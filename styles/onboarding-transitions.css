@@ -1,0 +1,14 @@
+﻿.page-transition-root { min-height: 100%; }
+.page-transition-enter { animation: page-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; will-change: opacity, transform; }
+@keyframes page-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes page-exit { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-8px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition-enter { animation: page-fade 0.3s ease both; }
+  @keyframes page-fade { from { opacity: 0; } to { opacity: 1; } }
+}
+.onboarding-progress-fill { transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.mobile-nav-backdrop { animation: backdrop-in 0.28s ease both; }
+.mobile-nav-panel { animation: mobile-nav-in 0.34s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes mobile-nav-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes backdrop-in { from { opacity: 0; } to { opacity: 1; } }

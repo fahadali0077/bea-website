@@ -1,0 +1,529 @@
+.ambassador-login-root {
+  --bg: #f2f0eb;
+  --white: #ffffff;
+  --black: #1a1a1a;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --text-muted: #9a9a9a;
+  --border: #d8d5cf;
+  --input-bg: #ffffff;
+  --btn-bg: #1a1a1a;
+  --btn-text: #ffffff;
+  --font-serif: "Canela Text", var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-lato), -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+    sans-serif;
+
+  min-height: 100vh;
+  background-color: var(--bg);
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ambassador-login-root .page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ambassador-login-root .login-layout {
+  display: grid;
+  grid-template-columns: 45% 1fr;
+  flex: 1;
+}
+
+.ambassador-login-root .left-panel {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  z-index: 10;
+  margin-right: -30px;
+}
+
+.ambassador-login-root .left-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.ambassador-login-root .left-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.1) 40%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+}
+
+.ambassador-login-root .left-brand {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  font-family: var(--font-sans);
+  font-size: 30px;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+
+.ambassador-login-root .left-content {
+  position: absolute;
+  bottom: 52px;
+  left: 28px;
+  right: 28px;
+  color: #ffffff;
+}
+
+.ambassador-login-root .left-eyebrow {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 16px;
+}
+
+.ambassador-login-root .left-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 3.2vw, 40px);
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 1.15;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.ambassador-login-root .left-divider {
+  width: 28px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.55);
+  margin-bottom: 18px;
+}
+
+.ambassador-login-root .left-body {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 260px;
+}
+
+.ambassador-login-root .right-panel {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  padding: 28px 0;
+  border-top-left-radius: 20px;
+  z-index: 999;
+}
+
+.ambassador-login-root .right-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 40px;
+  margin-bottom: auto;
+}
+
+.ambassador-login-root .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.ambassador-login-root .back-link:hover {
+  color: var(--text-primary);
+}
+
+.ambassador-login-root .back-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ambassador-login-root .right-form-wrap {
+  padding: 0 56px;
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+}
+
+.ambassador-login-root .form-eyebrow {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+}
+
+.ambassador-login-root .form-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 3.8vw, 46px);
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.ambassador-login-root .form-subtitle {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-bottom: 36px;
+}
+
+.ambassador-login-root .field-group {
+  margin-bottom: 18px;
+}
+
+.ambassador-login-root .field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 7px;
+}
+
+.ambassador-login-root .input-wrap {
+  position: relative;
+}
+
+.ambassador-login-root .field-input {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  color: var(--text-primary);
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.ambassador-login-root .field-input::placeholder {
+  color: var(--text-muted);
+}
+
+.ambassador-login-root .field-input:focus {
+  border-color: #aaa;
+}
+
+.ambassador-login-root .field-input--error {
+  border-color: #c44;
+}
+
+.ambassador-login-root .password-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.ambassador-login-root .password-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ambassador-login-root .form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.ambassador-login-root .remember-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.ambassador-login-root .remember-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  background: var(--white);
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.ambassador-login-root .remember-checkbox:checked {
+  background: var(--black);
+  border-color: var(--black);
+}
+
+.ambassador-login-root .remember-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 3.5px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: 1.5px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+.ambassador-login-root .forgot-link {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.ambassador-login-root .forgot-link:hover {
+  color: var(--text-primary);
+}
+
+.ambassador-login-root .btn-login {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 52px;
+  padding: 0 18px 0 24px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+  margin-bottom: 28px;
+}
+
+.ambassador-login-root .btn-login:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.ambassador-login-root .btn-login:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ambassador-login-root .btn-arrow {
+  width: 36px;
+  height: 36px;
+  background: var(--bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ambassador-login-root .btn-arrow svg {
+  width: 17px;
+  height: 17px;
+  color: #1a1a1a;
+}
+
+.ambassador-login-root .form-error {
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #fdecec;
+  color: #8b2e2e;
+  font-size: 13px;
+}
+
+.ambassador-login-root .or-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.ambassador-login-root .or-divider::before,
+.ambassador-login-root .or-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.ambassador-login-root .or-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.ambassador-login-root .btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 48px;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 12px;
+}
+
+.ambassador-login-root .btn-social:last-of-type {
+  margin-bottom: 0;
+}
+
+.ambassador-login-root .btn-social:hover:not(:disabled) {
+  border-color: #aaa;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.ambassador-login-root .btn-social:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ambassador-login-root .btn-social svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.ambassador-login-root .apply-section {
+  margin-top: 28px;
+}
+
+.ambassador-login-root .apply-section p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.ambassador-login-root .apply-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s;
+}
+
+.ambassador-login-root .apply-link:hover {
+  opacity: 0.7;
+}
+
+.ambassador-login-root .page-footer {
+  padding: 18px 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.ambassador-login-root .page-footer a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ambassador-login-root .page-footer a:hover {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .ambassador-login-root .login-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ambassador-login-root .left-panel {
+    min-height: 52vw;
+    max-height: 340px;
+  }
+
+  .ambassador-login-root .left-headline {
+    font-size: 22px;
+  }
+
+  .ambassador-login-root .left-brand {
+    font-size: 20px;
+    top: 20px;
+    left: 20px;
+  }
+
+  .ambassador-login-root .left-content {
+    bottom: 28px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .ambassador-login-root .left-body {
+    display: none;
+  }
+
+  .ambassador-login-root .right-panel {
+    padding: 24px 0 0;
+  }
+
+  .ambassador-login-root .right-header {
+    padding: 0 24px;
+    margin-bottom: 28px;
+  }
+
+  .ambassador-login-root .right-form-wrap {
+    padding: 0 24px;
+    max-width: 100%;
+  }
+
+  .ambassador-login-root .form-title {
+    font-size: 34px;
+  }
+
+  .ambassador-login-root .page-footer {
+    padding: 16px 24px;
+  }
+}
+
+@media (max-width: 420px) {
+  .ambassador-login-root .left-panel {
+    max-height: 280px;
+  }
+
+  .ambassador-login-root .right-form-wrap {
+    padding: 0 20px;
+  }
+
+  .ambassador-login-root .form-title {
+    font-size: 30px;
+  }
+}

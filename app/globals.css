@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans);
+  --font-lato: var(--font-sans);
+  --font-canela:
+    "CanelaTextTri", "CanelaTextTri-Regular", "Canela Text Trial",
+    "Canela Text Trial Regular", "Canela Text", "Canela", serif;
+  --font-sfpro:
+    "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  --font-minion: "Minion Concept", "Minion Pro", "Minion", Georgia, serif;
+  --font-minionvariable:
+    "Minion Variable", "MinionVariable", "Minion Concept", "Minion Pro",
+    "Minion", Georgia, serif;
+}
+
+.font-canela {
+  font-family:
+    "CanelaTextTri", "CanelaTextTri-Regular", "Canela Text Trial",
+    "Canela Text Trial Regular", "Canela Text", "Canela", serif;
+}
+
+@layer base {
+  :root {
+    --bea-bg: #f7f5f2;
+    --bea-black: #000000;
+    --bea-nyc: #050505;
+    --bea-input: #d7d4ce;
+    --bea-card-light: #fffcfe;
+    --bea-pill-light: #fbf5f0;
+    --bea-launch-bg: #f6f3ef;
+  }
+}
+
+body {
+  background-color: var(--bea-bg);
+  color: var(--bea-black);
+  font-family: var(--font-sans), sans-serif;
+}
+
+@layer components {
+  .rewards-mobile {
+    @apply block lg:hidden w-full;
+  }
+
+  .rewards-desktop {
+    @apply hidden lg:block w-full max-w-5xl mx-auto py-8 px-2;
+  }
+
+  /* Card styles used across rewards UI */
+  .card {
+    background: #fdfcfb;
+    border: 1px solid #ede8e1;
+    border-radius: 16px;
+  }
+
+  .card--muted {
+    background: #f4f0ec;
+    border: 1px solid #e3ded6;
+    border-radius: 12px;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes adminSlideLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes adminSlideRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-left {
+  animation: adminSlideLeft 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-right {
+  animation: adminSlideRight 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes adminPop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-pop {
+  animation: adminPop 0.16s ease-out forwards;
+}

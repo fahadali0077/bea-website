@@ -1,0 +1,206 @@
+/* Artboard overlay UI — plain CSS so layout works without Tailwind utilities. */
+
+.artboard-stage {
+  position: relative;
+}
+
+.artboard-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  overflow: hidden;
+  background-color: #f8f3ef;
+}
+
+/* Welcome hero — transparent over photo column; cream only on content side */
+.artboard-header--welcome {
+  background-color: transparent;
+  background-image: linear-gradient(
+    to right,
+    transparent 0,
+    transparent 404px,
+    #f8f3ef 404px,
+    #f8f3ef 100%
+  );
+}
+
+/* Invisible tap target — logo is baked into welcome.png at artboard coords */
+.artboard-hero-logo-hit {
+  position: absolute;
+  z-index: 40;
+}
+
+.artboard-login {
+  position: absolute;
+  margin: 0;
+  font-size: 12px;
+  color: #888480;
+  text-align: right;
+  line-height: 1.375;
+}
+
+.artboard-login a {
+  color: #1a1a1a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.artboard-stepper {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Each step is absolutely positioned at its measured design circle center
+   (left = circleCenterX - 11, top = circleCenterY - 11). */
+.artboard-step {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.artboard-step:hover {
+  opacity: 0.8;
+}
+
+/* Responsive (non-absolute) stepper row used below the design breakpoint */
+.artboard-step-row {
+  text-decoration: none;
+  color: inherit;
+}
+
+.artboard-step-row:hover {
+  opacity: 0.8;
+}
+
+.artboard-step-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+  border: 1px solid #c5c1bd;
+  background: transparent;
+  color: #c5c1bd;
+  box-sizing: border-box;
+}
+
+.artboard-step-circle--active {
+  background: #ffffff;
+  color: #c48b58;
+  border-color: #e8e4df;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.artboard-step-label {
+  font-size: 11px;
+  line-height: 1;
+  white-space: nowrap;
+  background: #f8f3ef;
+  padding-bottom: 4px;
+  color: #c5c1bd;
+  font-weight: 400;
+}
+
+.artboard-step-label--active {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.artboard-hit {
+  position: absolute;
+  z-index: 20;
+}
+
+.artboard-input {
+  position: absolute;
+  z-index: 20;
+  background: transparent !important;
+  border: none !important;
+  outline: none;
+  padding: 0 16px;
+  font-size: 14px;
+  color: #1a1a1a;
+  caret-color: #1a1a1a;
+  box-shadow: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.artboard-input::placeholder {
+  color: transparent;
+}
+
+.artboard-social-hit {
+  position: absolute;
+  z-index: 20;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Laptop account — transparent hit area; inset fill hides baked PNG labels only */
+.onboarding-page-desktop .artboard-social-btn {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  margin: 0;
+  padding: 1px;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.onboarding-page-desktop .artboard-social-btn__fill {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 100%;
+  background: #f8f3ef;
+  border-radius: 23px;
+  font-family: var(--font-lato), -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: #1a1a1a;
+}
+
+.onboarding-page-desktop .artboard-social-btn__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.onboarding-page-desktop .artboard-social-btn__icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.onboarding-page-desktop .artboard-social-btn__label {
+  white-space: nowrap;
+}
+
+.onboarding-page-desktop .artboard-social-btn:hover .artboard-social-btn__fill {
+  background: #f3eee8;
+}
