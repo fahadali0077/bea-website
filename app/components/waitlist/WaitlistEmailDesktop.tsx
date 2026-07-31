@@ -79,9 +79,6 @@ export function WaitlistEmailDesktop() {
           />
         </div>
 
-        <WaitlistFieldError message={stepError} />
-        {joinError ? <WaitlistJoinErrorAlert message={joinError} /> : null}
-
         <div className="wld-step7-actions">
           <button
             type="button"
@@ -92,6 +89,8 @@ export function WaitlistEmailDesktop() {
             {joinStatus === "loading" ? "Joining…" : content.cta.label}
             <ArrowRight size={20} strokeWidth={2} style={{ marginLeft: "8px" }} />
           </button>
+          <WaitlistFieldError message={stepError} />
+          {joinError ? <WaitlistJoinErrorAlert message={joinError} /> : null}
         </div>
       </div>
     </div>
