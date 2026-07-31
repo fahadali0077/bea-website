@@ -153,7 +153,6 @@ function AddAmbassadorForm({
         <div className="flex flex-col gap-4">
           <div className="bg-emerald-50 border border-emerald-200 rounded-[12px] p-4 text-emerald-800 text-[13px] font-medium flex flex-col gap-1">
             <p className="font-bold text-[14px]">Ambassador Invited Successfully!</p>
-            <p>Due to temporary SMTP limitations, please share the onboarding link below directly with the ambassador:</p>
           </div>
           <div className="flex flex-col gap-2">
             <span className="font-lato text-[11px] font-bold text-neutral-400 uppercase tracking-wider">Onboarding Link</span>
