@@ -3,16 +3,13 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { Mail } from "lucide-react";
 
 import { WAYS_STEP } from "@/lib/launch";
 import { useResendAmbassadorInviteMutation, useValidateAmbassadorOnboardingQuery } from "@/features/api/apiSlice";
-import { resetOnboardingProgress } from "@/lib/onboarding-progress";
 
 export function VerifyEmailStep() {
-  const router = useRouter();
-  const { eyebrow, titleLines, bodyPrefix,  resend, useDifferentEmail } = WAYS_STEP;
+  const { eyebrow, titleLines, bodyPrefix, continuePrompt, resend } = WAYS_STEP;
 
   const [token, setToken] = useState("");
   const { data: invite } = useValidateAmbassadorOnboardingQuery(token, { skip: !token });
@@ -37,12 +34,6 @@ export function VerifyEmailStep() {
       setResendError("Couldn't resend right now. Please try again in a moment.");
     }
   };
-
-  // const handleUseDifferentEmail = () => {
-  //   sessionStorage.removeItem("ambassador_onboarding_token");
-  //   resetOnboardingProgress();
-  //   router.push("/onboarding");
-  // };
 
   return (
     <section className="launch-step launch-step--verify">
@@ -92,12 +83,6 @@ export function VerifyEmailStep() {
             <button type="button" className="verify-link" onClick={handleResend} disabled={resending || resent}>
               {resent ? "Email sent" : resending ? "Sending…" : resend.label}
             </button>
-            <span className="verify-links-divider" aria-hidden="true">
-              ·
-            </span>
-            {/* <button type="button" className="verify-link" onClick={handleUseDifferentEmail}>
-              {useDifferentEmail.label}
-            </button> */}
           </div>
         </div>
       </div>
