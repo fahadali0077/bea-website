@@ -63,7 +63,7 @@ export default function Navbar({ activePage = 'home', fullWidth = false }: Navba
 
                 {/* CTA Button */}
                 <Link
-                    href="/waitlist"
+                    href="/waitlist/start"
                     className="bg-[#1a1a1a] text-white text-[13px] md:text-[14px] font-sans font-semibold md:font-medium px-[18px] py-[9px] md:px-6 md:py-[11px] rounded-full hover:opacity-90 transition-all whitespace-nowrap"
                 >
                     Join waitlist
