@@ -21,7 +21,7 @@ export interface Market {
 }
 
 export interface MarketsListResponse {
-  markets: Market[];
+  items: Market[];
   pagination: PaginationMeta;
 }
 

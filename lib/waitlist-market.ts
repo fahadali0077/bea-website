@@ -14,8 +14,6 @@ const CITY_IMAGE_FALLBACKS: Record<string, string> = {
   boston: "/waitlist/cities/boston.png?v=3",
   miami: "/waitlist/cities/miami.png?v=3",
   "los angeles": "/waitlist/cities/los-angeles.png?v=3",
-  chicago: "/waitlist/cities/chicago.png?v=3",
-  austin: "/waitlist/cities/austin.png?v=3",
 };
 
 function slugify(value: string) {

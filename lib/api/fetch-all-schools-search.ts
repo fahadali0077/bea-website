@@ -23,7 +23,7 @@ export async function fetchAllSchoolsBySearch(
       .dispatch(apiSlice.endpoints.listSchools.initiate({ search: term, marketId, page, limit: PAGE_LIMIT }))
       .unwrap();
 
-    allSchools.push(...data.schools);
+    allSchools.push(...data.items);
 
     if (page >= data.pagination.totalPages) {
       break;

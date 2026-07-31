@@ -101,7 +101,7 @@ export function WaitlistSchoolFields({ variant, error }: Props) {
         }
 
         listLoadedRef.current = true;
-        setListSchools(data.schools);
+        setListSchools(data.items);
       } catch {
         if (!cancelled) {
           setListError("Unable to load schools. Please try again.");

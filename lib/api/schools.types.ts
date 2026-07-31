@@ -26,7 +26,7 @@ export interface School {
 }
 
 export interface SchoolsListResponse {
-  schools: School[];
+  items: School[];
   pagination: PaginationMeta;
 }
 
