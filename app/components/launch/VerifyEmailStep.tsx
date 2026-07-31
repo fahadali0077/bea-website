@@ -9,7 +9,7 @@ import { Mail } from "lucide-react";
 import { WAYS_STEP } from "@/lib/launch";
 import { useResendAmbassadorInviteMutation, useValidateAmbassadorOnboardingQuery } from "@/features/api/apiSlice";
 
-export function WaysToWin() {
+export function VerifyEmailStep() {
   const router = useRouter();
   const { eyebrow, titleLines, bodyPrefix, continuePrompt, resend, useDifferentEmail } = WAYS_STEP;
 

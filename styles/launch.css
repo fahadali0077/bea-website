@@ -1553,6 +1553,16 @@
   display: none;
 }
 
+.launch-shell:has(.launch-step--invite-gate) {
+  padding: 0;
+}
+
+.launch-card:has(.launch-step--invite-gate) {
+  flex: 1;
+  width: 100%;
+  background: var(--launch-bg);
+}
+
 .launch-step--invite-gate {
   align-items: center;
   justify-content: center;
