@@ -6,7 +6,7 @@ import Link from 'next/link';
 import TopResponsesSection from '@/app/components/dashboard/TopResponsesSection';
 import RecentActivitySection from '@/app/components/dashboard/RecentActivitySection';
 import { SubmitResponseSidebar } from '@/app/components/dashboard/SubmitResponseSidebar';
-import { useGetTodayPromptQuery, useGetWaitlistDashboardQuery } from '@/features/api/apiSlice';
+import { useGetTodayPromptQuery, useGetWaitlistDashboardQuery, useGetMyLeaderboardQuery } from '@/features/api/apiSlice';
 import type { TodayPrompt } from '@/lib/api/prompts.types';
 import { getCompetitionLifecycle } from '@/lib/competition-lifecycle';
 
@@ -47,11 +47,27 @@ function TodayPromptSkeleton() {
 export default function DashboardPage() {
   const { data: prompt, isLoading } = useGetTodayPromptQuery();
   const { data: dashboard } = useGetWaitlistDashboardQuery();
+  const { data: myLeaderboard } = useGetMyLeaderboardQuery("participation");
   const [submitOpen, setSubmitOpen] = useState(false);
   const timeLeft = useTimeLeft(prompt);
   const lifecycle = getCompetitionLifecycle(dashboard?.competition);
   const promptOpen = Boolean(prompt && lifecycle.promptCtaEnabled);
   const activePrompt = promptOpen ? prompt : null;
+
+  // Compute real progress from API data
+  const breakdown = myLeaderboard?.meta?.breakdown;
+  const stepDone = [
+    // Step 1: Participated in at least one daily prompt
+    (breakdown?.promptPoints ?? 0) > 0 || (breakdown?.participationPoints ?? 0) > 0,
+    // Step 2: Invited at least one friend
+    (dashboard?.referrals?.directInvites ?? 0) > 0,
+    // Step 3: Earned invite/referral rewards (invite points credited)
+    (breakdown?.invitePoints ?? 0) > 0,
+    // Step 4: City unlocked — competition is active/exists
+    dashboard?.competition != null,
+  ];
+  const completedCount = stepDone.filter(Boolean).length;
+  const progressPct = Math.round((completedCount / stepDone.length) * 100);
 
   return (
     <>
@@ -170,15 +186,18 @@ export default function DashboardPage() {
                 Your Progress
               </span>
               <h3 className="text-[32px] md:text-[48px] font-sfpro font-normal text-[#2b2b2b] leading-none tracking-[0.03em] mt-1">
-                50%
+                {progressPct}%
               </h3>
               <p className="text-[11px] md:text-[14px] font-lato font-semibold text-[#c1bebc] mt-1">
-                Lets get to 100!
+                {progressPct === 100 ? "You\'re all set! 🎉" : "Let\'s get to 100!"}
               </p>
             </div>
 
             <div className="w-full h-[7.5px] bg-[#ece8e4] rounded-full overflow-hidden">
-              <div className="w-1/2 h-full bg-[#4a3428] rounded-full transition-all duration-500 ease-out" />
+              <div
+                className="h-full bg-[#4a3428] rounded-full transition-all duration-500 ease-out"
+                style={{ width: `${progressPct}%` }}
+              />
             </div>
           </div>
 
@@ -188,51 +207,35 @@ export default function DashboardPage() {
               How it works
             </span>
 
-            <div className="space-y-3.5">
-              {/* Item 1: Completed */}
-              <div className="flex items-center justify-between group">
-                <div className="flex items-center gap-3">
-                  <div className="w-5.5 h-5.5 rounded-full bg-[#e1dad7] flex items-center justify-center text-[14px] md:text-[20px] font-bold text-neutral-700">1</div>
-                  <span className="font-lato text-[11px] md:text-[14px] font-bold text-neutral-700 group-hover:text-black transition-colors">Participate in daily prompts</span>
+            {([
+              { label: "Participate in daily prompts" },
+              { label: "Invite friends" },
+              { label: "Earn rewards" },
+              { label: "Unlock your city" },
+            ] as const).map((step, i) => {
+              const done = stepDone[i];
+              return (
+                <div key={i} className="flex items-center justify-between group">
+                  <div className={`flex items-center gap-3 transition-opacity ${done ? "" : "opacity-70 group-hover:opacity-100"}`}>
+                    <div className="w-5.5 h-5.5 rounded-full bg-[#e1dad7] flex items-center justify-center text-[14px] md:text-[20px] font-bold text-neutral-700">
+                      {i + 1}
+                    </div>
+                    <span className="font-lato text-[11px] md:text-[14px] font-bold text-neutral-700 group-hover:text-black transition-colors">
+                      {step.label}
+                    </span>
+                  </div>
+                  {done ? (
+                    <div className="w-4.5 h-4.5 rounded-full bg-[#427c49] flex items-center justify-center text-white shrink-0 shadow-sm">
+                      <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                    </div>
+                  ) : (
+                    <div className="w-4.5 h-4.5 rounded-full border-[1.5px] border-neutral-300 shrink-0" />
+                  )}
                 </div>
-                <div className="w-4.5 h-4.5 rounded-full bg-[#427c49] flex items-center justify-center text-white shrink-0 shadow-sm">
-                  <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Item 2: Completed */}
-              <div className="flex items-center justify-between group">
-                <div className="flex items-center gap-3">
-                  <div className="w-5.5 h-5.5 rounded-full bg-[#e1dad7] flex items-center justify-center text-[14px] md:text-[20px] font-bold text-neutral-700">2</div>
-                  <span className="font-lato text-[11px] md:text-[14px] font-bold text-neutral-700 group-hover:text-black transition-colors">Invite friends</span>
-                </div>
-                <div className="w-4.5 h-4.5 rounded-full bg-[#427c49] flex items-center justify-center text-white shrink-0 shadow-sm">
-                  <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Item 3: Pending */}
-              <div className="flex items-center justify-between group">
-                <div className="flex items-center gap-3 opacity-70 group-hover:opacity-100 transition-opacity">
-                  <div className="w-5.5 h-5.5 rounded-full bg-[#e1dad7] flex items-center justify-center text-[14px] md:text-[20px] font-bold text-neutral-700">3</div>
-                  <span className="font-lato text-[11px] md:text-[14px] font-bold text-neutral-700">Earn rewards</span>
-                </div>
-                <div className="w-4.5 h-4.5 rounded-full border-[1.5px] border-neutral-300 shrink-0" />
-              </div>
-
-              {/* Item 4: Pending */}
-              <div className="flex items-center justify-between group">
-                <div className="flex items-center gap-3 opacity-70 group-hover:opacity-100 transition-opacity">
-                  <div className="w-5.5 h-5.5 rounded-full bg-[#e1dad7] flex items-center justify-center text-[14px] md:text-[20px] font-bold text-neutral-700">4</div>
-                  <span className="font-lato text-[11px] md:text-[14px] font-bold text-neutral-700">Unlock your city</span>
-                </div>
-                <div className="w-4.5 h-4.5 rounded-full border-[1.5px] border-neutral-300 shrink-0" />
-              </div>
-            </div>
+              );
+            })}
           </div>
 
           {/* Invite Friends */}
