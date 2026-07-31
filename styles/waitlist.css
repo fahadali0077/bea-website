@@ -419,7 +419,8 @@ body:has(.waitlist-artboard-root) {
   width: 18px;
   height: 18px;
   border-radius: 999px;
-  background: var(--wl-text);
+  border: 2px solid var(--wl-border);
+  background: transparent;
   flex-shrink: 0;
 }
 
@@ -471,6 +472,7 @@ body:has(.waitlist-artboard-root) {
 }
 
 .waitlist-school-card--selected .waitlist-school-card-dot {
+  border-color: #fff;
   background: #fff;
 }
 
@@ -3417,7 +3419,8 @@ body:has(.waitlist-artboard-root) {
   width: 18px;
   height: 18px;
   border-radius: 999px;
-  background: var(--wl-text, #1a1a1a);
+  border: 2px solid var(--wl-border, #d8d0c8);
+  background: transparent;
   flex-shrink: 0;
 }
 
@@ -3431,6 +3434,7 @@ body:has(.waitlist-artboard-root) {
 }
 
 .wld-step5-school-card--selected .wld-step5-school-card-dot {
+  border-color: #fff;
   background: #fff;
 }
 
