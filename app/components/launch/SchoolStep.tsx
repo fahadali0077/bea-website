@@ -12,7 +12,7 @@ import type { School } from "@/lib/api/schools.types";
 import { useCompleteAmbassadorOnboardingMutation } from "@/features/api/apiSlice";
 import { getApiErrorMessage, persistAccessToken } from "@/lib/api";
 
-export function InviteStep() {
+export function SchoolStep() {
   const router = useRouter();
   const { eyebrow, title, agreement, cta } = INVITE_STEP;
 
