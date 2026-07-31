@@ -510,6 +510,35 @@ body:has(.waitlist-artboard-root) {
   margin: 0 0 18px;
 }
 
+.waitlist-inline-alert {
+  margin-top: 12px;
+  padding: 16px 18px;
+  border: 1px solid rgba(192, 57, 43, 0.35);
+  border-radius: 12px;
+  background: rgba(192, 57, 43, 0.06);
+  text-align: center;
+}
+
+.waitlist-inline-alert-body {
+  margin: 0;
+  font-size: 14px;
+  color: #c0392b;
+}
+
+.waitlist-inline-alert-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: #c0392b;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
 /* Landing page */
 .waitlist-landing-header {
   display: flex;

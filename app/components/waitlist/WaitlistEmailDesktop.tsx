@@ -18,6 +18,7 @@ import { validateWaitlistStep } from "@/lib/waitlist-validation";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { WaitlistFieldError } from "./WaitlistFieldError";
+import { WaitlistJoinErrorAlert } from "./WaitlistJoinErrorAlert";
 
 export function WaitlistEmailDesktop() {
   const content = WAITLIST_PAGE_CONTENT["7"];
@@ -79,7 +80,7 @@ export function WaitlistEmailDesktop() {
         </div>
 
         <WaitlistFieldError message={stepError} />
-        {joinError ? <p className="mt-3 text-sm text-red-600">{joinError}</p> : null}
+        {joinError ? <WaitlistJoinErrorAlert message={joinError} /> : null}
 
         <div className="wld-step7-actions">
           <button

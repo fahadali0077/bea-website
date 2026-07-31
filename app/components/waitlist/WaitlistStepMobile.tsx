@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { WaitlistContinueButton } from "./WaitlistContinueButton";
 import { WaitlistFieldError } from "./WaitlistFieldError";
+import { WaitlistJoinErrorAlert } from "./WaitlistJoinErrorAlert";
 import {
   WaitlistMarketFields,
   type WaitlistMarketFieldsHandle,
@@ -88,9 +89,7 @@ export function WaitlistStepMobile({ artboardId }: Props) {
             loading={artboardId === "7" && joinStatus === "loading"}
           />
           <WaitlistFieldError message={stepError} />
-          {joinError && artboardId === "7" ? (
-            <p className="mt-3 text-center text-sm text-red-600">{joinError}</p>
-          ) : null}
+          {joinError && artboardId === "7" ? <WaitlistJoinErrorAlert message={joinError} /> : null}
         </>
       }
     >
