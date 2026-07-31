@@ -32,6 +32,18 @@ function formatDate(iso?: string | null) {
   return iso ? dateFmt.format(new Date(iso)) : "—";
 }
 
+/** Convert `<input type="date">` value (YYYY-MM-DD) to a stable mid-day UTC ISO. */
+function dateInputToIso(dateStr: string): string {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return "";
+  return `${dateStr}T12:00:00.000Z`;
+}
+
+function todayDateInputValue(): string {
+  const now = new Date();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+}
+
 const STATUS_TONE: Record<PromptStatus, string> = {
   SCHEDULED: "bg-[#eceef2] text-[#5b6b7d]",
   ACTIVE: "bg-[#e7f0ea] text-[#3d7a6e]",
@@ -56,7 +68,9 @@ function PromptForm({
 }) {
   const [title, setTitle] = useState(prompt?.title ?? "");
   const [description, setDescription] = useState(prompt?.description ?? "");
-  const [promptDate, setPromptDate] = useState(prompt?.promptDate?.slice(0, 10) ?? "");
+  const [promptDate, setPromptDate] = useState(
+    prompt?.promptDate ? prompt.promptDate.slice(0, 10) : todayDateInputValue(),
+  );
   const [status, setStatus] = useState<PromptStatus>(prompt?.status ?? "SCHEDULED");
   const [error, setError] = useState<string | null>(null);
 
@@ -68,7 +82,7 @@ function PromptForm({
       await onSubmit({
         title: title.trim(),
         description: description.trim(),
-        promptDate: promptDate ? new Date(promptDate).toISOString() : "",
+        promptDate: promptDate ? dateInputToIso(promptDate) : "",
         status,
       });
       onClose();
