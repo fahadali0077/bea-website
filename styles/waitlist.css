@@ -510,33 +510,62 @@ body:has(.waitlist-artboard-root) {
   margin: 0 0 18px;
 }
 
-.waitlist-inline-alert {
-  margin-top: 12px;
-  padding: 16px 18px;
-  border: 1px solid rgba(192, 57, 43, 0.35);
-  border-radius: 12px;
-  background: rgba(192, 57, 43, 0.06);
-  text-align: center;
+.waitlist-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(26, 26, 26, 0.5);
 }
 
-.waitlist-inline-alert-body {
-  margin: 0;
-  font-size: 14px;
+.waitlist-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  padding: 28px 24px 24px;
+  border-radius: 16px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.waitlist-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--wl-muted);
+  cursor: pointer;
+}
+
+.waitlist-modal-body {
+  margin: 0 0 20px;
+  font-size: 15px;
   color: #c0392b;
 }
 
-.waitlist-inline-alert-cta {
+.waitlist-modal-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 12px;
-  padding: 10px 20px;
-  border-radius: 10px;
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
   background: #c0392b;
   color: #fff;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
 }
 
 /* Landing page */
