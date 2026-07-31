@@ -59,7 +59,7 @@ export const WAYS_STEP = {
   bodyPrefix: "We sent a verification link to",
   continuePrompt: "Click the link in your email\nto continue.",
   resend: { label: "Resend email" },
-  useDifferentEmail: { label: "Use a different email" },
+  // useDifferentEmail: { label: "Use a different email" },
   cta: { label: "Continue", href: "/account" },
 };
 

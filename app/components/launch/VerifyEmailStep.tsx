@@ -12,7 +12,7 @@ import { resetOnboardingProgress } from "@/lib/onboarding-progress";
 
 export function VerifyEmailStep() {
   const router = useRouter();
-  const { eyebrow, titleLines, bodyPrefix, continuePrompt, resend, useDifferentEmail } = WAYS_STEP;
+  const { eyebrow, titleLines, bodyPrefix,  resend, } = WAYS_STEP;
 
   const [token, setToken] = useState("");
   const { data: invite } = useValidateAmbassadorOnboardingQuery(token, { skip: !token });
@@ -38,11 +38,11 @@ export function VerifyEmailStep() {
     }
   };
 
-  const handleUseDifferentEmail = () => {
-    sessionStorage.removeItem("ambassador_onboarding_token");
-    resetOnboardingProgress();
-    router.push("/onboarding");
-  };
+  // const handleUseDifferentEmail = () => {
+  //   sessionStorage.removeItem("ambassador_onboarding_token");
+  //   resetOnboardingProgress();
+  //   router.push("/onboarding");
+  // };
 
   return (
     <section className="launch-step launch-step--verify">
@@ -95,9 +95,9 @@ export function VerifyEmailStep() {
             <span className="verify-links-divider" aria-hidden="true">
               ·
             </span>
-            <button type="button" className="verify-link" onClick={handleUseDifferentEmail}>
+            {/* <button type="button" className="verify-link" onClick={handleUseDifferentEmail}>
               {useDifferentEmail.label}
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
