@@ -18,7 +18,13 @@ import type {
   WaitlistStatusResponse,
 } from "@/lib/api/types";
 import type { ListMarketsParams, MarketsListResponse, Market } from "@/lib/api/markets.types";
-import type { ListSchoolsParams, SchoolsListResponse, School } from "@/lib/api/schools.types";
+import type {
+  ListSchoolsParams,
+  SchoolsListResponse,
+  School,
+  SchoolRankingParams,
+  SchoolRankingResponse,
+} from "@/lib/api/schools.types";
 import type {
   ShopCategory,
   ListProductsParams,
@@ -57,7 +63,7 @@ import type {
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: axiosBaseQuery(),
-  tagTypes: ["Me", "WaitlistStatus", "WaitlistDashboard", "Leaderboard", "AmbassadorDashboard", "AmbassadorNetwork", "AmbassadorLeaderboard", "AmbassadorCalendar", "Schools", "Markets", "Products", "Categories", "TodayPrompt", "PromptResponses", "ResponseComments", "PromptsArchive", "ForumPosts", "ForumPost"],
+  tagTypes: ["Me", "WaitlistStatus", "WaitlistDashboard", "Leaderboard", "AmbassadorDashboard", "AmbassadorNetwork", "AmbassadorLeaderboard", "AmbassadorCalendar", "Schools", "SchoolRanking", "Markets", "Products", "Categories", "TodayPrompt", "PromptResponses", "ResponseComments", "PromptsArchive", "ForumPosts", "ForumPost"],
   endpoints: (builder) => ({
     requestMagicLink: builder.mutation<MagicLinkRequestResponse, string>({
       query: (email) => ({ url: "/auth/request-magic-link", method: "POST", data: { email } }),
@@ -101,6 +107,37 @@ export const apiSlice = createApi({
     listSchools: builder.query<SchoolsListResponse, ListSchoolsParams | void>({
       query: (params) => ({ url: "/schools", method: "GET", params: params ?? undefined }),
       providesTags: ["Schools"],
+    }),
+
+    getSchoolRanking: builder.query<SchoolRankingResponse, SchoolRankingParams | void>({
+      query: (params) => ({ url: "/schools/ranking", method: "GET", params: params ?? undefined }),
+      // Infinite-scroll cache: every page of the same filter set collapses into
+      // one cache entry so the component reads a single growing list instead of
+      // accumulating pages in local state.
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { search = "", marketId = "" } = queryArgs ?? {};
+        return `${endpointName}(${search}:${marketId})`;
+      },
+      merge: (currentCache, incoming) => {
+        currentCache.meta = incoming.meta;
+        currentCache.pagination = incoming.pagination;
+
+        // Page 1 means a fresh load or a filter change - replace, don't append.
+        if (incoming.pagination.page <= 1) {
+          currentCache.items = incoming.items;
+          return;
+        }
+
+        const seen = new Set(currentCache.items.map((item) => item.schoolId));
+        incoming.items.forEach((item) => {
+          if (!seen.has(item.schoolId)) {
+            currentCache.items.push(item);
+          }
+        });
+      },
+      forceRefetch: ({ currentArg, previousArg }) =>
+        currentArg?.page !== previousArg?.page,
+      providesTags: ["SchoolRanking"],
     }),
 
     listMarkets: builder.query<MarketsListResponse, ListMarketsParams | void>({
@@ -199,7 +236,7 @@ export const apiSlice = createApi({
         method: "POST",
         data: { responseText },
       }),
-      invalidatesTags: ["PromptResponses"],
+      invalidatesTags: ["PromptResponses", "TodayPrompt", "Leaderboard", "WaitlistDashboard"],
     }),
 
     likeResponse: builder.mutation<LikeResponseResult, LikeResponsePayload>({
@@ -273,6 +310,7 @@ export const {
   useGetWaitlistDashboardQuery,
   useGetMyLeaderboardQuery,
   useListSchoolsQuery,
+  useGetSchoolRankingQuery,
   useLazyListSchoolsQuery,
   useListMarketsQuery,
   useLazyListMarketsQuery,

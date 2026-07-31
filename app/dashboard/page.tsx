@@ -140,13 +140,22 @@ export default function DashboardPage() {
               </div>
 
               <div className="flex flex-wrap items-center gap-4 pt-1">
-                <button
-                  onClick={() => setSubmitOpen(true)}
-                  disabled={!promptOpen}
-                  className="bg-[#1b1b1b] hover:bg-black text-white font-lato text-[12px] md:text-[18px] font-bold px-5 py-2.5 rounded-[8px] shadow-sm hover:shadow transition-all duration-200 active:scale-[0.98] cursor-pointer"
-                >
-                  Submit your response
-                </button>
+                {activePrompt?.hasResponded ? (
+                  <span className="inline-flex items-center gap-2 bg-[#e7f0ea] text-[#3d7a6e] font-lato text-[12px] md:text-[16px] font-bold px-5 py-2.5 rounded-[8px]">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                    Response submitted
+                  </span>
+                ) : (
+                  <button
+                    onClick={() => setSubmitOpen(true)}
+                    disabled={!promptOpen}
+                    className="bg-[#1b1b1b] hover:bg-black text-white font-lato text-[12px] md:text-[18px] font-bold px-5 py-2.5 rounded-[8px] shadow-sm hover:shadow transition-all duration-200 active:scale-[0.98] cursor-pointer"
+                  >
+                    Submit your response
+                  </button>
+                )}
                 <Link
                   href="/dashboard/today/all-responses"
                   className="font-lato text-[12px] md:text-[18px] font-bold text-neutral-800 hover:text-black flex items-center gap-1 group py-2 cursor-pointer"

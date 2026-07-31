@@ -10,6 +10,7 @@ export interface TodayPrompt {
   status: PromptStatus;
   createdByAdminId: string;
   createdAt: string;
+  hasResponded?: boolean;
 }
 
 export interface ArchivePrompt {

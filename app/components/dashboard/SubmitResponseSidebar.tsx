@@ -17,12 +17,14 @@ export function SubmitResponseSidebar({ prompt, onClose }: SubmitResponseSidebar
   const [isVisible, setIsVisible] = useState(false);
   const [content, setContent] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const [submitResponse, { isLoading }] = useSubmitPromptResponseMutation();
 
   const isOpen = !!prompt;
+  const alreadyResponded = Boolean(prompt?.hasResponded);
 
   function handleClose() {
     setIsVisible(false);
@@ -33,15 +35,18 @@ export function SubmitResponseSidebar({ prompt, onClose }: SubmitResponseSidebar
     if (isOpen) {
       requestAnimationFrame(() => setIsVisible(true));
       setTimeout(() => textareaRef.current?.focus(), 320);
+      setSubmitted(Boolean(prompt?.hasResponded));
+      setError(null);
     } else {
       setIsVisible(false);
       const t = setTimeout(() => {
         setContent("");
         setSubmitted(false);
+        setError(null);
       }, CLOSE_DURATION_MS + 50);
       return () => clearTimeout(t);
     }
-  }, [isOpen]);
+  }, [isOpen, prompt?.hasResponded]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -63,11 +68,18 @@ export function SubmitResponseSidebar({ prompt, onClose }: SubmitResponseSidebar
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!prompt || !content.trim() || isLoading) return;
+    if (!prompt || !content.trim() || isLoading || alreadyResponded) return;
+    setError(null);
     try {
       await submitResponse({ promptId: prompt.id, responseText: content.trim() }).unwrap();
       setSubmitted(true);
-    } catch {
+    } catch (err) {
+      const rtkError = err as { message?: string; data?: { message?: string } };
+      setError(
+        rtkError.message ||
+          rtkError.data?.message ||
+          "Could not submit your response. You may have already responded today.",
+      );
     }
   };
 
@@ -173,7 +185,7 @@ export function SubmitResponseSidebar({ prompt, onClose }: SubmitResponseSidebar
 
               <button
                 type="submit"
-                disabled={isLoading || !content.trim()}
+                disabled={isLoading || !content.trim() || alreadyResponded}
                 className="w-full bg-[#1b1b1b] hover:bg-black disabled:opacity-50 text-white font-lato text-[14px] font-bold px-5 py-3.5 rounded-[8px] transition-all active:scale-[0.99] cursor-pointer disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isLoading ? (
@@ -188,6 +200,12 @@ export function SubmitResponseSidebar({ prompt, onClose }: SubmitResponseSidebar
                   "Submit response"
                 )}
               </button>
+
+              {error && (
+                <p className="font-lato text-[12px] font-semibold text-[#b0453a] text-center -mt-2">
+                  {error}
+                </p>
+              )}
             </form>
           )}
         </div>

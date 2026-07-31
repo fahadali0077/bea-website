@@ -1,24 +1,23 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import Image from 'next/image';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-interface SchoolRankingItem {
-    rank: number;
-    schoolName: string;
-    avatar: string;
-    participants: number | null;
-    prompts: number | null;
-    invites: number | null;
-    total: number | null;
-}
+import { useGetSchoolRankingQuery } from '@/features/api/apiSlice';
+import type { SchoolRankingEntry } from '@/lib/api/schools.types';
 
-const INITIAL_VISIBLE = 7;
-const LOAD_MORE_COUNT = 5;
-const TOTAL_SCHOOLS = 110;
+const PAGE_SIZE = 25;
+const FALLBACK_AVATAR = '/images/school-building.png';
 
 const GRID_ROW =
     'grid grid-cols-[60px_1fr_100px_100px_100px_80px] md:grid-cols-[100px_1fr_150px_150px_150px_120px] gap-4 items-center';
+
+const formatNumber = (value: number | null | undefined) =>
+    typeof value === 'number' ? value.toLocaleString('en-US') : '—';
+
+const formatPrize = (value: number | null | undefined) =>
+    typeof value === 'number'
+        ? `$${value.toLocaleString('en-US', { maximumFractionDigits: 0 })}`
+        : '—';
 
 function RankingRowSkeleton() {
     return (
@@ -36,40 +35,33 @@ function RankingRowSkeleton() {
     );
 }
 
+function StatSkeleton() {
+    return <div className="h-6 md:h-7 w-20 bg-neutral-200/60 rounded animate-pulse mt-2" />;
+}
+
+const MEDALS: Record<number, { base: string; mid: string; top: string }> = {
+    1: { base: '#caa138', mid: '#dfb33e', top: '#e5c158' },
+    2: { base: '#8d8d8d', mid: '#a8a8a8', top: '#c0c0c0' },
+    3: { base: '#935b30', mid: '#af6f3b', top: '#cd7f32' },
+};
+
 function RankBadge({ rank }: { rank: number }) {
-    if (rank === 1) {
+    const medal = MEDALS[rank];
+
+    if (medal) {
         return (
             <svg className="w-7 h-7 md:w-11 md:h-11 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 13.5V21L12 19.5L15 21V13.5" fill="#caa138" opacity="0.85" />
-                <path d="M12 13.5V21L15 19.5L18 21V13.5" fill="#dfb33e" opacity="0.85" />
-                <circle cx="12" cy="10" r="7" fill="#e5c158" stroke="#caa138" strokeWidth="1.2" />
-                <circle cx="12" cy="10" r="5.2" fill="#dfb33e" />
-                <text x="12" y="13" fontFamily="var(--font-sans), sans-serif" fontSize="9" fontWeight="950" fill="white" textAnchor="middle">1</text>
+                <path d="M9 13.5V21L12 19.5L15 21V13.5" fill={medal.base} opacity="0.85" />
+                <path d="M12 13.5V21L15 19.5L18 21V13.5" fill={medal.mid} opacity="0.85" />
+                <circle cx="12" cy="10" r="7" fill={medal.top} stroke={medal.base} strokeWidth="1.2" />
+                <circle cx="12" cy="10" r="5.2" fill={medal.mid} />
+                <text x="12" y="13" fontFamily="var(--font-sans), sans-serif" fontSize="9" fontWeight="950" fill="white" textAnchor="middle">
+                    {rank}
+                </text>
             </svg>
         );
     }
-    if (rank === 2) {
-        return (
-            <svg className="w-7 h-7 md:w-11 md:h-11 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 13.5V21L12 19.5L15 21V13.5" fill="#8d8d8d" opacity="0.85" />
-                <path d="M12 13.5V21L15 19.5L18 21V13.5" fill="#a8a8a8" opacity="0.85" />
-                <circle cx="12" cy="10" r="7" fill="#c0c0c0" stroke="#8d8d8d" strokeWidth="1.2" />
-                <circle cx="12" cy="10" r="5.2" fill="#a8a8a8" />
-                <text x="12" y="13" fontFamily="var(--font-sans), sans-serif" fontSize="9" fontWeight="950" fill="white" textAnchor="middle">2</text>
-            </svg>
-        );
-    }
-    if (rank === 3) {
-        return (
-            <svg className="w-7 h-7 md:w-11 md:h-11 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 13.5V21L12 19.5L15 21V13.5" fill="#935b30" opacity="0.85" />
-                <path d="M12 13.5V21L15 19.5L18 21V13.5" fill="#af6f3b" opacity="0.85" />
-                <circle cx="12" cy="10" r="7" fill="#cd7f32" stroke="#935b30" strokeWidth="1.2" />
-                <circle cx="12" cy="10" r="5.2" fill="#af6f3b" />
-                <text x="12" y="13" fontFamily="var(--font-sans), sans-serif" fontSize="9" fontWeight="950" fill="white" textAnchor="middle">3</text>
-            </svg>
-        );
-    }
+
     return (
         <span className="font-sfpro text-[14px] md:text-[20px] font-bold text-neutral-500 pl-2">
             {rank}
@@ -77,7 +69,28 @@ function RankBadge({ rank }: { rank: number }) {
     );
 }
 
-function RankingRow({ item }: { item: SchoolRankingItem }) {
+function SchoolAvatar({ src, name }: { src: string | null; name: string }) {
+    const [hasFailed, setHasFailed] = useState(false);
+    const resolvedSrc = !src || hasFailed ? FALLBACK_AVATAR : src;
+
+    return (
+        <div className="relative w-7.5 h-7.5 rounded-full overflow-hidden border border-neutral-200/70 shadow-sm bg-neutral-100 flex items-center justify-center shrink-0">
+            {/* Plain <img> on purpose: school logos are arbitrary remote URLs from
+                the database, and next/image would require whitelisting every
+                possible host in next.config.ts. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+                src={resolvedSrc}
+                alt={`${name} avatar`}
+                className="w-full h-full object-cover"
+                loading="lazy"
+                onError={() => setHasFailed(true)}
+            />
+        </div>
+    );
+}
+
+function RankingRow({ item }: { item: SchoolRankingEntry }) {
     return (
         <div className={`${GRID_ROW} py-4 border-b border-neutral-200/30 last:border-0 hover:bg-neutral-50/40 transition-colors duration-150`}>
             <div className="flex items-center pl-1">
@@ -85,75 +98,51 @@ function RankingRow({ item }: { item: SchoolRankingItem }) {
             </div>
 
             <div className="flex items-center gap-3 min-w-0">
-                <div className="relative w-7.5 h-7.5 rounded-full overflow-hidden border border-neutral-200/70 shadow-sm bg-neutral-100 flex items-center justify-center shrink-0">
-                    <Image
-                        src={item.avatar}
-                        alt={`${item.schoolName} avatar`}
-                        fill
-                        sizes="30px"
-                        className="object-cover"
-                    />
-                </div>
-                <span className="font-lato text-[12px] md:text-[18px] font-medium text-[#000000] truncate">
+                <SchoolAvatar src={item.imageUrl} name={item.schoolName} />
+                <span
+                    className="font-lato text-[12px] md:text-[18px] font-medium text-[#000000] truncate"
+                    title={item.schoolName}
+                >
                     {item.schoolName}
                 </span>
             </div>
 
             <span className="font-lato text-[12px] md:text-[18px] font-medium text-[#000000]">
-                {item.participants !== null ? item.participants : ''}
+                {formatNumber(item.participants)}
             </span>
             <span className="font-lato text-[12px] md:text-[18px] font-medium text-[#000000]">
-                {item.prompts !== null ? item.prompts : ''}
+                {formatNumber(item.prompts)}
             </span>
             <span className="font-lato text-[12px] md:text-[18px] font-medium text-[#000000]">
-                {item.invites !== null ? item.invites : ''}
+                {formatNumber(item.invites)}
             </span>
             <span className="font-lato text-[12px] md:text-[18px] font-medium text-[#000000]">
-                {item.total !== null ? item.total : ''}
+                {formatNumber(item.total)}
             </span>
         </div>
     );
 }
 
 export default function SchoolsPage() {
-    const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
-    const [isLoadingMore, setIsLoadingMore] = useState(false);
+    const [page, setPage] = useState(1);
     const loadMoreRef = useRef<HTMLDivElement>(null);
 
-    const rankingData = useMemo(
-        () =>
-            Array.from({ length: TOTAL_SCHOOLS }, (_, i) => {
-                const rank = i + 1;
-                if (rank === 1) {
-                    return {
-                        rank,
-                        schoolName: 'University of Connecticut',
-                        avatar: '/images/ron-avatar.png',
-                        participants: 200,
-                        prompts: 200,
-                        invites: 400,
-                        total: 600,
-                    };
-                }
-                return {
-                    rank,
-                    schoolName: 'Ron',
-                    avatar: '/images/ron-avatar.png',
-                    participants: null,
-                    prompts: null,
-                    invites: null,
-                    total: null,
-                };
-            }),
-        []
-    );
+    const { data, isFetching, isError, error, refetch } = useGetSchoolRankingQuery({
+        page,
+        limit: PAGE_SIZE,
+    });
 
-    const displayedRanking = useMemo(
-        () => rankingData.slice(0, visibleCount),
-        [rankingData, visibleCount]
-    );
+    // apiSlice merges every fetched page into one cache entry, so this is
+    // already the full accumulated board.
+    const rows = useMemo<SchoolRankingEntry[]>(() => data?.items ?? [], [data]);
+    const meta = data?.meta;
+    const hasMoreToLoad = Boolean(data?.pagination.hasNextPage);
+    const isInitialLoad = isFetching && rows.length === 0;
 
-    const hasMoreToLoad = visibleCount < rankingData.length;
+    const loadMore = useCallback(() => {
+        if (isFetching || !hasMoreToLoad) return;
+        setPage((prev) => prev + 1);
+    }, [isFetching, hasMoreToLoad]);
 
     useEffect(() => {
         if (!hasMoreToLoad) return;
@@ -163,22 +152,22 @@ export default function SchoolsPage() {
 
         const observer = new IntersectionObserver(
             (entries) => {
-                if (!entries[0]?.isIntersecting || isLoadingMore) return;
-
-                setIsLoadingMore(true);
-                window.setTimeout(() => {
-                    setVisibleCount((prev) =>
-                        Math.min(prev + LOAD_MORE_COUNT, rankingData.length)
-                    );
-                    setIsLoadingMore(false);
-                }, 600);
+                if (entries[0]?.isIntersecting) {
+                    loadMore();
+                }
             },
             { rootMargin: '120px' }
         );
 
         observer.observe(sentinel);
         return () => observer.disconnect();
-    }, [hasMoreToLoad, isLoadingMore, rankingData.length]);
+    }, [hasMoreToLoad, loadMore]);
+
+    const errorMessage = useMemo(() => {
+        if (!isError) return null;
+        const message = (error as { message?: string } | undefined)?.message;
+        return message || 'We could not load the school ranking right now.';
+    }, [isError, error]);
 
     return (
         <main className="flex-1 flex flex-col gap-6 md:gap-8">
@@ -208,7 +197,7 @@ export default function SchoolsPage() {
                             About this competition
                         </span>
                         <span className="font-lato text-[12px] md:text-[18px] font-normal text-neutral-500 mt-1.5 block leading-none">
-                            Campus Competition
+                            {meta?.competition?.title || meta?.scopeLabel || 'Campus Competition'}
                         </span>
                     </div>
                 </div>
@@ -218,25 +207,37 @@ export default function SchoolsPage() {
                         <span className="font-lato text-[12px] md:text-[18px] font-normal text-neutral-500 leading-none">
                             Total Schools
                         </span>
-                        <span className="font-lato text-[16px] md:text-[24px] font-bold text-neutral-800 mt-2 leading-none">
-                            {TOTAL_SCHOOLS}
-                        </span>
+                        {meta ? (
+                            <span className="font-lato text-[16px] md:text-[24px] font-bold text-neutral-800 mt-2 leading-none">
+                                {formatNumber(meta.totalSchools)}
+                            </span>
+                        ) : (
+                            <StatSkeleton />
+                        )}
                     </div>
                     <div className="flex flex-col">
                         <span className="font-lato text-[12px] md:text-[18px] font-normal text-neutral-500 leading-none">
                             Total Participants
                         </span>
-                        <span className="font-lato text-[16px] md:text-[24px] font-bold text-neutral-800 mt-2 leading-none">
-                            45,929
-                        </span>
+                        {meta ? (
+                            <span className="font-lato text-[16px] md:text-[24px] font-bold text-neutral-800 mt-2 leading-none">
+                                {formatNumber(meta.totalParticipants)}
+                            </span>
+                        ) : (
+                            <StatSkeleton />
+                        )}
                     </div>
                     <div className="flex flex-col">
                         <span className="font-lato text-[12px] md:text-[18px] font-normal text-neutral-500 leading-none">
                             Top Prize
                         </span>
-                        <span className="font-lato text-[16px] md:text-[24px] font-bold text-neutral-800 mt-2 leading-none">
-                            $10,000
-                        </span>
+                        {meta ? (
+                            <span className="font-lato text-[16px] md:text-[24px] font-bold text-neutral-800 mt-2 leading-none">
+                                {formatPrize(meta.topPrize)}
+                            </span>
+                        ) : (
+                            <StatSkeleton />
+                        )}
                     </div>
                 </div>
             </section>
@@ -254,18 +255,47 @@ export default function SchoolsPage() {
                             <span>Total</span>
                         </div>
 
-                        {displayedRanking.map((item) => (
-                            <RankingRow key={item.rank} item={item} />
+                        {rows.map((item) => (
+                            <RankingRow key={item.schoolId} item={item} />
                         ))}
 
-                        {isLoadingMore && (
+                        {isFetching && (
                             <>
                                 <RankingRowSkeleton />
                                 <RankingRowSkeleton />
+                                {isInitialLoad && (
+                                    <>
+                                        <RankingRowSkeleton />
+                                        <RankingRowSkeleton />
+                                        <RankingRowSkeleton />
+                                    </>
+                                )}
                             </>
                         )}
                     </div>
                 </div>
+
+                {!isFetching && rows.length === 0 && !isError && (
+                    <p className="py-10 text-center font-lato text-[13px] md:text-[16px] text-neutral-500">
+                        No schools have scored yet. Rankings appear once participants start
+                        sending prompts and invites.
+                    </p>
+                )}
+
+                {isError && rows.length === 0 && (
+                    <div className="py-10 flex flex-col items-center gap-3">
+                        <p className="font-lato text-[13px] md:text-[16px] text-neutral-500 text-center">
+                            {errorMessage}
+                        </p>
+                        <button
+                            type="button"
+                            onClick={() => refetch()}
+                            className="font-lato text-[13px] md:text-[15px] font-bold text-[#402b23] underline underline-offset-4 hover:opacity-70 transition-opacity"
+                        >
+                            Try again
+                        </button>
+                    </div>
+                )}
 
                 {hasMoreToLoad && <div ref={loadMoreRef} className="h-1" aria-hidden />}
             </section>
