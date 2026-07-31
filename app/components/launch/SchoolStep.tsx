@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Check, ChevronDown, Loader2 } from "lucide-react";
@@ -12,17 +12,24 @@ import type { School } from "@/lib/api/schools.types";
 import { useCompleteAmbassadorOnboardingMutation } from "@/features/api/apiSlice";
 import { getApiErrorMessage, persistAccessToken } from "@/lib/api";
 
+const formatSchoolLocation = (city: string | null | undefined, state: string | null | undefined) =>
+  city && state ? `${city}, ${state}` : city || state || null;
+
 export function SchoolStep() {
   const router = useRouter();
   const { eyebrow, title, agreement, cta } = INVITE_STEP;
 
   const [schools, setSchools] = useState<School[]>([]);
   const [schoolId, setSchoolId] = useState("");
+  const [schoolSearch, setSchoolSearch] = useState("");
+  const [schoolDropdownOpen, setSchoolDropdownOpen] = useState(false);
   const [graduationYear, setGraduationYear] = useState("");
   const [role] = useState(AMBASSADOR_ROLE_OPTIONS[0]);
   const [instagram, setInstagram] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const schoolPickerRef = useRef<HTMLDivElement>(null);
 
   const [completeOnboarding, { isLoading: submitting }] = useCompleteAmbassadorOnboardingMutation();
 
@@ -39,6 +46,29 @@ export function SchoolStep() {
       active = false;
     };
   }, []);
+
+  useEffect(() => {
+    function handlePointerDown(event: MouseEvent) {
+      if (!schoolPickerRef.current?.contains(event.target as Node)) {
+        setSchoolDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
+  }, []);
+
+  const filteredSchools = useMemo(() => {
+    const term = schoolSearch.trim().toLowerCase();
+    if (!term) return schools;
+    return schools.filter((s) => s.name.toLowerCase().includes(term));
+  }, [schools, schoolSearch]);
+
+  const selectSchool = (school: School) => {
+    setSchoolId(school.id);
+    setSchoolSearch(school.name);
+    setSchoolDropdownOpen(false);
+    setError(null);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,24 +119,52 @@ export function SchoolStep() {
               <label className="launch-field-label" htmlFor="launch-school">
                 School
               </label>
-              <div className="launch-select-wrap">
-                <select
+              <div className="launch-select-wrap launch-school-picker" ref={schoolPickerRef}>
+                <input
                   id="launch-school"
-                  className="launch-field-input launch-field-select"
-                  value={schoolId}
+                  type="text"
+                  className="launch-field-input"
+                  placeholder="Search your school"
+                  value={schoolSearch}
+                  autoComplete="off"
                   onChange={(e) => {
-                    setSchoolId(e.target.value);
+                    setSchoolSearch(e.target.value);
+                    setSchoolId("");
+                    setSchoolDropdownOpen(true);
                     setError(null);
                   }}
-                >
-                  <option value="">Select your school</option>
-                  {schools.map((s) => (
-                    <option key={s.id} value={s.id}>
-                      {s.name}
-                    </option>
-                  ))}
-                </select>
+                  onFocus={() => setSchoolDropdownOpen(true)}
+                />
                 <ChevronDown size={16} strokeWidth={2} className="launch-select-chevron" aria-hidden="true" />
+
+                {schoolDropdownOpen && (
+                  <div className="launch-school-dropdown" role="listbox" aria-label="School search results">
+                    {filteredSchools.length === 0 ? (
+                      <p className="launch-school-dropdown-status">
+                        {schoolSearch.trim() ? "No schools found." : "No schools available."}
+                      </p>
+                    ) : (
+                      filteredSchools.map((s) => {
+                        const location = formatSchoolLocation(s.city, s.state);
+                        const selected = schoolId === s.id;
+                        return (
+                          <button
+                            key={s.id}
+                            type="button"
+                            role="option"
+                            aria-selected={selected}
+                            className={`launch-school-dropdown-item${selected ? " is-selected" : ""}`}
+                            onMouseDown={(event) => event.preventDefault()}
+                            onClick={() => selectSchool(s)}
+                          >
+                            <span className="launch-school-dropdown-item-name">{s.name}</span>
+                            {location && <span className="launch-school-dropdown-item-meta">{location}</span>}
+                          </button>
+                        );
+                      })
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 

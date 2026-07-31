@@ -459,6 +459,70 @@
   pointer-events: none;
 }
 
+/* School search field — replaces the plain <select> with a searchable,
+   card-style list (bold name + "City, ST" meta line), matching the look
+   used for market/city selection elsewhere in the app. */
+
+.launch-school-picker {
+  position: relative;
+}
+
+.launch-school-dropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 20;
+  max-height: min(280px, 45vh);
+  overflow-y: auto;
+  border: 1px solid var(--launch-input-border);
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 12px 32px rgba(23, 24, 26, 0.1);
+}
+
+.launch-school-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-bottom: 1px solid var(--launch-border);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.launch-school-dropdown-item:last-of-type {
+  border-bottom: none;
+}
+
+.launch-school-dropdown-item:hover,
+.launch-school-dropdown-item.is-selected {
+  background: var(--launch-icon-bg);
+}
+
+.launch-school-dropdown-item-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--launch-ink);
+}
+
+.launch-school-dropdown-item-meta {
+  font-size: 13px;
+  color: var(--launch-muted);
+}
+
+.launch-school-dropdown-status {
+  margin: 0;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--launch-muted);
+}
+
 .launch-legal {
   font-size: 13px;
   color: var(--launch-muted);
