@@ -239,9 +239,12 @@ export default function DashboardPage() {
           </div>
 
           {/* Invite Friends */}
-          <button className="mt-8 bg-[#eaeaea] hover:bg-[#dfdfdf] active:scale-[0.98] text-neutral-800 font-lato text-[13px] md:text-[18px] font-bold py-3.5 rounded-[8px] text-center transition-all duration-200 cursor-pointer shadow-sm">
+          <Link
+            href="/dashboard/invite"
+            className="mt-8 bg-[#eaeaea] hover:bg-[#dfdfdf] active:scale-[0.98] text-neutral-800 font-lato text-[13px] md:text-[18px] font-bold py-3.5 rounded-[8px] text-center transition-all duration-200 cursor-pointer shadow-sm"
+          >
             Invite friends
-          </button>
+          </Link>
         </div>
 
         <RecentActivitySection variant="dashboard" />
