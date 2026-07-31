@@ -38,7 +38,7 @@ export const joinWaitlist = createAsyncThunk(
         message: "You're on the waitlist!",
         waitlistPosition: user.waitlistPosition ?? null,
         referralCode: user.referralCode,
-        referralLink: `https://datebea.com/link/${user.referralCode}`,
+        referralLink: `${typeof window !== "undefined" ? window.location.origin : ""}/link/${user.referralCode}`,
         magicLink,
       };
     } catch (error) {

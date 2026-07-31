@@ -31,8 +31,8 @@ export function YoureInStep() {
   const [referralLink, setReferralLink] = useState(link);
 
   useEffect(() => {
-    if (me?.user?.referralCode) {
-      setReferralLink(`bubba.app/invite/${me.user.referralCode}`);
+    if (me?.user?.referralCode && typeof window !== "undefined") {
+      setReferralLink(`${window.location.origin}/link/${me.user.referralCode}`);
     }
   }, [me]);
 
@@ -67,7 +67,9 @@ export function YoureInStep() {
 
           <p className="launch-welcome-link-label">{linkLabel}</p>
           <div className="launch-welcome-card">
-            <p className="launch-welcome-link font-canela onboarding-heading">{referralLink}</p>
+            <p className="launch-welcome-link font-canela onboarding-heading">
+              {referralLink.replace(/^https?:\/\//, "")}
+            </p>
             <CopyButton value={referralLink} />
           </div>
 
