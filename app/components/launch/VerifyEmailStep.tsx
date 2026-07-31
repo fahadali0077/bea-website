@@ -12,7 +12,7 @@ import { resetOnboardingProgress } from "@/lib/onboarding-progress";
 
 export function VerifyEmailStep() {
   const router = useRouter();
-  const { eyebrow, titleLines, bodyPrefix,  resend, } = WAYS_STEP;
+  const { eyebrow, titleLines, bodyPrefix,  resend, useDifferentEmail } = WAYS_STEP;
 
   const [token, setToken] = useState("");
   const { data: invite } = useValidateAmbassadorOnboardingQuery(token, { skip: !token });
