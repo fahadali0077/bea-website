@@ -29,12 +29,7 @@ export function AmbassadorLoginPage() {
 
     setError(null);
     try {
-      const res = await requestMagicLink(value).unwrap();
-      const link = res.magicLink;
-      if (link) {
-        window.location.href = link;
-        return;
-      }
+      await requestMagicLink(value).unwrap();
       setSent(true);
     } catch (err) {
       setError(getApiErrorMessage(err, "Unable to send login link. Please try again."));
