@@ -4,6 +4,7 @@ import { apiSlice } from "@/features/api/apiSlice";
 import authReducer from "@/features/auth/auth.slice";
 import waitlistReducer from "@/features/waitlist/waitlist.slice";
 import { initialWaitlistForm } from "@/features/waitlist/waitlist.types";
+import type { WaitlistState } from "@/features/waitlist/waitlist.types";
 
 const WAITLIST_FORM_STORAGE_KEY = "waitlist_form";
 
@@ -37,7 +38,7 @@ export const makeStore = () => {
             joinError: null,
             joinResult: null,
             waitlistPosition: null,
-          },
+          } satisfies WaitlistState,
         }
       : undefined,
   });
