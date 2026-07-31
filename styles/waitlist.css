@@ -407,6 +407,7 @@ body:has(.waitlist-artboard-root) {
 .waitlist-school-card-name {
   font-size: 15px;
   font-weight: 600;
+  color: var(--wl-text);
 }
 
 .waitlist-school-card-city {
@@ -469,6 +470,10 @@ body:has(.waitlist-artboard-root) {
 
 .waitlist-school-card--selected .waitlist-school-card-city {
   color: rgba(255, 255, 255, 0.75);
+}
+
+.waitlist-school-card--selected .waitlist-school-card-name {
+  color: #fff;
 }
 
 .waitlist-school-card--selected .waitlist-school-card-dot {
@@ -3431,6 +3436,10 @@ body:has(.waitlist-artboard-root) {
 
 .wld-step5-school-card--selected .wld-step5-school-card-city {
   color: rgba(255, 255, 255, 0.75);
+}
+
+.wld-step5-school-card--selected .wld-step5-school-card-name {
+  color: #fff;
 }
 
 .wld-step5-school-card--selected .wld-step5-school-card-dot {
