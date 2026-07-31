@@ -22,6 +22,7 @@ import {
   ClipboardList,
   ShieldAlert,
   History,
+  Trophy,
 } from "lucide-react";
 
 const ADMIN_AVATAR = "/images/ron-avatar.png";
@@ -47,6 +48,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Schools", href: "/admin/schools", icon: <GraduationCap className={ICON} />, ready: true },
   { label: "Markets", href: "/admin/markets", icon: <MapPin className={ICON} />, ready: true },
   { label: "Prompts", href: "/admin/prompts", icon: <MessageSquareText className={ICON} />, ready: true },
+  { label: "Competitions", href: "/admin/competitions", icon: <Trophy className={ICON} />, ready: true },
   { label: "Forum", href: "/admin/forum", icon: <ShieldAlert className={ICON} />, ready: true },
   { label: "Points", href: "/admin/points", icon: <Coins className={ICON} />, ready: true },
   { label: "Rewards", href: "/admin/rewards", icon: <Gift className={ICON} />, ready: true },
