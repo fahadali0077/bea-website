@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-import { SchoolStep } from "@/app/components/launch/SchoolStep";
+import { RoleStep } from "@/app/components/launch/RoleStep";
 
 export const metadata: Metadata = {
   title: "The Role | Bea Ambassador Onboarding",
 };
 
 export default function TheRole() {
-  return <SchoolStep />;
+  return <RoleStep />;
 }
