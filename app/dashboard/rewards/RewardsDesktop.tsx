@@ -9,7 +9,8 @@ import {
   GraduationCap,
   Trophy,
 } from "lucide-react";
-import { WAITLIST_PRIZES_DETAIL } from "@/lib/waitlist-page-content";
+import { useRedeemRewardMutation } from "@/features/api/apiSlice";
+import { useRewardsContent } from "./useRewardsContent";
 
 const RANK_ICONS = {
   campus: GraduationCap,
@@ -18,7 +19,19 @@ const RANK_ICONS = {
 } as const;
 
 export function RewardsDesktop() {
-  const c = WAITLIST_PRIZES_DETAIL;
+  const { content: c, hasRewards, isLoading, isError, errorMessage, refetch } =
+    useRewardsContent();
+  const [redeemReward, { isLoading: isRedeeming, originalArgs }] =
+    useRedeemRewardMutation();
+
+  const handleRedeem = async (rewardId: string | null) => {
+    if (!rewardId) return;
+    try {
+      await redeemReward(rewardId).unwrap();
+    } catch {
+      // Error surfaces via the RewardProgress refetch; card state updates itself.
+    }
+  };
 
   return (
     <div style={{ width: "100%", fontFamily: "var(--font-sans, 'Inter', sans-serif)" }}>
@@ -181,6 +194,35 @@ export function RewardsDesktop() {
         </button>
       </div>
 
+      {/* States: the board is empty until an admin creates a visible reward. */}
+      {isLoading && (
+        <p style={{ margin: "0 0 24px", fontSize: "14px", color: "#8a8078" }}>
+          Loading your rewards...
+        </p>
+      )}
+
+      {isError && (
+        <div style={{ margin: "0 0 24px", display: "flex", alignItems: "center", gap: "12px" }}>
+          <p style={{ margin: 0, fontSize: "14px", color: "#8a8078" }}>{errorMessage}</p>
+          <button
+            type="button"
+            onClick={() => refetch()}
+            style={{
+              background: "none", border: "none", padding: 0, cursor: "pointer",
+              fontSize: "14px", fontWeight: 700, color: "#4a3429", textDecoration: "underline",
+            }}
+          >
+            Try again
+          </button>
+        </div>
+      )}
+
+      {!isLoading && !isError && !hasRewards && (
+        <p style={{ margin: "0 0 24px", fontSize: "14px", color: "#8a8078" }}>
+          No rewards are available yet. Check back soon.
+        </p>
+      )}
+
       {/* ── FEATURED REWARDS – 3 column cards ── */}
       <div
         style={{
@@ -192,7 +234,7 @@ export function RewardsDesktop() {
       >
         {c.featured.rewards.map((r) => (
           <div
-            key={r.title}
+            key={r.id ?? r.title}
             className="card"
             style={{ padding: "22px 22px 20px", display: "flex", flexDirection: "column", minHeight: "220px" }}
           >
@@ -250,18 +292,21 @@ export function RewardsDesktop() {
               </span>
               <button
                 type="button"
+                onClick={() => handleRedeem(r.id)}
+                disabled={!r.canRedeem || isRedeeming}
+                title={r.disabledReason ?? undefined}
                 style={{
-                  background: "#1a1a1a",
+                  background: r.canRedeem ? "#1a1a1a" : "#c8c2bb",
                   color: "#fff",
                   border: "none",
                   borderRadius: "10px",
                   padding: "9px 20px",
                   fontSize: "14px",
                   fontWeight: 600,
-                  cursor: "pointer",
+                  cursor: r.canRedeem && !isRedeeming ? "pointer" : "not-allowed",
                 }}
               >
-                {r.cta}
+                {isRedeeming && originalArgs === r.id ? "Redeeming..." : r.cta}
               </button>
             </div>
           </div>

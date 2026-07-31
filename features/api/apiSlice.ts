@@ -19,6 +19,10 @@ import type {
 } from "@/lib/api/types";
 import type { ListMarketsParams, MarketsListResponse, Market } from "@/lib/api/markets.types";
 import type {
+  MyRewardProgressResponse,
+  RedeemRewardResponse,
+} from "@/lib/api/rewards.types";
+import type {
   ListSchoolsParams,
   SchoolsListResponse,
   School,
@@ -63,7 +67,7 @@ import type {
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: axiosBaseQuery(),
-  tagTypes: ["Me", "WaitlistStatus", "WaitlistDashboard", "Leaderboard", "AmbassadorDashboard", "AmbassadorNetwork", "AmbassadorLeaderboard", "AmbassadorCalendar", "Schools", "SchoolRanking", "Markets", "Products", "Categories", "TodayPrompt", "PromptResponses", "ResponseComments", "PromptsArchive", "ForumPosts", "ForumPost"],
+  tagTypes: ["Me", "WaitlistStatus", "WaitlistDashboard", "Leaderboard", "AmbassadorDashboard", "AmbassadorNetwork", "AmbassadorLeaderboard", "AmbassadorCalendar", "Schools", "SchoolRanking", "Markets", "RewardProgress", "Products", "Categories", "TodayPrompt", "PromptResponses", "ResponseComments", "PromptsArchive", "ForumPosts", "ForumPost"],
   endpoints: (builder) => ({
     requestMagicLink: builder.mutation<MagicLinkRequestResponse, string>({
       query: (email) => ({ url: "/auth/request-magic-link", method: "POST", data: { email } }),
@@ -107,6 +111,18 @@ export const apiSlice = createApi({
     listSchools: builder.query<SchoolsListResponse, ListSchoolsParams | void>({
       query: (params) => ({ url: "/schools", method: "GET", params: params ?? undefined }),
       providesTags: ["Schools"],
+    }),
+
+    getMyRewardProgress: builder.query<MyRewardProgressResponse, void>({
+      query: () => ({ url: "/rewards/my-progress", method: "GET" }),
+      providesTags: ["RewardProgress"],
+    }),
+
+    redeemReward: builder.mutation<RedeemRewardResponse, string>({
+      query: (rewardId) => ({ url: `/rewards/${rewardId}/redeem`, method: "POST" }),
+      // Redeeming consumes inventory and changes unlock status, and the points
+      // card reads from the same progress payload.
+      invalidatesTags: ["RewardProgress", "Leaderboard"],
     }),
 
     getSchoolRanking: builder.query<SchoolRankingResponse, SchoolRankingParams | void>({
@@ -311,6 +327,8 @@ export const {
   useGetMyLeaderboardQuery,
   useListSchoolsQuery,
   useGetSchoolRankingQuery,
+  useGetMyRewardProgressQuery,
+  useRedeemRewardMutation,
   useLazyListSchoolsQuery,
   useListMarketsQuery,
   useLazyListMarketsQuery,

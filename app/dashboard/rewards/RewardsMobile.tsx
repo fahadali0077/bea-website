@@ -10,7 +10,8 @@ import {
   Trophy,
 } from "lucide-react";
 import "@/styles/waitlist.css";
-import { WAITLIST_PRIZES_DETAIL } from "@/lib/waitlist-page-content";
+import { useRedeemRewardMutation } from "@/features/api/apiSlice";
+import { useRewardsContent } from "./useRewardsContent";
 
 const RANK_ICONS = {
   campus: GraduationCap,
@@ -19,7 +20,19 @@ const RANK_ICONS = {
 } as const;
 
 export function RewardsMobile() {
-  const c = WAITLIST_PRIZES_DETAIL;
+  const { content: c, hasRewards, isLoading, isError, errorMessage, refetch } =
+    useRewardsContent();
+  const [redeemReward, { isLoading: isRedeeming, originalArgs }] =
+    useRedeemRewardMutation();
+
+  const handleRedeem = async (rewardId: string | null) => {
+    if (!rewardId) return;
+    try {
+      await redeemReward(rewardId).unwrap();
+    } catch {
+      // Error surfaces via the RewardProgress refetch.
+    }
+  };
 
   return (
     <div className="waitlist-root" style={{ background: 'transparent', minHeight: 'auto' }}>
@@ -56,9 +69,29 @@ export function RewardsMobile() {
             <ArrowRight size={15} strokeWidth={1.75} />
           </button>
         </div>
+        {isLoading && (
+          <p style={{ fontSize: '14px', color: '#8a8078', margin: '0 0 12px' }}>Loading your rewards...</p>
+        )}
+        {isError && (
+          <p style={{ fontSize: '14px', color: '#8a8078', margin: '0 0 12px' }}>
+            {errorMessage}{' '}
+            <button
+              type="button"
+              onClick={() => refetch()}
+              style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontWeight: 700, color: '#4a3429', textDecoration: 'underline' }}
+            >
+              Try again
+            </button>
+          </p>
+        )}
+        {!isLoading && !isError && !hasRewards && (
+          <p style={{ fontSize: '14px', color: '#8a8078', margin: '0 0 12px' }}>
+            No rewards are available yet. Check back soon.
+          </p>
+        )}
         <div className="waitlist-reward-list">
           {c.featured.rewards.map((r) => (
-            <div key={r.title} className="waitlist-reward-card card" style={{ borderRadius: '12px' }}>
+            <div key={r.id ?? r.title} className="waitlist-reward-card card" style={{ borderRadius: '12px' }}>
               <span className="waitlist-reward-badge" style={{ background: '#f2eee7', color: '#827357' }}>{r.status}</span>
               <h3 className="waitlist-reward-title" style={{ color: '#1a1a1a' }}>{r.title}</h3>
               <p className="waitlist-reward-desc" style={{ color: '#6f6a64' }}>
@@ -68,8 +101,15 @@ export function RewardsMobile() {
               </p>
               <div className="waitlist-reward-foot">
                 <span className="waitlist-reward-cost" style={{ color: '#4a3429', fontWeight: 600 }}>{r.cost}</span>
-                <button type="button" className="waitlist-reward-redeem" style={{ background: '#1a1a1a', color: '#fff' }}>
-                  {r.cta}
+                <button
+                  type="button"
+                  className="waitlist-reward-redeem"
+                  onClick={() => handleRedeem(r.id)}
+                  disabled={!r.canRedeem || isRedeeming}
+                  title={r.disabledReason ?? undefined}
+                  style={{ background: r.canRedeem ? '#1a1a1a' : '#c8c2bb', color: '#fff' }}
+                >
+                  {isRedeeming && originalArgs === r.id ? 'Redeeming...' : r.cta}
                 </button>
               </div>
             </div>
