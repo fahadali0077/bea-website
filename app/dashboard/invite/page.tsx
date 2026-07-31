@@ -10,7 +10,7 @@ import { getCompetitionLifecycle } from '@/lib/competition-lifecycle';
 export default function InvitePage() {
     const [copied, setCopied] = useState(false);
     const { data: dashboard } = useGetWaitlistDashboardQuery();
-    const referralLink = dashboard?.user.referralLink ?? 'https://datebea.com/waitlist';
+    const referralLink = dashboard?.user.referralLink ?? (typeof window !== "undefined" ? window.location.origin : "");
     const directInvites = dashboard?.referrals.directInvites ?? 0;
     const shareTitle = 'Join me on Bea and unlock perks together!';
     const lifecycle = getCompetitionLifecycle(dashboard?.competition);
