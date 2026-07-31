@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { selectWaitlistForm } from "@/features/waitlist/waitlist.selectors";
 import { updateWaitlistForm } from "@/features/waitlist/waitlist.slice";
@@ -28,6 +29,7 @@ function formatSchoolLocation(school: School) {
 }
 
 export function WaitlistSchoolFields({ variant, error }: Props) {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const form = useAppSelector(selectWaitlistForm);
   const isDesktop = variant === "desktop";
@@ -269,9 +271,19 @@ export function WaitlistSchoolFields({ variant, error }: Props) {
 
   if (!form.marketId) {
     return (
-      <p className="waitlist-field-error">
-        Select a market first on the previous step.
-      </p>
+      <div className="waitlist-step-blocked">
+        <p className="waitlist-step-blocked-title">No market selected yet</p>
+        <p className="waitlist-step-blocked-body">
+          Head back and pick a city before choosing your school.
+        </p>
+        <button
+          type="button"
+          className="waitlist-btn-secondary"
+          onClick={() => router.push("/waitlist/3")}
+        >
+          Go select a market
+        </button>
+      </div>
     );
   }
 

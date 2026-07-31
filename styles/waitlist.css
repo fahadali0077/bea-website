@@ -488,6 +488,28 @@ body:has(.waitlist-artboard-root) {
   text-align: center;
 }
 
+.waitlist-step-blocked {
+  margin-top: 16px;
+  padding: 24px 20px;
+  border: 1px solid var(--wl-border);
+  border-radius: 14px;
+  background: var(--wl-input-bg);
+  text-align: center;
+}
+
+.waitlist-step-blocked-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--wl-text);
+  margin: 0 0 6px;
+}
+
+.waitlist-step-blocked-body {
+  font-size: 14px;
+  color: var(--wl-muted);
+  margin: 0 0 18px;
+}
+
 /* Landing page */
 .waitlist-landing-header {
   display: flex;
