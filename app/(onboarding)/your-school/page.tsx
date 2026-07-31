@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-import { InviteStep } from "@/app/components/launch/InviteStep";
+import { SchoolStep } from "@/app/components/launch/SchoolStep";
 
 export const metadata: Metadata = {
   title: "Your School | Bea Ambassador Onboarding",
 };
 
 export default function YourSchool() {
-  return <InviteStep />;
+  return <SchoolStep />;
 }
