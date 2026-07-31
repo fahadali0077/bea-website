@@ -8,6 +8,7 @@ import { Mail } from "lucide-react";
 
 import { WAYS_STEP } from "@/lib/launch";
 import { useResendAmbassadorInviteMutation, useValidateAmbassadorOnboardingQuery } from "@/features/api/apiSlice";
+import { resetOnboardingProgress } from "@/lib/onboarding-progress";
 
 export function VerifyEmailStep() {
   const router = useRouter();
@@ -39,6 +40,7 @@ export function VerifyEmailStep() {
 
   const handleUseDifferentEmail = () => {
     sessionStorage.removeItem("ambassador_onboarding_token");
+    resetOnboardingProgress();
     router.push("/onboarding");
   };
 

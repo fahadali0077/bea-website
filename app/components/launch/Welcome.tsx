@@ -2,13 +2,21 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 
 import { WELCOME_STEP } from "@/lib/launch";
+import { markStepReached } from "@/lib/onboarding-progress";
 
 export function Welcome() {
+  const router = useRouter();
   const { eyebrow, titleLines, subtitle, cta, loginPrompt, loginLabel, loginHref } =
     WELCOME_STEP;
+
+  const handleContinue = () => {
+    markStepReached("the-role");
+    router.push(cta.href);
+  };
 
   return (
     <section className="launch-step launch-step--hero">
@@ -32,10 +40,10 @@ export function Welcome() {
             ))}
           </p>
 
-          <Link href={cta.href} className="hero-cta cursor-pointer">
+          <button type="button" onClick={handleContinue} className="hero-cta cursor-pointer">
             <span>{cta.label}</span>
             <ArrowRight size={18} strokeWidth={2} className="hero-cta-arrow" aria-hidden="true" />
-          </Link>
+          </button>
 
           <p className="hero-signin">
             {loginPrompt}

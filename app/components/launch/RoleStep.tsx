@@ -7,6 +7,7 @@ import { ArrowRight, Tag, Gift, Users, Sprout } from "lucide-react";
 
 import { SCHOOL_STEP, type SchoolIcon } from "@/lib/launch";
 import { useResendAmbassadorInviteMutation } from "@/features/api/apiSlice";
+import { markStepReached } from "@/lib/onboarding-progress";
 
 function SchoolIconGlyph({ icon }: { icon: SchoolIcon }) {
   switch (icon) {
@@ -35,6 +36,8 @@ export function RoleStep() {
   const handleContinue = () => {
     if (navigating) return;
     setNavigating(true);
+
+    markStepReached("verify-email");
 
     const token = sessionStorage.getItem("ambassador_onboarding_token") ?? "";
     if (token) {

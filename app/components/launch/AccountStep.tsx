@@ -8,6 +8,7 @@ import { ArrowRight, Check, Loader2 } from "lucide-react";
 
 import { ACCOUNT_STEP } from "@/lib/launch";
 import { useValidateAmbassadorOnboardingQuery, useLazyCheckAmbassadorEmailQuery } from "@/features/api/apiSlice";
+import { markStepReached } from "@/lib/onboarding-progress";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const CHECK_DEBOUNCE_MS = 500;
@@ -57,6 +58,7 @@ export function AccountStep() {
     setSubmitting(true);
     sessionStorage.setItem("invite_full_name", fullName.trim());
     sessionStorage.setItem("invite_email", email.trim());
+    markStepReached("your-school");
     router.push(cta.href);
   };
 

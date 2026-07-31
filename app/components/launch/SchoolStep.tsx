@@ -11,6 +11,7 @@ import { fetchAllSchools } from "@/lib/api/fetch-all-schools-search";
 import type { School } from "@/lib/api/schools.types";
 import { useCompleteAmbassadorOnboardingMutation } from "@/features/api/apiSlice";
 import { getApiErrorMessage, persistAccessToken } from "@/lib/api";
+import { markStepReached } from "@/lib/onboarding-progress";
 
 const formatSchoolLocation = (city: string | null | undefined, state: string | null | undefined) =>
   city && state ? `${city}, ${state}` : city || state || null;
@@ -101,6 +102,7 @@ export function SchoolStep() {
       sessionStorage.setItem("invite_role", role);
       if (instagram.trim()) sessionStorage.setItem("invite_instagram", instagram.trim());
 
+      markStepReached("youre-in");
       router.push(cta.href);
     } catch (err) {
       setError(getApiErrorMessage(err, "Could not complete onboarding. Please try again."));

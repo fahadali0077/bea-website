@@ -7,6 +7,7 @@ import { Loader2 } from "lucide-react";
 
 import { readAccessToken } from "@/lib/api";
 import { useGetMeQuery } from "@/features/api/apiSlice";
+import { markStepReached, type OnboardingStepId } from "@/lib/onboarding-progress";
 
 const ALLOWED_NEXT_STEPS = new Set([
   "onboarding",
@@ -47,6 +48,7 @@ function RedirectContent() {
 
     if (token) {
       sessionStorage.setItem("ambassador_onboarding_token", token);
+      markStepReached(nextStep as OnboardingStepId);
       router.replace(`/${nextStep}?token=${token}`);
     } else {
       router.replace("/onboarding");
