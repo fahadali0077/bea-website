@@ -301,7 +301,7 @@ export default function TopResponsesSection({ variant, promptId: propPromptId }:
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'most-liked' | 'recent')}
-                className="appearance-none bg-[#faf9f6] border border-neutral-200 rounded-[8px] pl-4 pr-9 py-2.5 font-lato text-[11px] md:text-[14px] font-bold text-neutral-700 focus:outline-none focus:border-neutral-400 focus:ring-1 focus:ring-neutral-400 transition-all cursor-pointer"
+                className="appearance-none bg-[#faf9f6] border border-neutral-200 rounded-[8px] pl-4 pr-9 py-2.5 font-lato text-[16px] md:text-[14px] font-bold text-neutral-700 focus:outline-none focus:border-neutral-400 focus:ring-1 focus:ring-neutral-400 transition-all cursor-pointer"
               >
                 <option value="most-liked">Most liked</option>
                 <option value="recent">Most recent</option>

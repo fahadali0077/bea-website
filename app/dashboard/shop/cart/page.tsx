@@ -357,7 +357,7 @@ export default function CartPage() {
                         value={shipping.shippingName}
                         onChange={(event) => handleShippingChange("shippingName", event.target.value)}
                         placeholder="Full name"
-                        className="mt-2 w-full rounded-[10px] border border-neutral-200 bg-white px-3.5 py-3 text-[14px] text-neutral-900 outline-none focus:border-neutral-400"
+                        className="mt-2 w-full rounded-[10px] border border-neutral-200 bg-white px-3.5 py-3 text-[16px] md:text-[14px] text-neutral-900 outline-none focus:border-neutral-400"
                       />
                     </label>
                     <label className="block text-[13px] font-bold text-neutral-800">
@@ -366,7 +366,7 @@ export default function CartPage() {
                         value={shipping.shippingLine1}
                         onChange={(event) => handleShippingChange("shippingLine1", event.target.value)}
                         placeholder="Street address"
-                        className="mt-2 w-full rounded-[10px] border border-neutral-200 bg-white px-3.5 py-3 text-[14px] text-neutral-900 outline-none focus:border-neutral-400"
+                        className="mt-2 w-full rounded-[10px] border border-neutral-200 bg-white px-3.5 py-3 text-[16px] md:text-[14px] text-neutral-900 outline-none focus:border-neutral-400"
                       />
                     </label>
                   </div>
@@ -378,7 +378,7 @@ export default function CartPage() {
                         value={shipping.shippingCity}
                         onChange={(event) => handleShippingChange("shippingCity", event.target.value)}
                         placeholder="City"
-                        className="mt-2 w-full rounded-[10px] border border-neutral-200 bg-white px-3.5 py-3 text-[14px] text-neutral-900 outline-none focus:border-neutral-400"
+                        className="mt-2 w-full rounded-[10px] border border-neutral-200 bg-white px-3.5 py-3 text-[16px] md:text-[14px] text-neutral-900 outline-none focus:border-neutral-400"
                       />
                     </label>
                     <label className="block text-[13px] font-bold text-neutral-800">
@@ -387,7 +387,7 @@ export default function CartPage() {
                         value={shipping.shippingState}
                         onChange={(event) => handleShippingChange("shippingState", event.target.value)}
                         placeholder="State"
-                        className="mt-2 w-full rounded-[10px] border border-neutral-200 bg-white px-3.5 py-3 text-[14px] text-neutral-900 outline-none focus:border-neutral-400"
+                        className="mt-2 w-full rounded-[10px] border border-neutral-200 bg-white px-3.5 py-3 text-[16px] md:text-[14px] text-neutral-900 outline-none focus:border-neutral-400"
                       />
                     </label>
                     <label className="block text-[13px] font-bold text-neutral-800">
@@ -396,7 +396,7 @@ export default function CartPage() {
                         value={shipping.shippingZip}
                         onChange={(event) => handleShippingChange("shippingZip", event.target.value)}
                         placeholder="ZIP code"
-                        className="mt-2 w-full rounded-[10px] border border-neutral-200 bg-white px-3.5 py-3 text-[14px] text-neutral-900 outline-none focus:border-neutral-400"
+                        className="mt-2 w-full rounded-[10px] border border-neutral-200 bg-white px-3.5 py-3 text-[16px] md:text-[14px] text-neutral-900 outline-none focus:border-neutral-400"
                       />
                     </label>
                   </div>
@@ -408,7 +408,7 @@ export default function CartPage() {
                       onChange={(event) => handleShippingChange("notes", event.target.value)}
                       placeholder="Order notes or special instructions"
                       rows={4}
-                      className="mt-2 w-full rounded-[10px] border border-neutral-200 bg-white px-3.5 py-3 text-[14px] text-neutral-900 outline-none focus:border-neutral-400"
+                      className="mt-2 w-full rounded-[10px] border border-neutral-200 bg-white px-3.5 py-3 text-[16px] md:text-[14px] text-neutral-900 outline-none focus:border-neutral-400"
                     />
                   </label>
 

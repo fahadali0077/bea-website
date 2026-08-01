@@ -86,7 +86,7 @@ export default function LaunchFooter() {
                                      }}
                                      placeholder="Your email address"
                                      disabled={status === 'submitting'}
-                                     className="w-full bg-[#f8f6f3] border border-[#f8f6f3] rounded-2xl px-5 py-3.5 text-[12px] md:text-[14px] font-lato text-neutral-800/80 placeholder-[#4c4b4a]/70 focus:outline-none focus:bg-[#f8f6f3]/90 transition-all shadow-sm"
+                                     className="w-full bg-[#f8f6f3] border border-[#f8f6f3] rounded-2xl px-5 py-3.5 text-[16px] md:text-[14px] font-lato text-neutral-800/80 placeholder-[#4c4b4a]/70 focus:outline-none focus:bg-[#f8f6f3]/90 transition-all shadow-sm"
                                  />
                              </div>
                              

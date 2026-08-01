@@ -173,7 +173,7 @@ export function SubmitResponseSidebar({ prompt, onClose }: SubmitResponseSidebar
                   onChange={(e) => setContent(e.target.value.slice(0, MAX_CHARS))}
                   placeholder="Share your honest take…"
                   rows={7}
-                  className="w-full flex-1 resize-none bg-white border border-neutral-200 rounded-[10px] px-4 py-3.5 font-lato text-[14px] text-neutral-800 placeholder-neutral-400 focus:outline-none focus:border-[#584939] focus:ring-1 focus:ring-[#584939]/30 transition-all leading-relaxed"
+                  className="w-full flex-1 resize-none bg-white border border-neutral-200 rounded-[10px] px-4 py-3.5 font-lato text-[16px] md:text-[14px] text-neutral-800 placeholder-neutral-400 focus:outline-none focus:border-[#584939] focus:ring-1 focus:ring-[#584939]/30 transition-all leading-relaxed"
                 />
                 <p
                   className={`font-lato text-[11px] font-semibold text-right transition-colors ${charsLeft < 50 ? "text-[#b0453a]" : "text-neutral-400"

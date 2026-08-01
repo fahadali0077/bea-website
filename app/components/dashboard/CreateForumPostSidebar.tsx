@@ -155,7 +155,7 @@ export function CreateForumPostSidebar({ isOpen, onClose, defaultScope = "CAMPUS
                     id="post-scope"
                     value={scope}
                     onChange={(e) => setScope(e.target.value as ForumScope)}
-                    className="w-full appearance-none bg-white border border-neutral-200 rounded-[10px] px-4 py-3 font-lato text-[14px] text-neutral-800 focus:outline-none focus:border-[#584939] focus:ring-1 focus:ring-[#584939]/30 transition-all cursor-pointer"
+                    className="w-full appearance-none bg-white border border-neutral-200 rounded-[10px] px-4 py-3 font-lato text-[16px] md:text-[14px] text-neutral-800 focus:outline-none focus:border-[#584939] focus:ring-1 focus:ring-[#584939]/30 transition-all cursor-pointer"
                   >
                     <option value="CAMPUS">Campus (Your School)</option>
                     <option value="MARKET">Market (Your City)</option>
@@ -182,7 +182,7 @@ export function CreateForumPostSidebar({ isOpen, onClose, defaultScope = "CAMPUS
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Best coffee shops on campus?"
-                  className="w-full bg-white border border-neutral-200 rounded-[10px] px-4 py-3 font-lato text-[14px] text-neutral-800 placeholder-neutral-400 focus:outline-none focus:border-[#584939] focus:ring-1 focus:ring-[#584939]/30 transition-all"
+                  className="w-full bg-white border border-neutral-200 rounded-[10px] px-4 py-3 font-lato text-[16px] md:text-[14px] text-neutral-800 placeholder-neutral-400 focus:outline-none focus:border-[#584939] focus:ring-1 focus:ring-[#584939]/30 transition-all"
                 />
               </div>
 
@@ -198,7 +198,7 @@ export function CreateForumPostSidebar({ isOpen, onClose, defaultScope = "CAMPUS
                   onChange={(e) => setBody(e.target.value)}
                   placeholder="What's on your mind? Share tips, ask questions, or start a discussion..."
                   rows={8}
-                  className="w-full flex-1 resize-none bg-white border border-neutral-200 rounded-[10px] px-4 py-3.5 font-lato text-[14px] text-neutral-800 placeholder-neutral-400 focus:outline-none focus:border-[#584939] focus:ring-1 focus:ring-[#584939]/30 transition-all leading-relaxed"
+                  className="w-full flex-1 resize-none bg-white border border-neutral-200 rounded-[10px] px-4 py-3.5 font-lato text-[16px] md:text-[14px] text-neutral-800 placeholder-neutral-400 focus:outline-none focus:border-[#584939] focus:ring-1 focus:ring-[#584939]/30 transition-all leading-relaxed"
                 />
               </div>
 

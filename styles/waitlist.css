@@ -4133,3 +4133,19 @@ body:has(.waitlist-confirmed) {
   vertical-align: middle;
   margin-right: 6px;
 }
+/* ---------------------------------------------------------------
+   iOS zoom guard — see launch.css for the rationale.
+   --------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .waitlist-box-input,
+  .waitlist-email-pill input,
+  .waitlist-artboard-pill-input,
+  .waitlist-artboard-footer-input,
+  .waitlist-artboard-box-input,
+  .waitlist-landing-mobile .waitlist-email-pill input,
+  .wld-email-input,
+  .wld-footer-input {
+    font-size: 16px;
+  }
+}

@@ -2041,3 +2041,17 @@
   border-color: var(--launch-danger);
   color: var(--launch-danger);
 }
+
+/* ---------------------------------------------------------------
+   iOS zoom guard
+   Safari force-zooms any focused control below 16px and never zooms
+   back out. Lift to 16px on touch-sized viewports; desktop keeps the
+   designed 15px.
+   --------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .launch-field-input,
+  .launch-field-select {
+    font-size: 16px;
+  }
+}

@@ -194,7 +194,7 @@ export default function ForumPage() {
                 placeholder="Search posts"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#fcfbf8] border border-neutral-200/80 rounded-[4px] pl-10 pr-4 py-2.5 font-lato font-semibold text-[11px] md:text-[14px] text-neutral-800 placeholder-neutral-400 focus:outline-none focus:border-neutral-400 transition-all shadow-sm"
+                className="w-full bg-[#fcfbf8] border border-neutral-200/80 rounded-[4px] pl-10 pr-4 py-2.5 font-lato font-semibold text-[16px] md:text-[14px] text-neutral-800 placeholder-neutral-400 focus:outline-none focus:border-neutral-400 transition-all shadow-sm"
               />
               {searchQuery && (
                 <button
@@ -213,7 +213,7 @@ export default function ForumPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'recent' | 'popular')}
-                className="appearance-none bg-[#fcfbf8] border border-neutral-200/80 rounded-[4px] pl-4 pr-9 py-2.5 font-lato font-bold text-[11px] md:text-[14px] text-neutral-700 focus:outline-none focus:border-neutral-400 transition-all cursor-pointer shadow-sm"
+                className="appearance-none bg-[#fcfbf8] border border-neutral-200/80 rounded-[4px] pl-4 pr-9 py-2.5 font-lato font-bold text-[16px] md:text-[14px] text-neutral-700 focus:outline-none focus:border-neutral-400 transition-all cursor-pointer shadow-sm"
               >
                 <option value="recent">Latest</option>
                 <option value="popular">Popular</option>

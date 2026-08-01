@@ -38,7 +38,7 @@ function SearchBox({ value, onChange }: { value: string; onChange: (value: strin
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Search…"
-        className="w-full font-lato text-[13px] text-neutral-800 bg-white border border-neutral-200/70 rounded-[8px] pl-9 pr-3 py-2 focus:outline-none focus:border-neutral-400 transition-colors placeholder:text-neutral-400"
+        className="w-full font-lato text-[16px] md:text-[13px] text-neutral-800 bg-white border border-neutral-200/70 rounded-[8px] pl-9 pr-3 py-2 focus:outline-none focus:border-neutral-400 transition-colors placeholder:text-neutral-400"
       />
     </div>
   );

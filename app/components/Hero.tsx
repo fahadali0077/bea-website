@@ -69,7 +69,7 @@ export default function Hero() {
                                     }}
                                     placeholder="Enter email to join waitlist"
                                     disabled={status === 'submitting'}
-                                    className="w-full bg-transparent pl-4 text-[7px] font-sans text-neutral-800 placeholder-neutral-600 focus:outline-none py-2 disabled:opacity-50"
+                                    className="w-full bg-transparent pl-4 text-[16px] md:text-[7px] font-sans text-neutral-800 placeholder-neutral-600 focus:outline-none py-2 disabled:opacity-50"
                                 />
                                 <button 
                                     type="submit"

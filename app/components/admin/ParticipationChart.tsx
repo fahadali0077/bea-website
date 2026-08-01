@@ -104,7 +104,7 @@ export function ParticipationChart({ data }: { data: DailyMetric[] }) {
         <select
           value={range}
           onChange={(e) => setRange(Number(e.target.value))}
-          className="self-start sm:self-auto font-lato text-[13px] font-medium text-neutral-700 bg-white border border-neutral-200/70 rounded-[8px] px-3 py-2 cursor-pointer focus:outline-none focus:border-neutral-400 transition-colors"
+          className="self-start sm:self-auto font-lato text-[16px] md:text-[13px] font-medium text-neutral-700 bg-white border border-neutral-200/70 rounded-[8px] px-3 py-2 cursor-pointer focus:outline-none focus:border-neutral-400 transition-colors"
           aria-label="Select time range"
         >
           {RANGES.map((option) => (

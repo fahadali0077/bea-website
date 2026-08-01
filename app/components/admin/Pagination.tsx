@@ -60,7 +60,7 @@ export function Pagination({
             <select
               value={pageSize}
               onChange={(e) => onPageSizeChange(Number(e.target.value))}
-              className="font-lato text-[12px] font-semibold text-neutral-700 bg-white border border-neutral-200/70 rounded-[8px] pl-2.5 pr-7 py-1.5 cursor-pointer focus:outline-none focus:border-neutral-400 transition-colors"
+              className="font-lato text-[16px] md:text-[12px] font-semibold text-neutral-700 bg-white border border-neutral-200/70 rounded-[8px] pl-2.5 pr-7 py-1.5 cursor-pointer focus:outline-none focus:border-neutral-400 transition-colors"
             >
               {pageSizeOptions.map((option) => (
                 <option key={option} value={option}>

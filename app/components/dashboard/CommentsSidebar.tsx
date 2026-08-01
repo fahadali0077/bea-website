@@ -256,9 +256,14 @@ export default function CommentsSidebar({ target, onClose, commentsEnabled = tru
     }
   }, [displayTarget, responseCommentsData?.items, forumPostData?.comments]);
 
-  const commentsAreLoading = isResponse
-    ? responseLoading || responseFetching
-    : postLoading || postFetching;
+  // Only the first load replaces the list. isFetching is also true for the
+  // background refetch that follows posting a comment, and including it here
+  // tore the whole list down and showed "Loading comments..." even though the
+  // cached comments were still in memory.
+  const commentsAreLoading = isResponse ? responseLoading : postLoading;
+
+  // Used for a quiet inline indicator instead — the list stays on screen.
+  const commentsAreRefreshing = isResponse ? responseFetching : postFetching;
 
   const clearCloseTimer = useCallback(() => {
     if (closeTimerRef.current) {
@@ -398,8 +403,15 @@ export default function CommentsSidebar({ target, onClose, commentsEnabled = tru
           <ThreadPreview target={previewProps} likeCount={displayTarget.likeCount} />
 
           <div className="space-y-3">
-            <span className="text-[11px] md:text-[13px] font-lato font-bold tracking-[0.12em] text-neutral-500 uppercase block">
+            <span className="text-[11px] md:text-[13px] font-lato font-bold tracking-[0.12em] text-neutral-500 uppercase flex items-center gap-2">
               All comments
+              {commentsAreRefreshing && !commentsAreLoading && (
+                <span
+                  className="w-3 h-3 rounded-full border-[1.5px] border-neutral-300 border-t-neutral-500 animate-spin"
+                  role="status"
+                  aria-label="Refreshing comments"
+                />
+              )}
             </span>
 
             {commentsAreLoading ? (
@@ -442,7 +454,10 @@ export default function CommentsSidebar({ target, onClose, commentsEnabled = tru
                 onKeyDown={handleKeyDown}
                 disabled={!commentsEnabled}
                 placeholder={commentsEnabled ? "Add a comment..." : "Scoring is closed"}
-                className="w-full bg-white border border-neutral-200 rounded-lg px-3.5 py-2.5 font-lato text-[11px] md:text-[13px] text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-400 focus:ring-1 focus:ring-neutral-400 transition-all"
+                enterKeyHint="send"
+                /* 16px on mobile is the exact threshold below which iOS Safari
+                   force-zooms a focused input and never zooms back out. */
+                className="w-full bg-white border border-neutral-200 rounded-lg px-3.5 py-2.5 font-lato text-[16px] md:text-[13px] text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-400 focus:ring-1 focus:ring-neutral-400 transition-all"
               />
             </div>
             <button

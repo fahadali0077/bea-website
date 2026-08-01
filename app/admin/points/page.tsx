@@ -115,7 +115,7 @@ export default function AdminPointsPage() {
                     min={0}
                     value={draft[rule.action] ?? rule.points}
                     onChange={(e) => setPoints(rule.action, Number(e.target.value))}
-                    className="w-24 font-lato text-[14px] font-semibold text-neutral-800 bg-white border border-neutral-200/80 rounded-[8px] px-3 py-2 text-right focus:outline-none focus:border-neutral-400 transition-colors"
+                    className="w-24 font-lato text-[16px] md:text-[14px] font-semibold text-neutral-800 bg-white border border-neutral-200/80 rounded-[8px] px-3 py-2 text-right focus:outline-none focus:border-neutral-400 transition-colors"
                   />
                   <span className="font-lato text-[13px] font-medium text-neutral-400">pts</span>
                 </div>

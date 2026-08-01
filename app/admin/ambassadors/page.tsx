@@ -160,7 +160,7 @@ function AddAmbassadorForm({
               readOnly
               value={inviteLink}
               onClick={(e) => (e.target as HTMLInputElement).select()}
-              className="w-full font-lato text-[13px] text-neutral-800 bg-neutral-50 border border-neutral-200/80 rounded-[8px] px-3.5 py-2.5 outline-none cursor-pointer"
+              className="w-full font-lato text-[16px] md:text-[13px] text-neutral-800 bg-neutral-50 border border-neutral-200/80 rounded-[8px] px-3.5 py-2.5 outline-none cursor-pointer"
             />
           </div>
           <div className="flex gap-2">
@@ -196,7 +196,7 @@ function AddAmbassadorForm({
               }}
               onKeyDown={(e) => e.key === "Enter" && submit()}
               placeholder="name@university.edu"
-              className="w-full font-lato text-[14px] text-neutral-800 bg-white border border-neutral-200/80 rounded-[8px] px-3.5 py-2.5 focus:outline-none focus:border-neutral-400 transition-colors placeholder:text-neutral-400"
+              className="w-full font-lato text-[16px] md:text-[14px] text-neutral-800 bg-white border border-neutral-200/80 rounded-[8px] px-3.5 py-2.5 focus:outline-none focus:border-neutral-400 transition-colors placeholder:text-neutral-400"
             />
             {error && <p className="font-lato text-[12px] font-semibold text-[#b0453a]">{error}</p>}
             <p className="font-lato text-[12px] font-medium text-neutral-400">

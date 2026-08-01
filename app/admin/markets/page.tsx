@@ -428,7 +428,7 @@ export default function AdminMarketsPage() {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Search markets…"
-            className="w-full font-lato text-[14px] text-neutral-800 bg-white border border-neutral-200/70 rounded-[8px] pl-10 pr-3 py-2.5 focus:outline-none focus:border-neutral-400 transition-colors placeholder:text-neutral-400"
+            className="w-full font-lato text-[16px] md:text-[14px] text-neutral-800 bg-white border border-neutral-200/70 rounded-[8px] pl-10 pr-3 py-2.5 focus:outline-none focus:border-neutral-400 transition-colors placeholder:text-neutral-400"
           />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
