@@ -12,9 +12,16 @@ import type { School } from "@/lib/api/schools.types";
 import { useCompleteAmbassadorOnboardingMutation } from "@/features/api/apiSlice";
 import { getApiErrorMessage, persistAccessToken } from "@/lib/api";
 import { markStepReached } from "@/lib/onboarding-progress";
+import { LaunchErrorModal } from "./LaunchErrorModal";
 
 const formatSchoolLocation = (city: string | null | undefined, state: string | null | undefined) =>
   city && state ? `${city}, ${state}` : city || state || null;
+
+type FieldErrors = {
+  school?: string;
+  graduationYear?: string;
+  agreement?: string;
+};
 
 export function SchoolStep() {
   const router = useRouter();
@@ -28,9 +35,14 @@ export function SchoolStep() {
   const [role] = useState(AMBASSADOR_ROLE_OPTIONS[0]);
   const [instagram, setInstagram] = useState("");
   const [agreed, setAgreed] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [modalError, setModalError] = useState<string | null>(null);
 
   const schoolPickerRef = useRef<HTMLDivElement>(null);
+  const schoolInputRef = useRef<HTMLInputElement>(null);
+  const gradYearRef = useRef<HTMLSelectElement>(null);
+  const agreementRef = useRef<HTMLInputElement>(null);
 
   const [completeOnboarding, { isLoading: submitting }] = useCompleteAmbassadorOnboardingMutation();
 
@@ -41,7 +53,7 @@ export function SchoolStep() {
         if (active) setSchools(list);
       })
       .catch(() => {
-        if (active) setError("Failed to load schools");
+        if (active) setModalError("We couldn't load the school list. Please check your connection and try again.");
       });
     return () => {
       active = false;
@@ -64,40 +76,63 @@ export function SchoolStep() {
     return schools.filter((s) => s.name.toLowerCase().includes(term));
   }, [schools, schoolSearch]);
 
+  const clearFieldError = (field: keyof FieldErrors) =>
+    setFieldErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+
   const selectSchool = (school: School) => {
     setSchoolId(school.id);
     setSchoolSearch(school.name);
     setSchoolDropdownOpen(false);
-    setError(null);
+    clearFieldError("school");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const selectedSchool = schools.find((s) => s.id === schoolId);
-    if (!selectedSchool) return setError("Please select your school.");
-    if (!graduationYear) return setError("Please select your graduation year.");
-    if (!agreed) return setError("Please agree to the program guidelines.");
+
+    const errors: FieldErrors = {};
+    if (!selectedSchool) {
+      errors.school = schoolSearch.trim()
+        ? "Please pick your school from the list."
+        : "Please select your school.";
+    }
+    if (!graduationYear) errors.graduationYear = "Please select your graduation year.";
+    if (!agreed) errors.agreement = "Please agree to the program guidelines to continue.";
+
+    setFieldErrors(errors);
+
+    // Focus the first field that failed so the user lands on the problem.
+    if (errors.school) return schoolInputRef.current?.focus();
+    if (errors.graduationYear) return gradYearRef.current?.focus();
+    if (errors.agreement) return agreementRef.current?.focus();
 
     const token = sessionStorage.getItem("ambassador_onboarding_token") ?? "";
     const fullName = sessionStorage.getItem("invite_full_name") ?? "";
-    if (!token) return setError("Your invite link has expired. Please request a new one.");
-    if (!fullName) return setError("Please go back and enter your full name.");
 
-    setError(null);
+    // Session-level problems can't be fixed inline — surface them as a popup.
+    if (!token) return setModalError("Your invite link has expired. Please request a new one.");
+    if (!fullName) return setModalError("We're missing your name. Please go back and enter it again.");
+
     try {
       const result = await completeOnboarding({
         token,
         fullName,
-        schoolId: selectedSchool.id,
-        marketId: selectedSchool.marketId,
+        schoolId: selectedSchool!.id,
+        marketId: selectedSchool!.marketId,
         graduationYear: Number(graduationYear),
         instagram: instagram.trim() || undefined,
       }).unwrap();
 
       persistAccessToken(result.token);
 
-      sessionStorage.setItem("onboarding_school_id", selectedSchool.id);
-      sessionStorage.setItem("onboarding_market_id", selectedSchool.marketId);
+      sessionStorage.setItem("onboarding_school_id", selectedSchool!.id);
+      sessionStorage.setItem("onboarding_market_id", selectedSchool!.marketId);
       sessionStorage.setItem("invite_graduation_year", graduationYear);
       sessionStorage.setItem("invite_role", role);
       if (instagram.trim()) sessionStorage.setItem("invite_instagram", instagram.trim());
@@ -105,7 +140,7 @@ export function SchoolStep() {
       markStepReached("youre-in");
       router.push(cta.href);
     } catch (err) {
-      setError(getApiErrorMessage(err, "Could not complete onboarding. Please try again."));
+      setModalError(getApiErrorMessage(err, "Could not complete onboarding. Please try again."));
     }
   };
 
@@ -116,24 +151,27 @@ export function SchoolStep() {
           <p className="launch-eyebrow personalize-eyebrow">{eyebrow}</p>
           <h1 className="launch-title personalize-title font-canela onboarding-heading">{title}</h1>
 
-          <form onSubmit={handleSubmit} className="launch-form">
+          <form onSubmit={handleSubmit} className="launch-form" noValidate>
             <div>
               <label className="launch-field-label" htmlFor="launch-school">
                 School
               </label>
               <div className="launch-select-wrap launch-school-picker" ref={schoolPickerRef}>
                 <input
+                  ref={schoolInputRef}
                   id="launch-school"
                   type="text"
-                  className="launch-field-input"
+                  className={`launch-field-input${fieldErrors.school ? " is-invalid" : ""}`}
                   placeholder="Search your school"
                   value={schoolSearch}
                   autoComplete="off"
+                  aria-invalid={Boolean(fieldErrors.school)}
+                  aria-describedby={fieldErrors.school ? "launch-school-error" : undefined}
                   onChange={(e) => {
                     setSchoolSearch(e.target.value);
                     setSchoolId("");
                     setSchoolDropdownOpen(true);
-                    setError(null);
+                    clearFieldError("school");
                   }}
                   onFocus={() => setSchoolDropdownOpen(true)}
                 />
@@ -168,6 +206,11 @@ export function SchoolStep() {
                   </div>
                 )}
               </div>
+              {fieldErrors.school && (
+                <p className="launch-field-error" id="launch-school-error" role="alert">
+                  {fieldErrors.school}
+                </p>
+              )}
             </div>
 
             <div>
@@ -176,12 +219,15 @@ export function SchoolStep() {
               </label>
               <div className="launch-select-wrap">
                 <select
+                  ref={gradYearRef}
                   id="launch-grad-year"
-                  className="launch-field-input launch-field-select"
+                  className={`launch-field-input launch-field-select${fieldErrors.graduationYear ? " is-invalid" : ""}`}
                   value={graduationYear}
+                  aria-invalid={Boolean(fieldErrors.graduationYear)}
+                  aria-describedby={fieldErrors.graduationYear ? "launch-grad-year-error" : undefined}
                   onChange={(e) => {
                     setGraduationYear(e.target.value);
-                    setError(null);
+                    clearFieldError("graduationYear");
                   }}
                 >
                   <option value="">Select graduation year</option>
@@ -193,6 +239,11 @@ export function SchoolStep() {
                 </select>
                 <ChevronDown size={16} strokeWidth={2} className="launch-select-chevron" aria-hidden="true" />
               </div>
+              {fieldErrors.graduationYear && (
+                <p className="launch-field-error" id="launch-grad-year-error" role="alert">
+                  {fieldErrors.graduationYear}
+                </p>
+              )}
             </div>
 
             <div>
@@ -226,22 +277,30 @@ export function SchoolStep() {
               />
             </div>
 
-            <label className="launch-agreement">
-              <span className={`launch-agreement-box ${agreed ? "is-checked" : ""}`}>
-                {agreed && <Check size={13} strokeWidth={3} />}
-                <input
-                  type="checkbox"
-                  checked={agreed}
-                  onChange={(e) => {
-                    setAgreed(e.target.checked);
-                    setError(null);
-                  }}
-                />
-              </span>
-              <span>{agreement}</span>
-            </label>
-
-            {error && <p className="font-lato text-[13px] font-semibold text-[#b0453a]">{error}</p>}
+            <div>
+              <label className="launch-agreement">
+                <span className={`launch-agreement-box ${agreed ? "is-checked" : ""}${fieldErrors.agreement ? " is-invalid" : ""}`}>
+                  {agreed && <Check size={13} strokeWidth={3} />}
+                  <input
+                    ref={agreementRef}
+                    type="checkbox"
+                    checked={agreed}
+                    aria-invalid={Boolean(fieldErrors.agreement)}
+                    aria-describedby={fieldErrors.agreement ? "launch-agreement-error" : undefined}
+                    onChange={(e) => {
+                      setAgreed(e.target.checked);
+                      clearFieldError("agreement");
+                    }}
+                  />
+                </span>
+                <span>{agreement}</span>
+              </label>
+              {fieldErrors.agreement && (
+                <p className="launch-field-error" id="launch-agreement-error" role="alert">
+                  {fieldErrors.agreement}
+                </p>
+              )}
+            </div>
 
             <button type="submit" disabled={submitting} className="launch-cta cursor-pointer">
               {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>{cta.label}</span>}
@@ -261,6 +320,8 @@ export function SchoolStep() {
           />
         </div>
       </div>
+
+      {modalError && <LaunchErrorModal message={modalError} onClose={() => setModalError(null)} />}
     </section>
   );
 }
