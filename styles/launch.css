@@ -1998,3 +1998,46 @@
   opacity: 0.6;
   cursor: default;
 }
+
+/* ---------------------------------------------------------------
+   Share row feedback + pending invite link
+   --------------------------------------------------------------- */
+
+.launch-share-item:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.launch-share-item:not(:disabled) {
+  cursor: pointer;
+}
+
+.launch-share-item:not(:disabled):hover .launch-share-icon {
+  border-color: var(--launch-accent);
+  color: var(--launch-accent);
+}
+
+.launch-share-icon {
+  transition: border-color 150ms ease, color 150ms ease;
+}
+
+/* Reserves its line so the layout doesn't jump when a message appears. */
+.launch-share-status {
+  min-height: 18px;
+  margin-top: 10px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--launch-accent);
+}
+
+.launch-welcome-link-pending {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--launch-muted);
+}
+
+.launch-done-copy.is-failed {
+  border-color: var(--launch-danger);
+  color: var(--launch-danger);
+}

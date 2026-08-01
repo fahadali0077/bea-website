@@ -105,21 +105,14 @@ export const INVITE_STEP = {
   cta: { label: "Join the community", href: "/youre-in" },
 };
 
-export type ShareIcon = "instagram" | "messages" | "whatsapp" | "share";
+export const SHARE_MESSAGE = "I'm a Bubba ambassador — join me:";
 
 export const YOUREIN_STEP = {
   eyebrow: "Welcome, ambassador",
   title: "You're in.",
   subtitleLines: ["Thanks for being part of the", "Bubba community."],
   linkLabel: "Your invite link",
-  link: "bubba.app/invite/sophia",
   shareHeading: "Share your link",
-  shares: [
-    { icon: "instagram" as ShareIcon, label: "Instagram" },
-    { icon: "messages" as ShareIcon, label: "Messages" },
-    { icon: "whatsapp" as ShareIcon, label: "Copy link" },
-    { icon: "share" as ShareIcon, label: "More" },
-  ],
   nextUp: {
     label: "Next up",
     text: "Explore the ambassador hub and start inviting.",

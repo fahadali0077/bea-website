@@ -4,31 +4,18 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Instagram, Link2, MessageCircle, MoreHorizontal } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-import { YOUREIN_STEP, type ShareIcon } from "@/lib/launch";
+import { YOUREIN_STEP } from "@/lib/launch";
 import { CopyButton } from "@/app/components/launch/CopyButton";
+import { ShareRow } from "@/app/components/launch/ShareRow";
 import { useGetMeQuery } from "@/features/api/apiSlice";
 
-function ShareIconGlyph({ icon }: { icon: ShareIcon }) {
-  switch (icon) {
-    case "instagram":
-      return <Instagram size={22} strokeWidth={1.7} />;
-    case "messages":
-      return <MessageCircle size={22} strokeWidth={1.7} />;
-    case "whatsapp":
-      return <Link2 size={22} strokeWidth={1.7} />;
-    case "share":
-      return <MoreHorizontal size={22} strokeWidth={1.7} />;
-  }
-}
-
 export function YoureInStep() {
-  const { eyebrow, title, subtitleLines, linkLabel, link, shareHeading, shares, nextUp } =
-    YOUREIN_STEP;
-  const { data: me } = useGetMeQuery();
+  const { eyebrow, title, subtitleLines, linkLabel, shareHeading, nextUp } = YOUREIN_STEP;
+  const { data: me, isLoading } = useGetMeQuery();
 
-  const [referralLink, setReferralLink] = useState(link);
+  const [referralLink, setReferralLink] = useState<string | null>(null);
 
   useEffect(() => {
     if (me?.user?.referralCode && typeof window !== "undefined") {
@@ -67,22 +54,24 @@ export function YoureInStep() {
 
           <p className="launch-welcome-link-label">{linkLabel}</p>
           <div className="launch-welcome-card">
-            <p className="launch-welcome-link font-canela onboarding-heading">
-              {referralLink.replace(/^https?:\/\//, "")}
-            </p>
-            <CopyButton value={referralLink} />
+            {referralLink ? (
+              <>
+                <p className="launch-welcome-link font-canela onboarding-heading">
+                  {referralLink.replace(/^https?:\/\//, "")}
+                </p>
+                <CopyButton value={referralLink} />
+              </>
+            ) : (
+              // Never render a stand-in link — a fake URL is worse than a wait,
+              // since it can be copied and shared before the real one loads.
+              <p className="launch-welcome-link-pending">
+                {isLoading ? "Preparing your link…" : "Your invite link will appear here shortly."}
+              </p>
+            )}
           </div>
 
           <p className="launch-share-heading">{shareHeading}</p>
-          <div className="launch-share-row">
-            {shares.map((s) => (
-              <button key={s.label} type="button" className="launch-share-item">
-                <span className="launch-share-icon">
-                  <ShareIconGlyph icon={s.icon} />
-                </span>
-              </button>
-            ))}
-          </div>
+          <ShareRow link={referralLink} />
 
           <div className="launch-next-up">
             <p className="launch-next-up-label">{nextUp.label}</p>
