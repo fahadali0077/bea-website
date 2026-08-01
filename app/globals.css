@@ -1,8 +1,35 @@
 @import "tailwindcss";
 
+/* Suisse Intl — self-hosted static files (same approach as Canela Text below) */
+@font-face {
+  font-family: "Suisse Intl";
+  src: url("/fonts/SuisseIntl-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl";
+  src: url("/fonts/SuisseIntl-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl";
+  src: url("/fonts/SuisseIntl-Semibold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-sans: var(--font-sans);
   --font-lato: var(--font-sans);
+  --font-suisse: "Suisse Intl", var(--font-sans), -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-canela:
     "CanelaTextTri", "CanelaTextTri-Regular", "Canela Text Trial",
     "Canela Text Trial Regular", "Canela Text", "Canela", serif;
@@ -13,6 +40,11 @@
   --font-minionvariable:
     "Minion Variable", "MinionVariable", "Minion Concept", "Minion Pro",
     "Minion", Georgia, serif;
+}
+
+.font-suisse {
+  font-family: "Suisse Intl", var(--font-sans), -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .font-canela {
