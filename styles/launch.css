@@ -1851,3 +1851,106 @@
     animation: none;
   }
 }
+
+/* ---------------------------------------------------------------
+   Locked invite email + password field
+   --------------------------------------------------------------- */
+
+.launch-field-input.is-locked {
+  background: var(--launch-icon-bg);
+  color: var(--launch-muted);
+  cursor: default;
+}
+
+.launch-field-input.is-locked:focus-visible {
+  border-color: var(--launch-input-border);
+  box-shadow: none;
+}
+
+.launch-field-lock,
+.launch-field-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--launch-faint);
+}
+
+.launch-field-toggle {
+  padding: 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.launch-field-toggle:hover {
+  color: var(--launch-muted);
+}
+
+/* Shown only while the locked email field has focus. */
+.launch-field-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  background: var(--launch-icon-bg);
+  color: var(--launch-muted);
+  font-size: 12.5px;
+  line-height: 1.45;
+  animation: launch-note-in 140ms ease-out;
+}
+
+.launch-field-note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+@keyframes launch-note-in {
+  from { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* --- password strength meter --- */
+
+.launch-password-meter {
+  margin-top: 9px;
+}
+
+.launch-password-bar {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--launch-border);
+  overflow: hidden;
+}
+
+.launch-password-bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  transition: width 200ms ease, background-color 200ms ease;
+}
+
+.launch-password-bar.is-score-0 span { width: 8%;   background: var(--launch-border); }
+.launch-password-bar.is-score-1 span { width: 25%;  background: #c9752f; }
+.launch-password-bar.is-score-2 span { width: 50%;  background: #c9a22f; }
+.launch-password-bar.is-score-3 span { width: 75%;  background: #5b7a63; }
+.launch-password-bar.is-score-4 span { width: 100%; background: var(--launch-accent); }
+
+.launch-password-hint {
+  margin-top: 6px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--launch-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch-field-note { animation: none; }
+  .launch-password-bar span { transition: none; }
+}

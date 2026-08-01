@@ -134,6 +134,7 @@ export interface CheckEmailResponse {
 export interface CompleteOnboardingPayload {
   token: string;
   fullName: string;
+  password: string;
   schoolId: string;
   marketId: string;
   graduationYear?: number;

@@ -4,11 +4,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { ArrowRight, Check, Eye, EyeOff, Loader2, Lock } from "lucide-react";
 
 import { ACCOUNT_STEP } from "@/lib/launch";
 import { useValidateAmbassadorOnboardingQuery, useLazyCheckAmbassadorEmailQuery } from "@/features/api/apiSlice";
 import { markStepReached } from "@/lib/onboarding-progress";
+import { setPendingPassword } from "@/lib/onboarding-credentials";
+import { getPasswordStrength, PASSWORD_MIN_LENGTH } from "@/lib/password-strength";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const CHECK_DEBOUNCE_MS = 500;
@@ -16,21 +18,35 @@ const CHECK_DEBOUNCE_MS = 500;
 type FieldErrors = {
   fullName?: string;
   email?: string;
+  password?: string;
 };
 
 export function AccountStep() {
   const router = useRouter();
-  const { eyebrow, titleLines, alreadyRegisteredNote, availableNote, legal, cta, loginPrompt, loginLabel, loginHref } =
-    ACCOUNT_STEP;
+  const {
+    eyebrow,
+    titleLines,
+    alreadyRegisteredNote,
+    availableNote,
+    lockedEmailNote,
+    legal,
+    cta,
+    loginPrompt,
+    loginLabel,
+    loginHref,
+  } = ACCOUNT_STEP;
 
   const [token, setToken] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [emailNoticeVisible, setEmailNoticeVisible] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
 
   const nameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const { data: invite } = useValidateAmbassadorOnboardingQuery(token, { skip: !token });
   const [checkEmail, { data: emailCheck, isFetching: checkingEmail }] = useLazyCheckAmbassadorEmailQuery();
@@ -44,6 +60,8 @@ export function AccountStep() {
     if (invite?.email) setEmail(invite.email);
   }, [invite]);
 
+  // The invite email is fixed by the token, so it is locked once we have it.
+  const emailLocked = Boolean(invite?.email);
   const isEmailValid = EMAIL_RE.test(email.trim());
 
   useEffect(() => {
@@ -56,7 +74,7 @@ export function AccountStep() {
 
   const isNameValid = fullName.trim().length > 1;
   const emailMatchesChecked = emailCheck?.email === email.trim();
-  const alreadyRegistered = !checkingEmail && emailMatchesChecked && Boolean(emailCheck?.registered);
+  const strength = getPasswordStrength(password);
 
   const clearFieldError = (field: keyof FieldErrors) =>
     setFieldErrors((prev) => {
@@ -71,19 +89,22 @@ export function AccountStep() {
 
     const errors: FieldErrors = {};
     if (!isNameValid) errors.fullName = "Please enter your full name.";
-    if (!email.trim()) errors.email = "Please enter your email.";
-    else if (!isEmailValid) errors.email = "Please enter a valid email.";
-    else if (alreadyRegistered) errors.email = "This email is already registered. Try logging in instead.";
+    if (!password) errors.password = "Please create a password.";
+    else if (password.length < PASSWORD_MIN_LENGTH) {
+      errors.password = `Password must be at least ${PASSWORD_MIN_LENGTH} characters.`;
+    }
 
     setFieldErrors(errors);
 
     // Focus the first field that failed so the user lands on the problem.
     if (errors.fullName) return nameRef.current?.focus();
-    if (errors.email) return emailRef.current?.focus();
+    if (errors.password) return passwordRef.current?.focus();
 
     setSubmitting(true);
     sessionStorage.setItem("invite_full_name", fullName.trim());
     sessionStorage.setItem("invite_email", email.trim());
+    // Kept in memory only — never written to sessionStorage.
+    setPendingPassword(password);
     markStepReached("your-school");
     router.push(cta.href);
   };
@@ -117,8 +138,9 @@ export function AccountStep() {
                   setFullName(e.target.value);
                   clearFieldError("fullName");
                 }}
+                onFocus={() => setEmailNoticeVisible(false)}
                 className={`launch-field-input${fieldErrors.fullName ? " is-invalid" : ""}`}
-                autoComplete="off"
+                autoComplete="name"
                 aria-invalid={Boolean(fieldErrors.fullName)}
                 aria-describedby={fieldErrors.fullName ? "launch-fullName-error" : undefined}
               />
@@ -141,40 +163,104 @@ export function AccountStep() {
             </label>
             <div className="launch-field-wrap">
               <input
-                ref={emailRef}
                 id="launch-email"
                 name="email"
                 type="email"
                 value={email}
+                readOnly={emailLocked}
                 onChange={(e) => {
+                  if (emailLocked) return;
                   setEmail(e.target.value);
                   clearFieldError("email");
                 }}
-                className={`launch-field-input${fieldErrors.email ? " is-invalid" : ""}`}
-                autoComplete="off"
-                aria-invalid={Boolean(fieldErrors.email)}
-                aria-describedby={fieldErrors.email ? "launch-email-error" : undefined}
+                onFocus={() => setEmailNoticeVisible(emailLocked)}
+                onClick={() => setEmailNoticeVisible(emailLocked)}
+                onBlur={() => setEmailNoticeVisible(false)}
+                className={`launch-field-input${emailLocked ? " is-locked" : ""}`}
+                autoComplete="email"
+                aria-readonly={emailLocked}
+                aria-describedby={emailLocked && emailNoticeVisible ? "launch-email-locked" : undefined}
               />
-              {checkingEmail && (
-                <span className="launch-field-check" aria-hidden="true">
-                  <Loader2 size={16} strokeWidth={2.5} className="animate-spin" />
+              {emailLocked ? (
+                <span className="launch-field-lock" aria-hidden="true">
+                  <Lock size={15} strokeWidth={2.2} />
                 </span>
-              )}
-              {!checkingEmail && isEmailValid && !fieldErrors.email && (
-                <span className="launch-field-check" aria-hidden="true">
-                  <Check size={16} strokeWidth={2.5} />
-                </span>
+              ) : (
+                <>
+                  {checkingEmail && (
+                    <span className="launch-field-check" aria-hidden="true">
+                      <Loader2 size={16} strokeWidth={2.5} className="animate-spin" />
+                    </span>
+                  )}
+                  {!checkingEmail && isEmailValid && (
+                    <span className="launch-field-check" aria-hidden="true">
+                      <Check size={16} strokeWidth={2.5} />
+                    </span>
+                  )}
+                </>
               )}
             </div>
-            {fieldErrors.email && (
-              <p className="launch-field-error" id="launch-email-error" role="alert">
-                {fieldErrors.email}
+
+            {emailLocked && emailNoticeVisible && (
+              <p className="launch-field-note" id="launch-email-locked" role="status">
+                <Lock size={13} strokeWidth={2.2} aria-hidden="true" />
+                <span>{lockedEmailNote}</span>
               </p>
             )}
-            {!fieldErrors.email && !checkingEmail && emailMatchesChecked && (
+
+            {!emailLocked && !checkingEmail && emailMatchesChecked && (
               <p className={emailCheck?.registered ? "launch-already-registered" : "launch-email-available"}>
                 {emailCheck?.registered ? alreadyRegisteredNote : availableNote}
               </p>
+            )}
+          </div>
+
+          <div>
+            <label className="launch-field-label" htmlFor="launch-password">
+              Create password
+            </label>
+            <div className="launch-field-wrap">
+              <input
+                ref={passwordRef}
+                id="launch-password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  clearFieldError("password");
+                }}
+                onFocus={() => setEmailNoticeVisible(false)}
+                className={`launch-field-input${fieldErrors.password ? " is-invalid" : ""}`}
+                autoComplete="new-password"
+                aria-invalid={Boolean(fieldErrors.password)}
+                aria-describedby={
+                  fieldErrors.password ? "launch-password-error" : password ? "launch-password-strength" : undefined
+                }
+              />
+              <button
+                type="button"
+                className="launch-field-toggle"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                aria-pressed={showPassword}
+                tabIndex={-1}
+              >
+                {showPassword ? <EyeOff size={16} strokeWidth={2} /> : <Eye size={16} strokeWidth={2} />}
+              </button>
+            </div>
+
+            {fieldErrors.password ? (
+              <p className="launch-field-error" id="launch-password-error" role="alert">
+                {fieldErrors.password}
+              </p>
+            ) : (
+              <div className="launch-password-meter" id="launch-password-strength">
+                <div className={`launch-password-bar is-score-${strength.score}`} aria-hidden="true">
+                  <span />
+                </div>
+                <p className="launch-password-hint">{strength.label}</p>
+              </div>
             )}
           </div>
 

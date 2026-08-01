@@ -13,6 +13,7 @@ import { useCompleteAmbassadorOnboardingMutation } from "@/features/api/apiSlice
 import { getApiErrorMessage, persistAccessToken } from "@/lib/api";
 import { markStepReached } from "@/lib/onboarding-progress";
 import { LaunchErrorModal } from "./LaunchErrorModal";
+import { getPendingPassword, clearPendingPassword } from "@/lib/onboarding-credentials";
 
 const formatSchoolLocation = (city: string | null | undefined, state: string | null | undefined) =>
   city && state ? `${city}, ${state}` : city || state || null;
@@ -38,6 +39,7 @@ export function SchoolStep() {
 
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [modalError, setModalError] = useState<string | null>(null);
+  const [missingPassword, setMissingPassword] = useState(false);
 
   const schoolPickerRef = useRef<HTMLDivElement>(null);
   const schoolInputRef = useRef<HTMLInputElement>(null);
@@ -114,15 +116,19 @@ export function SchoolStep() {
 
     const token = sessionStorage.getItem("ambassador_onboarding_token") ?? "";
     const fullName = sessionStorage.getItem("invite_full_name") ?? "";
+    const password = getPendingPassword();
 
     // Session-level problems can't be fixed inline — surface them as a popup.
     if (!token) return setModalError("Your invite link has expired. Please request a new one.");
     if (!fullName) return setModalError("We're missing your name. Please go back and enter it again.");
+    // The password is held in memory only, so a page refresh clears it.
+    if (!password) return setMissingPassword(true);
 
     try {
       const result = await completeOnboarding({
         token,
         fullName,
+        password,
         schoolId: selectedSchool!.id,
         marketId: selectedSchool!.marketId,
         graduationYear: Number(graduationYear),
@@ -137,6 +143,7 @@ export function SchoolStep() {
       sessionStorage.setItem("invite_role", role);
       if (instagram.trim()) sessionStorage.setItem("invite_instagram", instagram.trim());
 
+      clearPendingPassword();
       markStepReached("youre-in");
       router.push(cta.href);
     } catch (err) {
@@ -322,6 +329,14 @@ export function SchoolStep() {
       </div>
 
       {modalError && <LaunchErrorModal message={modalError} onClose={() => setModalError(null)} />}
+
+      {missingPassword && (
+        <LaunchErrorModal
+          message="Your session was refreshed, so we need you to set your password again."
+          actionLabel="Go back"
+          onClose={() => router.push("/account")}
+        />
+      )}
     </section>
   );
 }

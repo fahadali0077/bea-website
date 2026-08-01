@@ -72,6 +72,7 @@ export const ACCOUNT_STEP = {
   ],
   alreadyRegisteredNote: "Email registered — you already have a Bea account. Continuing will sign you into it.",
   availableNote: "Email available.",
+  lockedEmailNote: "This is the email your invite was sent to, so it can't be changed here.",
   legal: {
     prefix: "By continuing, you agree to Bubba's ",
     termsLabel: "Terms of Service",
