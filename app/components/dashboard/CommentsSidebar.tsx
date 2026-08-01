@@ -8,7 +8,9 @@ import {
   useGetResponseCommentsQuery,
   useGetForumPostQuery,
   useCommentForumPostMutation,
+  useGetMeQuery,
 } from "@/features/api/apiSlice";
+import { Avatar } from "@/app/components/dashboard/Avatar";
 import type { PromptResponseComment } from "@/lib/api/prompts.types";
 import type { ForumComment } from "@/lib/api/forum.types";
 
@@ -211,6 +213,9 @@ export default function CommentsSidebar({ target, onClose, commentsEnabled = tru
   const [commentText, setCommentText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const { data: me } = useGetMeQuery();
+  const currentUserName = me?.user.fullName ?? me?.user.email?.split("@")[0] ?? "You";
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isClosingRef = useRef(false);
 
@@ -446,15 +451,8 @@ export default function CommentsSidebar({ target, onClose, commentsEnabled = tru
 
         <div className="shrink-0 px-4 md:px-5 py-4 border-t border-neutral-200/50 bg-[#faf9f6]">
           <div className="flex items-center gap-2.5">
-            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-neutral-200 shadow-sm bg-neutral-100 shrink-0">
-              <Image
-                src="/images/ron-avatar.png"
-                alt="Your avatar"
-                fill
-                sizes="32px"
-                className="object-cover"
-              />
-            </div>
+            {/* Was a stock photo of an unrelated person shown to every user. */}
+            <Avatar name={currentUserName} src={null} size={32} className="shadow-sm" />
             <div className="relative flex-1">
               <input
                 type="text"

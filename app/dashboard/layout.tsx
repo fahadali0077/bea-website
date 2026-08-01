@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { AuthBootstrap } from '@/app/components/providers/AuthBootstrap';
 import { useGetWaitlistDashboardQuery, useLogoutMutation } from '@/features/api/apiSlice';
 import { getCompetitionLifecycle } from '@/lib/competition-lifecycle';
+import { DayProgress } from '@/app/components/dashboard/DayProgress';
+import { Avatar } from '@/app/components/dashboard/Avatar';
 
 export default function DashboardLayout({
     children,
@@ -35,7 +36,10 @@ export default function DashboardLayout({
     const profile = {
         name: dashboard?.user.fullName ?? dashboard?.user.email.split('@')[0] ?? 'Member',
         school: dashboard?.school?.name ?? 'Your school',
-        avatar: '/images/ron-avatar.png',
+        // No avatar field on the user yet — the Avatar component renders the
+        // initial until one exists. Previously this pointed at a stock image
+        // of someone else ('/images/ron-avatar.png') for every single user.
+        avatar: null as string | null,
         rank: dashboard?.user.waitlistPosition
             ? `#${dashboard.user.waitlistPosition} on waitlist`
             : '#— on waitlist',
@@ -272,29 +276,17 @@ export default function DashboardLayout({
                             </svg>
                         </button>
                         <Link href="/" className="select-none hover:opacity-80 transition-opacity shrink-0 flex items-center">
-                            <img src="/images/assets/Bea_png.png" alt="Bea Logo" className="h-[20px] sm:h-[30px] md:h-[36px] w-auto object-contain" />
+                            <img src="/images/assets/Bea_png.png" alt="Bea Logo" className="h-[18px] md:h-[24px] w-auto object-contain" />
                         </Link>
                     </div>
 
                     {/* Progress Step Dot Indicator */}
                     {!pathname.startsWith('/dashboard/ambassador') && !['/dashboard/forum', '/dashboard/schools', '/dashboard/leaderboard', '/dashboard/invite', '/dashboard/rewards'].includes(pathname) && (
-                        <div className="flex items-center gap-1.5 sm:gap-2.5 md:gap-3 shrink min-w-0">
-                            <span className="text-[7.5px] sm:text-[9.5px] md:text-[11px] font-bold text-neutral-500 uppercase tracking-wider md:tracking-widest whitespace-nowrap">
-                                {lifecycle.label}
-                            </span>
-                            <div className="flex items-center gap-0.5 sm:gap-1.5 ml-0.5 sm:ml-1 shrink min-w-0">
-                                {/* Orange/Peach Dot (e8a588) */}
-                                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#e8a588] shadow-sm shrink-0" />
-                                {/* Connective Line */}
-                                <div className="w-3 sm:w-4.5 md:w-6 h-[1.5px] md:h-[2px] bg-neutral-950 rounded-full shrink-0" />
-                                {/* Black Dot */}
-                                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 rounded-full bg-neutral-950 shrink-0" />
-                                {/* Gray Dots */}
-                                {[...Array(5)].map((_, i) => (
-                                    <div key={i} className="w-1 h-1 sm:w-1.2 sm:h-1.2 md:w-1.5 md:h-1.5 rounded-full bg-neutral-300 shrink-0" />
-                                ))}
-                            </div>
-                        </div>
+                        <DayProgress
+                            dayNumber={lifecycle.dayNumber}
+                            totalDays={lifecycle.totalDays}
+                            label={lifecycle.label}
+                        />
                     )}
 
                     {/* User Profile dropdown */}
@@ -311,16 +303,7 @@ export default function DashboardLayout({
                                 <p className="text-[18px] font-lato font-black text-neutral-800 leading-tight">{profile.name}</p>
                                 <p className="text-[14px] font-lato font-medium text-[#7c7b7d] mt-0.5">{profile.school}</p>
                             </div>
-                            <div className="relative w-7 h-7 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-neutral-200 shadow-sm bg-neutral-100 flex items-center justify-center">
-                                <Image
-                                    src={profile.avatar}
-                                    alt={`${profile.name} profile avatar`}
-                                    fill
-                                    sizes="36px"
-                                    className="object-cover"
-                                    priority
-                                />
-                            </div>
+                            <Avatar name={profile.name} src={profile.avatar} size={32} className="shadow-sm" />
                             <svg
                                 className={`w-3 h-3 sm:w-3.5 sm:h-3.5 text-neutral-500 transition-transform duration-200 ${isProfileDropdownOpen ? 'rotate-180' : ''}`}
                                 fill="none"
@@ -340,15 +323,7 @@ export default function DashboardLayout({
                             >
                                 <div className="px-4 py-4 border-b border-neutral-200/50 bg-[#fbf7f4]">
                                     <div className="flex items-center gap-3">
-                                        <div className="relative w-10 h-10 rounded-full overflow-hidden border border-neutral-200 shadow-sm bg-neutral-100 shrink-0">
-                                            <Image
-                                                src={profile.avatar}
-                                                alt=""
-                                                fill
-                                                sizes="40px"
-                                                className="object-cover"
-                                            />
-                                        </div>
+                                        <Avatar name={profile.name} src={profile.avatar} size={40} className="shadow-sm" />
                                         <div className="min-w-0">
                                             <p className="text-[15px] font-lato font-black text-neutral-800 leading-tight truncate">
                                                 {profile.name}
@@ -463,7 +438,7 @@ export default function DashboardLayout({
                     <div className="fixed inset-y-0 left-0 w-64 max-w-[80vw] bg-[#fcfbf8] shadow-2xl flex flex-col p-5 transition-transform duration-300 animate-slide-in">
                         {/* Drawer Header */}
                         <div className="flex items-center justify-between pb-5 border-b border-neutral-200/50">
-                            <img src="/images/assets/Bea_png.png" alt="Bea Logo" className="h-[24px] w-auto object-contain" />
+                            <img src="/images/assets/Bea_png.png" alt="Bea Logo" className="h-[18px] w-auto object-contain" />
                             <button 
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="p-1 text-neutral-500 hover:text-neutral-800 focus:outline-none cursor-pointer"

@@ -31,6 +31,8 @@ const formatRemaining = (target?: string | null) => {
   return "<1h";
 };
 
+const TOTAL_DAYS = 7;
+
 export function getCompetitionLifecycle(competition: LifecycleCompetition) {
   const status = normalizeStatus(competition?.status);
   const scoringOpen = Boolean(competition?.scoringOpen) || status === "ACTIVE";
@@ -38,14 +40,16 @@ export function getCompetitionLifecycle(competition: LifecycleCompetition) {
   const end = competition?.endDate ? new Date(competition.endDate).getTime() : null;
   const now = Date.now();
   const dayNumber = start && end && now >= start && now < end
-    ? Math.min(7, Math.max(1, Math.floor((now - start) / DAY_MS) + 1))
+    ? Math.min(TOTAL_DAYS, Math.max(1, Math.floor((now - start) / DAY_MS) + 1))
     : null;
 
   if (status === "ACTIVE") {
     return {
       status,
       scoringOpen,
-      label: dayNumber ? `Day ${dayNumber} of 7` : "Competition active",
+      dayNumber,
+      totalDays: TOTAL_DAYS,
+      label: dayNumber ? `Day ${dayNumber} of ${TOTAL_DAYS}` : "Competition active",
       bannerTitle: "Competition is live",
       bannerBody: `Scoring is open${competition?.endDate ? ` for ${formatRemaining(competition.endDate)}` : ""}. Prompt, invite, like, and comment points count right now.`,
       tone: "active" as const,
@@ -57,6 +61,8 @@ export function getCompetitionLifecycle(competition: LifecycleCompetition) {
     return {
       status,
       scoringOpen: false,
+      dayNumber: null,
+      totalDays: TOTAL_DAYS,
       label: "Competition upcoming",
       bannerTitle: "Competition starts soon",
       bannerBody: competition?.startDate
@@ -71,6 +77,8 @@ export function getCompetitionLifecycle(competition: LifecycleCompetition) {
     return {
       status,
       scoringOpen: false,
+      dayNumber: null,
+      totalDays: TOTAL_DAYS,
       label: "Grace period",
       bannerTitle: "Competition ended",
       bannerBody: `Leaderboards are locked. No new points are awarded during grace${competition?.gracePeriodEndDate ? `, which ends in ${formatRemaining(competition.gracePeriodEndDate)}` : ""}.`,
@@ -82,6 +90,8 @@ export function getCompetitionLifecycle(competition: LifecycleCompetition) {
   return {
     status,
     scoringOpen: false,
+    dayNumber: null,
+    totalDays: TOTAL_DAYS,
     label: "Scoring closed",
     bannerTitle: status === "ARCHIVED" ? "Competition archived" : "No active competition",
     bannerBody: "Scoring is closed. There is no active daily prompt right now.",
