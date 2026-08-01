@@ -11,6 +11,7 @@ import { useValidateAmbassadorOnboardingQuery, useLazyCheckAmbassadorEmailQuery 
 import { markStepReached } from "@/lib/onboarding-progress";
 import { setPendingPassword } from "@/lib/onboarding-credentials";
 import { getPasswordStrength, PASSWORD_MIN_LENGTH } from "@/lib/password-strength";
+import { useEnterAdvance } from "@/lib/use-enter-advance";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const CHECK_DEBOUNCE_MS = 500;
@@ -23,6 +24,7 @@ type FieldErrors = {
 
 export function AccountStep() {
   const router = useRouter();
+  const handleFormKeyDown = useEnterAdvance();
   const {
     eyebrow,
     titleLines,
@@ -122,7 +124,7 @@ export function AccountStep() {
           ))}
         </h1>
 
-        <form onSubmit={handleSubmit} className="launch-form" noValidate>
+        <form onSubmit={handleSubmit} onKeyDown={handleFormKeyDown} className="launch-form" noValidate>
           <div>
             <label className="launch-field-label" htmlFor="launch-fullName">
               Full name
@@ -141,6 +143,7 @@ export function AccountStep() {
                 onFocus={() => setEmailNoticeVisible(false)}
                 className={`launch-field-input${fieldErrors.fullName ? " is-invalid" : ""}`}
                 autoComplete="name"
+                enterKeyHint="next"
                 aria-invalid={Boolean(fieldErrors.fullName)}
                 aria-describedby={fieldErrors.fullName ? "launch-fullName-error" : undefined}
               />
@@ -178,6 +181,7 @@ export function AccountStep() {
                 onBlur={() => setEmailNoticeVisible(false)}
                 className={`launch-field-input${emailLocked ? " is-locked" : ""}`}
                 autoComplete="email"
+                inputMode="email"
                 aria-readonly={emailLocked}
                 aria-describedby={emailLocked && emailNoticeVisible ? "launch-email-locked" : undefined}
               />
@@ -233,6 +237,7 @@ export function AccountStep() {
                 onFocus={() => setEmailNoticeVisible(false)}
                 className={`launch-field-input${fieldErrors.password ? " is-invalid" : ""}`}
                 autoComplete="new-password"
+                enterKeyHint="done"
                 aria-invalid={Boolean(fieldErrors.password)}
                 aria-describedby={
                   fieldErrors.password ? "launch-password-error" : password ? "launch-password-strength" : undefined

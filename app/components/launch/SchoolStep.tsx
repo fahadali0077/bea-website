@@ -14,6 +14,7 @@ import { getApiErrorMessage, persistAccessToken } from "@/lib/api";
 import { markStepReached } from "@/lib/onboarding-progress";
 import { LaunchErrorModal } from "./LaunchErrorModal";
 import { getPendingPassword, clearPendingPassword } from "@/lib/onboarding-credentials";
+import { useEnterAdvance } from "@/lib/use-enter-advance";
 
 const formatSchoolLocation = (city: string | null | undefined, state: string | null | undefined) =>
   city && state ? `${city}, ${state}` : city || state || null;
@@ -26,6 +27,7 @@ type FieldErrors = {
 
 export function SchoolStep() {
   const router = useRouter();
+  const handleFormKeyDown = useEnterAdvance();
   const { eyebrow, title, agreement, cta } = INVITE_STEP;
 
   const [schools, setSchools] = useState<School[]>([]);
@@ -85,6 +87,24 @@ export function SchoolStep() {
       delete next[field];
       return next;
     });
+
+  // Enter in the search box should pick a school, not submit a form that has
+  // no school selected yet — typing the exact name never set schoolId.
+  const handleSchoolKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Escape") {
+      setSchoolDropdownOpen(false);
+      return;
+    }
+    if (event.key !== "Enter") return;
+    if (!schoolDropdownOpen || filteredSchools.length === 0) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const exact = filteredSchools.find((s) => s.name.toLowerCase() === schoolSearch.trim().toLowerCase());
+    selectSchool(exact ?? filteredSchools[0]);
+    gradYearRef.current?.focus();
+  };
 
   const selectSchool = (school: School) => {
     setSchoolId(school.id);
@@ -158,7 +178,7 @@ export function SchoolStep() {
           <p className="launch-eyebrow personalize-eyebrow">{eyebrow}</p>
           <h1 className="launch-title personalize-title font-canela onboarding-heading">{title}</h1>
 
-          <form onSubmit={handleSubmit} className="launch-form" noValidate>
+          <form onSubmit={handleSubmit} onKeyDown={handleFormKeyDown} className="launch-form" noValidate>
             <div>
               <label className="launch-field-label" htmlFor="launch-school">
                 School
@@ -181,11 +201,21 @@ export function SchoolStep() {
                     clearFieldError("school");
                   }}
                   onFocus={() => setSchoolDropdownOpen(true)}
+                  onKeyDown={handleSchoolKeyDown}
+                  enterKeyHint="next"
+                  role="combobox"
+                  aria-expanded={schoolDropdownOpen}
+                  aria-controls="launch-school-listbox"
                 />
                 <ChevronDown size={16} strokeWidth={2} className="launch-select-chevron" aria-hidden="true" />
 
                 {schoolDropdownOpen && (
-                  <div className="launch-school-dropdown" role="listbox" aria-label="School search results">
+                  <div
+                    className="launch-school-dropdown"
+                    role="listbox"
+                    id="launch-school-listbox"
+                    aria-label="School search results"
+                  >
                     {filteredSchools.length === 0 ? (
                       <p className="launch-school-dropdown-status">
                         {schoolSearch.trim() ? "No schools found." : "No schools available."}
@@ -281,6 +311,7 @@ export function SchoolStep() {
                 className="launch-field-input"
                 autoComplete="off"
                 placeholder="@yourhandle"
+                enterKeyHint="done"
               />
             </div>
 
