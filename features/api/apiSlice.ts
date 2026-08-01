@@ -268,7 +268,30 @@ export const apiSlice = createApi({
         method: "POST",
         data: { commentText },
       }),
-      invalidatesTags: ["PromptResponses", "ResponseComments"],
+      // Write the new comment straight into the cache so it appears instantly
+      // with no refetch. The server returns the created row, so this is the
+      // real record rather than an optimistic guess.
+      async onQueryStarted({ responseId }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: created } = await queryFulfilled;
+          dispatch(
+            apiSlice.util.updateQueryData("getResponseComments", { responseId }, (draft) => {
+              if (draft.items.some((item) => item.id === created.id)) return;
+              draft.items.push(created);
+              draft.pagination.total += 1;
+            })
+          );
+        } catch {
+          // The component surfaces the failure to the user.
+        }
+      },
+      // Was the bare string "ResponseComments", which RTK reads as
+      // { type, id: undefined } and never matches the id-scoped tag the query
+      // provides — so the comment saved but the list never refreshed.
+      invalidatesTags: (_result, _err, { responseId }) => [
+        "PromptResponses",
+        { type: "ResponseComments" as const, id: responseId },
+      ],
     }),
 
     listForumPosts: builder.query<ListForumPostsResponse, ListForumPostsParams | void>({

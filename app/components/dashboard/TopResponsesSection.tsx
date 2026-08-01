@@ -164,7 +164,7 @@ export default function TopResponsesSection({ variant, promptId: propPromptId }:
 
   const [likeResponse] = useLikeResponseMutation();
 
-  const { data: responsesData, isLoading, isFetching } = useGetPromptResponsesQuery(
+  const { data: responsesData, isLoading } = useGetPromptResponsesQuery(
     { promptId: promptId!, scope: scopeTab, limit: 50 },
     { skip: !promptId }
   );
@@ -246,7 +246,10 @@ export default function TopResponsesSection({ variant, promptId: propPromptId }:
     };
   }, [commentsTarget, localLikes, sortedItems]);
 
-  const showSkeleton = isLoading || isFetching;
+  // Only the first load shows the skeleton. isFetching is also true for the
+  // background refetch triggered by liking or commenting, and including it
+  // here made the whole list flash back to placeholders each time.
+  const showSkeleton = isLoading;
 
   const seeAllLink = (
     <Link

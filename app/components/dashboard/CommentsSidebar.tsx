@@ -210,6 +210,7 @@ export default function CommentsSidebar({ target, onClose, commentsEnabled = tru
   const [displayTarget, setDisplayTarget] = useState<CommentsSidebarTarget | null>(null);
   const [commentText, setCommentText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isClosingRef = useRef(false);
 
@@ -265,6 +266,10 @@ export default function CommentsSidebar({ target, onClose, commentsEnabled = tru
   // Used for a quiet inline indicator instead — the list stays on screen.
   const commentsAreRefreshing = isResponse ? responseFetching : postFetching;
 
+  // displayTarget.commentsCount is captured when the sidebar opens, so it went
+  // stale the moment a comment was added. Count the live list instead.
+  const liveCommentCount = commentsAreLoading ? displayTarget?.commentsCount ?? 0 : comments.length;
+
   const clearCloseTimer = useCallback(() => {
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
@@ -317,6 +322,7 @@ export default function CommentsSidebar({ target, onClose, commentsEnabled = tru
   const handleSubmit = useCallback(async () => {
     if (!displayTarget || !commentText.trim() || isSubmitting || !commentsEnabled) return;
     setIsSubmitting(true);
+    setSubmitError(null);
     try {
       if (displayTarget.variant === "response") {
         await commentOnResponse({ responseId: displayTarget.id, commentText: commentText.trim() }).unwrap();
@@ -324,7 +330,10 @@ export default function CommentsSidebar({ target, onClose, commentsEnabled = tru
         await commentOnForumPost({ postId: displayTarget.id, commentText: commentText.trim() }).unwrap();
       }
       setCommentText("");
-    } catch {
+    } catch (err) {
+      // Previously an empty catch: a failed comment vanished with no feedback
+      // at all, which is indistinguishable from it having been posted.
+      setSubmitError((err as { message?: string })?.message ?? "Couldn't post your comment. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -383,8 +392,8 @@ export default function CommentsSidebar({ target, onClose, commentsEnabled = tru
               Comments
             </h2>
             <p className="text-[11px] md:text-[13px] font-lato font-medium text-neutral-400 mt-0.5">
-              {displayTarget.commentsCount}{" "}
-              {displayTarget.commentsCount === 1 ? "comment" : "comments"}
+              {liveCommentCount}{" "}
+              {liveCommentCount === 1 ? "comment" : "comments"}
             </p>
           </div>
           <button
@@ -450,7 +459,10 @@ export default function CommentsSidebar({ target, onClose, commentsEnabled = tru
               <input
                 type="text"
                 value={commentText}
-                onChange={(e) => setCommentText(e.target.value)}
+                onChange={(e) => {
+                  setCommentText(e.target.value);
+                  if (submitError) setSubmitError(null);
+                }}
                 onKeyDown={handleKeyDown}
                 disabled={!commentsEnabled}
                 placeholder={commentsEnabled ? "Add a comment..." : "Scoring is closed"}
@@ -466,9 +478,15 @@ export default function CommentsSidebar({ target, onClose, commentsEnabled = tru
               disabled={!commentText.trim() || isSubmitting || !commentsEnabled}
               className="px-4 py-2 rounded-lg bg-[#584939] text-white font-lato text-[11px] md:text-[13px] font-bold transition-all hover:bg-[#43382f] disabled:cursor-not-allowed disabled:opacity-50"
             >
-              Send
+              {isSubmitting ? "Sending…" : "Send"}
             </button>
           </div>
+
+          {submitError && (
+            <p className="mt-2 font-lato text-[12px] md:text-[13px] font-semibold text-[#b0453a]" role="alert">
+              {submitError}
+            </p>
+          )}
         </div>
       </aside>
     </div>
