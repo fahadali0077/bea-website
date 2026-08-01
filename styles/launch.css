@@ -1982,3 +1982,19 @@
   .launch-field-note { animation: none; }
   .launch-password-bar span { transition: none; }
 }
+
+/* ---------------------------------------------------------------
+   Verify-email blocked states (used / expired / revoked / invalid)
+   --------------------------------------------------------------- */
+
+.verify-blocked-cta {
+  width: auto;
+  min-width: 200px;
+  margin-top: 8px;
+  align-self: flex-start;
+}
+
+.verify-blocked-cta:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
