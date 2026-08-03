@@ -149,7 +149,7 @@ export function AccountStep() {
               />
               {isNameValid && !fieldErrors.fullName && (
                 <span className="launch-field-check" aria-hidden="true">
-                  <Check size={16} strokeWidth={2.5} />
+                  <Check size={16} strokeWidth={2} />
                 </span>
               )}
             </div>
@@ -187,18 +187,18 @@ export function AccountStep() {
               />
               {emailLocked ? (
                 <span className="launch-field-lock" aria-hidden="true">
-                  <Lock size={15} strokeWidth={2.2} />
+                  <Lock size={15} strokeWidth={2} />
                 </span>
               ) : (
                 <>
                   {checkingEmail && (
                     <span className="launch-field-check" aria-hidden="true">
-                      <Loader2 size={16} strokeWidth={2.5} className="animate-spin" />
+                      <Loader2 size={16} strokeWidth={2} className="animate-spin" />
                     </span>
                   )}
                   {!checkingEmail && isEmailValid && (
                     <span className="launch-field-check" aria-hidden="true">
-                      <Check size={16} strokeWidth={2.5} />
+                      <Check size={16} strokeWidth={2} />
                     </span>
                   )}
                 </>
@@ -207,7 +207,7 @@ export function AccountStep() {
 
             {emailLocked && emailNoticeVisible && (
               <p className="launch-field-note" id="launch-email-locked" role="status">
-                <Lock size={13} strokeWidth={2.2} aria-hidden="true" />
+                <Lock size={13} strokeWidth={2} aria-hidden="true" />
                 <span>{lockedEmailNote}</span>
               </p>
             )}

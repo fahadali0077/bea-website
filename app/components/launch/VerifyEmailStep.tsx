@@ -113,7 +113,7 @@ export function VerifyEmailStep() {
     return shell(
       <>
         <span className="verify-icon" aria-hidden="true">
-          <Loader2 size={22} strokeWidth={1.6} className="animate-spin" />
+          <Loader2 size={22} strokeWidth={2} className="animate-spin" />
         </span>
         <p className="verify-lede">Checking your invite…</p>
       </>,
@@ -124,7 +124,7 @@ export function VerifyEmailStep() {
     return shell(
       <>
         <span className="verify-icon" aria-hidden="true">
-          <Loader2 size={22} strokeWidth={1.6} className="animate-spin" />
+          <Loader2 size={22} strokeWidth={2} className="animate-spin" />
         </span>
         <h1 className="verify-title font-canela onboarding-heading">You&apos;re already set up.</h1>
         <p className="verify-lede">Taking you to your ambassador dashboard…</p>
@@ -141,7 +141,7 @@ export function VerifyEmailStep() {
     return shell(
       <>
         <span className="verify-icon" aria-hidden="true">
-          <Mail size={22} strokeWidth={1.6} />
+          <Mail size={22} strokeWidth={2} />
         </span>
         <h1 className="verify-title font-canela onboarding-heading">{failure.title}</h1>
         <p className="verify-lede">{failure.body}</p>
@@ -194,7 +194,7 @@ export function VerifyEmailStep() {
   return shell(
     <>
       <span className="verify-icon" aria-hidden="true">
-        <Mail size={22} strokeWidth={1.6} />
+        <Mail size={22} strokeWidth={2} />
       </span>
       <p className="verify-eyebrow">{eyebrow}</p>
       <h1 className="verify-title font-canela onboarding-heading">

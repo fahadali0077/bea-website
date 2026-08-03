@@ -12,13 +12,13 @@ import { markStepReached } from "@/lib/onboarding-progress";
 function SchoolIconGlyph({ icon }: { icon: SchoolIcon }) {
   switch (icon) {
     case "early-access":
-      return <Tag size={19} strokeWidth={1.6} />;
+      return <Tag size={19} strokeWidth={2} />;
     case "rewards":
-      return <Gift size={19} strokeWidth={1.6} />;
+      return <Gift size={19} strokeWidth={2} />;
     case "community":
-      return <Users size={19} strokeWidth={1.6} />;
+      return <Users size={19} strokeWidth={2} />;
     case "impact":
-      return <Sprout size={19} strokeWidth={1.6} />;
+      return <Sprout size={19} strokeWidth={2} />;
   }
 }
 

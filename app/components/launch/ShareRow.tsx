@@ -78,15 +78,15 @@ export function ShareRow({ link }: ShareRowProps) {
   };
 
   const actions: { id: ActionId; label: string; icon: React.ReactNode; onClick: () => void }[] = [
-    { id: "instagram", label: "Share on Instagram", icon: <Instagram size={22} strokeWidth={1.7} />, onClick: handleInstagram },
-    { id: "messages", label: "Share via Messages", icon: <MessageCircle size={22} strokeWidth={1.7} />, onClick: handleMessages },
+    { id: "instagram", label: "Share on Instagram", icon: <Instagram size={22} strokeWidth={2} />, onClick: handleInstagram },
+    { id: "messages", label: "Share via Messages", icon: <MessageCircle size={22} strokeWidth={2} />, onClick: handleMessages },
     {
       id: "copy",
       label: "Copy link",
-      icon: <Link2 size={22} strokeWidth={1.7} />,
+      icon: <Link2 size={22} strokeWidth={2} />,
       onClick: () => void handleCopy("copy", "Link copied to your clipboard."),
     },
-    { id: "more", label: canNativeShare ? "More sharing options" : "Copy link", icon: <Share2 size={22} strokeWidth={1.7} />, onClick: handleMore },
+    { id: "more", label: canNativeShare ? "More sharing options" : "Copy link", icon: <Share2 size={22} strokeWidth={2} />, onClick: handleMore },
   ];
 
   return (

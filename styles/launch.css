@@ -37,6 +37,11 @@
   --launch-shadow-card: 0px 8px 24px rgba(17, 17, 17, 0.06);
   --launch-shadow-popover: 0px 16px 40px rgba(17, 17, 17, 0.08);
 
+  /* Type — Canela Regular for display, Suisse Intl for UI/body */
+  --launch-font-display: "Canela Text", "CanelaTextTri", "Canela", Georgia, serif;
+  --launch-font-ui: "Suisse Intl", "SuisseIntl", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
   /* Interaction shades derived from Forest Green */
   --launch-accent-hover: #18402f;
   --launch-accent-pressed: #133424;
@@ -47,7 +52,7 @@
   align-items: stretch;
   background: var(--launch-page-bg);
   color: var(--launch-ink);
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--launch-font-ui);
   overflow-x: clip;
 }
 
@@ -146,27 +151,34 @@
 }
 
 .launch-eyebrow {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--launch-eyebrow);
   margin-bottom: 14px;
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.6px;
 }
 
 .launch-title {
-  font-size: 34px;
-  line-height: 1.12;
-  font-weight: 400;
   color: var(--launch-ink);
   margin-bottom: 16px;
+  font-family: var(--launch-font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 8vw, 64px);
+  line-height: 1.125;
+  letter-spacing: -0.01em;
 }
 
 .launch-subtitle {
-  font-size: 15px;
-  line-height: 1.55;
   color: var(--launch-muted);
   margin-bottom: 8px;
+  font-family: var(--launch-font-ui);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0;
 }
 
 .launch-step-inner--centered .launch-subtitle {
@@ -206,12 +218,15 @@
   border-radius: var(--launch-radius-l);
   background: var(--launch-accent);
   color: var(--launch-accent-contrast);
-  font-size: 15px;
-  font-weight: 600;
   text-decoration: none;
   border: none;
   box-shadow: var(--launch-shadow-button);
   transition: opacity 0.15s ease;
+  font-family: var(--launch-font-ui);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
 }
 
 .launch-cta span {
@@ -374,10 +389,13 @@
 
 .launch-field-label {
   display: block;
-  font-size: 13px;
-  font-weight: 600;
   color: var(--launch-ink);
   margin-bottom: 7px;
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
 }
 
 .launch-field-wrap {
@@ -393,9 +411,13 @@
   border: 1px solid var(--launch-input-border);
   background: #ffffff;
   padding: 0 42px 0 16px;
-  font-size: 15px;
   color: var(--launch-ink);
   outline: none;
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
 }
 
 .launch-field-input:focus-visible {
@@ -554,9 +576,13 @@
 }
 
 .launch-legal {
-  font-size: 13px;
   color: var(--launch-muted);
   margin-bottom: 4px;
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
 }
 
 .launch-legal a {
@@ -1222,29 +1248,35 @@
 }
 
 .verify-eyebrow {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2.4px;
   text-transform: uppercase;
   color: var(--launch-eyebrow);
   margin-bottom: 22px;
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.6px;
 }
 
 .verify-title {
-  font-size: 56px;
-  line-height: 1.1;
-  font-weight: 400;
-  letter-spacing: -0.5px;
   color: var(--launch-ink);
   margin-bottom: 22px;
+  font-family: var(--launch-font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 8vw, 64px);
+  line-height: 1.125;
+  letter-spacing: -0.01em;
 }
 
 .verify-lede {
-  font-size: 19px;
-  line-height: 1.65;
   color: var(--launch-muted);
   margin-bottom: 6px;
   max-width: 460px;
+  font-family: var(--launch-font-ui);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0;
 }
 
 .verify-lede strong {
@@ -1253,11 +1285,14 @@
 }
 
 .verify-hint {
-  font-size: 15px;
-  line-height: 1.6;
   color: var(--launch-faint);
   margin-bottom: 32px;
   max-width: 460px;
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
 }
 
 .verify-error {
@@ -1766,10 +1801,12 @@
   align-items: flex-start;
   gap: 6px;
   margin-top: 7px;
-  font-size: 13px;
-  line-height: 1.4;
-  font-weight: 600;
   color: var(--launch-danger);
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
 }
 
 .launch-field-error::before {
@@ -1839,9 +1876,12 @@
 
 .launch-modal-message {
   margin: 0 0 20px;
-  font-size: 15px;
-  line-height: 1.5;
   color: var(--launch-ink);
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
 }
 
 .launch-modal-cta {
@@ -1929,9 +1969,12 @@
   border-radius: var(--launch-radius-s);
   background: var(--launch-icon-bg);
   color: var(--launch-muted);
-  font-size: 12.5px;
-  line-height: 1.45;
   animation: launch-note-in 140ms ease-out;
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
 }
 
 .launch-field-note svg {
@@ -1973,9 +2016,12 @@
 
 .launch-password-hint {
   margin-top: 6px;
-  font-size: 12.5px;
-  line-height: 1.4;
   color: var(--launch-muted);
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2025,10 +2071,12 @@
 .launch-share-status {
   min-height: 18px;
   margin-top: 10px;
-  font-size: 12.5px;
-  line-height: 1.4;
-  font-weight: 600;
   color: var(--launch-accent);
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
 }
 
 .launch-welcome-link-pending {
@@ -2054,4 +2102,68 @@
   .launch-field-select {
     font-size: 16px;
   }
+}
+
+/* ---------------------------------------------------------------
+   Type scale — Bubba Visual System v1.0, usage table
+   Every text element on the onboarding screens maps to one of these.
+   --------------------------------------------------------------- */
+
+.type-hero {
+  font-family: var(--launch-font-display);
+  font-weight: 400;
+  /* Guide: 64/72. clamp keeps the exact desktop value while allowing the
+     headline to fit a 390px viewport; the 1.125 ratio is preserved. */
+  font-size: clamp(36px, 8vw, 64px);
+  line-height: 1.125;
+  letter-spacing: -0.01em;
+}
+
+.type-section-title {
+  font-family: var(--launch-font-display);
+  font-weight: 400;
+  font-size: clamp(26px, 5vw, 32px);
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.type-subhead {
+  font-family: var(--launch-font-ui);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+.type-eyebrow {
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.type-body {
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.type-caption {
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.type-micro {
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
 }
