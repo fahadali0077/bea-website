@@ -261,13 +261,18 @@
 
 .launch-footnote {
   margin-top: 16px;
-  font-size: 13px;
   text-align: center;
-  color: var(--launch-faint);
+  color: var(--launch-ink);
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
 }
 
 .launch-footnote a {
-  text-decoration: underline;
+  /* Mockup renders these as plain bold text, not underlined links. */
+  text-decoration: none;
   color: inherit;
 }
 
@@ -1345,13 +1350,16 @@
   background: none;
   border: none;
   padding: 0;
-  color: var(--launch-accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  font-weight: 600;
-  font-size: 14px;
+  color: var(--launch-ink);
+  /* Matches the footnote on screen 2 — bold, no underline. */
+  text-decoration: none;
   cursor: pointer;
   transition: opacity 0.15s ease;
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
 }
 
 .verify-link:hover {
