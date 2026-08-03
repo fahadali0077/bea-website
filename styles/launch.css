@@ -207,23 +207,39 @@
   margin-top: auto;
 }
 
-.launch-cta,
-.hero-cta,
-.launch-modal-cta,
-
-.launch-cta:hover,
-.hero-cta:hover,
-.launch-modal-cta:hover,
-.verify-blocked-cta:hover {
-  background: var(--launch-accent-hover);
+.launch-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 54px;
+  padding: 0 24px;
+  border-radius: var(--launch-radius-l);
+  background: var(--launch-accent);
+  color: var(--launch-accent-contrast);
+  text-decoration: none;
+  border: none;
+  box-shadow: var(--launch-shadow-button);
+  transition: opacity 0.15s ease;
+  font-family: var(--launch-font-ui);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
 }
-
-.launch-cta:disabled,
-.hero-cta:disabled,
-.launch-modal-cta:disabled,
 
 .launch-cta span {
   text-align: center;
+}
+
+.launch-cta:hover {
+  opacity: 0.9;
+}
+
+.launch-cta:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .launch-login-prompt {
@@ -762,6 +778,7 @@
   width: 100%;
 }
 
+
 @media (min-width: 768px) {
   .launch-shell {
     padding: 56px 0;
@@ -1026,7 +1043,11 @@
   .launch-step--role .launch-cta {
     box-sizing: border-box;
     display: flex;
+    height: auto;
+    max-width: 480px;
     margin: 0 auto 18px;
+    padding: 20px 32px;
+    border-radius: var(--launch-radius-l);
   }
 
   .launch-step--role .launch-footnote {
@@ -1071,6 +1092,33 @@
   font-size: 18px;
   line-height: 28px;
   letter-spacing: 0;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 460px;
+  background: var(--launch-accent);
+  color: #ffffff;
+  padding: 20px 32px;
+  border: none;
+  border-radius: var(--launch-radius-l);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+  font-family: var(--launch-font-ui);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.hero-cta:hover {
+  background: var(--launch-accent-hover);
+  transform: translateY(-1px);
 }
 
 .hero-cta-arrow {
@@ -1449,6 +1497,14 @@
     margin-bottom: 28px;
   }
 
+  .launch-step--account .launch-cta {
+    height: auto;
+    padding: 20px 32px;
+    border-radius: var(--launch-radius-l);
+    font-size: 16px;
+    gap: 14px;
+  }
+
   .launch-step--account .launch-login-prompt {
     margin-top: 0;
   }
@@ -1534,6 +1590,14 @@
     height: auto;
     padding: 14px 42px 14px 16px;
     border-width: 1.5px;
+  }
+
+  .launch-step--personalize .launch-cta {
+    height: auto;
+    padding: 20px 32px;
+    border-radius: var(--launch-radius-l);
+    font-size: 16px;
+    gap: 14px;
   }
 
   .personalize-art {
@@ -1709,6 +1773,23 @@
   color: var(--launch-ink);
 }
 
+.launch-step--invite-gate .launch-cta {
+  width: auto;
+  height: auto;
+  min-width: 300px;
+  margin-top: 40px;
+  padding: 17px 40px;
+  border-radius: var(--launch-radius-l);
+  background: var(--launch-accent);
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.launch-step--invite-gate .launch-cta:hover {
+  background: var(--launch-accent-pressed);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
 .launch-step--invite-gate .launch-cta:focus-visible {
   outline: 2px solid var(--launch-accent);
   outline-offset: 3px;
@@ -1730,6 +1811,7 @@
   }
 
   .launch-step--invite-gate .launch-cta {
+    width: 100%;
     min-width: 0;
   }
 }
@@ -1845,6 +1927,25 @@
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
+}
+
+.launch-modal-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 13px 20px;
+  border: none;
+  border-radius: var(--launch-radius-l);
+  background: var(--launch-accent);
+  color: var(--launch-accent-contrast);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.launch-modal-cta:hover {
+  opacity: 0.92;
 }
 
 @keyframes launch-modal-fade {
@@ -1976,6 +2077,18 @@
 /* ---------------------------------------------------------------
    Verify-email blocked states (used / expired / revoked / invalid)
    --------------------------------------------------------------- */
+
+.verify-blocked-cta {
+  width: auto;
+  min-width: 200px;
+  margin-top: 8px;
+  align-self: flex-start;
+}
+
+.verify-blocked-cta:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
 
 /* ---------------------------------------------------------------
    Share row feedback + pending invite link
