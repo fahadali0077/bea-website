@@ -4,7 +4,7 @@ import { CirclePlay, CircleDot, Sparkles, Trophy, Zap } from "lucide-react";
 import { useGetAmbassadorCalendarQuery } from "@/features/api/apiSlice";
 import { AmbassadorGuard, AmbassadorPageHeader, DashboardNotice, Panel } from "../_components";
 
-const ICON_BY_TYPE: Record<string, JSX.Element> = {
+const ICON_BY_TYPE: Record<string, React.JSX.Element> = {
   COMPETITION_START: (
     <span className="grid size-13.5 shrink-0 place-items-center rounded-full bg-[#e6eeee]">
       <CirclePlay className="size-6.25" />

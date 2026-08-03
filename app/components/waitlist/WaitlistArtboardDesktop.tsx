@@ -29,8 +29,12 @@ function scaled(rect: ScaledRect, designWidth: number) {
   return waitlistScaledHitStyle(rect, designWidth);
 }
 
+type OverlayPage = (typeof overlays.pages)[keyof typeof overlays.pages];
+
 export function WaitlistArtboardDesktop({ artboardId, children }: Props) {
-  const page = overlays.pages[artboardId];
+  // waitlist-overlays.json has no entry for artboard "6", but WaitlistArtboardId
+  // includes it — so this lookup can legitimately miss. The throw below handles it.
+  const page = (overlays.pages as Record<string, OverlayPage | undefined>)[artboardId];
 
   if (!page) {
     throw new Error(
