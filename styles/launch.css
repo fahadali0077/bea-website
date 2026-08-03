@@ -1181,8 +1181,11 @@
     flex-direction: column;
   }
 
+  /* Copy is left-aligned on this screen, but the sign-in line stays centred
+     under the full-width CTA, matching the mockup. */
   .hero-signin {
-    text-align: left;
+    text-align: center;
+    max-width: 100%;
   }
 }
 
