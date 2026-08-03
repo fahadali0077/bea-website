@@ -269,17 +269,17 @@ export function AccountStep() {
             )}
           </div>
 
+          <button type="submit" disabled={submitting} className="launch-cta cursor-pointer">
+            {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>{cta.label}</span>}
+            {!submitting && <ArrowRight size={18} strokeWidth={2} aria-hidden="true" />}
+          </button>
+
           <p className="launch-legal">
             {legal.prefix}
             <Link href={legal.termsHref}>{legal.termsLabel}</Link>
             {legal.conjunction}
             <Link href={legal.privacyHref}>{legal.privacyLabel}</Link>
           </p>
-
-          <button type="submit" disabled={submitting} className="launch-cta cursor-pointer">
-            {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>{cta.label}</span>}
-            {!submitting && <ArrowRight size={18} strokeWidth={2} aria-hidden="true" />}
-          </button>
         </form>
 
         <p className="launch-login-prompt">

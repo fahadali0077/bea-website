@@ -243,10 +243,14 @@
 }
 
 .launch-login-prompt {
-  margin-top: 18px;
-  font-size: 14px;
+  margin-top: 40px;
   text-align: center;
   color: var(--launch-muted);
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
 }
 
 .launch-login-prompt a {
@@ -581,8 +585,11 @@
 }
 
 .launch-legal {
+  /* Sits below the CTA and is centred in the mockup. */
+  margin-top: 20px;
+  margin-bottom: 0;
+  text-align: center;
   color: var(--launch-muted);
-  margin-bottom: 4px;
   font-family: var(--launch-font-ui);
   font-weight: 400;
   font-size: 12px;
