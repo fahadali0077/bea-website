@@ -212,23 +212,16 @@
 .launch-modal-cta,
 .verify-blocked-cta {
   /* Single source of truth for every primary button in the onboarding flow. */
-  position: relative;
   display: inline-flex;
   align-items: center;
-  /* Label is centred in the full button width; the arrow is pinned to the
-     right edge rather than sitting next to the text, which is what made the
-     spacing look equal on both sides. */
   justify-content: center;
-  gap: 0;
+  gap: 12px;
   width: 100%;
   max-width: 460px;
   height: 60px;
-  padding: 0 56px;
+  padding: 0 32px;
   border: none;
-  /* Pill, per the mockup and the guide's own button artwork. Note this differs
-     from the guide's radius table, which lists 16px as the L (button) radius —
-     every rendered button in the design is fully rounded. */
-  border-radius: 9999px;
+  border-radius: var(--launch-radius-l);
   background: var(--launch-accent);
   color: var(--launch-accent-contrast);
   box-shadow: var(--launch-shadow-button);
@@ -258,21 +251,8 @@
   cursor: default;
 }
 
-.launch-cta span,
-.hero-cta span,
-.launch-modal-cta span,
-.verify-blocked-cta span {
+.launch-cta span {
   text-align: center;
-}
-
-/* The trailing arrow sits at the right edge on every onboarding button. */
-.launch-cta > svg,
-.hero-cta > svg,
-.verify-blocked-cta > svg {
-  position: absolute;
-  right: 28px;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 .launch-login-prompt {
