@@ -888,9 +888,15 @@
   .launch-step-inner--hero {
     display: grid;
     grid-template-columns: 1.05fr 1fr;
+    grid-template-rows: auto 1fr;
     align-items: start;
     gap: 56px;
   }
+
+  /* Copy and actions stack in column one; art spans both rows in column two. */
+  .hero-copy { grid-column: 1; grid-row: 1; }
+  .hero-actions { grid-column: 1; grid-row: 2; align-self: end; }
+  .hero-art { grid-column: 2; grid-row: 1 / span 2; }
 
   
   .launch-card:has(.launch-step--hero, .launch-step--role) .launch-header {
@@ -1038,36 +1044,42 @@
   }
 }
 
-.hero-content {
+.hero-copy {
   max-width: 560px;
   display: flex;
   flex-direction: column;
 }
 
 .hero-eyebrow {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2.4px;
   color: var(--launch-eyebrow);
   text-transform: uppercase;
   margin-bottom: 22px;
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.6px;
 }
 
 .hero-title {
-  font-size: 64px;
-  line-height: 1.07;
-  font-weight: 400;
-  letter-spacing: -0.5px;
   color: var(--launch-ink);
   margin-bottom: 30px;
+  font-family: var(--launch-font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 8vw, 64px);
+  line-height: 1.125;
+  letter-spacing: -0.01em;
 }
 
 .hero-lede {
-  font-size: 19px;
-  line-height: 1.65;
   color: var(--launch-muted);
   margin-bottom: 44px;
   max-width: 460px;
+  font-family: var(--launch-font-ui);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0;
 }
 
 .hero-cta {
@@ -1079,14 +1091,17 @@
   max-width: 460px;
   background: var(--launch-accent);
   color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
   padding: 20px 32px;
   border: none;
   border-radius: var(--launch-radius-l);
   cursor: pointer;
   text-decoration: none;
   transition: background 0.2s ease, transform 0.15s ease;
+  font-family: var(--launch-font-ui);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
 }
 
 .hero-cta:hover {
@@ -1105,10 +1120,14 @@
 
 .hero-signin {
   margin-top: 22px;
-  font-size: 15px;
   color: var(--launch-muted);
   max-width: 460px;
   text-align: center;
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
 }
 
 .hero-signin a {
@@ -1141,21 +1160,29 @@
 
   .launch-step-inner--hero {
     gap: 28px;
-    text-align: center;
+    /* Mockup screen 1 is left-aligned on mobile; only screens 3 and 6 centre. */
+    text-align: left;
   }
 
-  .hero-content {
-    margin: 0 auto;
-    align-items: center;
+  .hero-copy {
+    margin: 0;
+    align-items: stretch;
+    order: 1;
   }
 
-  .hero-eyebrow,
-  .hero-lede {
-    text-align: center;
+  /* Illustration sits between the body copy and the CTA, per the mockup. */
+  .hero-art {
+    order: 2;
   }
 
-  .hero-title {
-    font-size: 40px;
+  .hero-actions {
+    order: 3;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-signin {
+    text-align: left;
   }
 }
 
