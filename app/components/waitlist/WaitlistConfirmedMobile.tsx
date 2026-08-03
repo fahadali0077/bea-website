@@ -1,43 +1,51 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { useState, useSyncExternalStore } from "react";
 import { ChevronLeft, Copy, Heart } from "lucide-react";
 
 import { useJoinWaitlistRankPosition } from "@/features/waitlist/useJoinWaitlistRankPosition";
-import { selectWaitlistForm } from "@/features/waitlist/waitlist.selectors";
+import { selectWaitlistForm, selectWaitlistJoinResult } from "@/features/waitlist/waitlist.selectors";
 import { WAITLIST_ARTBOARDS } from "@/lib/waitlist";
 import { formatWaitlistRankNumber, readStoredJoinResult } from "@/lib/waitlist-join-storage";
 import { WAITLIST_CONFIRMED_CONTENT } from "@/lib/waitlist-page-content";
 import { useAppSelector } from "@/store/hooks";
 
-import { WaitlistCheckBadge } from "./WaitlistCheckBadge";
 import { WaitlistPerkCards } from "./WaitlistPerkCards";
 import { WaitlistShareIcons } from "./WaitlistShareIcons";
+
+const emptySubscribe = () => () => {};
 
 export function WaitlistConfirmedMobile() {
   const meta = WAITLIST_ARTBOARDS["8"];
   const content = WAITLIST_CONFIRMED_CONTENT;
   const rankPosition = useJoinWaitlistRankPosition();
   const form = useAppSelector(selectWaitlistForm);
-  const [magicLink] = useState<string | null>(() => {
-    return readStoredJoinResult()?.magicLink ?? null;
-  });
+  const joinResult = useAppSelector(selectWaitlistJoinResult);
+  const [copied, setCopied] = useState(false);
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
 
-  const marketLabel = form.marketName;
-  const rankNumber = formatWaitlistRankNumber(rankPosition);
+  const marketLabel = mounted ? form.marketName : null;
+  const rankNumber = mounted ? formatWaitlistRankNumber(rankPosition) : null;
   const rankCity = marketLabel ? `in ${marketLabel}` : content.rankCity;
 
-  const progressLabel = form.marketName
-    ? `${form.marketName.toUpperCase()} PROGRESS`
-    : content.progressLabel;
+  const inviteLink = mounted
+    ? (joinResult?.referralLink ?? readStoredJoinResult()?.referralLink ?? "")
+    : "";
 
-  const referralLink =
-    typeof window !== "undefined" ? `${window.location.origin}/waitlist` : "/waitlist";
-
-  const handleCopyLink = () => {
-    void navigator.clipboard.writeText(referralLink);
+  const handleCopyInvite = () => {
+    void navigator.clipboard.writeText(inviteLink);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2000);
   };
+
+  const progressLabel = marketLabel
+    ? `${marketLabel.toUpperCase()} PROGRESS`
+    : content.progressLabel;
 
   return (
     <div className="waitlist-root">
@@ -46,18 +54,25 @@ export function WaitlistConfirmedMobile() {
           <Link href={meta.backHref!} className="waitlist-back" aria-label="Go back">
             <ChevronLeft size={22} strokeWidth={1.75} />
           </Link>
-          <Link href={content.waitingRoom.href} className="waitlist-waiting-room">
-            {content.waitingRoom.label}
-            <span aria-hidden> ↗</span>
-          </Link>
+          <div className="waitlist-confirmed-wordmark">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/4x/BubbaLogo.png" alt="Bubba" style={{ display: "block", width: "auto", height: 24 }} />
+          </div>
         </div>
 
-        <WaitlistCheckBadge />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/4x/prizes.png"
+          alt=""
+          style={{ width: "100%", height: "auto", margin: "20px auto 20px", borderRadius: 16, display: "block" }}
+        />
 
         <h1 className="waitlist-confirmed-title">{content.title}</h1>
-        <p className="waitlist-confirmed-sub">{content.subtitle}</p>
+        <p className="waitlist-confirmed-sub">
+          The waiting room commences in <strong>3 days</strong>.
+        </p>
 
-        {magicLink && (
+        {/*{magicLink && (
           <div className="bg-emerald-50 border border-emerald-200 rounded-[12px] p-4 text-emerald-800 text-[13px] font-medium flex flex-col gap-3 my-4">
             <p className="font-bold text-[14px]">Verification Link Generated</p>
             <p>Bypass email issues by copying this link or clicking below:</p>
@@ -80,7 +95,7 @@ export function WaitlistConfirmedMobile() {
               </button>
             </div>
           </div>
-        )}
+        )}*/}
 
         <div className="waitlist-rank-card">
           <p className="waitlist-rank-eyebrow">{content.rankEyebrow}</p>
@@ -99,10 +114,26 @@ export function WaitlistConfirmedMobile() {
           <p className="waitlist-rank-hint">{content.progressHint}</p>
         </div>
 
-        <div className="waitlist-section-divider">{content.perksEyebrow}</div>
+        <Link href={content.waitingRoom.href} className="waitlist-confirmed-enter">
+          Enter the waiting room <span aria-hidden>↗</span>
+        </Link>
+
+        {inviteLink ? (
+          <div className="waitlist-invite-link">
+            <p className="waitlist-invite-link-label">Your invite link</p>
+            <div className="waitlist-invite-link-box">
+              <span className="waitlist-invite-link-url">{inviteLink}</span>
+              <button type="button" className="waitlist-invite-link-copy" onClick={handleCopyInvite}>
+                <Copy size={14} strokeWidth={2} aria-hidden />
+                <span>{copied ? "Copied!" : "Copy"}</span>
+              </button>
+            </div>
+          </div>
+        ) : null}
+
         <WaitlistPerkCards />
 
-        <div className="waitlist-section-divider">{content.shareEyebrow}</div>
+        {/*<div className="waitlist-section-divider">{content.shareEyebrow}</div>
         <WaitlistShareIcons />
 
         <button
@@ -112,11 +143,10 @@ export function WaitlistConfirmedMobile() {
         >
           <Copy size={16} strokeWidth={2} aria-hidden />
           <span>{content.copyLabel}</span>
-        </button>
+        </button>*/}
 
         <div className="waitlist-confirmed-footer">
-          <Heart size={14} strokeWidth={1.5} aria-hidden className="waitlist-confirmed-heart" />
-          <p>{content.footerThankYou}</p>
+          <p style={{ display: "inline-flex", alignItems: "center" }}><Heart size={14} strokeWidth={1.5} aria-hidden className="waitlist-confirmed-heart" />{content.footerThankYou}</p>
           <p className="waitlist-confirmed-footer-muted">{content.footerClosing}</p>
         </div>
       </div>

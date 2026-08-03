@@ -23,13 +23,13 @@ export function WaitlistContinueButton({
   const content = (
     <>
       <span>{loading ? 'Please wait…' : label}</span>
-      <ArrowRight size={18} strokeWidth={2} aria-hidden="true" />
+      <ArrowRight size={21} strokeWidth={2} aria-hidden="true" style={{position:"absolute", right: "24px"}} />
     </>
   );
 
   if (href && !onContinue) {
     return (
-      <Link href={href} className="waitlist-btn-primary">
+      <Link href={href} className="waitlist-btn-primary" style={{position: "relative"}}>
         {content}
       </Link>
     );

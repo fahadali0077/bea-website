@@ -1,5 +1,13 @@
 export type AmbassadorRankMovementDirection = "UP" | "DOWN" | "SAME" | "NEW";
 
+export type PublicAmbassador = {
+  id: string;
+  fullName: string;
+  referralCode: string;
+  schoolName: string | null;
+  marketName: string | null;
+};
+
 export type AmbassadorCompetition = {
   id: string;
   title: string;

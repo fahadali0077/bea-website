@@ -18,7 +18,7 @@ export default function Navbar({ activePage = 'home', fullWidth = false }: Navba
             : "px-4 py-3 md:px-8 md:py-6 lg:px-14 lg:py-7 max-w-5xl mx-auto"
             }`}>
             {/* 1. Logo & Mobile Hamburger (Matches waitlist landing style) */}
-            <div className="flex items-center gap-3 flex-shrink-0">
+            <div className="flex items-center gap-3 shrink-0">
                 <button
                     onClick={() => setIsMenuOpen(true)}
                     className="md:hidden p-1 text-[#1a1a1a] hover:opacity-80 focus:outline-none cursor-pointer flex items-center justify-center"
@@ -30,7 +30,7 @@ export default function Navbar({ activePage = 'home', fullWidth = false }: Navba
                     href="/waitlist"
                     className="select-none hover:opacity-85 transition-opacity leading-none flex items-center"
                 >
-                    <img src="/images/assets/Bea_png.png" alt="Bea Logo" className="h-[26px] md:h-[38px] w-auto object-contain" />
+                    <img src="/images/assets/Bea_png.png" alt="Bea Logo" className="h-6.5 md:h-9.5 w-auto object-contain" />
                 </Link>
             </div>
 
@@ -64,7 +64,7 @@ export default function Navbar({ activePage = 'home', fullWidth = false }: Navba
                 {/* CTA Button */}
                 <Link
                     href="/waitlist/start"
-                    className="bg-[#1a1a1a] text-white text-[13px] md:text-[14px] font-sans font-semibold md:font-medium px-[18px] py-[9px] md:px-6 md:py-[11px] rounded-full hover:opacity-90 transition-all whitespace-nowrap"
+                    className="bg-[#1a1a1a] text-white text-[13px] md:text-[14px] font-sans font-semibold md:font-medium px-4.5 py-2.25 md:px-6 md:py-2.75 rounded-full hover:opacity-90 transition-all whitespace-nowrap"
                 >
                     Join waitlist
                 </Link>
@@ -95,7 +95,7 @@ export default function Navbar({ activePage = 'home', fullWidth = false }: Navba
                     >
                         {/* Drawer Header */}
                         <div className="flex items-center justify-between pb-5 border-b border-[#e3ded6]">
-                            <img src="/images/assets/Bea_png.png" alt="Bea Logo" className="h-[24px] w-auto object-contain" />
+                            <img src="/images/assets/Bea_png.png" alt="Bea Logo" className="h-6 w-auto object-contain" />
                             <button
                                 onClick={() => setIsMenuOpen(false)}
                                 className="p-1 text-neutral-500 hover:text-neutral-800 focus:outline-none cursor-pointer"
@@ -106,29 +106,29 @@ export default function Navbar({ activePage = 'home', fullWidth = false }: Navba
                         </div>
 
                         {/* Navigation Items */}
-                        <div className="flex-grow flex flex-col gap-1.5 py-6">
+                        <div className="grow flex flex-col gap-1.5 py-6">
                             <Link
                                 href="/faq"
                                 onClick={() => setIsMenuOpen(false)}
-                                className={`w-full text-left py-3 px-4 rounded-[8px] flex items-center gap-3.5 font-sans text-[14px] font-semibold transition-all duration-200 ${activePage === 'faq' ? 'bg-[#f2eee7]/80 text-black font-bold' : 'text-neutral-700 hover:text-black hover:bg-[#f2eee7]/50'
+                                className={`w-full text-left py-3 px-4 rounded-lg flex items-center gap-3.5 font-sans text-[14px] font-semibold transition-all duration-200 ${activePage === 'faq' ? 'bg-[#f2eee7]/80 text-black font-bold' : 'text-neutral-700 hover:text-black hover:bg-[#f2eee7]/50'
                                     }`}
                             >
                                 FAQ
                             </Link>
-                            <div className="h-[1px] bg-[#e3ded6]/50 my-0.5" />
+                            <div className="h-px bg-[#e3ded6]/50 my-0.5" />
                             <Link
                                 href="/login"
                                 onClick={() => setIsMenuOpen(false)}
-                                className={`w-full text-left py-3 px-4 rounded-[8px] flex items-center gap-3.5 font-sans text-[14px] font-semibold transition-all duration-200 ${activePage === 'ambassadors' ? 'bg-[#f2eee7]/80 text-black font-bold' : 'text-neutral-700 hover:text-black hover:bg-[#f2eee7]/50'
+                                className={`w-full text-left py-3 px-4 rounded-lg flex items-center gap-3.5 font-sans text-[14px] font-semibold transition-all duration-200 ${activePage === 'ambassadors' ? 'bg-[#f2eee7]/80 text-black font-bold' : 'text-neutral-700 hover:text-black hover:bg-[#f2eee7]/50'
                                     }`}
                             >
                                 Ambassadors
                             </Link>
-                            <div className="h-[1px] bg-[#e3ded6]/50 my-0.5" />
+                            <div className="h-px bg-[#e3ded6]/50 my-0.5" />
                             <Link
                                 href="/calendar"
                                 onClick={() => setIsMenuOpen(false)}
-                                className={`w-full text-left py-3 px-4 rounded-[8px] flex items-center gap-3.5 font-sans text-[14px] font-semibold transition-all duration-200 ${activePage === 'calendar' ? 'bg-[#f2eee7]/80 text-black font-bold' : 'text-neutral-700 hover:text-black hover:bg-[#f2eee7]/50'
+                                className={`w-full text-left py-3 px-4 rounded-lg flex items-center gap-3.5 font-sans text-[14px] font-semibold transition-all duration-200 ${activePage === 'calendar' ? 'bg-[#f2eee7]/80 text-black font-bold' : 'text-neutral-700 hover:text-black hover:bg-[#f2eee7]/50'
                                     }`}
                             >
                                 Calendar

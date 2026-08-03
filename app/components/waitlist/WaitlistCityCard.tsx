@@ -23,11 +23,11 @@ export function WaitlistCityCard({ city, selected, static: isStatic, onSelect }:
         loading="lazy"
         draggable={false}
       />
-      <div className="waitlist-city-card-shade" aria-hidden />
+      {/*<div className="waitlist-city-card-shade" aria-hidden />*/}
       <div className="waitlist-city-card-label">
         <span className="city-name">{city.name}</span>
-        <span className="city-plans">{city.plans}</span>
-        <span className="city-tonight">plans tonight</span>
+        {/*<span className="city-plans">{city.plans}</span>
+        <span className="city-tonight">plans tonight</span>*/}
       </div>
     </>
   );

@@ -276,7 +276,7 @@ export default function DashboardLayout({
                             </svg>
                         </button>
                         <Link href="/" className="select-none hover:opacity-80 transition-opacity shrink-0 flex items-center">
-                            <img src="/images/assets/Bea_png.png" alt="Bea Logo" className="h-[18px] md:h-[24px] w-auto object-contain" />
+                            <img src="/images/assets/Bea_png.png" alt="Bea Logo" className="h-[20px] sm:h-[30px] md:h-[36px] w-auto object-contain" />
                         </Link>
                     </div>
 
@@ -438,7 +438,7 @@ export default function DashboardLayout({
                     <div className="fixed inset-y-0 left-0 w-64 max-w-[80vw] bg-[#fcfbf8] shadow-2xl flex flex-col p-5 transition-transform duration-300 animate-slide-in">
                         {/* Drawer Header */}
                         <div className="flex items-center justify-between pb-5 border-b border-neutral-200/50">
-                            <img src="/images/assets/Bea_png.png" alt="Bea Logo" className="h-[18px] w-auto object-contain" />
+                            <img src="/images/assets/Bea_png.png" alt="Bea Logo" className="h-[24px] w-auto object-contain" />
                             <button 
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="p-1 text-neutral-500 hover:text-neutral-800 focus:outline-none cursor-pointer"

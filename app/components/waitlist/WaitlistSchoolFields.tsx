@@ -297,19 +297,19 @@ export function WaitlistSchoolFields({ variant, error }: Props) {
             : "waitlist-search-block waitlist-search-block--tight waitlist-market-search"
         }
       >
-        <label
+        {/*<label
           className={
             isDesktop ? "wld-step5-search-label" : "waitlist-field-label"
           }
           htmlFor="school-search"
         >
           Search your school
-        </label>
+        </label>*/}
         <input
           id="school-search"
           type="search"
           className={isDesktop ? "wld-step5-search-input" : "waitlist-box-input"}
-          placeholder="Search universities"
+          placeholder="Search school"
           value={search}
           onChange={(event) => {
             setSearch(event.target.value);
@@ -409,6 +409,15 @@ export function WaitlistSchoolFields({ variant, error }: Props) {
           </div>
         ) : null}
       </div>
+
+      {!isDesktop && form.schoolId && !form.notInSchool ? (
+        <button type="button" className="waitlist-school-card waitlist-school-card--selected">
+          <div>
+            <div className="waitlist-school-card-name font-sfpro!">{form.schoolName}</div>
+          </div>
+          <span className="waitlist-school-card-dot" aria-hidden />
+        </button>
+      ) : null}
 
       {listLoading ? (
         <p className="waitlist-market-loading">Loading schools…</p>

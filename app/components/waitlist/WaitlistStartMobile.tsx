@@ -1,17 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowRight, Heart, Mail } from "lucide-react";
 
 import { updateWaitlistForm } from "@/features/waitlist/waitlist.slice";
 import { selectWaitlistForm } from "@/features/waitlist/waitlist.selectors";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
-import { WaitlistContinueButton } from "./WaitlistContinueButton";
 import { WaitlistFieldError } from "./WaitlistFieldError";
-import { WaitlistProgress } from "./WaitlistProgress";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -39,31 +36,28 @@ export function WaitlistStartMobile() {
   };
 
   return (
-    <div className="waitlist-root waitlist-coded">
-      <div className="waitlist-step-shell">
-        <div className="waitlist-step-top">
-          <Link href="/" className="waitlist-back" aria-label="Go back">
-            <ArrowLeft size={24} strokeWidth={1.75} />
-          </Link>
-          <WaitlistProgress filledCount={0} />
+    <div className="waitlist-root waitlist-coded waitlist-email-start">
+      <main className="waitlist-email-start__content font-sfpro!">
+        <div className="waitlist-email-start__wordmark">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/4x/BubbaLogo.png" alt="Bubba" style={{ display: "block", width: "auto", height: 26 }} />
         </div>
-
-        <div className="waitlist-step-body">
-          <h1 className="waitlist-step-title waitlist-step-title--serif">
-            What&apos;s your email?
-          </h1>
-          <p className="waitlist-step-subtitle">
-            We&apos;ll use this to save your spot on the waitlist.
-          </p>
-
-          <div className="waitlist-search-block">
-            <label className="waitlist-field-label" htmlFor="waitlist-start-email">
-              Email
-            </label>
+        <h1 className="font-canela!">
+          Join the waitlist<br />for early access<br />to <span>your city</span>
+        </h1>
+        <p className="font-sfpro! waitlist-email-start__intro">
+          Bea is launching soon.<br />We&apos;ve designed a special waitlist<br />experience beforehand.
+        </p>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/4x/market.png" alt="An illustrated bench and signs" className="waitlist-email-start__art" />
+        <div className="waitlist-email-start__form">
+          <label htmlFor="waitlist-start-email">Enter your email to get started</label>
+          <div className="waitlist-email-start__input-wrap">
+            <Mail size={26} aria-hidden="true" />
             <input
               id="waitlist-start-email"
               type="email"
-              className="waitlist-box-input"
+              className="font-sfpro!"
               placeholder="you@email.com"
               autoComplete="email"
               value={email}
@@ -79,11 +73,13 @@ export function WaitlistStartMobile() {
               }}
             />
           </div>
-
-          <WaitlistContinueButton label="Continue" onContinue={handleContinue} />
+          <button type="button" className="waitlist-email-start__submit font-sfpro!" style={{position:"relative", cursor: "pointer"}} onClick={handleContinue}>
+            Join the waitlist <ArrowRight size={21} aria-hidden="true" style={{ position: "absolute", right: "24px" }} />
+          </button>
+          <p className="waitlist-email-start__privacy font-sfpro!"><Heart size={22} aria-hidden="true" /> We&apos;ll never spam you. Unsubscribe anytime.</p>
           <WaitlistFieldError message={error} />
         </div>
-      </div>
+      </main>
     </div>
   );
 }

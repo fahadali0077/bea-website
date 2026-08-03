@@ -62,6 +62,7 @@ import type {
   AmbassadorDashboardResponse,
   AmbassadorLeaderboardEntry,
   AmbassadorReferralNetwork,
+  PublicAmbassador,
 } from "@/lib/api/ambassador.types";
 
 export const apiSlice = createApi({
@@ -169,6 +170,10 @@ export const apiSlice = createApi({
     listAllSchools: builder.query<School[], { marketId?: string } | void>({
       query: (params) => ({ url: "/schools/all", method: "GET", params: params ?? undefined }),
       providesTags: ["Schools"],
+    }),
+
+    listPublicAmbassadors: builder.query<PublicAmbassador[], { marketId?: string; schoolId?: string }>({
+      query: (params) => ({ url: "/ambassador/public", method: "GET", params }),
     }),
 
     listShopProducts: builder.query<ProductsListResponse, ListProductsParams | void>({
@@ -359,6 +364,7 @@ export const {
   useLazyListAllMarketsQuery,
   useListAllSchoolsQuery,
   useLazyListAllSchoolsQuery,
+  useListPublicAmbassadorsQuery,
   useListShopProductsQuery,
   useLazyListShopProductsQuery,
   useListShopCategoriesQuery,

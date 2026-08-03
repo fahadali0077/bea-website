@@ -21,6 +21,7 @@
 .waitlist-coded .waitlist-step-title--serif {
   font-weight: 400;
   letter-spacing: -0.03em;
+  color: #294431;
 }
 
 .waitlist-coded .waitlist-link-secondary,
@@ -33,9 +34,34 @@
   font-weight: 600;
 }
 
+.waitlist-coded .waitlist-btn-primary {
+  background-color: #294431;
+}
+
 /* ── Phone baseline (<768px) ── */
+.waitlist-coded .waitlist-step-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Skip-market anchor above the primary CTA */
+.waitlist-coded .waitlist-skip-market-link {
+  display: block;
+  margin: 24px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #133d27;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
 .waitlist-coded .waitlist-step-body {
   margin-top: 48px;
+  flex: 1 1 auto;
 }
 
 .waitlist-coded .waitlist-step-title {
@@ -44,6 +70,42 @@
 
 .waitlist-coded .waitlist-step-title--serif {
   font-size: 30px;
+}
+
+/* Bottom bar — image + CTA anchored to the bottom of the screen */
+.waitlist-coded .waitlist-step-bottom {
+  flex: 0 0 auto;
+  margin-top: 32px;
+  padding-bottom: 8px;
+}
+
+/* Step image — full-width above the CTA in the bottom bar */
+.waitlist-coded .waitlist-step-image {
+  margin: 0 auto 24px;
+  max-width: 600px;
+}
+
+.waitlist-coded .waitlist-step-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+@media (min-width: 480px) {
+  .waitlist-coded .waitlist-step-image {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 520px;
+  }
+
+  .waitlist-coded .waitlist-step-image--right {
+    margin-left: auto;
+  }
+
+  .waitlist-coded .waitlist-step-image--left {
+    margin-right: auto;
+  }
 }
 
 /* Progress — full-width segments on phones */
@@ -68,7 +130,7 @@
 /* City cards — 2-col grid on phones */
 .waitlist-coded .waitlist-city-carousel {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
   margin-top: 20px;
   padding: 0;

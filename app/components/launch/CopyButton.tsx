@@ -38,7 +38,7 @@ export function CopyButton({ value }: { value: string }) {
       aria-label={copied ? "Link copied" : "Copy link"}
       title={failed ? "Couldn't copy — select the link and copy it manually" : "Copy link"}
     >
-      {copied ? <Check size={20} strokeWidth={2} /> : <Copy size={20} strokeWidth={2} />}
+      {copied ? <Check size={20} strokeWidth={2} /> : <Copy size={20} strokeWidth={1.7} />}
     </button>
   );
 }

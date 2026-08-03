@@ -276,7 +276,7 @@ export const WaitlistMarketFields = forwardRef<WaitlistMarketFieldsHandle, Props
             }
             htmlFor={searchInputId}
           >
-            Search any city
+            or search any city
           </label>
           <input
             ref={searchInputRef}
@@ -285,7 +285,7 @@ export const WaitlistMarketFields = forwardRef<WaitlistMarketFieldsHandle, Props
             className={
               searchInputClassName + (searchInvalid ? " waitlist-field--highlight" : "")
             }
-            placeholder="Search"
+            placeholder="Search market"
             value={search}
             onChange={(event) => {
               setSearchInvalid(false);

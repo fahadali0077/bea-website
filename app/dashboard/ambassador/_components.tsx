@@ -42,13 +42,13 @@ export function DashboardNotice({ children }: { children: ReactNode }) {
 export function AmbassadorPageHeader({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <div className="space-y-1">
-      <p className="font-sfpro text-[11px] md:text-[13px] font-bold uppercase tracking-[0.16em] text-[#584939]">
+      {/*<p className="font-sfpro text-[11px] md:text-[13px] font-bold uppercase tracking-[0.16em] text-[#584939]">
         Ambassador
-      </p>
-      <h1 className="text-[24px] md:text-[38px] font-canela font-medium tracking-[0.02em] text-neutral-900 leading-tight">
+      </p>*/}
+      <h1 className="text-[24px] md:text-[48pt] font-canela font-regular tracking-[0.02em] text-[#000000] leading-tight">
         {title}
       </h1>
-      <p className="text-[13px] md:text-[16px] font-lato font-medium text-neutral-500 max-w-2xl">
+      <p className="text-[13px] md:text-[18pt] font-lato font-medium text-[#7c7c7c]">
         {subtitle}
       </p>
     </div>

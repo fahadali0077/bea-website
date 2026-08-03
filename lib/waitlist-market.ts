@@ -10,10 +10,18 @@ export type WaitlistCityOption = {
 };
 
 const CITY_IMAGE_FALLBACKS: Record<string, string> = {
-  "new york": "/waitlist/cities/new-york.png?v=3",
-  boston: "/waitlist/cities/boston.png?v=3",
-  miami: "/waitlist/cities/miami.png?v=3",
-  "los angeles": "/waitlist/cities/los-angeles.png?v=3",
+  atlanta: "/images/4x/Atlanta.png",
+  austin: "/images/4x/austin.png",
+  boston: "/images/4x/Boston.png",
+  charlotte: "/images/4x/Charlotte.png",
+  chicago: "/images/4x/Chicago.png",
+  columbus: "/images/4x/Columbus.png",
+  dc: "/images/4x/DC.png",
+  denver: "/images/4x/DENVER.png",
+  "los angeles": "/images/4x/Los%20angeles.png",
+  miami: "/images/4x/Miami.png",
+  "new york": "/images/4x/new%20york.png",
+  phoenix: "/images/4x/Phoenix.png",
 };
 
 function slugify(value: string) {

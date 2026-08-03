@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -20,6 +20,8 @@ import { WAITLIST_CONFIRMED_CONTENT } from "@/lib/waitlist-page-content";
 import { useAppSelector } from "@/store/hooks";
 
 import { WaitlistCheckBadge } from "./WaitlistCheckBadge";
+
+const emptySubscribe = () => () => {};
 
 function WhatsappIcon({ size = 22 }: { size?: number }) {
   return (
@@ -60,12 +62,17 @@ export function WaitlistConfirmedDesktop() {
   const [magicLink] = useState<string | null>(() => {
     return readStoredJoinResult()?.magicLink ?? null;
   });
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
 
-  const marketLabel = form.marketName;
-  const rankNumber = formatWaitlistRankNumber(rankPosition);
+  const marketLabel = mounted ? form.marketName : null;
+  const rankNumber = mounted ? formatWaitlistRankNumber(rankPosition) : null;
   const rankCity = marketLabel ? `in ${marketLabel}` : content.rankCity;
 
-  const progressLabel = form.marketName
+  const progressLabel = mounted && form.marketName
     ? `${form.marketName.toUpperCase()} PROGRESS`
     : content.progressLabel;
 
@@ -96,7 +103,9 @@ export function WaitlistConfirmedDesktop() {
 
         <div className="wld-step8-header">
           <h1 className="wld-step8-title">{content.title}</h1>
-          <p className="wld-step8-subtitle">{content.subtitle}</p>
+          <p className="wld-step8-subtitle">
+            The waiting room commences in <strong>3 days</strong>.
+          </p>
         </div>
 
         {magicLink && (
@@ -147,7 +156,6 @@ export function WaitlistConfirmedDesktop() {
         <div className="wld-step8-section-divider-wrapper">
           <div className="wld-step8-section-divider">{content.perksEyebrow}</div>
         </div>
-        <p className="wld-step8-perks-subtitle">{content.perksSubtitle}</p>
         <div className="wld-step8-perk-cards">
           {content.perks.map((perk) => {
             const Icon = PERK_ICONS[perk.id];

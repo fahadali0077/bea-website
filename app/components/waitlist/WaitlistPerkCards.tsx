@@ -9,11 +9,10 @@ const PERK_ICONS = {
 } as const;
 
 export function WaitlistPerkCards() {
-  const { perksSubtitle, perks } = WAITLIST_CONFIRMED_CONTENT;
+  const { perks } = WAITLIST_CONFIRMED_CONTENT;
 
   return (
     <>
-      <p className="waitlist-perks-subtitle">{perksSubtitle}</p>
       <div className="waitlist-perk-cards">
         {perks.map((perk) => {
           const Icon = PERK_ICONS[perk.id];

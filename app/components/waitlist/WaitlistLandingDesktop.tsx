@@ -22,6 +22,7 @@ import {
   WAITLIST_CITIES,
   WAITLIST_HERO_CITIES,
   WAITLIST_HERO_IMAGE,
+  WAITLIST_HERO_IMAGE_MOBILE,
 } from "@/lib/waitlist";
 import { useAppDispatch } from "@/store/hooks";
 
@@ -79,7 +80,6 @@ export function WaitlistLandingDesktop() {
           <h1 className="wld-hero-title">Together,<br />today.</h1>
           <p className="wld-hero-sub">
             24 hour to chat.<br />
-            Only see active profiles.
           </p>
           <form
             className="wld-email-pill"
@@ -103,7 +103,13 @@ export function WaitlistLandingDesktop() {
             <img
               src={WAITLIST_HERO_IMAGE}
               alt="People connecting on Bea"
-              className="wld-hero-img"
+              className="wld-hero-img wld-hero-img--desktop"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={WAITLIST_HERO_IMAGE_MOBILE}
+              alt="People connecting on Bea"
+              className="wld-hero-img wld-hero-img--mobile"
             />
           </div>
         </div>

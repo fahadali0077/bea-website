@@ -22,10 +22,7 @@ export function readStoredJoinResult(): JoinWaitlistResponse | null {
 
   try {
     const parsed = JSON.parse(raw) as JoinWaitlistResponse;
-    if (
-      typeof parsed.waitlistPosition === "number" &&
-      Number.isFinite(parsed.waitlistPosition)
-    ) {
+    if (typeof parsed.referralCode === "string" && parsed.referralCode) {
       return parsed;
     }
   } catch {

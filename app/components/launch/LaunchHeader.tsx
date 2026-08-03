@@ -13,7 +13,11 @@ export function LaunchHeader() {
   return (
     <header className="launch-header">
       <div className="launch-header-inner">
-        <span className="launch-header-brand font-canela onboarding-heading">Bubba</span>
+        <span className="launch-header-brand font-canela onboarding-heading">
+          <span className="hidden md:inline">Bubba</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/4x/BubbaLogo.png" alt="Bubba" className="md:hidden" style={{ display: "block", width: "auto", height: 25 }} />
+        </span>
         <LaunchStepper currentStep={currentStep} />
       </div>
     </header>

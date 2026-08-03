@@ -42,7 +42,7 @@ export function WaitlistConfirmed() {
       <div className="waitlist-confirmed">
         <WaitlistCheckBadge />
 
-        <h1 className="waitlist-confirmed-title">{content.title}</h1>
+        <h1 className="waitlist-confirmed-title font-sfpro!">{content.title}</h1>
         <p className="waitlist-confirmed-sub">{content.subtitle}</p>
 
         <div className="waitlist-rank-card">

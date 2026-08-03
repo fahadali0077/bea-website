@@ -318,7 +318,7 @@ export function SchoolStep() {
             <div>
               <label className="launch-agreement">
                 <span className={`launch-agreement-box ${agreed ? "is-checked" : ""}${fieldErrors.agreement ? " is-invalid" : ""}`}>
-                  {agreed && <Check size={13} strokeWidth={2} />}
+                  {agreed && <Check size={13} strokeWidth={3} />}
                   <input
                     ref={agreementRef}
                     type="checkbox"

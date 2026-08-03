@@ -3,12 +3,19 @@ import type {
   WaitlistStepArtboardId,
 } from "@/lib/waitlist";
 
+export type WaitlistStepImage = {
+  src: string;
+  side: "left" | "right";
+  alt?: string;
+};
+
 export type WaitlistStepContent = {
   title: string;
   subtitle?: string;
   titleSerif?: boolean;
   cta: { label: string; href: string };
   secondary?: { label: string; href: string };
+  image?: WaitlistStepImage;
 };
 
 export const WAITLIST_LANDING_CONTENT = {
@@ -39,32 +46,44 @@ export const WAITLIST_PAGE_CONTENT: Record<
   WaitlistStepContent
 > = {
   "3": {
-    title: "Which market do you want to join",
-    subtitle: "Select your city or search a city.",
-    titleSerif: true,
-    cta: { label: "Claim my spot", href: "/waitlist/4" },
-  },
-  "4": {
-    title: "What do we call you?",
+    title: "Where do you want to date?",
+    subtitle: "Choose the city you want to join.\n(This helps with launch)",
     titleSerif: true,
     cta: { label: "Continue", href: "/waitlist/5" },
+    image: { src: "/images/4x/market.png", side: "left", alt: "Market illustration" },
   },
-  "5": {
-    title: "Which school are you affiliated with?",
+  "4": {
+    title: "A little about you",
+    subtitle: "This will be used for the waiting room.",
     titleSerif: true,
     cta: { label: "Continue", href: "/waitlist/7" },
+    image: { src: "/images/4x/name.png", side: "right", alt: "Name illustration" },
+  },
+  "5": {
+    title: "Are you part of a\nschool community?",
+    subtitle: "This campus is used to choose\nyour waiting room.",
+    titleSerif: true,
+    cta: { label: "Continue", href: "/waitlist/6" },
+    image: { src: "/images/4x/school.png", side: "right", alt: "School illustration" },
+  },
+  "6": {
+    title: "Did an ambassador\nbring you here",
+    subtitle: "If you heard about us through an ambassador\nplease give them credit!",
+    titleSerif: true,
+    cta: { label: "Continue", href: "/waitlist/4" },
   },
   "7": {
     title: "Where should we send the invite to?",
-    subtitle: "We'll let you know the moment you can join",
+    subtitle: "We’ll let you know the moment Bubba opens up.",
     titleSerif: true,
-    cta: { label: "Confirm email", href: "/waitlist/8" },
+    cta: { label: "Continue", href: "/waitlist/8" },
+    image: { src: "/images/4x/email.png", side: "left", alt: "Email illustration" },
   },
 };
 
 export const WAITLIST_CONFIRMED_CONTENT = {
   title: "You're on the list!",
-  subtitle: "Thanks for being part of bea.",
+  subtitle: "The waiting room commences in 3 days.",
   rankEyebrow: "YOUR PLACE IN LINE",
   rankNumber: "#2,487",
   rankCity: "in New York, NY",
@@ -73,7 +92,6 @@ export const WAITLIST_CONFIRMED_CONTENT = {
   progressHint:
     "Almost there! Share with friends to help unlock your city sooner.",
   perksEyebrow: "UNLOCK PERKS",
-  perksSubtitle: "Every friend you invite earns in-app rewards",
   perks: [
     {
       id: "early",

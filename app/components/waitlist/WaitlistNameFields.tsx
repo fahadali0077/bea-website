@@ -82,7 +82,7 @@ export const WaitlistNameFields = forwardRef<WaitlistNameFieldsHandle, Props>(
 
     const firstNameClassName = isDesktop
       ? "wld-step4-input"
-      : "waitlist-underline-input";
+      : "waitlist-box-input";
     const ageClassName = firstNameClassName;
 
     const firstNameWrapClass = isDesktop
@@ -100,7 +100,11 @@ export const WaitlistNameFields = forwardRef<WaitlistNameFieldsHandle, Props>(
             (invalidField === "firstName" ? " waitlist-name-field--invalid" : "")
           }
         >
-          <label className={labelClassName} htmlFor={firstNameId}>
+          <label
+            className={labelClassName}
+            htmlFor={firstNameId}
+            style={isDesktop ? undefined : { color: "#8d8d8d", marginTop: "30px" }}
+          >
             {isDesktop ? "First name" : "First name"}
           </label>
           <input
@@ -133,7 +137,11 @@ export const WaitlistNameFields = forwardRef<WaitlistNameFieldsHandle, Props>(
             (invalidField === "age" ? " waitlist-name-field--invalid" : "")
           }
         >
-          <label className={labelClassName} htmlFor={ageId}>
+          <label
+            className={labelClassName}
+            htmlFor={ageId}
+            style={isDesktop ? undefined : { color: "#8d8d8d" }}
+          >
             {isDesktop ? "How old are you?" : "Age"}
           </label>
           <input

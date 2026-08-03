@@ -10,9 +10,9 @@ export const WAITLIST = {
   pillActive: "#1a1a1a",
 } as const;
 
-export type WaitlistArtboardId = "1" | "3" | "4" | "5" | "7" | "8" | "9";
+export type WaitlistArtboardId = "1" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
 
-export type WaitlistStepArtboardId = "3" | "4" | "5" | "7";
+export type WaitlistStepArtboardId = "3" | "4" | "5" | "6" | "7";
 
 export type WaitlistArtboardMeta = {
   id: WaitlistArtboardId;
@@ -41,7 +41,7 @@ export const WAITLIST_ARTBOARDS: Record<WaitlistArtboardId, WaitlistArtboardMeta
     href: "/waitlist/3",
     progressIndex: 1,
     backHref: "/waitlist",
-    nextHref: "/waitlist/4",
+    nextHref: "/waitlist/5",
   },
   "4": {
     id: "4",
@@ -49,8 +49,8 @@ export const WAITLIST_ARTBOARDS: Record<WaitlistArtboardId, WaitlistArtboardMeta
     label: "Name",
     href: "/waitlist/4",
     progressIndex: 2,
-    backHref: "/waitlist/3",
-    nextHref: "/waitlist/5",
+    backHref: "/waitlist/6",
+    nextHref: "/waitlist/7",
   },
   "5": {
     id: "5",
@@ -58,8 +58,17 @@ export const WAITLIST_ARTBOARDS: Record<WaitlistArtboardId, WaitlistArtboardMeta
     label: "School",
     href: "/waitlist/5",
     progressIndex: 3,
-    backHref: "/waitlist/4",
-    nextHref: "/waitlist/7",
+    backHref: "/waitlist/3",
+    nextHref: "/waitlist/6",
+  },
+  "6": {
+    id: "6",
+    file: "6.png",
+    label: "Ambassador credit",
+    href: "/waitlist/6",
+    progressIndex: 3,
+    backHref: "/waitlist/5",
+    nextHref: "/waitlist/4",
   },
   "7": {
     id: "7",
@@ -90,12 +99,13 @@ export const WAITLIST_ARTBOARDS: Record<WaitlistArtboardId, WaitlistArtboardMeta
   },
 };
 
-export const WAITLIST_JOIN_FLOW: WaitlistArtboardId[] = ["3", "4", "5", "7", "8", "9"];
+export const WAITLIST_JOIN_FLOW: WaitlistArtboardId[] = ["3", "5", "6", "4", "7", "8", "9"];
 
 export const WAITLIST_PROGRESS_STEP_HREFS = [
   "/waitlist/3",
-  "/waitlist/4",
   "/waitlist/5",
+  "/waitlist/6",
+  "/waitlist/4",
   "/waitlist/7",
 ] as const;
 
@@ -146,6 +156,7 @@ export const WAITLIST_HERO_CITIES = [
 ] as const;
 
 export const WAITLIST_HERO_IMAGE = "/waitlist/hero/couple.png";
+export const WAITLIST_HERO_IMAGE_MOBILE = "/images/4x/hero-scene.png";
 
 export type WaitlistCity = (typeof WAITLIST_CITIES)[number];
 
