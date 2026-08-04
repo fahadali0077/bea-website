@@ -175,42 +175,12 @@ export default function DashboardLayout({
 
     const ambassadorNavItems = [
         {
-            label: 'Overview',
-            mobileLabel: 'Overview',
-            href: '/dashboard/ambassador',
-            icon: (
-                <svg className="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5h6.75v6.75H3.75V13.5zM13.5 3.75h6.75v16.5H13.5V3.75zM3.75 3.75h6.75v6.75H3.75V3.75z" />
-                </svg>
-            ),
-        },
-        {
-            label: 'Network',
-            mobileLabel: 'Network',
-            href: '/dashboard/ambassador/network',
-            icon: (
-                <svg className="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5zM5.25 21.75a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5zM18.75 21.75a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5zM12 7.5v3.75m0 0L5.25 16.5m6.75-5.25l6.75 5.25" />
-                </svg>
-            ),
-        },
-        {
-            label: 'Ambassador Rank',
-            mobileLabel: 'Amb Rank',
+            label: 'Leaderboard',
+            mobileLabel: 'Rank',
             href: '/dashboard/ambassador/leaderboard',
             icon: (
                 <svg className="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 18.75h10.5M8.25 18.75v-7.5h7.5v7.5M10.5 11.25V5.25h3v6M5.25 21h13.5" />
-                </svg>
-            ),
-        },
-        {
-            label: 'Calendar',
-            mobileLabel: 'Calendar',
-            href: '/dashboard/ambassador/calendar',
-            icon: (
-                <svg className="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M4.5 8.25h15M5.25 5.25h13.5A1.5 1.5 0 0120.25 6.75v12A1.5 1.5 0 0118.75 20.25H5.25a1.5 1.5 0 01-1.5-1.5v-12A1.5 1.5 0 015.25 5.25z" />
                 </svg>
             ),
         },
@@ -231,6 +201,26 @@ export default function DashboardLayout({
             icon: (
                 <svg className="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5l2.1 4.25 4.7.68-3.4 3.31.8 4.68L12 15.2l-4.2 2.22.8-4.68-3.4-3.31 4.7-.68L12 4.5z" />
+                </svg>
+            ),
+        },
+        {
+            label: 'Calendar',
+            mobileLabel: 'Calendar',
+            href: '/dashboard/ambassador/calendar',
+            icon: (
+                <svg className="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M4.5 8.25h15M5.25 5.25h13.5A1.5 1.5 0 0120.25 6.75v12A1.5 1.5 0 0118.75 20.25H5.25a1.5 1.5 0 01-1.5-1.5v-12A1.5 1.5 0 015.25 5.25z" />
+                </svg>
+            ),
+        },
+        {
+            label: 'Overview',
+            mobileLabel: 'Overview',
+            href: '/dashboard/ambassador',
+            icon: (
+                <svg className="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5h6.75v6.75H3.75V13.5zM13.5 3.75h6.75v16.5H13.5V3.75zM3.75 3.75h6.75v6.75H3.75V3.75z" />
                 </svg>
             ),
         },

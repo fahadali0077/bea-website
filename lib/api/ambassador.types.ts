@@ -75,6 +75,8 @@ export type AmbassadorLeaderboardEntry = {
   rankMovementLabel: string;
   userId: string;
   fullName: string;
+  schoolId: string | null;
+  marketId: string | null;
   school: string | null;
   market: string | null;
   directInvites: number;
