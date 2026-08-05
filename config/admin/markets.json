@@ -1,9 +1,0 @@
-[
-  { "id": "mkt_bos", "name": "Boston", "city": "Boston", "state": "MA", "country": "US", "unlock_target": 5000, "participant_count": 8420, "status": "active", "created_at": "2026-04-15T08:00:00Z" },
-  { "id": "mkt_nyc", "name": "New York City", "city": "New York", "state": "NY", "country": "US", "unlock_target": 6000, "participant_count": 11230, "status": "active", "created_at": "2026-04-15T08:00:00Z" },
-  { "id": "mkt_la", "name": "Los Angeles", "city": "Los Angeles", "state": "CA", "country": "US", "unlock_target": 5000, "participant_count": 7640, "status": "active", "created_at": "2026-04-15T08:00:00Z" },
-  { "id": "mkt_chi", "name": "Chicago", "city": "Chicago", "state": "IL", "country": "US", "unlock_target": 4000, "participant_count": 5210, "status": "active", "created_at": "2026-04-16T08:00:00Z" },
-  { "id": "mkt_sf", "name": "San Francisco Bay Area", "city": "San Francisco", "state": "CA", "country": "US", "unlock_target": 5000, "participant_count": 6890, "status": "active", "created_at": "2026-04-16T08:00:00Z" },
-  { "id": "mkt_aus", "name": "Austin", "city": "Austin", "state": "TX", "country": "US", "unlock_target": 3000, "participant_count": 3120, "status": "active", "created_at": "2026-04-17T08:00:00Z" },
-  { "id": "mkt_det", "name": "Detroit", "city": "Detroit", "state": "MI", "country": "US", "unlock_target": 3000, "participant_count": 1480, "status": "active", "created_at": "2026-04-17T08:00:00Z" }
-]
