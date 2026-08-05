@@ -1,0 +1,110 @@
+[
+  {
+    "id": "shp_tee",
+    "name": "Bea Tee",
+    "category": "apparel",
+    "price": 28,
+    "points": 2800,
+    "badge": "Popular",
+    "image": "https://static.vecteezy.com/system/resources/thumbnails/034/969/304/small/ai-generated-t-shirt-mockup-clip-art-free-png.png",
+    "description": "Soft cotton crew-neck tee with a subtle Bea mark.",
+    "colors": ["Black", "White", "Navy", "Tan"],
+    "sizes": ["XS", "S", "M", "L", "XL"]
+  },
+  {
+    "id": "shp_hat",
+    "name": "Bea Hat",
+    "category": "apparel",
+    "price": 24,
+    "points": 2400,
+    "badge": null,
+    "image": "https://png.pngtree.com/png-vector/20240202/ourmid/pngtree-isolated-black-cap-png-image_11590683.png",
+    "description": "Structured cap with an embroidered Bea mark.",
+    "colors": ["Black", "Tan", "Navy"],
+    "sizes": []
+  },
+  {
+    "id": "shp_chair",
+    "name": "Beach Chair",
+    "category": "beach",
+    "price": 79,
+    "points": 7900,
+    "badge": "New",
+    "image": "https://png.pngtree.com/png-vector/20240205/ourmid/pngtree-blue-and-white-striped-beach-chair-or-deck-chair-for-sunbathing-png-image_11547788.png",
+    "description": "Foldable beach chair for game-day tailgates and the shore.",
+    "colors": ["Blue", "Sand"],
+    "sizes": []
+  },
+  {
+    "id": "shp_towel",
+    "name": "Beach Towel",
+    "category": "beach",
+    "price": 34,
+    "points": 3400,
+    "badge": null,
+    "image": "https://png.pngtree.com/png-clipart/20241013/original/pngtree-portable-beach-towel-png-image_16309805.png",
+    "description": "Oversized quick-dry towel with the Bea logo.",
+    "colors": ["Coral", "Teal"],
+    "sizes": []
+  },
+  {
+    "id": "shp_picnic",
+    "name": "Picnic Kit",
+    "category": "lifestyle",
+    "price": 89,
+    "points": 8900,
+    "badge": "Limited",
+    "image": "https://png.pngtree.com/png-vector/20240329/ourmid/pngtree-picnic-set-flower-alcohol-summer-png-image_12062518.png",
+    "description": "Everything for a campus picnic — blanket, plates, and carrier.",
+    "colors": [],
+    "sizes": []
+  },
+  {
+    "id": "shp_moped",
+    "name": "Moped",
+    "category": "lifestyle",
+    "price": 1499,
+    "points": 149900,
+    "badge": "Grand prize",
+    "image": "https://png.pngtree.com/png-clipart/20230928/original/pngtree-soft-blue-scooter-png-image_13165985.png",
+    "description": "The headline reward — cruise campus in Bea style.",
+    "colors": [],
+    "sizes": []
+  },
+  {
+    "id": "shp_surfboard",
+    "name": "Surfboard",
+    "category": "beach",
+    "price": 349,
+    "points": 34900,
+    "badge": null,
+    "image": "https://png.pngtree.com/recommend-works/png-clipart/20250110/ourmid/pngtree-blue-surfboard-with-wave-pattern-on-it-png-image_15137201.png",
+    "description": "Beginner-friendly board for weekend sessions.",
+    "colors": [],
+    "sizes": []
+  },
+  {
+    "id": "shp_cards",
+    "name": "Playing Cards",
+    "category": "lifestyle",
+    "price": 12,
+    "points": 1200,
+    "badge": null,
+    "image": "https://static.vecteezy.com/system/resources/thumbnails/008/854/548/small/poker-card-casino-3d-design-elements-free-png.png",
+    "description": "Premium deck for dorm-room game nights.",
+    "colors": [],
+    "sizes": []
+  },
+  {
+    "id": "shp_keychain",
+    "name": "Key Chain",
+    "category": "lifestyle",
+    "price": 9,
+    "points": 900,
+    "badge": null,
+    "image": "https://png.pngtree.com/png-vector/20240807/ourmid/pngtree-smiley-key-chain-accessory-png-image_13404120.png",
+    "description": "Metal Bea key chain to carry everywhere.",
+    "colors": ["Silver", "Gold"],
+    "sizes": []
+  }
+]

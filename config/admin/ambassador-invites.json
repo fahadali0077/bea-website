@@ -1,0 +1,72 @@
+[
+  {
+    "id": "inv_001",
+    "email": "ava.thompson@northeastern.edu",
+    "status": "accepted",
+    "invited_by_admin_id": "usr_022",
+    "invite_token": "amb_8fk29dla01",
+    "expires_at": "2026-05-09T09:15:00Z",
+    "accepted_at": "2026-05-02T09:15:00Z",
+    "created_at": "2026-05-01T09:15:00Z"
+  },
+  {
+    "id": "inv_002",
+    "email": "marcus.reyes@bu.edu",
+    "status": "accepted",
+    "invited_by_admin_id": "usr_022",
+    "invite_token": "amb_2mr77qpz04",
+    "expires_at": "2026-05-10T14:20:00Z",
+    "accepted_at": "2026-05-03T14:20:00Z",
+    "created_at": "2026-05-02T14:20:00Z"
+  },
+  {
+    "id": "inv_003",
+    "email": "sofia.nguyen@nyu.edu",
+    "status": "accepted",
+    "invited_by_admin_id": "usr_022",
+    "invite_token": "amb_5sn31wbv09",
+    "expires_at": "2026-05-05T16:45:00Z",
+    "accepted_at": "2026-04-28T16:45:00Z",
+    "created_at": "2026-04-27T16:45:00Z"
+  },
+  {
+    "id": "inv_004",
+    "email": "daniel.okafor@columbia.edu",
+    "status": "pending",
+    "invited_by_admin_id": "usr_022",
+    "invite_token": "amb_3do62hkt10",
+    "expires_at": "2026-06-27T10:00:00Z",
+    "accepted_at": null,
+    "created_at": "2026-06-20T10:00:00Z"
+  },
+  {
+    "id": "inv_005",
+    "email": "taylor.brooks@mit.edu",
+    "status": "pending",
+    "invited_by_admin_id": "usr_022",
+    "invite_token": "amb_9tb18ncs12",
+    "expires_at": "2026-06-29T11:30:00Z",
+    "accepted_at": null,
+    "created_at": "2026-06-22T11:30:00Z"
+  },
+  {
+    "id": "inv_006",
+    "email": "jordan.lee@gatech.edu",
+    "status": "expired",
+    "invited_by_admin_id": "usr_022",
+    "invite_token": "amb_4jl55rgd07",
+    "expires_at": "2026-06-12T08:00:00Z",
+    "accepted_at": null,
+    "created_at": "2026-06-05T08:00:00Z"
+  },
+  {
+    "id": "inv_007",
+    "email": "sam.rivera@uw.edu",
+    "status": "revoked",
+    "invited_by_admin_id": "usr_022",
+    "invite_token": "amb_7sr90fme03",
+    "expires_at": "2026-06-18T13:00:00Z",
+    "accepted_at": null,
+    "created_at": "2026-06-08T13:00:00Z"
+  }
+]

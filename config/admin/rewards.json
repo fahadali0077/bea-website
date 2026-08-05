@@ -1,0 +1,93 @@
+[
+  {
+    "id": "rw_001",
+    "title": "Bea Founders Tee",
+    "description": "Limited-edition tee for early waitlist supporters.",
+    "reward_type": "invite_based",
+    "unlock_type": "invite_count",
+    "required_points": 0,
+    "required_invites": 5,
+    "required_rank": 0,
+    "quantity": 500,
+    "status": "active",
+    "created_at": "2026-05-01T08:00:00Z"
+  },
+  {
+    "id": "rw_002",
+    "title": "Early Access Pass",
+    "description": "Skip the line when the Bea app launches.",
+    "reward_type": "points_based",
+    "unlock_type": "points_target",
+    "required_points": 1000,
+    "required_invites": 0,
+    "required_rank": 0,
+    "quantity": 1000,
+    "status": "active",
+    "created_at": "2026-05-01T08:05:00Z"
+  },
+  {
+    "id": "rw_003",
+    "title": "Campus Champion Prize",
+    "description": "Awarded to the #1 ranked user on each campus.",
+    "reward_type": "campus_winner",
+    "unlock_type": "ranking_position",
+    "required_points": 0,
+    "required_invites": 0,
+    "required_rank": 1,
+    "quantity": 1,
+    "status": "active",
+    "created_at": "2026-05-02T08:00:00Z"
+  },
+  {
+    "id": "rw_004",
+    "title": "Market Champion Prize — $1,000",
+    "description": "Cash prize for the top user in each market.",
+    "reward_type": "market_winner",
+    "unlock_type": "ranking_position",
+    "required_points": 0,
+    "required_invites": 0,
+    "required_rank": 1,
+    "quantity": 1,
+    "status": "active",
+    "created_at": "2026-05-02T08:05:00Z"
+  },
+  {
+    "id": "rw_005",
+    "title": "National Grand Prize — $10,000",
+    "description": "The national #1 takes home the grand prize.",
+    "reward_type": "national_winner",
+    "unlock_type": "ranking_position",
+    "required_points": 0,
+    "required_invites": 0,
+    "required_rank": 1,
+    "quantity": 1,
+    "status": "active",
+    "created_at": "2026-05-02T08:10:00Z"
+  },
+  {
+    "id": "rw_006",
+    "title": "Ambassador Elite Kit",
+    "description": "Exclusive merch bundle for top-performing ambassadors.",
+    "reward_type": "ambassador",
+    "unlock_type": "admin_defined",
+    "required_points": 0,
+    "required_invites": 0,
+    "required_rank": 0,
+    "quantity": 100,
+    "status": "active",
+    "created_at": "2026-05-03T08:00:00Z"
+  },
+  {
+    "id": "rw_007",
+    "title": "Limited Sticker Pack",
+    "description": "Invite a friend, get the launch sticker pack.",
+    "reward_type": "invite_based",
+    "unlock_type": "invite_count",
+    "required_points": 0,
+    "required_invites": 1,
+    "required_rank": 0,
+    "quantity": 2000,
+    "status": "inactive",
+    "created_at": "2026-05-04T08:00:00Z"
+  }
+]

@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "title": "Bea — Admin Login",
+    "description": "Sign in to the Bea admin panel"
+  },
+  "theme": {
+    "cssVariables": {
+      "--bg": "#f2f0eb",
+      "--white": "#ffffff",
+      "--black": "#1a1a1a",
+      "--text-primary": "#1a1a1a",
+      "--text-secondary": "#6b6b6b",
+      "--text-muted": "#9a9a9a",
+      "--border": "#d8d5cf",
+      "--input-bg": "#ffffff",
+      "--btn-bg": "#1a1a1a",
+      "--btn-text": "#ffffff"
+    }
+  },
+  "api": {
+    "login": "/api/auth/admin/login",
+    "google": "",
+    "apple": "",
+    "useExternalBackend": false,
+    "externalBaseUrl": "",
+    "redirectOnSuccess": "/admin"
+  },
+  "leftPanel": {
+    "image": "/images/login-page-image.png",
+    "imageAlt": "The Bea community",
+    "brand": "Bea",
+    "eyebrow": "Admin Console",
+    "headline": ["Manage the", "Bea experience."],
+    "body": "Oversee users, ambassadors, competitions, prompts, rewards, and analytics from one place."
+  },
+  "header": {
+    "backLabel": "Back to home",
+    "backHref": "/"
+  },
+  "form": {
+    "eyebrow": "Admin Login",
+    "title": "Welcome back",
+    "subtitle": "Sign in to the Bea admin panel.",
+    "fields": [
+      {
+        "id": "email",
+        "label": "Email",
+        "type": "email",
+        "placeholder": "you@beadating.com",
+        "autoComplete": "email",
+        "required": true
+      },
+      {
+        "id": "password",
+        "label": "Password",
+        "type": "password",
+        "placeholder": "Enter your password",
+        "autoComplete": "current-password",
+        "required": true,
+        "showToggle": true
+      }
+    ],
+    "rememberMe": {
+      "label": "Remember me",
+      "defaultChecked": true
+    },
+    "submit": {
+      "label": "Sign in",
+      "loadingLabel": "Signing in…"
+    }
+  }
+}

@@ -1,0 +1,2130 @@
+.launch-shell {
+  /* Bubba Visual System v1.0 — colour palette */
+  --launch-forest-green: #1f4d3a;
+  --launch-green-tint: #e9f1ec;
+  --launch-atlantic-blue: #5c6fae;
+  --launch-hydrangea-blue: #bfd0e2;
+  --launch-warm-white: #fafaf8;
+  --launch-sand: #e6e6e2;
+  --launch-stone: #d7d7d2;
+  --launch-charcoal: #666666;
+  --launch-ink-hex: #111111;
+
+  /* Semantic aliases used across the onboarding steps */
+  --launch-page-bg: var(--launch-warm-white);
+  --launch-bg: var(--launch-warm-white);
+  --launch-ink: var(--launch-ink-hex);
+  --launch-muted: var(--launch-charcoal);
+  --launch-faint: var(--launch-stone);
+  --launch-border: var(--launch-sand);
+  --launch-input-border: var(--launch-sand);
+  --launch-accent: var(--launch-forest-green);
+  --launch-accent-contrast: #ffffff;
+  --launch-eyebrow: var(--launch-forest-green);
+  --launch-icon-bg: var(--launch-green-tint);
+  --launch-next-up-bg: var(--launch-green-tint);
+  --launch-danger: #b0453a;
+  --launch-danger-soft: #fdf3f1;
+
+  /* Radius scale — XL cards, L buttons, M inputs/pills, S chips */
+  --launch-radius-xl: 24px;
+  --launch-radius-l: 16px;
+  --launch-radius-m: 12px;
+  --launch-radius-s: 8px;
+
+  /* Shadows — soft and ambient */
+  --launch-shadow-button: 0px 4px 12px rgba(31, 77, 58, 0.15);
+  --launch-shadow-card: 0px 8px 24px rgba(17, 17, 17, 0.06);
+  --launch-shadow-popover: 0px 16px 40px rgba(17, 17, 17, 0.08);
+
+  /* Type — Canela Regular for display, Suisse Intl for UI/body */
+  --launch-font-display: "Canela Text", "CanelaTextTri", "Canela", Georgia, serif;
+  --launch-font-ui: "Suisse Intl", "SuisseIntl", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  /* Interaction shades derived from Forest Green */
+  --launch-accent-hover: #18402f;
+  --launch-accent-pressed: #133424;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: var(--launch-page-bg);
+  color: var(--launch-ink);
+  font-family: var(--launch-font-ui);
+  overflow-x: clip;
+}
+
+.launch-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--launch-bg);
+  margin: 0 auto;
+}
+
+.launch-card main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Header: logo + dot progress ---------- */
+
+.launch-header {
+  width: 100%;
+  padding: 28px 24px 0;
+}
+
+.launch-header-inner {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.launch-header-brand {
+  font-size: 26px;
+  line-height: 1;
+  color: var(--launch-ink);
+}
+
+.launch-step-dots {
+  display: flex;
+  align-items: center;
+}
+
+.launch-step-dots-segment {
+  display: flex;
+  align-items: center;
+}
+
+.launch-step-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 9999px;
+  border: 1.5px solid var(--launch-border);
+  background: transparent;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.launch-step-dot.is-filled {
+  background: var(--launch-accent);
+  border-color: var(--launch-accent);
+}
+
+.launch-step-dots-line {
+  width: 34px;
+  height: 1.5px;
+  background: var(--launch-border);
+  margin: 0 6px;
+  transition: background-color 0.2s ease;
+}
+
+.launch-step-dots-line.is-filled {
+  background: var(--launch-accent);
+}
+
+/* ---------- Shared step layout ---------- */
+
+.launch-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 24px 56px;
+}
+
+.launch-step-inner {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.launch-step-inner--centered {
+  text-align: center;
+}
+
+.launch-eyebrow {
+  text-transform: uppercase;
+  color: var(--launch-eyebrow);
+  margin-bottom: 14px;
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.6px;
+}
+
+.launch-title {
+  color: var(--launch-ink);
+  margin-bottom: 16px;
+  font-family: var(--launch-font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 8vw, 64px);
+  line-height: 1.125;
+  letter-spacing: -0.01em;
+}
+
+.launch-subtitle {
+  color: var(--launch-muted);
+  margin-bottom: 8px;
+  font-family: var(--launch-font-ui);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+.launch-step-inner--centered .launch-subtitle {
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.launch-subtitle--tight {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.launch-step-copy {
+  margin-bottom: 24px;
+}
+
+.launch-illustration {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 8px 0 28px;
+}
+
+.launch-step-actions {
+  margin-top: auto;
+}
+
+.launch-cta,
+.hero-cta,
+.launch-modal-cta,
+.verify-blocked-cta {
+  /* Single source of truth for every primary button in the onboarding flow. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 460px;
+  height: 60px;
+  padding: 0 32px;
+  border: none;
+  border-radius: var(--launch-radius-l);
+  background: var(--launch-accent);
+  color: var(--launch-accent-contrast);
+  box-shadow: var(--launch-shadow-button);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  transition: background 0.2s ease, opacity 0.15s ease;
+}
+
+.launch-cta:hover,
+.hero-cta:hover,
+.launch-modal-cta:hover,
+.verify-blocked-cta:hover {
+  background: var(--launch-accent-hover);
+}
+
+.launch-cta:disabled,
+.hero-cta:disabled,
+.launch-modal-cta:disabled,
+.verify-blocked-cta:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.launch-cta span {
+  text-align: center;
+}
+
+.launch-login-prompt {
+  margin-top: 40px;
+  text-align: center;
+  color: var(--launch-muted);
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.launch-login-prompt a {
+  color: var(--launch-accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.launch-login-prompt a:hover {
+  opacity: 0.8;
+}
+
+.launch-footnote {
+  margin-top: 16px;
+  text-align: center;
+  color: var(--launch-ink);
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.launch-footnote a {
+  /* Mockup renders these as plain bold text, not underlined links. */
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ---------- The Role: icon-in-circle list ---------- */
+
+.launch-role-items {
+  display: flex;
+  flex-direction: column;
+  margin: 4px 0 28px;
+}
+
+.launch-role-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--launch-border);
+}
+
+.launch-role-item:last-child {
+  border-bottom: none;
+}
+
+.launch-role-icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid var(--launch-border);
+  background: transparent;
+  color: var(--launch-accent);
+}
+
+.launch-role-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--launch-ink);
+  margin-bottom: 3px;
+}
+
+.launch-role-desc {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--launch-muted);
+}
+
+/* ---------- Verify email ---------- */
+
+.launch-verify-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 24px;
+  border-radius: 9999px;
+  background: var(--launch-icon-bg);
+  color: var(--launch-ink);
+}
+
+.launch-verify-email {
+  font-weight: 700;
+  color: var(--launch-ink);
+}
+
+.launch-already-registered {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: var(--launch-radius-m);
+  background: var(--launch-icon-bg);
+  color: var(--launch-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.launch-email-available {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--launch-accent);
+  font-weight: 600;
+}
+
+.launch-verify-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.launch-verify-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--launch-accent);
+  cursor: pointer;
+}
+
+.launch-verify-link:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Forms (create account / ambassador setup) ---------- */
+
+.launch-form {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.launch-field-label {
+  display: block;
+  color: var(--launch-ink);
+  margin-bottom: 7px;
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.launch-field-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.launch-field-input {
+  width: 100%;
+  height: 48px;
+  border-radius: var(--launch-radius-m);
+  border: 1px solid var(--launch-input-border);
+  background: #ffffff;
+  padding: 0 42px 0 16px;
+  color: var(--launch-ink);
+  outline: none;
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.launch-field-input:focus-visible {
+  border-color: var(--launch-accent);
+  box-shadow: 0 0 0 3px rgba(31, 77, 58, 0.15);
+}
+
+.launch-field-input:disabled {
+  background: var(--launch-icon-bg);
+  color: var(--launch-muted);
+  cursor: not-allowed;
+}
+
+.launch-field-check {
+  position: absolute;
+  right: 14px;
+  display: inline-flex;
+  color: var(--launch-accent);
+  pointer-events: none;
+}
+
+.launch-field-eye {
+  position: absolute;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 4px;
+  color: var(--launch-faint);
+  cursor: pointer;
+}
+
+.launch-field-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--launch-faint);
+}
+
+.launch-password-strength {
+  margin-top: 10px;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--launch-sand);
+  overflow: hidden;
+}
+
+.launch-password-strength span {
+  display: block;
+  height: 100%;
+  border-radius: 9999px;
+  background: var(--launch-accent);
+  transition: width 0.2s ease;
+}
+
+.launch-password-strength[data-level="1"] span {
+  width: 33%;
+  background: #b0453a;
+}
+
+.launch-password-strength[data-level="2"] span {
+  width: 66%;
+  background: var(--launch-hydrangea-blue);
+}
+
+.launch-password-strength[data-level="3"] span {
+  width: 100%;
+  background: var(--launch-accent);
+}
+
+/* Select fields (School / Graduation year / Your role) */
+
+.launch-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.launch-field-select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 40px;
+}
+
+.launch-select-chevron {
+  position: absolute;
+  right: 14px;
+  color: var(--launch-faint);
+  pointer-events: none;
+}
+
+/* School search field — replaces the plain <select> with a searchable,
+   card-style list (bold name + "City, ST" meta line), matching the look
+   used for market/city selection elsewhere in the app. */
+
+.launch-school-picker {
+  position: relative;
+}
+
+.launch-school-dropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 20;
+  max-height: min(280px, 45vh);
+  overflow-y: auto;
+  border: 1px solid var(--launch-input-border);
+  border-radius: var(--launch-radius-m);
+  background: #ffffff;
+  box-shadow: var(--launch-shadow-popover);
+}
+
+.launch-school-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-bottom: 1px solid var(--launch-border);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.launch-school-dropdown-item:last-of-type {
+  border-bottom: none;
+}
+
+.launch-school-dropdown-item:hover,
+.launch-school-dropdown-item.is-selected {
+  background: var(--launch-icon-bg);
+}
+
+.launch-school-dropdown-item-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--launch-ink);
+}
+
+.launch-school-dropdown-item-meta {
+  font-size: 13px;
+  color: var(--launch-muted);
+}
+
+.launch-school-dropdown-status {
+  margin: 0;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--launch-muted);
+}
+
+.launch-legal {
+  /* Sits below the CTA and is centred in the mockup. */
+  margin-top: 20px;
+  margin-bottom: 0;
+  text-align: center;
+  color: var(--launch-muted);
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+.launch-legal a {
+  color: var(--launch-ink);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.launch-agreement {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--launch-muted);
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.launch-agreement-box {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border-radius: var(--launch-radius-s);
+  border: 1.5px solid var(--launch-input-border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: #ffffff;
+}
+
+.launch-agreement-box.is-checked {
+  background: var(--launch-accent);
+  border-color: var(--launch-accent);
+}
+
+.launch-agreement-box input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* ---------- Ambassador setup: bottom-bleed illustration ---------- */
+
+.launch-illustration--bleed {
+  margin-left: -24px;
+  margin-right: -24px;
+  width: calc(100% + 48px);
+  margin-bottom: -56px;
+}
+
+/* ---------- Welcome, Ambassador ---------- */
+
+.launch-welcome-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 28px;
+  border-radius: 9999px;
+  background: var(--launch-icon-bg);
+  color: var(--launch-ink);
+}
+
+.launch-welcome-icon-sparkle {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  color: var(--launch-eyebrow);
+}
+
+.launch-welcome-link-label {
+  font-size: 13px;
+  color: var(--launch-muted);
+  margin: 28px 0 10px;
+}
+
+.launch-welcome-card {
+  background: #ffffff;
+  border: 1px solid var(--launch-border);
+  border-radius: var(--launch-radius-xl);
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 32px;
+}
+
+.launch-welcome-link {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--launch-ink);
+  word-break: break-all;
+  text-align: left;
+}
+
+.launch-share-heading {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--launch-muted);
+  margin-bottom: 18px;
+}
+
+.launch-share-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.launch-share-item {
+  display: inline-flex;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--launch-ink);
+  padding: 0;
+}
+
+.launch-share-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 9999px;
+  border: 1px solid var(--launch-border);
+  color: var(--launch-ink);
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.launch-share-item:hover .launch-share-icon {
+  opacity: 0.65;
+}
+
+.launch-next-up {
+  background: var(--launch-next-up-bg);
+  border-radius: var(--launch-radius-xl);
+  padding: 22px 24px;
+  text-align: left;
+}
+
+.launch-next-up-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--launch-faint);
+  margin-bottom: 10px;
+}
+
+.launch-next-up-text {
+  font-size: 15px;
+  color: var(--launch-ink);
+  margin-bottom: 14px;
+}
+
+.launch-next-up-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--launch-accent);
+  text-decoration: none;
+}
+
+.launch-illustration--panorama {
+  margin-top: 24px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .launch-shell {
+    padding: 56px 0;
+    justify-content: flex-start;
+  }
+
+  .launch-card {
+    flex: none;
+    width: 100%;
+    background: transparent;
+  }
+
+  .launch-header {
+    padding: 40px 48px 0;
+  }
+
+  .launch-header-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .launch-step {
+    padding: 32px 48px 56px;
+  }
+
+  .launch-step-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .launch-title {
+    font-size: 38px;
+  }
+
+  .launch-illustration--bleed {
+    margin-left: -48px;
+    margin-right: -48px;
+    width: calc(100% + 96px);
+    margin-bottom: -56px;
+  }
+
+  
+  .launch-step-inner:has(> img) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 56px;
+    align-content: center;
+    min-height: 560px;
+    max-width: 1040px;
+    text-align: left;
+  }
+
+  .launch-step-inner:has(> img) > *:not(img) {
+    grid-column: 1;
+  }
+
+  .launch-step-inner > img {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    border-radius: var(--launch-radius-xl);
+    margin: 0;
+  }
+
+  .launch-step-inner:has(> img) .launch-subtitle {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .launch-header-inner,
+  .launch-step-inner {
+    max-width: 1040px;
+  }
+
+  .launch-step {
+    padding: 40px 64px 64px;
+  }
+
+  .launch-header {
+    padding: 44px 64px 0;
+  }
+
+  .launch-title {
+    font-size: 44px;
+  }
+
+  .launch-illustration--bleed {
+    margin-left: -64px;
+    margin-right: -64px;
+    width: calc(100% + 128px);
+  }
+}
+
+/* ---------- Page 1 (Welcome) hero — matches the provided reference design ----------
+   Scoped entirely to .hero-* classes and .launch-step-inner--hero, used only by
+   Welcome.tsx. Does not touch .launch-step-inner, .launch-illustration, or any other
+   shared rule used by the other 5 pages. */
+
+.launch-step--hero {
+  padding: 56px;
+}
+
+.launch-step-inner--hero {
+  display: flex;
+  flex-direction: column;
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 941px) {
+  .launch-step-inner--hero {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    grid-template-rows: auto 1fr;
+    align-items: start;
+    gap: 56px;
+  }
+
+  /* Copy and actions stack in column one; art spans both rows in column two. */
+  .hero-copy { grid-column: 1; grid-row: 1; }
+  .hero-actions { grid-column: 1; grid-row: 2; align-self: end; }
+  .hero-art { grid-column: 2; grid-row: 1 / span 2; }
+
+  
+  .launch-card:has(.launch-step--hero, .launch-step--role) .launch-header {
+    box-sizing: border-box;
+    padding: 28px 56px;
+    border-bottom: 1px solid var(--launch-border);
+  }
+
+  .launch-card:has(.launch-step--hero, .launch-step--role) .launch-header-inner {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  /* Page 1's content is centered at max-width 1320px, so its header matches. */
+  .launch-card:has(.launch-step--hero) .launch-header-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  /* Page 2's content is edge-to-edge with just padding (no centered max-width),
+     so its header must be edge-to-edge too, or the brand would drift inward
+     while the content below it starts flush with the padded edge. */
+  .launch-card:has(.launch-step--role) .launch-header-inner {
+    max-width: none;
+    margin: 0;
+  }
+
+  .launch-card:has(.launch-step--hero) .launch-step-dots-line {
+    width: 46px;
+  }
+
+  .launch-card:has(.launch-step--role) .launch-step-dots-line {
+    width: 44px;
+  }
+
+  .launch-card:has(.launch-step--hero, .launch-step--role) .launch-step-dot {
+    border-width: 2px;
+  }
+
+  .launch-shell:has(.launch-step--hero, .launch-step--role) {
+    padding: 0;
+  }
+}
+
+/* ---------- Page 2 (SchoolStep / "The Role") desktop — matches the provided
+   reference design. Mobile (<=768px) keeps the existing single-column list
+   with circular icons, completely untouched: everything below is scoped to
+   .launch-step--role and only takes effect at 769px+. */
+
+@media (min-width: 769px) {
+  .launch-step--role {
+    padding: 0;
+  }
+
+  .launch-step--role .launch-step-inner {
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    padding: 52px 56px 48px;
+    text-align: left;
+  }
+
+  .launch-step--role .launch-eyebrow {
+    font-size: 13px;
+    letter-spacing: 2.4px;
+    margin-bottom: 22px;
+  }
+
+  .launch-step--role .launch-title {
+    font-size: clamp(36px, 3.4vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.4px;
+    margin-bottom: 16px;
+  }
+
+  .launch-step--role .launch-subtitle {
+    font-size: 19px;
+    line-height: 1.65;
+    max-width: 600px;
+    margin-bottom: 48px;
+  }
+
+  .launch-step--role .launch-role-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 0 0 48px;
+    border-top: 1px solid var(--launch-border);
+  }
+
+  .launch-step--role .launch-role-item {
+    align-items: flex-start;
+    gap: 18px;
+    padding: 28px 32px 28px 0;
+    border-bottom: 1px solid var(--launch-border);
+  }
+
+  .launch-step--role .launch-role-item:nth-child(even) {
+    padding-left: 40px;
+    padding-right: 0;
+    border-left: 1px solid var(--launch-border);
+  }
+
+  .launch-step--role .launch-role-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    margin-top: 2px;
+  }
+
+  .launch-step--role .launch-role-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .launch-step--role .launch-role-title {
+    font-size: 16px;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .launch-step--role .launch-role-desc {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .launch-step--role .launch-cta {
+    box-sizing: border-box;
+    display: flex;
+    margin: 0 auto 18px;
+  }
+
+  .launch-step--role .launch-footnote {
+    text-align: center;
+    margin-top: 0;
+  }
+}
+
+.hero-copy {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-eyebrow {
+  color: var(--launch-eyebrow);
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.6px;
+}
+
+.hero-title {
+  color: var(--launch-ink);
+  margin-bottom: 30px;
+  font-family: var(--launch-font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 8vw, 64px);
+  line-height: 1.125;
+  letter-spacing: -0.01em;
+}
+
+.hero-lede {
+  color: var(--launch-muted);
+  margin-bottom: 44px;
+  max-width: 460px;
+  font-family: var(--launch-font-ui);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+.hero-cta-arrow {
+  display: inline-flex;
+  transition: transform 0.2s ease;
+}
+
+.hero-cta:hover .hero-cta-arrow {
+  transform: translateX(4px);
+}
+
+.hero-signin {
+  margin-top: 22px;
+  color: var(--launch-muted);
+  max-width: 460px;
+  text-align: center;
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.hero-signin a {
+  color: var(--launch-accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero-signin a:hover {
+  text-decoration: underline;
+}
+
+.hero-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-art img {
+  width: 100%;
+  height: auto;
+  max-width: 620px;
+  display: block;
+}
+
+@media (max-width: 940px) {
+  .launch-step--hero {
+    padding: 32px 24px 56px;
+  }
+
+  .launch-step-inner--hero {
+    gap: 28px;
+    /* Mockup screen 1 is left-aligned on mobile; only screens 3 and 6 centre. */
+    text-align: left;
+  }
+
+  .hero-copy {
+    margin: 0;
+    align-items: stretch;
+    order: 1;
+  }
+
+  /* Illustration sits between the body copy and the CTA, per the mockup. */
+  .hero-art {
+    order: 2;
+  }
+
+  .hero-actions {
+    order: 3;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Copy is left-aligned on this screen, but the sign-in line stays centred
+     under the full-width CTA, matching the mockup. */
+  .hero-signin {
+    text-align: center;
+    max-width: 100%;
+  }
+}
+
+/* ---------- Page 3 (WaysToWin / "Verify your email") desktop — matches the
+   provided reference design. Scoped to .launch-step--verify and .verify-*
+   classes; mobile keeps the existing single-column centered layout. Only
+   presentation changes here — no data, hooks, or handlers were touched. */
+
+.launch-step--verify {
+  padding: 56px;
+}
+
+.launch-step-inner--verify {
+  display: flex;
+  flex-direction: column;
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media (min-width: 941px) {
+  .launch-step-inner--verify {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    align-items: start;
+    gap: 56px;
+    text-align: left;
+  }
+
+  .launch-card:has(.launch-step--verify) .launch-header {
+    box-sizing: border-box;
+    padding: 28px 56px;
+    border-bottom: 1px solid var(--launch-border);
+  }
+
+  .launch-card:has(.launch-step--verify) .launch-header-inner {
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .launch-card:has(.launch-step--verify) .launch-step-dots-line {
+    width: 46px;
+  }
+
+  .launch-card:has(.launch-step--verify) .launch-step-dot {
+    border-width: 2px;
+  }
+
+  .launch-shell:has(.launch-step--verify) {
+    padding: 0;
+  }
+}
+
+.verify-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.verify-art img {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  display: block;
+  border-radius: var(--launch-radius-s);
+}
+
+.verify-content {
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+}
+
+.verify-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 28px;
+  border-radius: 9999px;
+  background: var(--launch-icon-bg);
+  color: var(--launch-accent);
+}
+
+.verify-eyebrow {
+  text-transform: uppercase;
+  color: var(--launch-eyebrow);
+  margin-bottom: 22px;
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.6px;
+}
+
+.verify-title {
+  color: var(--launch-ink);
+  margin-bottom: 22px;
+  font-family: var(--launch-font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 8vw, 64px);
+  line-height: 1.125;
+  letter-spacing: -0.01em;
+}
+
+.verify-lede {
+  color: var(--launch-muted);
+  margin-bottom: 6px;
+  max-width: 460px;
+  font-family: var(--launch-font-ui);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+.verify-lede strong {
+  color: var(--launch-ink);
+  font-weight: 700;
+}
+
+.verify-hint {
+  color: var(--launch-faint);
+  margin-bottom: 32px;
+  max-width: 460px;
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.verify-error {
+  font-size: 13px;
+  font-weight: 600;
+  color: #b0453a;
+  margin: -20px 0 20px;
+  max-width: 460px;
+}
+
+.verify-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-size: 14px;
+  max-width: 460px;
+}
+
+.verify-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--launch-ink);
+  /* Matches the footnote on screen 2 — bold, no underline. */
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.verify-link:hover {
+  opacity: 0.75;
+}
+
+.verify-link:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.verify-links-divider {
+  color: var(--launch-border);
+}
+
+@media (max-width: 940px) {
+  .launch-step--verify {
+    padding: 32px 24px 56px;
+  }
+
+  .launch-step-inner--verify {
+    gap: 28px;
+  }
+
+  .verify-content {
+    order: 1;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .verify-art {
+    order: 2;
+  }
+
+  .verify-icon {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .verify-lede,
+  .verify-hint {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .verify-title {
+    font-size: 38px;
+  }
+
+  .verify-links {
+    justify-content: center;
+    margin: 0 auto;
+  }
+}
+
+/* ---------- Page 4 (AccountStep / "Create account") desktop — matches the
+   provided reference design. Mobile (<=768px) keeps the existing single-
+   column form untouched; everything below is scoped to .launch-step--account
+   and only takes effect at 769px+. Shared field/legal/cta classes are only
+   overridden inside this scope so InviteStep (which reuses them) is unaffected. */
+
+@media (min-width: 769px) {
+  .launch-shell:has(.launch-step--account) {
+    padding: 0;
+    background: var(--launch-warm-white);
+  }
+
+  .launch-card:has(.launch-step--account) {
+    background: var(--launch-warm-white);
+  }
+
+  .launch-card:has(.launch-step--account) .launch-header {
+    padding: 22px 56px;
+    border-bottom: 1px solid var(--launch-border);
+  }
+
+  .launch-card:has(.launch-step--account) .launch-header-inner {
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .launch-card:has(.launch-step--account) .launch-step-dots-line {
+    width: 44px;
+  }
+
+  .launch-step--account {
+    padding: 52px 56px 48px;
+  }
+
+  .launch-step--account .launch-step-inner {
+    max-width: 480px;
+  }
+
+  .launch-step--account .launch-eyebrow {
+    font-size: 13px;
+    letter-spacing: 2.4px;
+    margin-bottom: 22px;
+  }
+
+  .launch-step--account .launch-title {
+    font-size: clamp(36px, 3.4vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.4px;
+    margin-bottom: 40px;
+  }
+
+  .launch-step--account .launch-field-label {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .launch-step--account .launch-field-input {
+    height: auto;
+    padding: 14px 42px 14px 16px;
+    border-width: 1.5px;
+  }
+
+  .launch-step--account .launch-legal {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .launch-step--account .launch-login-prompt {
+    margin-top: 0;
+  }
+}
+
+/* ---------- Page 5 (InviteStep / "Tell us about you") desktop — matches the
+   provided reference design. Mobile (<=940px) keeps the existing single-
+   column form with the bottom-bleed illustration, completely untouched;
+   everything below is scoped to .launch-step--personalize and only takes
+   effect at 941px+. Shared field classes are only overridden inside this
+   scope so AccountStep's own desktop styling is unaffected. */
+
+@media (min-width: 941px) {
+  .launch-step--personalize {
+    padding: 0;
+  }
+
+  .launch-step-inner--personalize {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    align-items: start;
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 64px 56px 56px;
+    gap: 64px;
+  }
+
+  .launch-card:has(.launch-step--personalize) .launch-header {
+    padding: 28px 56px;
+    border-bottom: 1px solid var(--launch-border);
+  }
+
+  .launch-card:has(.launch-step--personalize) .launch-header-inner {
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .launch-card:has(.launch-step--personalize) .launch-step-dots-line {
+    width: 46px;
+  }
+
+  .launch-shell:has(.launch-step--personalize) {
+    padding: 0;
+  }
+
+  .personalize-content {
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .personalize-eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: var(--launch-eyebrow);
+    margin-bottom: 22px;
+  }
+
+  .personalize-title {
+    font-size: 44px;
+    line-height: 1.14;
+    font-weight: 400;
+    letter-spacing: -0.4px;
+    color: var(--launch-ink);
+    margin-bottom: 36px;
+  }
+
+  .launch-step--personalize .launch-field-label {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .launch-step--personalize .launch-field-input {
+    height: auto;
+    padding: 14px 42px 14px 16px;
+    border-width: 1.5px;
+  }
+
+  .personalize-art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .personalize-art img {
+    width: 100%;
+    height: auto;
+    max-width: 620px;
+    display: block;
+  }
+}
+
+/* ---------- Page 6 (YoureInStep / "You're in") desktop — matches the
+   provided reference design. Mobile (<=980px) keeps the existing single-
+   column centered layout with the bottom panorama illustration, completely
+   untouched; everything below is scoped to .launch-step--ambassador and
+   only takes effect at 981px+. */
+
+@media (min-width: 981px) {
+  .launch-step--ambassador {
+    padding: 0;
+  }
+
+  .launch-step-inner--ambassador {
+    display: grid;
+    grid-template-columns: 46% 1fr;
+    align-items: stretch;
+    min-height: 620px;
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 56px;
+    gap: 56px;
+  }
+
+  .launch-card:has(.launch-step--ambassador) .launch-header {
+    padding: 28px 56px;
+    border-bottom: 1px solid var(--launch-border);
+  }
+
+  .launch-card:has(.launch-step--ambassador) .launch-header-inner {
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .launch-card:has(.launch-step--ambassador) .launch-step-dots-line {
+    width: 46px;
+  }
+
+  .launch-shell:has(.launch-step--ambassador) {
+    padding: 0;
+  }
+
+  .ambassador-content {
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+  }
+
+  .launch-step--ambassador .launch-eyebrow {
+    font-size: 13px;
+    letter-spacing: 2.4px;
+    margin-bottom: 22px;
+  }
+
+  .launch-step--ambassador .launch-title {
+    font-size: 56px;
+    line-height: 1.02;
+    letter-spacing: -0.4px;
+    margin-bottom: 20px;
+  }
+
+  .launch-step--ambassador .launch-subtitle {
+    font-size: 19px;
+    line-height: 1.65;
+    max-width: 360px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .launch-step--ambassador .launch-share-heading {
+    text-align: center;
+  }
+
+  .ambassador-art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ambassador-art img {
+    width: 100%;
+    height: auto;
+    max-width: 620px;
+    display: block;
+    margin: 0;
+  }
+}
+
+/* ---------- Invite-only gate (LaunchShell "no invite" state) — matches
+   the provided reference design. Brand-only header (step dots hidden) and
+   a full-height centered message, with the CTA collapsing to full width
+   on narrow screens per the reference. */
+
+.launch-card:has(.launch-step--invite-gate) .launch-header {
+  padding: 32px clamp(24px, 5vw, 72px);
+}
+
+.launch-card:has(.launch-step--invite-gate) .launch-header-inner {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+}
+
+.launch-card:has(.launch-step--invite-gate) .launch-step-dots {
+  display: none;
+}
+
+.launch-shell:has(.launch-step--invite-gate) {
+  padding: 0;
+}
+
+.launch-card:has(.launch-step--invite-gate) {
+  flex: 1;
+  width: 100%;
+  background: var(--launch-bg);
+}
+
+.launch-step--invite-gate {
+  align-items: center;
+  justify-content: center;
+  padding: 48px clamp(24px, 5vw, 72px) 96px;
+}
+
+.launch-step--invite-gate .launch-step-inner {
+  max-width: 680px;
+}
+
+.launch-step--invite-gate .launch-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: var(--launch-accent);
+  margin-bottom: 0;
+}
+
+.launch-step--invite-gate .launch-title {
+  margin-top: 22px;
+  margin-bottom: 0;
+  font-size: clamp(40px, 5.2vw, 68px);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  font-weight: 400;
+}
+
+.launch-step--invite-gate .launch-subtitle {
+  margin-top: 24px;
+  margin-bottom: 0;
+  max-width: 520px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--launch-ink);
+}
+
+.launch-step--invite-gate .launch-cta:focus-visible {
+  outline: 2px solid var(--launch-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch-step--invite-gate .launch-cta {
+    transition: none;
+  }
+
+  .launch-step--invite-gate .launch-cta:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .launch-card:has(.launch-step--invite-gate) .launch-header {
+    padding: 24px;
+  }
+
+  .launch-step--invite-gate .launch-cta {
+    min-width: 0;
+  }
+}
+
+/* ---------- Small mobile tightening ---------- */
+
+@media (max-width: 380px) {
+  .launch-title {
+    font-size: 28px;
+  }
+
+  .launch-step {
+    padding: 32px 20px 48px;
+  }
+
+  .launch-header {
+    padding: 24px 20px 0;
+  }
+
+  .launch-illustration--bleed {
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+  }
+}
+/* ---------------------------------------------------------------
+   Error handling: inline field errors + submission error modal
+   --------------------------------------------------------------- */
+
+.launch-field-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 7px;
+  color: var(--launch-danger);
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.launch-field-error::before {
+  content: "";
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: var(--launch-danger);
+  -webkit-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.launch-field-input.is-invalid {
+  border-color: var(--launch-danger);
+  background: var(--launch-danger-soft);
+}
+
+.launch-field-input.is-invalid:focus-visible {
+  border-color: var(--launch-danger);
+  box-shadow: 0 0 0 3px rgba(176, 69, 58, 0.14);
+}
+
+.launch-agreement-box.is-invalid {
+  border-color: var(--launch-danger);
+  background: var(--launch-danger-soft);
+}
+
+/* --- submission / server error popup --- */
+
+.launch-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(26, 26, 26, 0.5);
+  animation: launch-modal-fade 160ms ease-out;
+}
+
+.launch-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  padding: 28px 24px 24px;
+  border-radius: var(--launch-radius-xl);
+  background: #fff;
+  text-align: center;
+  box-shadow: var(--launch-shadow-popover);
+  animation: launch-modal-rise 180ms ease-out;
+}
+
+.launch-modal-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  background: var(--launch-danger-soft);
+  color: var(--launch-danger);
+}
+
+.launch-modal-message {
+  margin: 0 0 20px;
+  color: var(--launch-ink);
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+@keyframes launch-modal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes launch-modal-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch-modal-overlay,
+  .launch-modal-card {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Locked invite email + password field
+   --------------------------------------------------------------- */
+
+.launch-field-input.is-locked {
+  background: var(--launch-icon-bg);
+  color: var(--launch-muted);
+  cursor: default;
+}
+
+.launch-field-input.is-locked:focus-visible {
+  border-color: var(--launch-input-border);
+  box-shadow: none;
+}
+
+.launch-field-lock,
+.launch-field-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--launch-faint);
+}
+
+.launch-field-toggle {
+  padding: 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--launch-radius-s);
+}
+
+.launch-field-toggle:hover {
+  color: var(--launch-muted);
+}
+
+/* Shown only while the locked email field has focus. */
+.launch-field-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 9px 12px;
+  border-radius: var(--launch-radius-s);
+  background: var(--launch-icon-bg);
+  color: var(--launch-muted);
+  animation: launch-note-in 140ms ease-out;
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+.launch-field-note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+@keyframes launch-note-in {
+  from { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* --- password strength meter --- */
+
+.launch-password-meter {
+  margin-top: 9px;
+}
+
+.launch-password-bar {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--launch-border);
+  overflow: hidden;
+}
+
+.launch-password-bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  transition: width 200ms ease, background-color 200ms ease;
+}
+
+.launch-password-bar.is-score-0 span { width: 8%;   background: var(--launch-stone); }
+.launch-password-bar.is-score-1 span { width: 25%;  background: var(--launch-stone); }
+.launch-password-bar.is-score-2 span { width: 50%;  background: var(--launch-hydrangea-blue); }
+.launch-password-bar.is-score-3 span { width: 75%;  background: var(--launch-atlantic-blue); }
+.launch-password-bar.is-score-4 span { width: 100%; background: var(--launch-accent); }
+
+.launch-password-hint {
+  margin-top: 6px;
+  color: var(--launch-muted);
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch-field-note { animation: none; }
+  .launch-password-bar span { transition: none; }
+}
+
+/* ---------------------------------------------------------------
+   Verify-email blocked states (used / expired / revoked / invalid)
+   --------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------
+   Share row feedback + pending invite link
+   --------------------------------------------------------------- */
+
+.launch-share-item:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.launch-share-item:not(:disabled) {
+  cursor: pointer;
+}
+
+.launch-share-item:not(:disabled):hover .launch-share-icon {
+  border-color: var(--launch-accent);
+  color: var(--launch-accent);
+}
+
+.launch-share-icon {
+  transition: border-color 150ms ease, color 150ms ease;
+}
+
+/* Reserves its line so the layout doesn't jump when a message appears. */
+.launch-share-status {
+  min-height: 18px;
+  margin-top: 10px;
+  color: var(--launch-accent);
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+.launch-welcome-link-pending {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--launch-muted);
+}
+
+.launch-done-copy.is-failed {
+  border-color: var(--launch-danger);
+  color: var(--launch-danger);
+}
+
+/* ---------------------------------------------------------------
+   iOS zoom guard
+   Safari force-zooms any focused control below 16px and never zooms
+   back out. Lift to 16px on touch-sized viewports; desktop keeps the
+   designed 15px.
+   --------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .launch-field-input,
+  .launch-field-select {
+    font-size: 16px;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Type scale — Bubba Visual System v1.0, usage table
+   Every text element on the onboarding screens maps to one of these.
+   --------------------------------------------------------------- */
+
+.type-hero {
+  font-family: var(--launch-font-display);
+  font-weight: 400;
+  /* Guide: 64/72. clamp keeps the exact desktop value while allowing the
+     headline to fit a 390px viewport; the 1.125 ratio is preserved. */
+  font-size: clamp(36px, 8vw, 64px);
+  line-height: 1.125;
+  letter-spacing: -0.01em;
+}
+
+.type-section-title {
+  font-family: var(--launch-font-display);
+  font-weight: 400;
+  font-size: clamp(26px, 5vw, 32px);
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.type-subhead {
+  font-family: var(--launch-font-ui);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+.type-eyebrow {
+  font-family: var(--launch-font-ui);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.type-body {
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.type-caption {
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.type-micro {
+  font-family: var(--launch-font-ui);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+}

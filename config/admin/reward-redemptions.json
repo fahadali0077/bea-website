@@ -1,0 +1,10 @@
+[
+  { "id": "rd_001", "user_id": "usr_005", "reward_id": "rw_001", "status": "requested", "redeemed_at": null, "created_at": "2026-06-22T18:30:00Z" },
+  { "id": "rd_002", "user_id": "usr_007", "reward_id": "rw_002", "status": "requested", "redeemed_at": null, "created_at": "2026-06-22T19:05:00Z" },
+  { "id": "rd_003", "user_id": "usr_011", "reward_id": "rw_001", "status": "approved", "redeemed_at": null, "created_at": "2026-06-21T14:20:00Z" },
+  { "id": "rd_004", "user_id": "usr_016", "reward_id": "rw_002", "status": "redeemed", "redeemed_at": "2026-06-20T16:00:00Z", "created_at": "2026-06-19T10:15:00Z" },
+  { "id": "rd_005", "user_id": "usr_013", "reward_id": "rw_007", "status": "requested", "redeemed_at": null, "created_at": "2026-06-22T20:40:00Z" },
+  { "id": "rd_006", "user_id": "usr_019", "reward_id": "rw_001", "status": "rejected", "redeemed_at": null, "created_at": "2026-06-18T11:30:00Z" },
+  { "id": "rd_007", "user_id": "usr_003", "reward_id": "rw_006", "status": "approved", "redeemed_at": null, "created_at": "2026-06-21T09:45:00Z" },
+  { "id": "rd_008", "user_id": "usr_023", "reward_id": "rw_002", "status": "expired", "redeemed_at": null, "created_at": "2026-05-30T13:00:00Z" }
+]

@@ -1,0 +1,456 @@
+/* Waitlist — phones (<768px) coded layout vs artboard desktop (≥768px) */
+
+.waitlist-page-mobile {
+  display: block;
+}
+
+.waitlist-page-desktop {
+  display: none !important;
+  /* query container so the artboard scales to real content width (no scrollbar gap) */
+  container-type: inline-size;
+}
+
+@media (min-width: 768px) {
+  .waitlist-page-mobile {
+    display: none !important;
+  }
+
+  .waitlist-page-desktop {
+    display: block !important;
+  }
+}
+
+.waitlist-page-mobile {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+.waitlist-page-mobile .waitlist-root {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+/* ── Artboard typography: Inter everywhere on coded mobile pages ── */
+.waitlist-page-mobile .waitlist-root {
+  --wl-serif: var(--wl-sans);
+  font-family: var(--wl-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+/* Force Inter on every text element (overrides Canela from waitlist.css) */
+.waitlist-page-mobile .waitlist-root :where(
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  a,
+  button,
+  label,
+  li,
+  em,
+  strong,
+  input,
+  textarea,
+  select
+) {
+  font-family: var(--wl-sans);
+}
+
+/* Page titles — same light grotesque as landing "Together, today." */
+.waitlist-page-mobile .waitlist-hero-title,
+.waitlist-page-mobile .waitlist-step-title,
+.waitlist-page-mobile .waitlist-step-title--serif,
+.waitlist-page-mobile .waitlist-confirmed-title,
+.waitlist-page-mobile .waitlist-prizes-title {
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: -0.03em;
+}
+
+.waitlist-page-mobile .waitlist-landing-logo,
+.waitlist-page-mobile .waitlist-appbar-logo {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Section + card headings */
+.waitlist-page-mobile .waitlist-section-heading,
+.waitlist-page-mobile .waitlist-card-heading,
+.waitlist-page-mobile .waitlist-reward-title,
+.waitlist-page-mobile .waitlist-earn-title,
+.waitlist-page-mobile .waitlist-info-strong {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* Large numerals / display accents */
+.waitlist-page-mobile .waitlist-rank-number,
+.waitlist-page-mobile .waitlist-points-value,
+.waitlist-page-mobile .waitlist-standing-value,
+.waitlist-page-mobile .waitlist-timer-time,
+.waitlist-page-mobile .waitlist-footer-title em,
+.waitlist-page-mobile .waitlist-city-card-label .city-name,
+.waitlist-page-mobile .waitlist-perk-card h4 {
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: -0.02em;
+}
+
+.waitlist-page-mobile .waitlist-section-serif,
+.waitlist-page-mobile .waitlist-perks-subtitle,
+.waitlist-page-mobile .waitlist-hero-sub,
+.waitlist-page-mobile .waitlist-step-subtitle,
+.waitlist-page-mobile .waitlist-confirmed-sub,
+.waitlist-page-mobile .waitlist-prizes-sub,
+.waitlist-page-mobile .waitlist-launch-subtitle,
+.waitlist-page-mobile .waitlist-reward-desc,
+.waitlist-page-mobile .waitlist-earn-desc,
+.waitlist-page-mobile .waitlist-info-text,
+.waitlist-page-mobile .waitlist-rank-city,
+.waitlist-page-mobile .waitlist-rank-hint,
+.waitlist-page-mobile .waitlist-school-card-city {
+  font-weight: 400;
+}
+
+.waitlist-page-mobile .waitlist-landing-cta,
+.waitlist-page-mobile .waitlist-btn-primary,
+.waitlist-page-mobile .waitlist-btn-secondary,
+.waitlist-page-mobile .waitlist-reward-redeem {
+  font-weight: 600;
+}
+
+.waitlist-page-mobile .waitlist-field-label,
+.waitlist-page-mobile .waitlist-hero-eyebrow,
+.waitlist-page-mobile .waitlist-field-label--caps,
+.waitlist-page-mobile .waitlist-rank-eyebrow,
+.waitlist-page-mobile .waitlist-rank-progress-label,
+.waitlist-page-mobile .waitlist-section-divider,
+.waitlist-page-mobile .waitlist-timer-labels,
+.waitlist-page-mobile .waitlist-perk-card-footer,
+.waitlist-page-mobile .waitlist-points-eyebrow,
+.waitlist-page-mobile .waitlist-info-eyebrow,
+.waitlist-page-mobile .waitlist-reward-badge,
+.waitlist-page-mobile .waitlist-earn-points,
+.waitlist-page-mobile .waitlist-city-card-label .city-plans {
+  font-weight: 600;
+}
+
+/* Hide plans/tonight text on mobile city cards — name only */
+.waitlist-page-mobile .waitlist-city-card-label .city-plans,
+.waitlist-page-mobile .waitlist-city-card-label .city-tonight {
+  display: none;
+}
+
+.waitlist-page-mobile .waitlist-prizes-viewall,
+.waitlist-page-mobile .waitlist-points-history,
+.waitlist-page-mobile .waitlist-link-secondary,
+.waitlist-page-mobile .waitlist-waiting-room,
+.waitlist-page-mobile .waitlist-drawer-link,
+.waitlist-page-mobile .waitlist-appbar-profile-name,
+.waitlist-page-mobile .waitlist-drawer-profile-name,
+.waitlist-page-mobile .waitlist-drawer-rank-org,
+.waitlist-page-mobile .waitlist-school-card-name {
+  font-weight: 500;
+}
+
+.waitlist-page-mobile .waitlist-footer-title {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.waitlist-page-mobile .waitlist-footer-title em {
+  margin-top: 6px;
+  font-size: 32px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+/* Mobile stepper — cumulative fill, artboard colors */
+.waitlist-page-mobile .waitlist-progress {
+  max-width: none;
+  flex: 1;
+  gap: 8px;
+  height: 5px;
+}
+
+.waitlist-page-mobile .waitlist-progress-bar {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 5px;
+  border-radius: 0;
+  background: #e7dad0;
+}
+
+.waitlist-page-mobile .waitlist-progress-bar--filled {
+  background: #1a1a1a;
+}
+
+.waitlist-page-mobile .waitlist-root {
+  --wl-bg: #f8f6f3;
+  --wl-bar-inactive: #e7dad0;
+}
+
+.waitlist-page-mobile .waitlist-step-body {
+  margin-top: 48px;
+}
+
+.waitlist-page-mobile .waitlist-step-title {
+  font-size: 28px;
+}
+
+.waitlist-page-mobile .waitlist-step-title--serif {
+  font-size: 30px;
+}
+
+.waitlist-page-mobile .waitlist-prizes-title {
+  font-size: 33px;
+}
+
+/* City cards — 2-column grid, every card fully visible (no cut-off) */
+.waitlist-page-mobile .waitlist-section--launch {
+  padding-bottom: 20px;
+}
+
+.waitlist-page-mobile .waitlist-city-carousel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.waitlist-page-mobile .waitlist-city-carousel .waitlist-city-card {
+  width: 100%;
+  max-width: none;
+  aspect-ratio: 4 / 5;
+}
+
+.waitlist-page-mobile .waitlist-city-card-shade {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 8, 6, 0) 52%,
+    rgba(10, 8, 6, 0.62) 78%,
+    rgba(10, 8, 6, 0.94) 100%
+  );
+}
+
+.waitlist-page-mobile .waitlist-city-card-label {
+  padding: 0 12px 12px;
+}
+
+.waitlist-page-mobile .waitlist-landing-mobile .waitlist-section {
+  padding: 36px var(--wl-gutter);
+}
+
+.waitlist-page-mobile .waitlist-launch-subtitle {
+  margin: 12px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--wl-text);
+  max-width: 340px;
+}
+
+.waitlist-page-mobile .waitlist-section--footer {
+  padding-top: 16px;
+  padding-bottom: 40px;
+}
+
+/* Footer — clear hierarchy: headline → email → CTA button */
+.waitlist-page-mobile .waitlist-landing-mobile .waitlist-footer-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.waitlist-page-mobile .waitlist-footer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.waitlist-page-mobile .waitlist-footer-input::placeholder {
+  color: #4a4540 !important;
+  opacity: 1;
+}
+
+.waitlist-page-mobile .waitlist-box-input.waitlist-footer-input::placeholder {
+  color: #4a4540 !important;
+  opacity: 1;
+}
+
+.waitlist-page-mobile .waitlist-footer-input {
+  min-height: 52px !important;
+  padding: 14px 16px !important;
+}
+
+.waitlist-page-mobile .waitlist-footer-submit {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 52px;
+  margin-top: 0 !important;
+  padding: 16px 24px;
+  border-radius: 14px;
+  background: var(--wl-text);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.waitlist-page-mobile .waitlist-hero-image {
+  border-radius: 20px;
+  margin-top: 24px;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.waitlist-page-mobile .waitlist-landing-mobile .waitlist-hero {
+  display: block;
+}
+
+/* City pills — scroll horizontally on narrow screens */
+.waitlist-page-mobile .waitlist-city-pills {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 2px;
+}
+
+.waitlist-page-mobile .waitlist-city-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.waitlist-page-mobile .waitlist-city-pill {
+  flex: 0 0 auto;
+}
+
+/* Perk row — 3 across, fully visible (matches artboard, no cut-off) */
+.waitlist-page-mobile .waitlist-perk-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  overflow: visible;
+}
+
+.waitlist-page-mobile .waitlist-perk-card {
+  min-width: 0;
+  min-height: 0;
+  padding: 14px 8px;
+}
+
+.waitlist-page-mobile .waitlist-perk-card h4 {
+  font-size: 12px;
+}
+
+.waitlist-page-mobile .waitlist-perk-card-desc,
+.waitlist-page-mobile .waitlist-perk-card-footer {
+  font-size: 9.5px;
+}
+
+.waitlist-page-mobile .waitlist-rank-card--prizes {
+  margin-top: 32px;
+  text-align: left;
+}
+
+.waitlist-page-mobile .waitlist-prizes-mobile .waitlist-btn-primary {
+  margin-top: 28px;
+}
+
+/* Bubba mobile refresh — route wrappers leave md and larger layouts untouched. */
+@media (max-width: 767px) {
+  .waitlist-email-start { min-height: 100dvh; background: #fbfaf9; color: #050505; }
+  .waitlist-email-start__content { min-height: 100dvh; margin: 0 auto; padding: 36px 30px 28px; text-align: center; }
+  .waitlist-email-start__wordmark, .waitlist-mobile-wordmark { font-family: var(--font-serif), Georgia, serif !important; font-size: 27px; font-weight: 500; line-height: 1; letter-spacing: -.07em; }
+  .waitlist-email-start__wordmark, .waitlist-confirmed-wordmark { display: flex; justify-content: center; }
+  .waitlist-email-start h1 { margin: 30px 0 30px; color: #133d27; font-family: var(--font-serif), Georgia, serif !important; font-size: 48px; font-weight: 400; line-height: 1.08; letter-spacing: -.045em; }
+  .waitlist-email-start h1 span { color: #4A83E1; }
+  .waitlist-email-start__intro { margin: 0; color: #676669; font-size: 24px; line-height: 1.55; }
+  .waitlist-email-start__art { display: block; margin: 20px auto 14px; object-fit: contain; }
+  .waitlist-email-start__form { text-align: left; }
+  .waitlist-email-start__form label { display: block; margin-bottom: 8px; color: #8d8d8d; font-size: 18px; }
+  .waitlist-email-start__input-wrap { display: flex; align-items: center; gap: 10px; height: 70px; padding: 0 13px; border: 1px solid #cdcdcd; border-radius: 11px; color: #b7b7b7; }
+  .waitlist-email-start__input-wrap input { width: 100%; border: 0; outline: 0; background: transparent; color: #181818; font-size: 18px; font-weight: 500; }
+  .waitlist-email-start__submit { display: flex; align-items: center; justify-content: center; gap: 24px; width: 100%; height: 80px; margin-top: 40px; border: 0; border-radius: 8px; background: #075334; color: #fff; font-size: 24px; font-weight: 500; }
+  .waitlist-email-start__privacy { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 30px 0 0; color: #878787; font-size: 18px; font-weight: 400; }
+  .waitlist-email-start__privacy svg { color: #3a7bf0; }
+
+  .waitlist-coded .waitlist-step-shell { min-height: 100dvh; margin: 0 auto; padding: 22px 24px 20px; background: #fbfaf9; }
+  .waitlist-coded .waitlist-step-top { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  .waitlist-coded .waitlist-back { display: none; }
+  .waitlist-coded .waitlist-progress { width: 100%; gap: 10px; }
+  .waitlist-coded .waitlist-progress-bar { position: relative; height: 2px !important; border-radius: 100%; background: #d9d9d9; background-clip: content-box; padding-left: 10px; box-sizing: border-box; }
+  .waitlist-coded .waitlist-progress-bar::before { position: absolute; top: 50%; left: -1px; width: 12px; height: 12px; border: 1px solid #dedede; border-radius: 999px; background: #fbfaf9; content: ""; transform: translateY(-50%); }
+  .waitlist-coded .waitlist-progress-bar--filled { background: #d9d9d9; }
+  .waitlist-coded .waitlist-progress-bar--filled::before { border-color: #075334; background: #075334; }
+  .waitlist-coded .waitlist-step-body { margin-top: 26px; flex: 1 1 auto; }
+  .waitlist-coded .waitlist-step-title, .waitlist-coded .waitlist-step-title--serif { color: #050505; font-family: var(--font-canela) !important; font-size: 36px !important; line-height: 1.12; letter-spacing: -.045em; max-width: 348px; }
+  .waitlist-coded .waitlist-step-subtitle { margin-top: 10px; color: #676669; font-size: 24px; line-height: 1.5; max-width: 371px; }
+  .waitlist-coded .waitlist-field-label, .waitlist-coded .waitlist-field-label--caps { color: #4568a0; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .waitlist-coded .waitlist-search-block { margin-top: 28px; }
+  .waitlist-coded .waitlist-box-input { height: 71px; padding: 0 12px; border: 1px solid #cdcdcd; border-radius: 11px; background: #fff; font-size: 18px; }
+  .waitlist-coded .waitlist-box-input[type="number"]::-webkit-outer-spin-button, .waitlist-coded .waitlist-box-input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .waitlist-coded .waitlist-box-input[type="number"] { -moz-appearance: textfield; }
+  .waitlist-coded .waitlist-city-carousel { display: flex; gap: 9px; margin: 18px -24px 0; padding: 0 24px 4px; overflow-x: auto; scrollbar-width: none; }
+  .waitlist-coded .waitlist-city-carousel .waitlist-city-card { flex: 0 0 112px; width: 150px; height: 240px; aspect-ratio: 1 / 1.33; border: 1px solid #e8e8e8; border-radius: 14px; }
+  .waitlist-coded .waitlist-city-card-label { padding: 0 7px 7px; }
+  .waitlist-coded .waitlist-city-card-label .city-name { font-size: 18px; color: #3a3a3a; text-align: center; }
+  .waitlist-coded .waitlist-city-card-shade { background: linear-gradient(transparent 56%, rgba(0, 0, 0, .5)); }
+  .waitlist-coded .waitlist-market-search { margin-top: 90px; }
+  .waitlist-coded .waitlist-market-search .waitlist-field-label { margin-bottom: 10px; font-size: 18px; color: #5b6c9b }
+  .waitlist-coded .waitlist-school-list { display: none; }
+  .waitlist-coded .waitlist-school-card { display: flex; width: 100%; min-height: 95px; margin-top:22px; padding: 9px 11px; border: 1px solid #3e5c72; border-radius: 7px; background: #eaf6ff; }
+  .waitlist-coded .waitlist-school-card-dot { width: 16px; height: 16px; background: #fff; display: none; }
+  .waitlist-coded .waitlist-school-card-dot::after { color: #111; content: "×"; font-size: 15px; line-height: 16px; }
+  .waitlist-coded .waitlist-or-divider { margin: 20px 0; color: #4568a0; font-size: 10px; text-transform: uppercase; }
+  .waitlist-coded .waitlist-btn-secondary { min-height: 125px; border: 1px solid #7d997a; border-radius: 6px; background: #f0f2ee; color: #000000; font-size: 18px; }
+  .waitlist-coded .waitlist-step-bottom { margin-top: 0 !important; padding-top: 0px; }
+  .waitlist-coded .waitlist-step-bottom .waitlist-step-image { display: none; }
+  .waitlist-coded .waitlist-btn-primary { display: flex; align-items: center; justify-content: center; gap: 24px; width: 100%; min-height: 80px; margin: 0; border-radius: 16px; background: #294431; font-size: 24px; position: relative; }
+
+  .waitlist-coded .waitlist-underline-field { margin-top: 18px; }
+  .waitlist-coded .waitlist-underline-field + .waitlist-underline-field { margin-top: 16px; }
+  .waitlist-coded .waitlist-name-field-hint { margin: 5px 0 0; font-size: 11px; }
+
+  .waitlist-ambassador-list { display: grid; gap: 8px; margin-top: 16px; }
+  .waitlist-ambassador-card { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 95px; padding: 7px 10px; border: 1px solid #e2e2e2; border-radius: 6px; background: #fff; color: #111; text-align: left; }
+  .waitlist-ambassador-card--selected { border-color: #7096ad; background: #e9f5ff; }
+  .waitlist-ambassador-avatar { display: grid; width: 57px; height: 57px; place-items: center; border: 1px solid #b2cacc; border-radius: 50%; background: #e9f1f7; color: #5b6c9b; font-size: 18px; }
+  .waitlist-ambassador-card strong, .waitlist-ambassador-card small { display: block; }
+  .waitlist-ambassador-card strong { font-size: 24px; line-height: 1.1; color: #000000; }
+  .waitlist-ambassador-card small { margin-top: 2px; font-size: 18px; color: #727272 }
+  .waitlist-ambassador-check { display: grid; width: 33px; height: 33px; margin-left: auto; place-items: center; border-radius: 50%; background: #6393be; color: white; font-size: 18px; font-weight: 600; }
+  .waitlist-ambassador-skip { justify-self: center; margin-bottom: 12px; border: 0; background: none; color: #000000; font-size: 18px; font-weight: 400; margin-top: 26px; text-decoration: underline; }
+
+  .waitlist-page-mobile .waitlist-confirmed { min-height: 100dvh; padding: 28px 22px 22px; background: #fbfaf9; text-align: center; }
+  .waitlist-page-mobile .waitlist-confirmed-top { justify-content: center; min-height: 28px; }
+  .waitlist-page-mobile .waitlist-confirmed-top .waitlist-back { display: none; }
+  .waitlist-confirmed-wordmark { font-family: var(--font-serif), Georgia, serif !important; font-size: 25px; letter-spacing: -.07em; }
+  .waitlist-page-mobile .waitlist-check-badge-svg { width: 108px; height: 108px; margin: 20px auto 8px; }
+  .waitlist-page-mobile .waitlist-confirmed-title { color: #000000; font-family: var(--font-canela), serif !important; font-size: 36px; letter-spacing: -.045em; }
+  .waitlist-page-mobile .waitlist-confirmed-sub { margin-top: 20px; color: #202020; font-size: 24px; font-weight: 400; font-family: var(--font-canela), serif !important; }
+  .waitlist-page-mobile .waitlist-rank-card { margin-top: 18px; padding: 13px 12px 10px; border: 1px solid #b2cacc; border-radius: 9px; background: #e9f1f7; }
+  .waitlist-page-mobile .waitlist-rank-eyebrow { color: #5b6c9b; font-size: 18px; letter-spacing: .08em; }
+  .waitlist-page-mobile .waitlist-rank-number { margin: 20px 0 20px; color: #000000; font-family: var(--font-canela), serif !important; font-size: 103px; line-height: 1; }
+  .waitlist-page-mobile .waitlist-rank-city { color: #000000; font-size: 24px; font-weight: 400; }
+  .waitlist-page-mobile .waitlist-rank-divider, .waitlist-page-mobile .waitlist-rank-progress-label, .waitlist-page-mobile .waitlist-rank-progress-bar, .waitlist-page-mobile .waitlist-rank-hint, .waitlist-page-mobile .waitlist-section-divider, .waitlist-page-mobile .waitlist-perk-cards, .waitlist-page-mobile .waitlist-confirmed-footer { display: none; }
+  .waitlist-confirmed-enter { display: flex; align-items: center; justify-content: center; gap: 10px; height: 70px; margin-top: 70px; border: 1px solid #4a83e1; border-radius: 12px; color: #4a83e1; font-size: 18px; font-weight: 500; }
+  .waitlist-invite-link { margin: 14px 0 0; padding: 12px 14px; border: 1px solid #d4e0eb; border-radius: 9px; background: #fff; text-align: left; }
+  .waitlist-invite-link-label { margin-bottom: 6px; color: #4568a0; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .waitlist-invite-link-box { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .waitlist-invite-link-url { color: #111; font-size: 12px; font-weight: 600; word-break: break-all; }
+  .waitlist-invite-link-copy { display: inline-flex; align-items: center; gap: 5px; flex: 0 0 auto; padding: 6px 10px; border: 1px solid #528cff; border-radius: 6px; background: #fff; color: #2865e1; font-size: 10px; font-weight: 700; }
+}
