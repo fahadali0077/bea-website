@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Zap } from "lucide-react";
+
+import { BUBBA_BRAND } from "@/lib/bubba-content";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const RADIUS = 47;
@@ -70,7 +71,8 @@ export function BubbaDial() {
           <span>MIN</span>
           <span>SEC</span>
         </div>
-        <Zap size={16} strokeWidth={2} className="bb-dial-bolt" fill="currentColor" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={BUBBA_BRAND.bolt} alt="" className="bb-dial-bolt" />
       </div>
     </div>
   );

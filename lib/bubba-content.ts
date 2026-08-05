@@ -5,9 +5,16 @@
  */
 
 export const BUBBA_BRAND = {
-  wordmark: "/images/4x/BubbaLogo.png",
-  scene: "/images/4x/hero-scene.png",
-  faqScene: "/images/faq.jpg",
+  /** Green wordmark is the default; the black cut is for dark-on-light overlays. */
+  wordmark: "/bubba/wordmark-green.png",
+  wordmarkBlack: "/bubba/wordmark-black.png",
+  /** Circular "B" seal used in the footer baseline. */
+  mark: "/bubba/mark-b.png",
+  scene: "/bubba/hero-scene.png",
+  faqScene: "/bubba/faq-cyclist.png",
+  /** Campus line art — reserved for the Competition Rules page. */
+  campus: "/bubba/campus.png",
+  bolt: "/bubba/bolt.png",
   tagline: "Together, today.",
   supportEmail: "support@joinbubba.co",
   partnershipsEmail: "partnerships@joinbubba.co",

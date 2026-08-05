@@ -692,8 +692,10 @@
 }
 
 .bb-dial-bolt {
-  color: var(--bb-green);
-  margin-top: 4px;
+  width: 11px;
+  height: auto;
+  margin-top: 6px;
+  display: block;
 }
 
 .bb-scene {
@@ -1115,15 +1117,10 @@
 }
 
 .bb-footer-seal {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--bb-green);
-  color: #fff;
-  display: grid;
-  place-items: center;
-  font-family: var(--bb-display);
-  font-size: 12px;
+  width: 20px;
+  height: auto;
+  display: block;
+  flex: none;
 }
 
 /* ============================================================
@@ -1378,7 +1375,7 @@
 
 .bb-faq-cta-art {
   min-height: 190px;
-  background: #1b3a28;
+  background: #fff;
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -1387,7 +1384,8 @@
 .bb-faq-cta-art img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center bottom;
   display: block;
 }
 

@@ -81,9 +81,8 @@ export function BubbaFooter({ showCapture = true }: Props) {
           </div>
 
           <div className="bb-footer-base">
-            <span className="bb-footer-seal" aria-hidden="true">
-              B
-            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={BUBBA_BRAND.mark} alt="" className="bb-footer-seal" />
             <span>Bubba {new Date().getFullYear()}. All rights reserved.</span>
           </div>
         </div>
