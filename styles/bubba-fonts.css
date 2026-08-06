@@ -1,0 +1,120 @@
+/* ============================================================
+   Bubba font registration
+   ------------------------------------------------------------
+   Canela and Canela Text resolve from LOCALLY INSTALLED copies
+   only — there is no url() here on purpose. Anyone with the
+   fonts installed (designer, reviewer, you) sees the real thing;
+   nothing is served from the domain, so nothing is redistributed.
+
+   WHEN A COMMERCIAL TYPE WEBFONT LICENCE IS PURCHASED:
+   add the url() line to each block below, e.g.
+       src: local("Canela Medium"),
+            url("/fonts/Canela-Medium.woff2") format("woff2");
+   and drop the licensed .woff2 files into /public/fonts.
+   Nothing else in the codebase needs to change.
+
+   The trial names are listed after the retail names so a machine
+   with only the trials installed still resolves. Note the trials
+   lack & : ; and the em dash.
+   ============================================================ */
+
+/* ---- Canela (display cut) ---- */
+
+@font-face {
+  font-family: "Canela";
+  src: local("Canela Regular"), url("/fonts/Canela-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Canela";
+  src: local("Canela Medium"), url("/fonts/Canela-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Canela";
+  src: local("Canela Bold"), url("/fonts/Canela-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---- Canela Text (text cut) ---- */
+
+@font-face {
+  font-family: "Canela Text";
+  src: local("Canela Text Regular"), url("/fonts/CanelaText-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Canela Text";
+  src: local("Canela Text Medium"), local("Canela Text Medium Trial");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Canela Text";
+  src: local("Canela Text Bold"), url("/fonts/CanelaText-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---- Lato Medium (500) ----
+   Google Fonts and Fontsource both stop at 100/300/400/700/900, and the
+   supplied archive has no Medium either. The design uses Lato-Medium for
+   most body copy. Lato 2.015 from latofonts.com does include it under the
+   OFL — free for commercial use. Drop Lato-Medium.woff2 into /public/fonts
+   and add the url() below; until then this resolves locally or falls to 400. */
+
+@font-face {
+  font-family: "Lato Web";
+  src: local("Lato Medium");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   Metric-matched fallbacks
+   ------------------------------------------------------------
+   Until licensed Canela files exist, these make Fraunces occupy
+   very nearly the same space Canela does, so line breaks, baseline
+   positions and block heights match the design even though the
+   letterforms differ. Numbers measured directly off the Canela
+   files — Fraunces is ~8% wider and has a much taller ascent
+   (0.978 vs 0.775), which is what throws the spacing.
+
+   These sit AFTER "Canela" in the stack, so a licensed webfont —
+   or a local install — always wins and these never apply.
+   ============================================================ */
+
+@font-face {
+  font-family: "Canela Fallback";
+  src: local("Fraunces"), local("Fraunces 9pt"), local("Georgia");
+  size-adjust: 91.8%;
+  ascent-override: 78.3%;
+  descent-override: 22.7%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Canela Text Fallback";
+  src: local("Fraunces"), local("Fraunces 9pt"), local("Georgia");
+  size-adjust: 97.3%;
+  ascent-override: 74.2%;
+  descent-override: 21.1%;
+  line-gap-override: 0%;
+  font-display: swap;
+}

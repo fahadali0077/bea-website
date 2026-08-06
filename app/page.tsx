@@ -1,15 +1,9 @@
-import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
-import { BubbaLanding } from "@/app/components/bubba/BubbaLanding";
-
-import "@/styles/bubba.css";
-
-export const metadata: Metadata = {
-  title: "Bubba — Together, today.",
-  description:
-    "24 hours to chat. Bubba only shows recently active people and every conversation lasts a day. Join the waitlist before your city launches.",
-};
-
-export default function Home() {
-  return <BubbaLanding />;
+/**
+ * The landing page now lives at the site root. The waitlist step screens
+ * (/waitlist/3 … /waitlist/9) are unchanged and still route through here.
+ */
+export default function WaitlistPage() {
+  redirect("/");
 }

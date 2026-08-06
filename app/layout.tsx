@@ -32,22 +32,6 @@ export default function RootLayout({
       lang="en"
       className={`${lato.variable} ${inter.variable} ${fraunces.variable} ${serifFont.variable}`}
     >
-      <head>
-        <link
-          rel="preload"
-          href="/fonts/CanelaText-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/CanelaText-Medium.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-      </head>
       <body className="antialiased">
         <StoreProvider>{children}</StoreProvider>
       </body>
