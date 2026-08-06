@@ -33,6 +33,9 @@
   --bb-card: #f4f4f4;
   --bb-footer-bg: #eeeeee;
   --bb-ink-btn: #272117;
+  --bb-warm: #fbfaf7;
+  --bb-closer-bg: #f2f1ec;
+  --bb-footer-bg-desk: #edebe6;
 
   /* Type */
   --bb-display: "Canela Text", var(--font-fraunces), Georgia, "Times New Roman",
@@ -528,7 +531,7 @@
 }
 
 .bb-hero-tm {
-  font-size: 0.34em;
+  font-size: 0.17em;
   vertical-align: super;
   letter-spacing: 0;
 }
@@ -827,6 +830,10 @@
   margin-right: auto;
 }
 
+.bb-wr-foot {
+  display: block;
+}
+
 .bb-wr-cta {
   display: inline-flex;
   align-items: center;
@@ -1033,6 +1040,7 @@
   margin: 0;
   padding: 0;
   display: grid;
+  grid-auto-flow: column;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px 18px;
   align-content: start;
@@ -1060,6 +1068,10 @@
 .bb-footer-social a {
   color: inherit;
   line-height: 0;
+}
+
+.bb-footer-social a span {
+  display: none;
 }
 
 .bb-footer-social a:hover {
@@ -1593,20 +1605,6 @@
 
 /* ---------- Drawer (final mobile design) ---------- */
 
-.bb-nav-cta-short {
-  display: none;
-}
-
-@media (max-width: 620px) {
-  .bb-nav-cta-long {
-    display: none;
-  }
-
-  .bb-nav-cta-short {
-    display: inline;
-  }
-}
-
 .bb-drawer-links {
   display: block;
   margin-top: 26px;
@@ -1707,4 +1705,374 @@
   font-weight: 600;
   color: var(--bb-ink);
   margin-top: 6px;
+}
+
+/* ============================================================
+   Desktop layer
+   Geometry taken from Bubba_Desktop_Home.html measured at 1440.
+   Type stays on the project's own families — only spacing,
+   scale and layout come from the reference.
+   ============================================================ */
+
+@media (min-width: 1024px) {
+  .bb-shell,
+  .bb-shell--wide {
+    max-width: 1360px;
+    padding-inline: 40px;
+  }
+
+  /* ---- Chrome ---- */
+
+  .bb-announce {
+    font-size: 13px;
+    padding: 10px 40px;
+  }
+
+  .bb-nav-inner {
+    height: 82px;
+    padding-inline: 40px;
+  }
+
+  .bb-nav-links {
+    display: flex;
+    gap: 30px;
+  }
+
+  .bb-nav-link {
+    font-size: 14px;
+  }
+
+  .bb-nav-brand img {
+    height: 30px;
+  }
+
+  .bb-nav-cta {
+    height: 38px;
+    padding-inline: 22px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .bb-nav-burger {
+    display: none;
+  }
+
+  /* ---- Hero ---- */
+
+  .bb-hero {
+    padding: 150px 0 0;
+  }
+
+  .bb-hero-title {
+    font-size: 132px;
+    line-height: 0.94;
+  }
+
+  .bb-hero-sub {
+    margin-top: 34px;
+    font-size: 13px;
+  }
+
+  .bb-hero-capture {
+    margin-top: 56px;
+  }
+
+  .bb-hero-capture .bb-capture {
+    width: 557px;
+  }
+
+  .bb-rail {
+    padding: 96px 0 84px;
+  }
+
+  .bb-rail-cities {
+    margin-top: 22px;
+  }
+
+  .bb-rail-city {
+    font-size: 15px;
+    padding: 4px 28px;
+  }
+
+  /* ---- Waiting Room ---- */
+
+  .bb-wr {
+    padding: 24px 0 0;
+  }
+
+  .bb-wr .bb-shell {
+    padding-inline: 80px;
+    max-width: 1440px;
+  }
+
+  .bb-wr-card {
+    padding: 67px 73px 60px;
+    border-radius: 28px;
+    border-width: 0;
+  }
+
+  .bb-wr-month {
+    font-size: 12px;
+  }
+
+  .bb-wr-day {
+    font-size: 92px;
+    margin-top: 8px;
+  }
+
+  .bb-wr-note {
+    margin-top: 18px;
+    padding: 9px 20px;
+    max-width: none;
+    font-size: 13px;
+  }
+
+  .bb-wr-title {
+    font-size: 60px;
+    margin-top: 30px;
+  }
+
+  .bb-wr-lede {
+    font-size: 17px;
+    max-width: 520px;
+    margin-top: 8px;
+  }
+
+  /* Three tiles on a translucent white wash, not bare rows. */
+  .bb-wr-items {
+    max-width: none;
+    margin-top: 54px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    text-align: left;
+  }
+
+  .bb-wr-item {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.28);
+    border-radius: 14px;
+    padding: 29px;
+    gap: 0;
+  }
+
+  .bb-wr-item-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 22px;
+  }
+
+  .bb-wr-item-body {
+    font-size: 15px;
+    margin-top: 10px;
+  }
+
+  /* Footnote and CTA share a ruled row. */
+  .bb-wr-footnote {
+    margin: 0;
+    max-width: 460px;
+    text-align: left;
+    font-size: 15px;
+  }
+
+  .bb-wr-cta {
+    margin-top: 0;
+    padding: 13px 26px;
+  }
+
+  .bb-wr-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 52px;
+    padding-top: 44px;
+    border-top: 1px solid rgba(31, 74, 46, 0.22);
+  }
+
+  /* ---- Countdown ---- */
+
+  .bb-moment {
+    background: var(--bb-warm);
+    padding: 110px 0 0;
+  }
+
+  .bb-moment .bb-display--lg {
+    font-size: 86px;
+    margin-top: 22px;
+  }
+
+  .bb-moment-lede {
+    font-size: 18px;
+    max-width: 30ch;
+    margin-top: 22px;
+  }
+
+  .bb-dial {
+    width: 275px;
+    height: 275px;
+    margin-top: 62px;
+  }
+
+  .bb-dial-time {
+    font-size: 46px;
+  }
+
+  .bb-scene {
+    max-width: 1120px;
+    margin-top: 90px;
+  }
+
+  .bb-scene-caption {
+    font-size: 17px;
+    margin-top: 60px;
+    padding-bottom: 90px;
+  }
+
+  /* ---- Closer ---- */
+
+  .bb-closer {
+    padding: 96px 0 0;
+  }
+
+  .bb-closer-card {
+    max-width: 1280px;
+    border-radius: 24px;
+    padding: 72px 80px;
+    background: var(--bb-closer-bg);
+    display: grid;
+    grid-template-columns: 530px 530px;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 60px;
+  }
+
+  .bb-closer-title {
+    font-size: 54px;
+    margin: 0;
+  }
+
+  .bb-closer-sub {
+    font-size: 17px;
+    margin: 16px 0 0;
+    max-width: 380px;
+  }
+
+  .bb-closer-card .bb-capture {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    width: 530px;
+  }
+
+  /* ---- Footer ---- */
+
+  .bb-footer {
+    background: var(--bb-footer-bg-desk);
+    padding: 84px 0 0;
+  }
+
+  .bb-footer-grid {
+    grid-template-columns: minmax(0, 468px) minmax(0, 334px) minmax(0, 334px);
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .bb-footer-brand img {
+    height: 30px;
+  }
+
+  .bb-footer-tag {
+    font-size: 17px;
+    margin: 6px 0 26px;
+  }
+
+  .bb-footer-about {
+    font-size: 14.5px;
+    line-height: 1.72;
+    max-width: 420px;
+  }
+
+  .bb-footer-heading {
+    font-size: 11.5px;
+    margin-bottom: 24px;
+  }
+
+  /* Single column per group on desktop. */
+  .bb-footer-list {
+    grid-auto-flow: row;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none !important;
+    gap: 14px;
+  }
+
+  .bb-footer-list a {
+    font-size: 14.5px;
+  }
+
+  /* Socials read as words, not glyphs. */
+  .bb-footer-social {
+    margin-top: 30px;
+    gap: 22px;
+  }
+
+  .bb-footer-social a {
+    font-size: 14.5px;
+    line-height: 1.4;
+  }
+
+  .bb-footer-social svg {
+    display: none;
+  }
+
+  .bb-footer-social a span {
+    display: inline;
+  }
+
+  .bb-footer-sep {
+    display: none;
+  }
+
+  .bb-footer-base {
+    margin-top: 64px;
+    padding: 24px 0 40px;
+    font-size: 13px;
+  }
+
+  .bb-footer-seal {
+    display: none;
+  }
+
+  /* ---- Cookie sheet reads as one row ---- */
+
+  .bb-cookie {
+    left: 40px;
+    right: 40px;
+    bottom: 28px;
+    border: 1px solid var(--bb-line);
+    border-radius: 16px;
+    background: var(--bb-paper);
+    padding: 20px 28px;
+    grid-template-columns: 1fr auto auto auto;
+    align-items: center;
+    justify-items: start;
+    gap: 28px;
+    text-align: left;
+    box-shadow: 0 10px 34px rgba(22, 24, 26, 0.1);
+  }
+
+  .bb-cookie-body {
+    max-width: none;
+    font-size: 14px;
+  }
+
+  .bb-cookie-accept {
+    width: auto;
+    padding: 12px 30px;
+    font-size: 14px;
+  }
+
+  .bb-cookie-x {
+    position: static;
+  }
 }

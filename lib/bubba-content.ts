@@ -24,12 +24,16 @@ export const BUBBA_BRAND = {
 
 /** Nav — left links; the wordmark sits centred and the CTA sits right. */
 export const BUBBA_NAV_LINKS = [
-  { key: "waiting-room", label: "Waiting Room", href: "/#waiting-room" },
+  { key: "waiting-room", label: "The Waiting Room", href: "/#waiting-room" },
   { key: "ambassadors", label: "Ambassadors", href: "/login" },
-  { key: "calendar", label: "Calendar", href: "/calendar" },
+  { key: "faq", label: "FAQs", href: "/faq" },
+  { key: "contact", label: "Contact", href: "/contact" },
 ] as const;
 
-export type BubbaNavKey = (typeof BUBBA_NAV_LINKS)[number]["key"] | "home";
+export type BubbaNavKey =
+  | (typeof BUBBA_NAV_LINKS)[number]["key"]
+  | "calendar"
+  | "home";
 
 /** Hero city rail. */
 export const BUBBA_LAUNCH_CITIES = [

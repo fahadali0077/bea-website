@@ -36,6 +36,8 @@ export function BubbaLanding() {
           </div>
         </section>
 
+        {/* ── Waiting Room ── */}
+        <WaitingRoomSection />
         {/* ── The moment: signature countdown ── */}
         <section className="bb-moment">
           <div className="bb-shell">
@@ -64,8 +66,6 @@ export function BubbaLanding() {
           </div>
         </section>
 
-        {/* ── Waiting Room ── */}
-        <WaitingRoomSection />
     </BubbaShell>
   );
 }

@@ -51,7 +51,14 @@ export function BubbaFooter({ showCapture = true }: Props) {
 
             <div>
               <h2 className="bb-footer-heading">Explore</h2>
-              <ul className="bb-footer-list">
+              <ul
+                className="bb-footer-list"
+                style={{
+                  gridTemplateRows: `repeat(${Math.ceil(
+                    BUBBA_FOOTER_EXPLORE.length / 2,
+                  )}, auto)`,
+                }}
+              >
                 {BUBBA_FOOTER_EXPLORE.map((item) => (
                   <li key={item.href}>
                     <Link href={item.href}>{item.label}</Link>
@@ -62,9 +69,11 @@ export function BubbaFooter({ showCapture = true }: Props) {
               <div className="bb-footer-social">
                 <a href="https://instagram.com" aria-label="Bubba on Instagram">
                   <Instagram size={19} strokeWidth={1.6} />
+                  <span>Instagram</span>
                 </a>
                 <a href="https://tiktok.com" aria-label="Bubba on TikTok">
                   <Music2 size={19} strokeWidth={1.6} />
+                  <span>TikTok</span>
                 </a>
               </div>
 
@@ -73,7 +82,14 @@ export function BubbaFooter({ showCapture = true }: Props) {
 
             <div>
               <h2 className="bb-footer-heading">Legal</h2>
-              <ul className="bb-footer-list">
+              <ul
+                className="bb-footer-list"
+                style={{
+                  gridTemplateRows: `repeat(${Math.ceil(
+                    BUBBA_FOOTER_LEGAL.length / 2,
+                  )}, auto)`,
+                }}
+              >
                 {BUBBA_FOOTER_LEGAL.map((item) => (
                   <li key={item.href}>
                     <Link href={item.href}>{item.label}</Link>

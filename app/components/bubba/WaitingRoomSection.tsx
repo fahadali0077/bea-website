@@ -45,12 +45,14 @@ export function WaitingRoomSection() {
             })}
           </ul>
 
-          <p className="bb-wr-footnote">{wr.footnote}</p>
+          <div className="bb-wr-foot">
+            <p className="bb-wr-footnote">{wr.footnote}</p>
 
-          <Link href={wr.cta.href} className="bb-wr-cta">
-            {wr.cta.label}
-            <ChevronRight size={16} strokeWidth={2} />
-          </Link>
+            <Link href={wr.cta.href} className="bb-wr-cta">
+              {wr.cta.label}
+              <ChevronRight size={16} strokeWidth={2} />
+            </Link>
+          </div>
         </div>
       </div>
     </section>
