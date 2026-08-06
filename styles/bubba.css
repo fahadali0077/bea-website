@@ -69,9 +69,9 @@
     system-ui, var(--font-sans), sans-serif;
 
   /* The countdown digits are Big Caslon FB — also macOS-only. */
-  --bb-numeral: "Big Caslon", "Big Caslon FB", var(--bb-canela), Georgia,
+  --bb-numeral: "Big Caslon", "Big Caslon FB", var(--font-fraunces), Georgia,
     serif;
-  --bb-sans: var(--font-sans), var(--font-lato), -apple-system,
+  --bb-sans: "Lato", var(--font-sans), var(--font-lato), -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   /* Rhythm */
@@ -873,7 +873,7 @@
 .bb-wr-footnote {
   font-size: 14px;
   line-height: 1.5;
-  color: var(--bb-green);
+  color: var(--bb-ink);
   margin-top: 44px;
   max-width: 300px;
   margin-left: auto;
