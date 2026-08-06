@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 
 import { updateWaitlistForm } from "@/features/waitlist/waitlist.slice";
-import { WAITLIST_ARTBOARDS } from "@/lib/waitlist";
+import { joinStepHref } from "@/lib/join";
 import { useAppDispatch } from "@/store/hooks";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -46,7 +46,9 @@ export function BubbaCapture({
 
     setError(null);
     dispatch(updateWaitlistForm({ email }));
-    router.push(WAITLIST_ARTBOARDS["1"].nextHref ?? "/waitlist/start");
+    // Straight into the first collecting step — the address is already
+    // in the store, so the intro screen would just ask for it again.
+    router.push(joinStepHref(0));
   };
 
   return (

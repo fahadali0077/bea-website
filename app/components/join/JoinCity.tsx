@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { useListMarketsQuery } from "@/features/api/apiSlice";
 import { updateWaitlistForm } from "@/features/waitlist/waitlist.slice";
-import { joinStepHref, joinStepIndex } from "@/lib/join";
+import { cityArt, joinStepHref, joinStepIndex } from "@/lib/join";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { JoinShell } from "./JoinShell";
@@ -52,7 +52,12 @@ export function JoinCity() {
                   onClick={() => choose(m.id, m.name)}
                   aria-pressed={selected === m.id}
                 >
-                  <span className="jn-city-art" aria-hidden="true" />
+                  <span className="jn-city-art" aria-hidden="true">
+                    {cityArt(m.name) ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img src={cityArt(m.name) as string} alt="" />
+                    ) : null}
+                  </span>
                   <span className="jn-city-name">{m.name}</span>
                 </button>
               </li>

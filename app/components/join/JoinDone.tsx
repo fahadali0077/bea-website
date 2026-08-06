@@ -39,7 +39,10 @@ export function JoinDone() {
       </header>
 
       <main className="jn-main jn-main--done">
-        <div className="jn-done-art" aria-hidden="true" />
+        <div className="jn-done-art" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/bubba/done-envelope.png" alt="" />
+        </div>
 
         <h1 className="jn-done-title">You&rsquo;re on the list.</h1>
 

@@ -73,3 +73,40 @@ export function joinStepHref(index: number): string {
   const step = JOIN_STEPS[index];
   return step ? `/waitlist/${step.slug}` : "/waitlist/done";
 }
+
+/**
+ * City card artwork, keyed by a slug derived from the market name so it
+ * survives the API returning "New York" vs "New York, NY". Markets without
+ * art fall through to a plain tinted card rather than a broken image.
+ */
+const CITY_ART_SLUGS = new Set([
+  "new-york",
+  "boston",
+  "miami",
+  "los-angeles",
+  "chicago",
+  "austin",
+  "phoenix",
+  "atlanta",
+  "charlotte",
+  "denver",
+  "columbus",
+  "washington-dc",
+]);
+
+export function cityArt(marketName: string): string | null {
+  const slug = marketName
+    .toLowerCase()
+    .replace(/[.,]/g, "")
+    .replace(/\bdc\b/, "dc")
+    .trim()
+    .replace(/\s+/g, "-");
+
+  const direct = slug.split("-").slice(0, 3).join("-");
+  for (const candidate of [slug, direct, slug.replace(/-[a-z]{2}$/, "")]) {
+    if (CITY_ART_SLUGS.has(candidate)) {
+      return `/bubba/city-${candidate}.png`;
+    }
+  }
+  return null;
+}

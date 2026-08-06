@@ -56,7 +56,10 @@ export function JoinIntro() {
           experience beforehand.
         </p>
 
-        <div className="jn-intro-art" aria-hidden="true" />
+        <div className="jn-intro-art" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/bubba/intro-bench.png" alt="" />
+        </div>
 
         <form className="jn-intro-form" onSubmit={submit} noValidate>
           <label className="jn-field-label" htmlFor="jn-intro-email">
