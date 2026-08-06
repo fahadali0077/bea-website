@@ -731,3 +731,307 @@
   text-decoration: none;
   margin-top: 26px;
 }
+
+/* ============================================================
+   Desktop layer
+   ------------------------------------------------------------
+   Geometry measured from Bubba_Waitlist_Desktop.html at 1440.
+   Type and colour stay on the values extracted from
+   Join_waitlist.ai — the HTML mock substitutes Libre Caslon and
+   Instrument Sans, which are not the project's faces.
+
+   Every screen is one viewport tall, so a step never scrolls.
+   ============================================================ */
+
+@media (min-width: 1024px) {
+  .jn-page {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  /* ---- Header: wordmark left, dots right ---- */
+
+  .jn-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 84px;
+    padding: 0 64px;
+  }
+
+  .jn-brand img {
+    height: 30px;
+  }
+
+  .jn-dots {
+    margin: 0;
+    width: 220px;
+  }
+
+  /* ---- Two columns: prompt left, controls right ---- */
+
+  .jn-main {
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-columns: 400px minmax(0, 840px);
+    grid-template-rows: auto auto 1fr;
+    column-gap: 72px;
+    align-content: start;
+    justify-content: center;
+    padding: 56px 64px 0;
+    max-width: 1440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .jn-eyebrow {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 12px;
+  }
+
+  .jn-heading {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 46px;
+    line-height: 1.1;
+    margin-top: 18px;
+  }
+
+  /* The artboard's line breaks are a mobile measure — at 400px the
+     heading should rewrap on its own. */
+  .jn-heading span {
+    display: inline;
+  }
+
+  .jn-heading span + span::before {
+    content: " ";
+  }
+
+  .jn-sub {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: start;
+    font-size: 17px;
+    margin-top: 22px;
+  }
+
+  .jn-sub--aside span + span {
+    display: block;
+    font-size: 14px;
+    color: #8a8378;
+    margin-top: 6px;
+  }
+
+  .jn-body {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    margin-top: 0;
+    gap: 20px;
+  }
+
+  /* ---- City cards: four across, no scroll ---- */
+
+  .jn-cities {
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .jn-city {
+    width: auto;
+    border-radius: 12px;
+    padding-bottom: 14px;
+  }
+
+  .jn-city-art {
+    height: 180px;
+  }
+
+  .jn-city-name {
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 12px;
+  }
+
+  .jn-input {
+    padding: 17px 18px;
+  }
+
+  .jn-optout {
+    padding: 34px 24px;
+    font-size: 15px;
+  }
+
+  /* ---- Footer: actions to the right, on one line ---- */
+
+  .jn-foot {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 34px;
+    padding: 0 64px 46px;
+    max-width: 1440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .jn-error {
+    margin-right: auto;
+  }
+
+  .jn-skip {
+    font-size: 15px;
+    text-decoration: none;
+  }
+
+  .jn-skip:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .jn-cta {
+    width: auto;
+    min-width: 172px;
+    height: 58px;
+    border-radius: 10px;
+    padding: 0 54px 0 30px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .jn-cta svg {
+    right: 26px;
+  }
+
+  /* ---- Intro: copy left, illustration right ---- */
+
+  .jn-page--intro,
+  .jn-page--done {
+    text-align: left;
+  }
+
+  .jn-top--intro {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 64px;
+    height: 98px;
+  }
+
+  .jn-main--intro {
+    display: grid;
+    grid-template-columns: 560px minmax(0, 616px);
+    column-gap: 96px;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    padding: 0 64px;
+    max-width: 1440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .jn-intro-title {
+    font-size: 66px;
+    line-height: 1.06;
+  }
+
+  .jn-intro-sub {
+    font-size: 19px;
+    margin-top: 26px;
+    max-width: 440px;
+  }
+
+  /* The illustration moves to its own column. */
+  .jn-intro-art {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    margin: 0;
+    align-self: center;
+  }
+
+  .jn-intro-form {
+    max-width: 560px;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    column-gap: 14px;
+    margin-top: 34px;
+  }
+
+  .jn-intro-form .jn-field-label {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  .jn-intro-form .jn-cta {
+    height: 60px;
+  }
+
+  .jn-promise {
+    margin-top: 18px;
+  }
+
+  /* ---- Done: illustration left, detail right ---- */
+
+  .jn-main--done {
+    display: grid;
+    grid-template-columns: 584px minmax(0, 584px);
+    column-gap: 80px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    padding: 0 64px;
+    max-width: 1440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .jn-done-art {
+    grid-column: 1;
+    grid-row: 1 / span 5;
+    width: 100%;
+    justify-self: center;
+  }
+
+  .jn-done-title {
+    grid-column: 2;
+    font-size: 56px;
+    margin: 0;
+  }
+
+  .jn-done-sub {
+    grid-column: 2;
+    font-size: 18px;
+    margin-top: 12px;
+  }
+
+  .jn-place {
+    grid-column: 2;
+    margin-top: 26px;
+    padding: 30px 36px;
+    border-radius: 14px;
+  }
+
+  .jn-place-num {
+    font-size: 72px;
+  }
+
+  .jn-place-where {
+    font-size: 15px;
+  }
+
+  .jn-invite {
+    grid-column: 2;
+    margin-top: 24px;
+  }
+
+  .jn-done-link {
+    grid-column: 2;
+    margin-top: 20px;
+    justify-self: start;
+  }
+}

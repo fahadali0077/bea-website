@@ -60,7 +60,9 @@ export function JoinShell({
             <span key={i}>{line}</span>
           ))}
         </h1>
-        <p className="jn-sub">
+        {/* Only the city step has a smaller, dimmer second line
+            ("(This helps with launch)") — 21pt against 24pt in the .ai. */}
+        <p className={"jn-sub" + (slug === "city" ? " jn-sub--aside" : "")}>
           {step.sub.map((line, i) => (
             <span key={i}>{line}</span>
           ))}
