@@ -1989,7 +1989,7 @@
 
   .bb-footer {
     background: var(--bb-footer-bg-desk);
-    padding: 84px 0 0;
+    padding: 84px 0 28px;
   }
 
   .bb-footer-grid {
@@ -2054,13 +2054,9 @@
   }
 
   .bb-footer-base {
-    margin-top: 64px;
-    padding: 24px 0 40px;
+    margin-top: 48px;
+    padding: 24px 0 0;
     font-size: 13px;
-  }
-
-  .bb-footer-seal {
-    display: none;
   }
 
   /* ---- Cookie sheet reads as one row ---- */
