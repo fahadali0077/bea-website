@@ -8,6 +8,8 @@ import { WaitingRoomSection } from "./WaitingRoomSection";
 export function BubbaLanding() {
   return (
     <BubbaShell active="home">
+        {/* ── First screen: hero + city rail, exactly one viewport ── */}
+        <div className="bb-first">
         {/* ── Hero ── */}
         <section className="bb-hero">
           <div className="bb-shell">
@@ -35,6 +37,7 @@ export function BubbaLanding() {
             </ul>
           </div>
         </section>
+        </div>
 
         {/* ── Waiting Room ── */}
         <WaitingRoomSection />

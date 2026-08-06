@@ -521,9 +521,21 @@
    Hero
    ============================================================ */
 
+.bb-first {
+  --bb-chrome: 104px;
+  min-height: calc(100vh - var(--bb-chrome));
+  min-height: calc(100svh - var(--bb-chrome));
+  display: flex;
+  flex-direction: column;
+}
+
 .bb-hero {
   text-align: center;
-  padding: clamp(96px, 22vh, 190px) 0 clamp(60px, 14vh, 120px);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 0;
 }
 
 .bb-hero-title {
@@ -556,7 +568,7 @@
 /* Launching-in city rail */
 
 .bb-rail {
-  padding: 8px 0 clamp(40px, 6vw, 68px);
+  padding: 0 0 clamp(26px, 5vh, 54px);
   text-align: center;
 }
 
@@ -873,6 +885,10 @@
 /* ============================================================
    Announcement strip
    ============================================================ */
+
+.bb-announce p {
+  margin: 0;
+}
 
 .bb-announce {
   background: var(--bb-announce);
@@ -1759,13 +1775,17 @@
 
   /* ---- Hero ---- */
 
+  .bb-first {
+    --bb-chrome: 120px;
+  }
+
   .bb-hero {
-    padding: 150px 0 0;
+    padding: 32px 0;
   }
 
   .bb-hero-title {
-    font-size: 132px;
-    line-height: 0.94;
+    font-size: min(8.4vw, 13vh);
+    line-height: 0.98;
   }
 
   .bb-hero-sub {
@@ -1782,7 +1802,7 @@
   }
 
   .bb-rail {
-    padding: 96px 0 84px;
+    padding: 0 0 clamp(40px, 7vh, 84px);
   }
 
   .bb-rail-cities {
