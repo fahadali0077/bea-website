@@ -37,6 +37,21 @@
   --bb-closer-bg: #f2f1ec;
   --bb-footer-bg-desk: #edebe6;
 
+  /* Text greys taken verbatim from Final_Mobile_website_home_page.ai */
+  --bb-ai-announce: #214c37;
+  --bb-ai-wr-green: #1d442e;
+  --bb-ai-eyebrow-sub: #7c7c7c;
+  --bb-ai-body-dark: #383838;
+  --bb-ai-lede: #7a7a7a;
+  --bb-ai-caption: #565656;
+  --bb-ai-about: #2d2d2d;
+  --bb-ai-cookie: #636363;
+  --bb-ai-closer-sub: #676669;
+  --bb-ai-legal: #777777;
+  --bb-ai-social: #111111;
+  --bb-ai-placeholder: #999999;
+  --bb-ai-units: #3a3a3a;
+
   /* Type */
   --bb-display: "Canela Text", var(--font-fraunces), Georgia, "Times New Roman",
     serif;
@@ -116,7 +131,7 @@
 }
 
 .bb-eyebrow--muted {
-  color: var(--bb-muted);
+  color: var(--bb-ai-eyebrow-sub);
 }
 
 @media (min-width: 768px) {
@@ -485,7 +500,7 @@
 }
 
 .bb-capture-input::placeholder {
-  color: var(--bb-faint);
+  color: var(--bb-ai-placeholder);
 }
 
 .bb-capture-btn {
@@ -554,7 +569,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--bb-muted);
+  color: var(--bb-ai-eyebrow-sub);
 }
 
 .bb-hero-capture {
@@ -628,7 +643,7 @@
 .bb-moment-lede {
   margin: 14px auto 0;
   max-width: 42ch;
-  color: var(--bb-muted);
+  color: var(--bb-ai-lede);
   font-size: 15px;
   line-height: 1.7;
 }
@@ -702,7 +717,7 @@
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.15em;
-  color: var(--bb-faint);
+  color: var(--bb-ai-units);
 }
 
 .bb-dial-bolt {
@@ -727,7 +742,7 @@
 .bb-scene-caption {
   margin: 18px 0 0;
   font-size: 13.5px;
-  color: var(--bb-muted);
+  color: var(--bb-ai-caption);
 }
 
 /* ============================================================
@@ -778,14 +793,14 @@
 .bb-wr-title {
   font-size: clamp(30px, 8.5vw, 40px);
   line-height: 1.05;
-  color: var(--bb-green);
+  color: var(--bb-ai-wr-green);
   margin-top: 20px;
 }
 
 .bb-wr-lede {
   font-size: 15px;
   line-height: 1.55;
-  color: var(--bb-green);
+  color: var(--bb-ai-body-dark);
   margin-top: 12px;
   max-width: 330px;
   margin-left: auto;
@@ -828,7 +843,7 @@
 .bb-wr-item-body {
   font-size: 13.5px;
   line-height: 1.5;
-  color: var(--bb-green);
+  color: var(--bb-ai-body-dark);
   margin-top: 3px;
 }
 
@@ -892,7 +907,7 @@
 
 .bb-announce {
   background: var(--bb-announce);
-  color: var(--bb-green);
+  color: var(--bb-ai-announce);
   text-align: center;
   padding: 11px 14px;
   font-size: 12.5px;
@@ -939,7 +954,7 @@
 .bb-cookie-body {
   font-size: 14.5px;
   line-height: 1.55;
-  color: var(--bb-body);
+  color: var(--bb-ai-cookie);
   max-width: 420px;
 }
 
@@ -992,13 +1007,13 @@
 .bb-closer-title {
   font-family: var(--bb-display);
   font-size: 24px;
-  color: var(--bb-green);
+  color: var(--bb-ink);
   margin: 0 0 6px;
 }
 
 .bb-closer-sub {
   font-size: 13.5px;
-  color: var(--bb-muted);
+  color: var(--bb-ai-closer-sub);
   margin: 0 0 18px;
 }
 
@@ -1037,7 +1052,7 @@
 .bb-footer-about {
   font-size: 13px;
   line-height: 1.75;
-  color: var(--bb-body);
+  color: var(--bb-ai-about);
   margin: 0;
 }
 
@@ -1693,7 +1708,7 @@
   align-items: center;
   gap: 12px;
   font-size: 15px;
-  color: var(--bb-ink);
+  color: var(--bb-ai-social);
   text-decoration: none;
 }
 
@@ -1708,7 +1723,7 @@
 
 .bb-drawer-legal a {
   font-size: 14px;
-  color: var(--bb-faint);
+  color: var(--bb-ai-legal);
   text-decoration: none;
 }
 
