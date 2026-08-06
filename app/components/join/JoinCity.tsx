@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { X } from "lucide-react";
 
 import { useListMarketsQuery } from "@/features/api/apiSlice";
 import { updateWaitlistForm } from "@/features/waitlist/waitlist.slice";
@@ -10,47 +11,66 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { JoinShell } from "./JoinShell";
 
+/** "Boston" + "MA" reads as "Boston, MA" under the name in the chosen row. */
+function where(city: string | null, state: string | null) {
+  return [city, state].filter(Boolean).join(", ") || null;
+}
+
 export function JoinCity() {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const selected = useAppSelector((s) => s.waitlist.form.marketId);
+  const form = useAppSelector((s) => s.waitlist.form);
   const [search, setSearch] = useState("");
+  const [meta, setMeta] = useState<string | null>(null);
 
-  const { data, isLoading } = useListMarketsQuery({
-    search: search.trim() || undefined,
-    limit: 12,
-  });
-  const markets = data?.items ?? [];
+  /* The card rail always shows the featured markets — typing filters the
+     dropdown, not the rail, so the cards don't vanish mid-search. */
+  const { data: featured, isLoading } = useListMarketsQuery({ limit: 12 });
+  const cards = featured?.items ?? [];
 
-  const choose = (id: string, name: string) =>
+  const { data: found, isFetching } = useListMarketsQuery(
+    { search: search.trim(), limit: 6 },
+    { skip: search.trim().length < 2 },
+  );
+  const results = found?.items ?? [];
+
+  const choose = (id: string, name: string, place: string | null) => {
     dispatch(updateWaitlistForm({ marketId: id, marketName: name }));
+    setMeta(place);
+    setSearch("");
+  };
+
+  const clear = () => {
+    dispatch(updateWaitlistForm({ marketId: null, marketName: null }));
+    setMeta(null);
+  };
+
+  const showResults = search.trim().length >= 2 && !form.marketId;
 
   return (
     <JoinShell
       slug="city"
-      canContinue={Boolean(selected)}
+      canContinue={Boolean(form.marketId)}
       skip={{
         label: "Continue without a market",
         onClick: () => {
-          dispatch(updateWaitlistForm({ marketId: null, marketName: null }));
+          clear();
           router.push(joinStepHref(joinStepIndex("city") + 1));
         },
       }}
     >
-      {/* Horizontal card rail — the design lets the fourth card bleed off
-          the right edge as an affordance that it scrolls. */}
       <ul className="jn-cities">
         {isLoading
           ? [0, 1, 2].map((i) => <li key={i} className="jn-city jn-city--ghost" />)
-          : markets.map((m) => (
+          : cards.map((m) => (
               <li key={m.id}>
                 <button
                   type="button"
                   className={
-                    "jn-city" + (selected === m.id ? " jn-city--on" : "")
+                    "jn-city" + (form.marketId === m.id ? " jn-city--on" : "")
                   }
-                  onClick={() => choose(m.id, m.name)}
-                  aria-pressed={selected === m.id}
+                  onClick={() => choose(m.id, m.name, where(m.city, m.state))}
+                  aria-pressed={form.marketId === m.id}
                 >
                   <span className="jn-city-art" aria-hidden="true">
                     {cityArt(m.name) ? (
@@ -73,7 +93,52 @@ export function JoinCity() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         aria-label="Search market"
+        role="combobox"
+        aria-expanded={showResults}
+        aria-controls="jn-city-results"
       />
+
+      {showResults ? (
+        <ul className="jn-results" id="jn-city-results" role="listbox">
+          {isFetching && results.length === 0 ? (
+            <li className="jn-results-note">Searching…</li>
+          ) : results.length === 0 ? (
+            <li className="jn-results-note">
+              No market matches &ldquo;{search.trim()}&rdquo; yet.
+            </li>
+          ) : (
+            results.map((m) => (
+              <li key={m.id} role="option" aria-selected={false}>
+                <button
+                  type="button"
+                  onClick={() => choose(m.id, m.name, where(m.city, m.state))}
+                >
+                  <span className="jn-result-name">{m.name}</span>
+                  {where(m.city, m.state) ? (
+                    <span className="jn-result-meta">
+                      {where(m.city, m.state)}
+                    </span>
+                  ) : null}
+                </button>
+              </li>
+            ))
+          )}
+        </ul>
+      ) : null}
+
+      {/* Whatever the route in — card or dropdown — the choice reads back
+          the same way, with a clear affordance. */}
+      {form.marketId ? (
+        <div className="jn-chosen">
+          <span>
+            <span className="jn-chosen-name">{form.marketName}</span>
+            {meta ? <span className="jn-chosen-meta">{meta}</span> : null}
+          </span>
+          <button type="button" onClick={clear} aria-label="Clear city">
+            <X size={16} strokeWidth={2} />
+          </button>
+        </div>
+      ) : null}
     </JoinShell>
   );
 }

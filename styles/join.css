@@ -327,6 +327,13 @@
   margin-top: 2px;
 }
 
+.jn-results-note {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--jn-meta);
+  background: #fff;
+}
+
 .jn-chosen {
   display: flex;
   align-items: center;
