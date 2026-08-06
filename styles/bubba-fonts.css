@@ -70,12 +70,6 @@
   font-display: swap;
 }
 
-/* ---- Lato Medium (500) ----
-   Google Fonts and Fontsource both stop at 100/300/400/700/900, and the
-   supplied archive has no Medium either. The design uses Lato-Medium for
-   most body copy. Lato 2.015 from latofonts.com does include it under the
-   OFL — free for commercial use. Drop Lato-Medium.woff2 into /public/fonts
-   and add the url() below; until then this resolves locally or falls to 400. */
 
 @font-face {
   font-family: "Lato Web";
