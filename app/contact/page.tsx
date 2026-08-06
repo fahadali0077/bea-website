@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
-import { BubbaFooter } from "@/app/components/bubba/BubbaFooter";
-import { BubbaNav } from "@/app/components/bubba/BubbaNav";
+import { BubbaShell } from "@/app/components/bubba/BubbaShell";
 import { BUBBA_BRAND } from "@/lib/bubba-content";
 
 import "@/styles/bubba.css";
@@ -14,10 +13,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="bb-page">
-      <BubbaNav />
-
-      <main className="bb-main">
+    <BubbaShell showCapture={false}>
         <div className="bb-shell">
           <header className="bb-doc" style={{ paddingBottom: 0 }}>
             <p className="bb-eyebrow bb-eyebrow--muted">Get in touch</p>
@@ -106,9 +102,6 @@ export default function ContactPage() {
             </section>
           </div>
         </div>
-      </main>
-
-      <BubbaFooter showCapture={false} />
-    </div>
+    </BubbaShell>
   );
 }

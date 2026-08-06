@@ -2,9 +2,18 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { ArrowRight, Instagram, Menu, Music2, X } from "lucide-react";
 
-import { BUBBA_BRAND, BUBBA_NAV_LINKS, type BubbaNavKey } from "@/lib/bubba-content";
+import {
+  BUBBA_BRAND,
+  BUBBA_DRAWER_LEGAL,
+  BUBBA_DRAWER_LINKS,
+  BUBBA_NAV_LINKS,
+  BUBBA_SOCIALS,
+  type BubbaNavKey,
+} from "@/lib/bubba-content";
+
+const SOCIAL_ICONS = { instagram: Instagram, tiktok: Music2 } as const;
 
 type Props = {
   active?: BubbaNavKey;
@@ -70,7 +79,8 @@ export function BubbaNav({ active = "home" }: Props) {
 
           <div className="bb-nav-right">
             <Link href="/waitlist/start" className="bb-btn bb-btn--ink bb-nav-cta">
-              Join waitlist
+              <span className="bb-nav-cta-long">Join waitlist</span>
+              <span className="bb-nav-cta-short">Join</span>
             </Link>
           </div>
         </div>
@@ -97,30 +107,63 @@ export function BubbaNav({ active = "home" }: Props) {
               </button>
             </div>
 
-            <div className="bb-drawer-links">
-                {BUBBA_NAV_LINKS.map((link) => (
+            <nav className="bb-drawer-links">
+              {BUBBA_DRAWER_LINKS.map((link) => (
                 <Link
-                  key={link.key}
+                  key={link.href}
                   href={link.href}
                   className="bb-drawer-link"
                   onClick={() => setOpen(false)}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
+                  <ArrowRight size={18} strokeWidth={1.6} />
                 </Link>
               ))}
-              <Link href="/faq" className="bb-drawer-link" onClick={() => setOpen(false)}>
-                FAQ
-              </Link>
+            </nav>
+
+            <Link
+              href="/waitlist/start"
+              className="bb-drawer-card"
+              onClick={() => setOpen(false)}
+            >
+              <span>
+                <span className="bb-drawer-card-title">Be the first to know</span>
+                <span className="bb-drawer-card-body">
+                  Join the waitlist for early access to Bubba
+                </span>
+              </span>
+              <span className="bb-drawer-card-go" aria-hidden="true">
+                <ArrowRight size={17} strokeWidth={2} />
+              </span>
+            </Link>
+
+            <div className="bb-drawer-social">
+              {BUBBA_SOCIALS.map((social) => {
+                const Icon = SOCIAL_ICONS[social.key];
+                return (
+                  <a
+                    key={social.key}
+                    href={social.href}
+                    className="bb-drawer-social-link"
+                  >
+                    <Icon size={18} strokeWidth={1.6} />
+                    <span>{social.label}</span>
+                  </a>
+                );
+              })}
             </div>
 
-            <div className="bb-drawer-foot">
-              <Link
-                href="/waitlist/start"
-                className="bb-btn bb-btn--solid"
-                onClick={() => setOpen(false)}
-              >
-                Join waitlist
-              </Link>
+            <div className="bb-drawer-legal">
+              {BUBBA_DRAWER_LEGAL.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <p className="bb-drawer-year">Bubba {new Date().getFullYear()}</p>
             </div>
           </div>
         </>

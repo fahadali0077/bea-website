@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { BubbaFooter } from "@/app/components/bubba/BubbaFooter";
-import { BubbaNav } from "@/app/components/bubba/BubbaNav";
+import { BubbaShell } from "@/app/components/bubba/BubbaShell";
 import { BUBBA_LEGAL_DOCS, getLegalDoc } from "@/lib/bubba-legal";
 
 import "@/styles/bubba.css";
@@ -29,10 +28,7 @@ export default async function LegalPage({ params }: Props) {
   }
 
   return (
-    <div className="bb-page">
-      <BubbaNav />
-
-      <main className="bb-main">
+    <BubbaShell showCapture={false}>
         <div className="bb-shell bb-shell--narrow bb-doc">
           <h1 className="bb-display bb-display--md bb-doc-title">{doc.title}</h1>
           <p className="bb-doc-updated">Last updated: {doc.updated}</p>
@@ -74,9 +70,6 @@ export default async function LegalPage({ params }: Props) {
             ))}
           </div>
         </div>
-      </main>
-
-      <BubbaFooter showCapture={false} />
-    </div>
+    </BubbaShell>
   );
 }

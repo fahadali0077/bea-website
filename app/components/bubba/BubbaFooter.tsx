@@ -47,14 +47,6 @@ export function BubbaFooter({ showCapture = true }: Props) {
               </p>
               <p className="bb-footer-about">{BUBBA_FOOTER_ABOUT}</p>
 
-              <div className="bb-footer-social">
-                <a href="https://instagram.com" aria-label="Bubba on Instagram">
-                  <Instagram size={16} strokeWidth={1.7} />
-                </a>
-                <a href="https://tiktok.com" aria-label="Bubba on TikTok">
-                  <Music2 size={16} strokeWidth={1.7} />
-                </a>
-              </div>
             </div>
 
             <div>
@@ -66,6 +58,17 @@ export function BubbaFooter({ showCapture = true }: Props) {
                   </li>
                 ))}
               </ul>
+
+              <div className="bb-footer-social">
+                <a href="https://instagram.com" aria-label="Bubba on Instagram">
+                  <Instagram size={19} strokeWidth={1.6} />
+                </a>
+                <a href="https://tiktok.com" aria-label="Bubba on TikTok">
+                  <Music2 size={19} strokeWidth={1.6} />
+                </a>
+              </div>
+
+              <hr className="bb-footer-sep" />
             </div>
 
             <div>

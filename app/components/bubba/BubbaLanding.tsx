@@ -2,16 +2,12 @@ import { BUBBA_BRAND, BUBBA_LAUNCH_CITIES } from "@/lib/bubba-content";
 
 import { BubbaCapture } from "./BubbaCapture";
 import { BubbaDial } from "./BubbaDial";
-import { BubbaFooter } from "./BubbaFooter";
-import { BubbaNav } from "./BubbaNav";
+import { BubbaShell } from "./BubbaShell";
 import { WaitingRoomSection } from "./WaitingRoomSection";
 
 export function BubbaLanding() {
   return (
-    <div className="bb-page">
-      <BubbaNav active="home" />
-
-      <main className="bb-main">
+    <BubbaShell active="home">
         {/* ── Hero ── */}
         <section className="bb-hero">
           <div className="bb-shell">
@@ -29,7 +25,7 @@ export function BubbaLanding() {
         {/* ── Launching in ── */}
         <section className="bb-rail">
           <div className="bb-shell">
-            <p className="bb-eyebrow bb-eyebrow--muted">Launching this fall</p>
+            <p className="bb-eyebrow bb-eyebrow--muted">Launching this summer</p>
             <ul className="bb-rail-cities">
               {BUBBA_LAUNCH_CITIES.map((city) => (
                 <li key={city} className="bb-rail-city">
@@ -43,7 +39,7 @@ export function BubbaLanding() {
         {/* ── The moment: signature countdown ── */}
         <section className="bb-moment">
           <div className="bb-shell">
-            <p className="bb-eyebrow bb-eyebrow--muted">Designed for the moment</p>
+            <p className="bb-eyebrow">Designed for the moment</p>
             <h2
               className="bb-display bb-display--lg"
               style={{ marginTop: 14 }}
@@ -51,7 +47,7 @@ export function BubbaLanding() {
               24 hours to chat
             </h2>
             <p className="bb-moment-lede">
-              You only see recently active people. Every conversation lasts 24
+              Only see recently active profiles. Every conversation lasts 24
               hours.
             </p>
 
@@ -64,17 +60,12 @@ export function BubbaLanding() {
               src={BUBBA_BRAND.scene}
               alt="An illustrated street scene of people meeting up around the city"
             />
-            <p className="bb-scene-caption">
-              Real people. Real moments. Right now.
-            </p>
+            <p className="bb-scene-caption">Right people. Right now.</p>
           </div>
         </section>
 
         {/* ── Waiting Room ── */}
         <WaitingRoomSection />
-      </main>
-
-      <BubbaFooter />
-    </div>
+    </BubbaShell>
   );
 }

@@ -223,4 +223,65 @@ export const BUBBA_FOOTER_LEGAL = [
 ] as const;
 
 export const BUBBA_FOOTER_ABOUT =
-  "Bubba was started to reduce the friction found in modern dating apps. Each conversation is limited to 24 hours and you only see recently active profiles, so you can get on a date the very same day. We celebrate dating for the sake of dating — learning about yourself and experiencing life through new people and new adventures.";
+  "Bubba was started to reduce friction found in modern dating apps. Each conversation is limited to 24 hours and users only see recently active profiles, designed to get you on a date the very same day. We celebrate dating for the sake of dating, learning about yourself, and experiencing life through new people and adventures.";
+
+/** Site-wide announcement strip above the nav. */
+export const BUBBA_ANNOUNCEMENT =
+  "The Waiting Room opens August 18\u201324 at participating schools.";
+
+export const BUBBA_COOKIE_NOTICE = {
+  body: "We use cookies to improve your experience, remember your settings, and help us build a better Bubba.",
+  accept: "Continue",
+  preferences: "Preferences",
+} as const;
+
+/** Mobile drawer — a longer list than the desktop nav rail. */
+export const BUBBA_DRAWER_LINKS = [
+  { label: "The Waiting Room", href: "/#waiting-room" },
+  { label: "Ambassadors", href: "/login" },
+  { label: "FAQs", href: "/faq" },
+  { label: "Contact", href: "/contact" },
+] as const;
+
+export const BUBBA_DRAWER_LEGAL = [
+  { label: "Privacy Policy", href: "/legal/privacy" },
+  { label: "Terms of Use", href: "/legal/terms" },
+  { label: "Cookies", href: "/legal/cookies" },
+] as const;
+
+export const BUBBA_SOCIALS = [
+  { key: "instagram", label: "Instagram", href: "https://instagram.com" },
+  { key: "tiktok", label: "TikTok", href: "https://tiktok.com" },
+] as const;
+
+/**
+ * The Waiting Room announcement card. Dates are deliberately unset — the
+ * design calls for "TBD" until ambassador onboarding closes.
+ */
+export const BUBBA_WAITING_ROOM = {
+  month: "September",
+  day: "TBD",
+  note: "We\u2019ll announce dates after ambassador onboarding is complete",
+  title: "The Waiting Room",
+  lede: "One week of daily prompts at selected schools across the country.",
+  items: [
+    {
+      key: "prompt",
+      title: "One daily prompt",
+      body: "See, like, & contribute responses to a sample of our icebreakers",
+    },
+    {
+      key: "compete",
+      title: "Compete across campus",
+      body: "Earn points for your responses, and have a few laughs",
+    },
+    {
+      key: "prizes",
+      title: "Redeem prizes",
+      body: "Use your points for exclusive Bubba merch & app perks",
+    },
+  ],
+  footnote:
+    "Cities will launch one at a time shortly after the waiting room ends",
+  cta: { label: "Learn more", href: "/calendar" },
+} as const;

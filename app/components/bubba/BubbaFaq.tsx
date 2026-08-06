@@ -6,17 +6,13 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 
 import { BUBBA_BRAND, BUBBA_FAQS } from "@/lib/bubba-content";
 
-import { BubbaFooter } from "./BubbaFooter";
-import { BubbaNav } from "./BubbaNav";
+import { BubbaShell } from "./BubbaShell";
 
 export function BubbaFaq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="bb-page">
-      <BubbaNav />
-
-      <main className="bb-main">
+    <BubbaShell>
         <div className="bb-shell">
           <header className="bb-faq-head">
             <p className="bb-eyebrow bb-eyebrow--muted">
@@ -91,9 +87,6 @@ export function BubbaFaq() {
             </div>
           </section>
         </div>
-      </main>
-
-      <BubbaFooter />
-    </div>
+    </BubbaShell>
   );
 }

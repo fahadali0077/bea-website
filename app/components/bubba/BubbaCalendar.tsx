@@ -5,17 +5,13 @@ import { ChevronDown } from "lucide-react";
 
 import { BUBBA_MARKETS } from "@/lib/bubba-content";
 
-import { BubbaFooter } from "./BubbaFooter";
-import { BubbaNav } from "./BubbaNav";
+import { BubbaShell } from "./BubbaShell";
 
 export function BubbaCalendar() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <div className="bb-page">
-      <BubbaNav active="calendar" />
-
-      <main className="bb-main">
+    <BubbaShell active="calendar">
         <div className="bb-shell bb-shell--wide">
           <header className="bb-cal-head">
             <p className="bb-eyebrow bb-eyebrow--muted">Launch calendar</p>
@@ -89,9 +85,6 @@ export function BubbaCalendar() {
             })}
           </ul>
         </div>
-      </main>
-
-      <BubbaFooter />
-    </div>
+    </BubbaShell>
   );
 }
