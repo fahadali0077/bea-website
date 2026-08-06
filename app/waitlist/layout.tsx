@@ -3,23 +3,28 @@ import { Suspense } from "react";
 
 import { WaitlistReferralInitializer } from "@/app/components/providers/WaitlistReferralInitializer";
 
-import "@/styles/waitlist-fonts.css";
-import "@/styles/waitlist.css";
-import "@/styles/waitlist-mobile.css";
-import "@/styles/waitlist-coded.css";
+import "@/styles/join.css";
 
 export const metadata: Metadata = {
-  title: "Join the waitlist — Bea",
-  description: "Together, today. Join the Bea waitlist for early access.",
+  title: "Join the waitlist — Bubba",
+  description: "Join the Bubba waitlist for early access in your city.",
 };
 
-export default function WaitlistLayout({ children }: { children: React.ReactNode }) {
+/**
+ * The four legacy artboard stylesheets are gone — the flow no longer renders
+ * pixel-mapped overlays, so waitlist.css and friends had nothing left to
+ * style here. The referral initialiser stays: it reads ?ref= off the URL and
+ * seeds the redux form before any step mounts.
+ */
+export default function WaitlistLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <div className="waitlist-artboard-root">
-      <Suspense fallback={null}>
-        <WaitlistReferralInitializer />
-      </Suspense>
+    <Suspense fallback={null}>
+      <WaitlistReferralInitializer />
       {children}
-    </div>
+    </Suspense>
   );
 }

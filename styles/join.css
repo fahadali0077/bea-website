@@ -1,0 +1,711 @@
+/* ============================================================
+   Waitlist join flow — mobile
+   ------------------------------------------------------------
+   Type, colour and size taken from Join_waitlist.ai. Artboards
+   are 562pt wide; point sizes are scaled by 390/562 = 0.694, so
+   a 36pt heading lands at 25px and 24pt body at 16.5px.
+
+   Namespaced `jn-` so nothing here collides with bubba.css or
+   the legacy waitlist.css.
+   ============================================================ */
+
+.jn-page {
+  --jn-paper: #fcfbfb;
+  --jn-ink: #000000;
+  --jn-green: #043e25;
+  --jn-green-btn: #20452f;
+  --jn-blue: #3185e8;
+  --jn-eyebrow: #576d9f;
+  --jn-body: #676669;
+  --jn-slate: #303a46;
+  --jn-meta: #727272;
+  --jn-placeholder: #8d8d8d;
+  --jn-line: #e2e2e2;
+  --jn-tint: #e7f1f8;
+  --jn-optout: #eeeeea;
+
+  --jn-serif: var(--bb-canela-text, "Canela Text", Georgia, serif);
+  --jn-display: var(--bb-canela, "Canela", Georgia, serif);
+  --jn-ui: -apple-system, "SF Pro Display", BlinkMacSystemFont, system-ui,
+    var(--font-sans), sans-serif;
+  --jn-label: "Suisse Intl", "SuisseIntl", var(--jn-ui);
+
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--jn-paper);
+  color: var(--jn-ink);
+  font-family: var(--jn-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+.jn-page *,
+.jn-page *::before,
+.jn-page *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Top bar + dots ---------- */
+
+.jn-top {
+  padding: 22px 22px 0;
+}
+
+.jn-brand {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.jn-brand img {
+  height: 26px;
+  width: auto;
+}
+
+.jn-dots {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.jn-dot {
+  display: flex;
+  align-items: center;
+  flex: 1 1 0;
+}
+
+.jn-dot:last-child {
+  flex: 0 0 auto;
+}
+
+.jn-dot-mark {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1.5px solid #c9cdc9;
+  background: transparent;
+  flex: none;
+}
+
+.jn-dot--done .jn-dot-mark,
+.jn-dot--now .jn-dot-mark {
+  background: var(--jn-green-btn);
+  border-color: var(--jn-green-btn);
+}
+
+/* The rule that trails each dot except the last. */
+.jn-dot:not(:last-child)::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: #d8dcd8;
+  margin: 0 6px;
+}
+
+.jn-dot--done:not(:last-child)::after {
+  background: var(--jn-green-btn);
+}
+
+/* ---------- Step head ---------- */
+
+.jn-main {
+  flex: 1 1 auto;
+  padding: 26px 22px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.jn-eyebrow {
+  font-family: var(--jn-label);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--jn-eyebrow);
+  margin: 0;
+}
+
+.jn-heading {
+  font-family: var(--jn-serif);
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 1.28;
+  color: var(--jn-ink);
+  margin: 12px 0 0;
+}
+
+.jn-heading span {
+  display: block;
+}
+
+.jn-sub {
+  font-size: 16.5px;
+  line-height: 1.45;
+  color: var(--jn-body);
+  margin: 14px 0 0;
+}
+
+.jn-sub span {
+  display: block;
+}
+
+.jn-body {
+  margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---------- Fields ---------- */
+
+.jn-input {
+  width: 100%;
+  border: 1px solid var(--jn-line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 15px 16px;
+  /* 16px rather than the design's 12.5px: anything under 16 makes iOS
+     Safari zoom the viewport on focus, which breaks the layout mid-flow. */
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--jn-ink);
+  outline: 0;
+}
+
+.jn-input::placeholder {
+  color: var(--jn-placeholder);
+  font-size: 14px;
+}
+
+.jn-input:focus {
+  border-color: var(--jn-green-btn);
+  box-shadow: 0 0 0 3px rgba(32, 69, 47, 0.08);
+}
+
+.jn-field {
+  display: block;
+}
+
+.jn-field-label {
+  display: block;
+  font-size: 12.5px;
+  color: var(--jn-placeholder);
+  margin-bottom: 7px;
+}
+
+.jn-hint,
+.jn-error {
+  font-size: 13px;
+  margin: 0;
+  color: #b3452f;
+}
+
+.jn-empty {
+  font-size: 14.5px;
+  color: var(--jn-body);
+  margin: 0;
+}
+
+/* ---------- City rail ---------- */
+
+.jn-cities {
+  list-style: none;
+  margin: 0 -22px;
+  padding: 0 22px;
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-padding-left: 22px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.jn-cities::-webkit-scrollbar {
+  display: none;
+}
+
+.jn-city {
+  width: 108px;
+  flex: none;
+  scroll-snap-align: start;
+  border: 1px solid var(--jn-line);
+  border-radius: 10px;
+  background: #fff;
+  padding: 0 0 10px;
+  cursor: pointer;
+  font-family: inherit;
+  display: block;
+  overflow: hidden;
+}
+
+.jn-city--ghost {
+  height: 140px;
+  background: #f2f2f0;
+  border-color: transparent;
+}
+
+.jn-city-art {
+  display: block;
+  height: 96px;
+  background: linear-gradient(180deg, #eef3f8 0%, #f7f9f6 100%);
+}
+
+.jn-city-name {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #3a3a3a;
+  text-align: center;
+  margin-top: 9px;
+}
+
+.jn-city--on {
+  border-color: var(--jn-blue);
+  box-shadow: 0 0 0 2px rgba(49, 133, 232, 0.18);
+}
+
+.jn-or-label {
+  font-family: var(--jn-label);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--jn-eyebrow);
+  margin: 6px 0 0;
+}
+
+/* ---------- Campus ---------- */
+
+.jn-results {
+  list-style: none;
+  margin: -6px 0 0;
+  padding: 0;
+  border: 1px solid var(--jn-line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.jn-results button {
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: 0;
+  border-bottom: 1px solid var(--jn-line);
+  padding: 13px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  display: block;
+}
+
+.jn-results li:last-child button {
+  border-bottom: 0;
+}
+
+.jn-result-name {
+  display: block;
+  font-size: 15px;
+  color: var(--jn-ink);
+}
+
+.jn-result-meta {
+  display: block;
+  font-size: 12.5px;
+  color: var(--jn-meta);
+  margin-top: 2px;
+}
+
+.jn-chosen {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--jn-tint);
+  border: 1px solid #cfe1f2;
+  border-radius: 8px;
+  padding: 13px 14px 13px 16px;
+}
+
+.jn-chosen-name {
+  display: block;
+  font-size: 16.5px;
+  color: var(--jn-ink);
+}
+
+.jn-chosen-meta {
+  display: block;
+  font-size: 12.5px;
+  color: var(--jn-meta);
+  margin-top: 2px;
+}
+
+.jn-chosen button {
+  border: 0;
+  background: transparent;
+  color: var(--jn-slate);
+  cursor: pointer;
+  line-height: 0;
+  padding: 4px;
+}
+
+.jn-or {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 4px 0;
+}
+
+.jn-or::before,
+.jn-or::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--jn-line);
+}
+
+.jn-or span {
+  font-family: var(--jn-label);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--jn-eyebrow);
+}
+
+.jn-optout {
+  width: 100%;
+  background: var(--jn-optout);
+  border: 1px solid #e2e2dd;
+  border-radius: 10px;
+  padding: 30px 20px;
+  font-family: inherit;
+  font-size: 14.5px;
+  color: var(--jn-ink);
+  cursor: pointer;
+}
+
+.jn-optout--on {
+  background: var(--jn-tint);
+  border-color: var(--jn-blue);
+}
+
+/* ---------- Ambassadors ---------- */
+
+.jn-amb {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.jn-amb-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: #fff;
+  border: 1px solid var(--jn-line);
+  border-radius: 10px;
+  padding: 13px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+
+.jn-amb-row--ghost {
+  height: 62px;
+  background: #f2f2f0;
+  border-color: transparent;
+}
+
+.jn-amb-row--on {
+  background: var(--jn-tint);
+  border-color: var(--jn-blue);
+}
+
+.jn-amb-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #dbe6f4;
+  color: var(--jn-eyebrow);
+  font-family: var(--jn-serif);
+  font-size: 12.5px;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.jn-amb-id {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.jn-amb-name {
+  display: block;
+  font-size: 16.5px;
+  color: var(--jn-ink);
+}
+
+.jn-amb-school {
+  display: block;
+  font-size: 12.5px;
+  color: var(--jn-meta);
+  margin-top: 2px;
+}
+
+.jn-amb-tick {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: var(--jn-blue);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+/* ---------- Footer actions ---------- */
+
+.jn-foot {
+  position: sticky;
+  bottom: 0;
+  background: var(--jn-paper);
+  padding: 16px 22px calc(18px + env(safe-area-inset-bottom));
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.jn-skip {
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--jn-green);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.jn-cta {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--jn-green-btn);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 17px 22px;
+  font-family: inherit;
+  font-size: 16.5px;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+}
+
+.jn-cta svg {
+  position: absolute;
+  right: 20px;
+}
+
+.jn-cta:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+/* ---------- Intro screen ---------- */
+
+.jn-page--intro,
+.jn-page--done {
+  text-align: center;
+}
+
+.jn-top--intro {
+  display: grid;
+  justify-items: center;
+  padding-top: 26px;
+}
+
+.jn-main--intro {
+  padding: 30px 22px 40px;
+  align-items: center;
+}
+
+.jn-intro-title {
+  font-family: var(--jn-serif);
+  font-weight: 400;
+  font-size: 33px;
+  line-height: 1.24;
+  color: var(--jn-green);
+  margin: 0;
+}
+
+.jn-intro-accent {
+  color: var(--jn-blue);
+}
+
+.jn-intro-sub {
+  font-size: 16.5px;
+  line-height: 1.5;
+  color: var(--jn-body);
+  margin: 16px 0 0;
+}
+
+.jn-intro-art {
+  width: 100%;
+  height: 150px;
+  margin: 26px 0 22px;
+  background: linear-gradient(180deg, #eef3f8 0%, #fbfbf9 100%);
+  border-radius: 12px;
+}
+
+.jn-intro-form {
+  width: 100%;
+  display: grid;
+  gap: 12px;
+  text-align: left;
+}
+
+.jn-promise {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  color: #878787;
+  margin: 16px 0 0;
+}
+
+.jn-promise svg {
+  color: var(--jn-eyebrow);
+}
+
+/* ---------- Done screen ---------- */
+
+.jn-main--done {
+  padding: 24px 22px 44px;
+  align-items: center;
+}
+
+.jn-done-art {
+  width: 190px;
+  height: 130px;
+  background: linear-gradient(180deg, #eef3f8 0%, #fbfbf9 100%);
+  border-radius: 12px;
+}
+
+.jn-done-title {
+  font-family: var(--jn-serif);
+  font-weight: 400;
+  font-size: 25px;
+  color: var(--jn-ink);
+  margin: 22px 0 0;
+}
+
+.jn-done-sub {
+  font-size: 16.5px;
+  line-height: 1.45;
+  color: var(--jn-slate);
+  margin: 12px 0 0;
+}
+
+.jn-done-sub strong {
+  font-weight: 700;
+}
+
+.jn-place {
+  width: 100%;
+  background: var(--jn-tint);
+  border-radius: 12px;
+  padding: 24px 20px 20px;
+  margin-top: 26px;
+}
+
+.jn-place-label {
+  font-family: var(--jn-label);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--jn-eyebrow);
+  margin: 0;
+}
+
+/* The hash is set in the UI face and the figure in Canela display,
+   exactly as the artboard has it. */
+.jn-place-num {
+  font-family: var(--jn-display);
+  font-size: 72px;
+  line-height: 1.05;
+  color: var(--jn-ink);
+  margin: 8px 0 0;
+}
+
+.jn-place-hash {
+  font-family: var(--jn-ui);
+  font-weight: 400;
+}
+
+.jn-place-where {
+  font-size: 16.5px;
+  color: var(--jn-ink);
+  margin: 4px 0 0;
+}
+
+.jn-invite {
+  width: 100%;
+  margin-top: 26px;
+}
+
+.jn-invite-label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--jn-ink);
+  margin: 0 0 10px;
+}
+
+.jn-invite-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--jn-line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 4px 6px 4px 14px;
+}
+
+.jn-invite-row input {
+  flex: 1 1 auto;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--jn-ink);
+  min-width: 0;
+  padding: 12px 0;
+}
+
+.jn-invite-row button {
+  border: 0;
+  background: transparent;
+  color: var(--jn-slate);
+  cursor: pointer;
+  padding: 9px;
+  line-height: 0;
+}
+
+.jn-done-link {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--jn-blue);
+  text-decoration: none;
+  margin-top: 26px;
+}
