@@ -12,7 +12,7 @@ export interface JoinWaitlistPayload {
   email: string;
   fullName: string;
   age: number;
-  marketId: string;
+  marketId?: string;
   schoolId?: string;
   notInSchool?: boolean;
   referralCode?: string;

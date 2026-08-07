@@ -8,6 +8,7 @@ export interface WaitlistFormState {
   age: string;
   marketId: string | null;
   marketName: string | null;
+  skippedMarket: boolean;
   schoolId: string | null;
   schoolName: string | null;
   notInSchool: boolean;
@@ -28,6 +29,7 @@ export const initialWaitlistForm: WaitlistFormState = {
   age: "",
   marketId: null,
   marketName: null,
+  skippedMarket: false,
   schoolId: null,
   schoolName: null,
   notInSchool: false,

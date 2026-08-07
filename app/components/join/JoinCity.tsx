@@ -45,13 +45,21 @@ export function JoinCity() {
   const results = found?.items ?? [];
 
   const choose = (id: string, name: string, place: string | null) => {
-    dispatch(updateWaitlistForm({ marketId: id, marketName: name }));
+    dispatch(
+      updateWaitlistForm({
+        marketId: id,
+        marketName: name,
+        skippedMarket: false,
+      }),
+    );
     setMeta(place);
     setSearch("");
   };
 
   const clear = () => {
-    dispatch(updateWaitlistForm({ marketId: null, marketName: null }));
+    dispatch(
+      updateWaitlistForm({ marketId: null, marketName: null, skippedMarket: false }),
+    );
     setMeta(null);
   };
 
@@ -64,7 +72,14 @@ export function JoinCity() {
       skip={{
         label: "Continue without a market",
         onClick: () => {
-          clear();
+          dispatch(
+            updateWaitlistForm({
+              marketId: null,
+              marketName: null,
+              skippedMarket: true,
+            }),
+          );
+          setMeta(null);
           router.push(joinStepHref(joinStepIndex("city") + 1));
         },
       }}

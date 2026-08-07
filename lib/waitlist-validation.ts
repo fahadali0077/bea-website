@@ -7,6 +7,9 @@ export function validateWaitlistStep(
 ): string | null {
   switch (step) {
     case "3":
+      if (form.skippedMarket) {
+        return null;
+      }
       if (!form.marketId || !form.marketName) {
         return "Please select a market to continue.";
       }
@@ -59,7 +62,7 @@ export function validateWaitlistFormForJoin(
     }
   }
 
-  if (!form.marketId) {
+  if (!form.marketId && !form.skippedMarket) {
     return "Please select a market to continue.";
   }
 
@@ -71,7 +74,7 @@ export function buildJoinWaitlistPayload(form: WaitlistFormState) {
     email: form.email.trim(),
     fullName: form.fullName.trim(),
     age: Number(form.age),
-    marketId: form.marketId!,
+    ...(form.marketId ? { marketId: form.marketId } : {}),
     schoolId: form.notInSchool ? undefined : (form.schoolId ?? undefined),
     referralCode: form.referralCode ?? undefined,
   };
