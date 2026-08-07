@@ -28,8 +28,8 @@ export function JoinBasics() {
         />
       </label>
 
-      <label className="jn-field">
-        <span className="jn-field-label">Age</span>
+      <label className="jn-field mt-[48.63px]">
+        <span className="jn-field-label mb-[9.97px]">Age</span>
         <input
           className="jn-input"
           type="number"

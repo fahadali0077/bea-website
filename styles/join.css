@@ -201,6 +201,10 @@
   gap: 0;
 }
 
+.jn-page--basics .jn-body {
+  margin-top: 46.24px;
+}
+
 /* ---------- Fields ---------- */
 
 .jn-input {
@@ -257,9 +261,9 @@
 
 .jn-field-label {
   display: block;
-  font-size: 12.5px;
+  font-size: 18px;
   color: var(--jn-placeholder);
-  margin-bottom: 7px;
+  margin-bottom: 13.49px;
 }
 
 .jn-hint,
@@ -680,6 +684,12 @@
   justify-items: center;
 }
 
+.jn-page--ambassador .jn-actions {
+  gap: 20.08px;
+}
+.jn-page--email .jn-body{
+    margin-top: 45.78px;
+}
 .jn-skip {
   border: 0;
   background: transparent;
@@ -696,6 +706,14 @@
   font-size: 12.5px;
   font-weight: 400;
   color: var(--jn-ink);
+}
+
+.jn-page--ambassador .jn-skip {
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 5.9px;
 }
 
 .jn-cta {
@@ -1182,12 +1200,6 @@
   .jn-skip:hover {
     text-decoration: underline;
     text-underline-offset: 3px;
-  }
-
-  .jn-page--ambassador .jn-skip {
-    font-size: 12.5px;
-    font-weight: 400;
-    color: var(--jn-ink);
   }
 
   /* ---- City: slightly wider so a 2-up card grid breathes ---- */

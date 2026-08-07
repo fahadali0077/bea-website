@@ -90,7 +90,9 @@ export function JoinIntro() {
 
           <button type="submit" className="jn-cta">
             Join the waitlist
-            <ArrowRight size={18} strokeWidth={2} />
+            <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.85 17.5623C11.5 17.2123 11.5 16.6525 11.85 16.3025L18.35 9.80254H0.890015C0.400015 9.80254 0 9.4024 0 8.9124C0 8.4224 0.400015 8.02227 0.890015 8.02227H18.35L11.85 1.52227C11.5 1.17227 11.5 0.6125 11.85 0.2625C12.2 -0.0875 12.76 -0.0875 13.11 0.2625L21.14 8.29228C21.49 8.64228 21.49 9.20254 21.14 9.55254L13.11 17.5823C12.76 17.9323 12.2 17.9323 11.85 17.5823V17.5623Z" fill="white"/>
+            </svg>
           </button>
         </form>
 
