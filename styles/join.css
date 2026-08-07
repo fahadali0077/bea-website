@@ -593,6 +593,15 @@
   justify-items: center;
 }
 
+/* Basics and campus are short, one-or-two-field steps — pinning the button
+   to the bottom of the viewport (as the city/ambassador lists need, so the
+   CTA stays reachable past a long scroll) just leaves a big empty gap here.
+   Letting the footer sit in normal flow keeps it right under the content. */
+.jn-page--basics .jn-foot,
+.jn-page--campus .jn-foot {
+  position: static;
+}
+
 .jn-skip {
   border: 0;
   background: transparent;
