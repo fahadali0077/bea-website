@@ -959,12 +959,9 @@
 /* ============================================================
    Desktop layer
    ------------------------------------------------------------
-   Geometry measured from Bubba_Waitlist_Desktop.html at 1440.
-   Type and colour stay on the values extracted from
-   Join_waitlist.ai — the HTML mock substitutes Libre Caslon and
-   Instrument Sans, which are not the project's faces.
-
-   Every screen is one viewport tall, so a step never scrolls.
+   Join steps are a single centered column — copy above, controls
+   below — so wide viewports don't open a hollow mid-gap.
+   Intro / done keep their two-pane layouts below.
    ============================================================ */
 
 @media (min-width: 1024px) {
@@ -972,8 +969,7 @@
     min-height: 100vh;
     min-height: 100svh;
     --jn-side-pad: 48px;
-    /* Keep copy and controls close — avoid the stretched mid-gap. */
-    --jn-col-gap: 40px;
+    --jn-col-gap: 48px;
     /* Match the intro input + CTA: same height, fixed control width. */
     --jn-field-h: 59px;
     --jn-btn-h: 59px;
@@ -990,8 +986,9 @@
     height: 84px;
     padding: 0 var(--jn-side-pad);
     width: 100%;
-    max-width: 1200px;
+    max-width: 1120px;
     margin-inline: auto;
+    flex: none;
   }
 
   .jn-brand img {
@@ -1003,43 +1000,37 @@
     width: 220px;
   }
 
-  /* ---- Two columns: prompt left, controls + actions right ---- */
+  /* ---- Single column: copy, then controls + actions ---- */
 
   .jn-col-copy,
   .jn-col-actions {
     display: block;
     min-width: 0;
+    width: 100%;
+    max-width: var(--jn-control-w);
   }
 
   .jn-main {
-    flex: 0 1 auto;
-    display: grid;
-    /* Cap the copy column so 1fr can't open a huge gutter. */
-    grid-template-columns: minmax(260px, 380px) var(--jn-control-w);
-    column-gap: var(--jn-col-gap);
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-content: start;
-    align-items: start;
-    padding: 36px var(--jn-side-pad) 40px;
+    gap: 0;
+    padding: 28px var(--jn-side-pad) 56px;
     width: 100%;
-    max-width: 960px;
+    max-width: none;
     margin-inline: auto;
   }
 
   .jn-col-copy {
-    grid-column: 1;
-    grid-row: 1;
-    max-width: none;
+    margin: 0 0 28px;
   }
 
   .jn-col-actions {
-    grid-column: 2;
-    grid-row: 1;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    width: var(--jn-control-w);
-    max-width: var(--jn-control-w);
+    gap: 18px;
   }
 
   .jn-eyebrow {
@@ -1047,13 +1038,13 @@
   }
 
   .jn-heading {
-    font-size: 42px;
-    line-height: 1.12;
-    margin-top: 12px;
+    font-size: 40px;
+    line-height: 1.15;
+    margin-top: 10px;
+    max-width: 20ch;
   }
 
-  /* The artboard's line breaks are a mobile measure — at 400px the
-     heading should rewrap on its own. */
+  /* The artboard's line breaks are a mobile measure — rewrap freely. */
   .jn-heading span {
     display: inline;
   }
@@ -1063,14 +1054,16 @@
   }
 
   .jn-sub {
-    font-size: 17px;
-    margin-top: 14px;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 12px;
+    max-width: 36ch;
   }
 
   .jn-sub--aside span+span {
     display: block;
-    font-size: 14.6px;
-    margin-top: 6px;
+    font-size: 14px;
+    margin-top: 4px;
   }
 
   .jn-body {
@@ -1108,10 +1101,21 @@
     text-underline-offset: 3px;
   }
 
-  /* ---- City cards: scrolls within the column, however many fit ---- */
+  /* ---- City: slightly wider so a 2-up card grid breathes ---- */
 
-  /* On desktop the city rail becomes a wrapping 2-column grid so the
-     cards are always visible without horizontal scrolling. */
+  .jn-page--city {
+    --jn-control-w: 520px;
+  }
+
+  .jn-page--city .jn-main {
+    justify-content: flex-start;
+    padding-top: 36px;
+  }
+
+  .jn-page--city .jn-heading {
+    max-width: none;
+  }
+
   .jn-cities {
     margin: 0;
     padding: 0;
@@ -1119,42 +1123,40 @@
     scroll-padding-left: 0;
     overflow-x: visible;
     flex-wrap: wrap;
-    /* Use 2 evenly-sized columns within the constrained right column */
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .jn-city {
     width: 100%;
-    height: 180px;
+    height: 168px;
     border-radius: 12px;
-    padding-bottom: 14px;
+    padding-bottom: 12px;
   }
 
   .jn-city-art {
-    height: 130px;
+    height: 120px;
   }
 
   .jn-city-name {
     font-size: 14px;
     font-weight: 500;
-    margin-top: 10px;
+    margin-top: 8px;
   }
 
-  /* Cap the card grid so the step stays within one viewport. */
   .jn-page--city .jn-cities {
-    max-height: 392px;
+    max-height: min(360px, 46vh);
     overflow-y: auto;
     overscroll-behavior: contain;
     align-content: start;
   }
 
   .jn-optout {
-    padding: 34px 24px;
+    padding: 28px 24px;
     font-size: 15px;
   }
 
-  /* ---- Campus & basics (same control column as every other step) ---- */
+  /* ---- Campus & basics ---- */
 
   .jn-page--campus .jn-sub span,
   .jn-page--basics .jn-sub span {
@@ -1166,11 +1168,17 @@
     content: " ";
   }
 
-  /* ---- Ambassadors: two across ---- */
+  .jn-page--campus .jn-heading,
+  .jn-page--ambassador .jn-heading,
+  .jn-page--email .jn-heading {
+    max-width: 16ch;
+  }
+
+  /* ---- Ambassadors: one clean list in the column ---- */
 
   .jn-amb {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px 16px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
     align-content: start;
   }
 
@@ -1329,13 +1337,13 @@
   }
 }
 
-/* Use the extra width on large screens for denser card grids. */
+/* City cards can go three-across on very wide screens. */
 @media (min-width: 1400px) {
-  .jn-cities {
-    grid-template-columns: repeat(3, 1fr);
+  .jn-page--city {
+    --jn-control-w: 640px;
   }
 
-  .jn-amb {
+  .jn-cities {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
