@@ -8,6 +8,7 @@ import { updateWaitlistForm } from "@/features/waitlist/waitlist.slice";
 import { joinStepHref, joinStepIndex } from "@/lib/join";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
+import { JoinFail } from "./JoinFail";
 import { JoinShell } from "./JoinShell";
 
 function initials(name: string) {
@@ -24,7 +25,7 @@ export function JoinAmbassador() {
   const router = useRouter();
   const form = useAppSelector((s) => s.waitlist.form);
 
-  const { data, isLoading } = useListPublicAmbassadorsQuery({
+  const { data, isLoading, isError, refetch } = useListPublicAmbassadorsQuery({
     marketId: form.marketId ?? undefined,
     schoolId: form.schoolId ?? undefined,
   });
@@ -41,7 +42,9 @@ export function JoinAmbassador() {
         },
       }}
     >
-      {isLoading ? (
+      {isError ? (
+        <JoinFail what="ambassadors" onRetry={() => void refetch()} />
+      ) : isLoading ? (
         <ul className="jn-amb">
           {[0, 1, 2].map((i) => (
             <li key={i} className="jn-amb-row jn-amb-row--ghost" />

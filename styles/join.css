@@ -147,7 +147,7 @@
 }
 
 .jn-sub {
-  font-size: 16.5px;
+  font-size: 16.65px;
   line-height: 1.45;
   color: var(--jn-body);
   margin: 14px 0 0;
@@ -155,6 +155,11 @@
 
 .jn-sub span {
   display: block;
+}
+
+/* "(This helps with launch)" is set a step down, 21pt against 24pt. */
+.jn-sub--aside span + span {
+  font-size: 14.6px;
 }
 
 .jn-body {
@@ -183,7 +188,7 @@
 
 .jn-input::placeholder {
   color: var(--jn-placeholder);
-  font-size: 14px;
+  font-size: 12.5px;
 }
 
 .jn-input:focus {
@@ -218,6 +223,40 @@
   font-size: 14.5px;
   color: var(--jn-body);
   margin: 0;
+}
+
+.jn-fail {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  padding: 16px 18px;
+  border: 1px solid #e4c9c2;
+  border-radius: 10px;
+  background: #fdf6f4;
+}
+
+.jn-fail p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #8a3a26;
+}
+
+.jn-retry {
+  border: 1px solid #8a3a26;
+  background: transparent;
+  color: #8a3a26;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 999px;
+  padding: 7px 16px;
+  cursor: pointer;
+}
+
+.jn-retry:hover {
+  background: #8a3a26;
+  color: #fff;
 }
 
 /* ---------- City rail ---------- */
@@ -278,7 +317,7 @@
 .jn-city-name {
   display: block;
   font-size: 12.5px;
-  font-weight: 600;
+  font-weight: 500;
   color: #3a3a3a;
   text-align: center;
   margin-top: 9px;
@@ -328,7 +367,7 @@
 
 .jn-result-name {
   display: block;
-  font-size: 15px;
+  font-size: 16.65px;
   color: var(--jn-ink);
 }
 
@@ -360,7 +399,7 @@
 
 .jn-chosen-name {
   display: block;
-  font-size: 16.5px;
+  font-size: 16.65px;
   color: var(--jn-ink);
 }
 
@@ -397,7 +436,7 @@
 
 .jn-or span {
   font-family: var(--jn-label);
-  font-size: 10px;
+  font-size: 9.7px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -412,7 +451,8 @@
   border-radius: 10px;
   padding: 20px;
   font-family: inherit;
-  font-size: 14.5px;
+  font-size: 12.5px;
+  font-weight: 400;
   color: var(--jn-ink);
   cursor: pointer;
 }
@@ -467,6 +507,8 @@
   color: var(--jn-eyebrow);
   font-family: var(--jn-serif);
   font-size: 12.5px;
+  font-weight: 500;
+  color: var(--jn-eyebrow);
   display: grid;
   place-items: center;
   flex: none;
@@ -479,7 +521,7 @@
 
 .jn-amb-name {
   display: block;
-  font-size: 16.5px;
+  font-size: 16.65px;
   color: var(--jn-ink);
 }
 
@@ -507,7 +549,8 @@
   position: sticky;
   bottom: 0;
   background: var(--jn-paper);
-  padding: 16px 29px calc(24px + env(safe-area-inset-bottom));
+  margin-top: 32px;
+  padding: 20px 29px calc(24px + env(safe-area-inset-bottom));
   display: grid;
   gap: 12px;
   justify-items: center;
@@ -517,12 +560,18 @@
   border: 0;
   background: transparent;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 16.65px;
   font-weight: 500;
   color: var(--jn-green);
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.jn-skip--plain {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--jn-ink);
 }
 
 .jn-cta {
@@ -538,7 +587,7 @@
   border-radius: 10px;
   padding: 0 22px;
   font-family: inherit;
-  font-size: 16.5px;
+  font-size: 16.65px;
   font-weight: 500;
   cursor: pointer;
   position: relative;
@@ -575,7 +624,7 @@
 .jn-intro-title {
   font-family: var(--jn-serif);
   font-weight: 400;
-  font-size: 33px;
+  font-size: 33.3px;
   line-height: 1.24;
   color: var(--jn-green);
   margin: 0;
@@ -586,7 +635,7 @@
 }
 
 .jn-intro-sub {
-  font-size: 16.5px;
+  font-size: 16.65px;
   line-height: 1.5;
   color: var(--jn-body);
   margin: 16px 0 0;
@@ -601,6 +650,10 @@
   width: 100%;
   height: auto;
   display: block;
+}
+
+.jn-intro-form .jn-input::placeholder {
+  color: #c4c4c4;
 }
 
 .jn-intro-form {
@@ -649,7 +702,7 @@
 }
 
 .jn-done-sub {
-  font-size: 16.5px;
+  font-size: 16.65px;
   line-height: 1.45;
   color: var(--jn-slate);
   margin: 12px 0 0;
@@ -683,7 +736,7 @@
    exactly as the artboard has it. */
 .jn-place-num {
   font-family: var(--jn-display);
-  font-size: 72px;
+  font-size: 71.8px;
   line-height: 1.05;
   color: var(--jn-ink);
   margin: 8px 0 0;
@@ -695,7 +748,7 @@
 }
 
 .jn-place-where {
-  font-size: 16.5px;
+  font-size: 16.65px;
   color: var(--jn-ink);
   margin: 4px 0 0;
 }
@@ -729,7 +782,8 @@
   outline: 0;
   background: transparent;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 16.65px;
+  font-weight: 500;
   color: var(--jn-ink);
   min-width: 0;
   padding: 12px 0;
@@ -846,8 +900,7 @@
 
   .jn-sub--aside span + span {
     display: block;
-    font-size: 14px;
-    color: #8a8378;
+    font-size: 14.6px;
     margin-top: 6px;
   }
 
@@ -894,6 +947,18 @@
     font-size: 15px;
   }
 
+  /* ---- Ambassadors: two across ---- */
+
+  .jn-amb {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 16px;
+    align-content: start;
+  }
+
+  .jn-amb-row {
+    height: 100%;
+  }
+
   /* ---- Footer: actions to the right, on one line ---- */
 
   .jn-foot {
@@ -902,7 +967,8 @@
     align-items: center;
     justify-content: flex-end;
     gap: 34px;
-    padding: 0 64px 46px;
+    margin-top: 0;
+    padding: 40px 64px 46px;
     max-width: 1440px;
     margin-inline: auto;
     width: 100%;

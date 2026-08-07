@@ -9,6 +9,7 @@ import { updateWaitlistForm } from "@/features/waitlist/waitlist.slice";
 import { cityArt, joinStepHref, joinStepIndex } from "@/lib/join";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
+import { JoinFail } from "./JoinFail";
 import { JoinShell } from "./JoinShell";
 
 /** "Boston" + "MA" reads as "Boston, MA" under the name in the chosen row. */
@@ -25,10 +26,19 @@ export function JoinCity() {
 
   /* The card rail always shows the featured markets — typing filters the
      dropdown, not the rail, so the cards don't vanish mid-search. */
-  const { data: featured, isLoading } = useListMarketsQuery({ limit: 12 });
+  const {
+    data: featured,
+    isLoading,
+    isError: featuredFailed,
+    refetch: refetchFeatured,
+  } = useListMarketsQuery({ limit: 12 });
   const cards = featured?.items ?? [];
 
-  const { data: found, isFetching } = useListMarketsQuery(
+  const {
+    data: found,
+    isFetching,
+    isError: searchFailed,
+  } = useListMarketsQuery(
     { search: search.trim(), limit: 6 },
     { skip: search.trim().length < 2 },
   );
@@ -59,6 +69,10 @@ export function JoinCity() {
         },
       }}
     >
+      {featuredFailed ? (
+        <JoinFail what="cities" onRetry={() => void refetchFeatured()} />
+      ) : null}
+
       <ul className="jn-cities">
         {isLoading
           ? [0, 1, 2].map((i) => <li key={i} className="jn-city jn-city--ghost" />)
@@ -100,7 +114,11 @@ export function JoinCity() {
 
       {showResults ? (
         <ul className="jn-results" id="jn-city-results" role="listbox">
-          {isFetching && results.length === 0 ? (
+          {searchFailed ? (
+            <li className="jn-results-note">
+              Search is unavailable right now. Try again in a moment.
+            </li>
+          ) : isFetching && results.length === 0 ? (
             <li className="jn-results-note">Searching…</li>
           ) : results.length === 0 ? (
             <li className="jn-results-note">

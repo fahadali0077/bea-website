@@ -78,8 +78,16 @@ export function JoinShell({
           </p>
         ) : null}
 
+        {/* The artboards treat these differently: the city skip is 24pt
+            medium green, the ambassador one 18pt regular ink. */}
         {skip ? (
-          <button type="button" className="jn-skip" onClick={skip.onClick}>
+          <button
+            type="button"
+            className={
+              "jn-skip" + (slug === "ambassador" ? " jn-skip--plain" : "")
+            }
+            onClick={skip.onClick}
+          >
             {skip.label}
           </button>
         ) : null}

@@ -7,6 +7,7 @@ import { useListSchoolsQuery } from "@/features/api/apiSlice";
 import { updateWaitlistForm } from "@/features/waitlist/waitlist.slice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
+import { JoinFail } from "./JoinFail";
 import { JoinShell } from "./JoinShell";
 
 export function JoinCampus() {
@@ -17,7 +18,7 @@ export function JoinCampus() {
   // rather than in the submitted form state.
   const [meta, setMeta] = useState<string | null>(null);
 
-  const { data } = useListSchoolsQuery(
+  const { data, isFetching, isError, refetch } = useListSchoolsQuery(
     { search: search.trim() || undefined, limit: 6 },
     { skip: search.trim().length < 2 },
   );
@@ -49,6 +50,23 @@ export function JoinCampus() {
         onChange={(e) => setSearch(e.target.value)}
         aria-label="Search school"
       />
+
+      {isError && search.trim().length >= 2 ? (
+        <JoinFail what="schools" onRetry={() => void refetch()} />
+      ) : null}
+
+      {/* Searching and no-match states, so an empty box never reads as broken. */}
+      {search.trim().length >= 2 && !form.schoolId && !isError ? (
+        results.length === 0 ? (
+          <ul className="jn-results">
+            <li className="jn-results-note">
+              {isFetching
+                ? "Searching…"
+                : `No school matches “${search.trim()}” yet.`}
+            </li>
+          </ul>
+        ) : null
+      ) : null}
 
       {results.length > 0 && !form.schoolId ? (
         <ul className="jn-results">

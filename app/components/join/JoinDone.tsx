@@ -13,6 +13,10 @@ export function JoinDone() {
 
   const link = joinResult?.referralLink ?? "";
   const place = waitlistPosition ?? joinResult?.waitlistPosition ?? null;
+  /* Someone can land here directly — a bookmark, a refresh after the store
+     cleared, a shared URL — with nothing to show. Say so plainly and give
+     them a way back rather than rendering an empty shell. */
+  const noResult = !joinResult && place === null;
 
   useEffect(() => {
     if (!copied) return;
@@ -44,12 +48,21 @@ export function JoinDone() {
           <img src="/bubba/done-envelope.png" alt="" />
         </div>
 
-        <h1 className="jn-done-title">You&rsquo;re on the list.</h1>
+        <h1 className="jn-done-title">
+          {noResult ? "Nothing to show yet." : "You\u2019re on the list."}
+        </h1>
 
         <p className="jn-done-sub">
-          The waiting room commences in <strong>3 days</strong>.
+          {noResult ? (
+            "We can't find a waitlist entry for this session. If you already joined, check your email for the invite."
+          ) : (
+            <>
+              The waiting room commences in <strong>3 days</strong>.
+            </>
+          )}
         </p>
 
+        {noResult ? null : (
         <section className="jn-place">
           <p className="jn-place-label">Your place in line</p>
           <p className="jn-place-num">
@@ -60,6 +73,7 @@ export function JoinDone() {
             <p className="jn-place-where">in {form.marketName}</p>
           ) : null}
         </section>
+        )}
 
         {link ? (
           <section className="jn-invite">
@@ -73,8 +87,11 @@ export function JoinDone() {
           </section>
         ) : null}
 
-        <Link href="/" className="jn-done-link">
-          Enter the waiting room
+        <Link
+          href={noResult ? "/waitlist/start" : "/"}
+          className="jn-done-link"
+        >
+          {noResult ? "Start again" : "Enter the waiting room"}
         </Link>
       </main>
     </div>
