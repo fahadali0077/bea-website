@@ -727,6 +727,13 @@
   display: grid;
   justify-items: center;
   padding-top: 26px;
+  position: relative;
+}
+
+/* Progress dots sit under the centered wordmark on mobile. */
+.jn-top--intro .jn-dots {
+  width: 100%;
+  max-width: 220px;
 }
 
 .jn-main--intro {
@@ -977,12 +984,14 @@
     --jn-btn-w: var(--jn-control-w);
   }
 
-  /* ---- Header: wordmark left, dots right — match intro top spacing ---- */
+  /* ---- Header: same chrome as intro; dots pin to the right ---- */
 
-  .jn-top {
+  .jn-top,
+  .jn-top--intro {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    position: relative;
     height: 98px;
     padding: 0 var(--jn-side-pad);
     width: 100%;
@@ -995,9 +1004,15 @@
     height: 34px;
   }
 
-  .jn-dots {
+  .jn-dots,
+  .jn-top--intro .jn-dots {
+    position: absolute;
+    right: var(--jn-side-pad);
+    top: 50%;
+    transform: translateY(-50%);
     margin: 0;
     width: 220px;
+    max-width: 220px;
   }
 
   /* ---- Single column: copy, then controls + actions ---- */
@@ -1200,16 +1215,6 @@
   .jn-page--intro,
   .jn-page--done {
     text-align: left;
-  }
-
-  .jn-top--intro {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 var(--jn-side-pad);
-    height: 98px;
-    width: 100%;
-    max-width: 1200px;
-    margin-inline: auto;
   }
 
   .jn-intro-copy {
