@@ -48,34 +48,42 @@ export function BubbaDial() {
   return (
     <div className="bb-dial">
       <svg className="bb-dial-svg" viewBox="0 0 100 100" aria-hidden="true">
-        <circle className="bb-dial-track" cx="50" cy="50" r={RADIUS} />
+        <defs>
+          <linearGradient id="bb-dial-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#9eb8a2" />
+            <stop offset="100%" stopColor="#1e3a29" />
+          </linearGradient>
+        </defs>
         <circle
-          className="bb-dial-arc"
+          className="bb-dial-track"
           cx="50"
           cy="50"
           r={RADIUS}
-          strokeDasharray={CIRCUMFERENCE}
-          strokeDashoffset={offset}
+          stroke="url(#bb-dial-grad)"
+        />
+        {/* Top black tick mark */}
+        <path
+          d="M 45,3 A 47,47 0 0,1 55,3"
+          fill="none"
+          stroke="#000"
+          strokeWidth="2.8"
+          strokeLinecap="round"
         />
       </svg>
 
       <div className="bb-dial-inner">
         <div className="bb-dial-readout" suppressHydrationWarning>
-          <div className="bb-dial-part">
+          <div className="bb-dial-group">
             <span className="bb-dial-time">{pad(h)}</span>
             <span className="bb-dial-unit">HRS</span>
           </div>
-          <span className="bb-dial-colon" aria-hidden="true">
-            :
-          </span>
-          <div className="bb-dial-part">
+          <span className="bb-dial-colon" aria-hidden="true">:</span>
+          <div className="bb-dial-group">
             <span className="bb-dial-time">{pad(m)}</span>
             <span className="bb-dial-unit">MIN</span>
           </div>
-          <span className="bb-dial-colon" aria-hidden="true">
-            :
-          </span>
-          <div className="bb-dial-part">
+          <span className="bb-dial-colon" aria-hidden="true">:</span>
+          <div className="bb-dial-group">
             <span className="bb-dial-time">{pad(s)}</span>
             <span className="bb-dial-unit">SEC</span>
           </div>
