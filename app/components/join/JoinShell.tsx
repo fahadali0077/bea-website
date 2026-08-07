@@ -21,6 +21,8 @@ type Props = {
   skip?: { label: string; onClick: () => void };
   busy?: boolean;
   error?: string | null;
+  /** Decorative artwork layered behind the step content. */
+  art?: string;
 };
 
 export function JoinShell({
@@ -31,6 +33,7 @@ export function JoinShell({
   skip,
   busy,
   error,
+  art,
 }: Props) {
   const router = useRouter();
   const index = joinStepIndex(slug);
@@ -52,6 +55,13 @@ export function JoinShell({
         </Link>
         <JoinDots current={index} />
       </header>
+
+      {art ? (
+        <div className="jn-step-art" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={art} alt="" />
+        </div>
+      ) : null}
 
       <main className="jn-main">
         <p className="jn-eyebrow">{step.eyebrow}</p>
