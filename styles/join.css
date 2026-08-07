@@ -532,7 +532,7 @@
 .jn-optout {
   width: 100%;
   min-height: 87px;
-  background: #fff;
+  background: var(--jn-optout);
   border: 1px solid var(--jn-line);
   border-radius: 10px;
   padding: 20px;
@@ -713,14 +713,14 @@
   right: 20px;
 }
 
+/* The reference screens always render Continue solid dark green — even
+   with no selection or empty required fields — so the disabled state
+   stays functionally non-interactive but is never visually dimmed. */
 .jn-cta:disabled {
-  opacity: 0.42;
   cursor: not-allowed;
 }
 
-/* Keep the busy CTA readable — full opacity, light spinner instead. */
 .jn-cta--busy:disabled {
-  opacity: 1;
   cursor: wait;
 }
 
