@@ -2,9 +2,15 @@
 
 import { useRouter } from "next/navigation";
 
-import { joinWaitlist, updateWaitlistForm } from "@/features/waitlist/waitlist.slice";
+import {
+  clearWaitlistErrors,
+  joinWaitlist,
+  updateWaitlistForm,
+} from "@/features/waitlist/waitlist.slice";
+import { isAlreadyOnWaitlistError } from "@/lib/waitlist-errors";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
+import { JoinAlreadyOnWaitlistModal } from "./JoinAlreadyOnWaitlistModal";
 import { JoinShell } from "./JoinShell";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,6 +25,8 @@ export function JoinEmail() {
   const { form, joinStatus, joinError } = useAppSelector((s) => s.waitlist);
 
   const valid = EMAIL.test(form.email.trim());
+  const alreadyOnWaitlist = isAlreadyOnWaitlistError(joinError);
+  const inlineError = alreadyOnWaitlist ? null : joinError;
 
   const submit = () => {
     void dispatch(joinWaitlist())
@@ -30,24 +38,34 @@ export function JoinEmail() {
     return false;
   };
 
+  const dismissAlreadyOnWaitlist = () => {
+    dispatch(clearWaitlistErrors());
+  };
+
   return (
-    <JoinShell
-      slug="email"
-      canContinue={valid}
-      busy={joinStatus === "loading"}
-      error={joinError}
-      onContinue={submit}
-    >
-      <input
-        className="jn-input"
-        type="email"
-        inputMode="email"
-        autoComplete="email"
-        placeholder="you@email.com"
-        value={form.email}
-        onChange={(e) => dispatch(updateWaitlistForm({ email: e.target.value }))}
-        aria-label="Email address"
-      />
-    </JoinShell>
+    <>
+      {alreadyOnWaitlist ? (
+        <JoinAlreadyOnWaitlistModal onClose={dismissAlreadyOnWaitlist} />
+      ) : null}
+
+      <JoinShell
+        slug="email"
+        canContinue={valid}
+        busy={joinStatus === "loading"}
+        error={inlineError}
+        onContinue={submit}
+      >
+        <input
+          className="jn-input"
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+          placeholder="you@email.com"
+          value={form.email}
+          onChange={(e) => dispatch(updateWaitlistForm({ email: e.target.value }))}
+          aria-label="Email address"
+        />
+      </JoinShell>
+    </>
   );
 }
