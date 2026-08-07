@@ -472,11 +472,14 @@
   color: var(--jn-eyebrow);
 }
 
+/* Default state reads as a plain secondary action — transparent/white
+   fill with a neutral border and dark text — so it's clearly distinct
+   from the filled, brand-tinted "selected" state below. */
 .jn-optout {
   width: 100%;
   min-height: 87px;
-  background: var(--jn-optout);
-  border: 1px solid var(--jn-optout-border);
+  background: #fff;
+  border: 1px solid var(--jn-line);
   border-radius: 10px;
   padding: 20px;
   font-family: inherit;
@@ -484,6 +487,11 @@
   font-weight: 400;
   color: var(--jn-ink);
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.jn-optout:hover {
+  border-color: var(--jn-optout-border);
 }
 
 .jn-optout--on {
@@ -1019,14 +1027,16 @@
   /* ---- Steps with artwork ---- */
 
   /* Artwork and copy are columns of the same grid, so they stay a fixed
-     distance apart no matter how wide the window gets. */
+     distance apart no matter how wide the window gets. The row stretches
+     to the full height of the main area so the artwork column can fill
+     it edge-to-edge instead of hugging the top with dead space below. */
   .jn-page--art .jn-main {
     grid-template-columns: minmax(0, 1fr) var(--jn-btn-w);
-    grid-template-rows: auto;
+    grid-template-rows: 1fr;
     column-gap: 72px;
     justify-content: center;
-    align-content: center;
-    align-items: center;
+    align-content: stretch;
+    align-items: stretch;
     padding-top: 0;
   }
 
@@ -1034,23 +1044,55 @@
     display: block;
     grid-column: 2;
     grid-row: 1;
+    align-self: center;
   }
 
+  /* Fills the full height of the left column (rather than sitting at a
+     fixed height anchored to the top) so it reads as balanced against
+     the vertically centered copy on the right. */
   .jn-page--art .jn-step-art {
     display: block;
     grid-column: 1;
     grid-row: 1;
-    align-self: center;
+    align-self: stretch;
     min-width: 0;
-    height: min(62vh, 560px);
+    height: 100%;
+    max-height: 640px;
+    margin-block: auto;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background: var(--jn-tint);
   }
 
   .jn-page--art .jn-step-art img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
+    /* The source illustration is a sepia hand-drawn sketch, which reads
+       as a different, more vintage product than the rest of the flow.
+       Desaturating it first and then tinting with the brand palette
+       (rather than swapping the asset) keeps the same artwork but pulls
+       it into the app's modern, flat, green/blue look. */
+    filter: grayscale(1) brightness(1.1) contrast(0.92);
+  }
+
+  /* Brand-colour duotone wash. `color` blend mode recolours the
+     grayscale image using this layer's hue while preserving the
+     illustration's own light/dark detail underneath. */
+  .jn-page--art .jn-step-art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      165deg,
+      rgba(4, 62, 37, 0.65) 0%,
+      rgba(49, 133, 232, 0.4) 100%
+    );
+    mix-blend-mode: color;
+    pointer-events: none;
   }
 
   .jn-page--art .jn-heading {
