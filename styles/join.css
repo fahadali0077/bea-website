@@ -145,7 +145,7 @@
 /* ---------- Step head ---------- */
 
 .jn-main {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   padding: 26px 24px 0;
   display: flex;
   flex-direction: column;
@@ -917,10 +917,10 @@
   /* ---- Two columns: prompt left, controls right ---- */
 
   .jn-main {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     display: grid;
     grid-template-columns: 440px minmax(0, 800px);
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto auto;
     column-gap: 72px;
     align-content: start;
     justify-content: center;
@@ -1031,6 +1031,7 @@
      to the full height of the main area so the artwork column can fill
      it edge-to-edge instead of hugging the top with dead space below. */
   .jn-page--art .jn-main {
+    flex: 1 1 auto;
     grid-template-columns: minmax(0, 1fr) var(--jn-btn-w);
     grid-template-rows: 1fr;
     column-gap: 72px;
@@ -1172,21 +1173,27 @@
 
   /* City and ambassador: the skip link ("Continue without a market" /
      "I wasn't invited by an ambassador") stacks directly above the
-     Continue button instead of sitting beside it, so the two read as
-     one right-aligned unit. */
+     Continue button, and the pair sits at the same horizontal position
+     as .jn-body's column above (440px column 1 + 72px gap in from the
+     shared 68px page padding), not against the far right edge of the
+     page — so the button lines up under the field/cards and the skip
+     label centers over the button instead of floating off to the side. */
   .jn-page--city .jn-foot,
   .jn-page--ambassador .jn-foot {
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     gap: 14px;
+    width: var(--jn-btn-w);
+    margin-inline: calc(68px + 440px + 72px) 0;
+    padding-inline: 0;
   }
 
   .jn-page--city .jn-error,
   .jn-page--ambassador .jn-error {
     margin-right: 0;
     align-self: stretch;
-    text-align: right;
+    text-align: left;
   }
 
   .jn-cta {
