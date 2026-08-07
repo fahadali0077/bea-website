@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -11,10 +12,11 @@ export const metadata: Metadata = {
 };
 
 export default function ForgotPasswordPage() {
-  const { header } = loginConfig;
+  const { header, theme } = loginConfig;
+  const themeStyle = theme.cssVariables as CSSProperties;
 
   return (
-    <div className="ambassador-login-root ambassador-login-root--program">
+    <div className="ambassador-login-root ambassador-login-root--program" style={themeStyle}>
       <div className="page-wrapper page-wrapper--program">
         <div className="login-layout login-layout--program">
           <AmbassadorLoginBrandPanel />
