@@ -980,18 +980,23 @@
     max-width: var(--jn-btn-w);
   }
 
-  /* The city rail is the one exception — it bleeds past the measure so four
-     cards stay visible, and scrolls from there. */
-  .jn-cities {
-    width: 800px;
+  /* The city step is the one exception — the rail needs the full column
+     width to work with (not the 440px field measure), so it has room to
+     lay out cards and scroll horizontally within its own box instead of
+     spilling past .jn-body and overflowing the page. */
+  .jn-page--city .jn-body {
     max-width: none;
   }
 
-  /* ---- City cards: four across, no scroll ---- */
+  /* ---- City cards: scrolls within the column, however many fit ---- */
 
-  /* Still a scroller, as on mobile — four fit the column and the rest are
-     reachable by dragging sideways. */
+  /* Fills whatever width column 2 actually has (rather than a fixed 800px)
+     so it never demands more room than the viewport can give it. Still a
+     horizontal scroller, as on mobile, for any cards past the visible
+     width. */
   .jn-cities {
+    width: 100%;
+    max-width: none;
     margin: 0;
     padding: 0;
     gap: 20px;
