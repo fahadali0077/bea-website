@@ -186,7 +186,7 @@
 }
 
 /* "(This helps with launch)" is set a step down, 21pt against 24pt. */
-.jn-sub--aside span + span {
+.jn-sub--aside span+span {
   font-size: 14.6px;
 }
 
@@ -924,7 +924,7 @@
        the button) tops out at that width now, so reserving more track
        than that just leaves blank space between the content and the
        right edge of the page. */
-    grid-template-columns: 440px minmax(0, var(--jn-btn-w));
+    grid-template-columns: 440px var(--jn-btn-w);
     grid-template-rows: auto auto auto;
     column-gap: 72px;
     align-content: start;
@@ -955,7 +955,7 @@
     display: inline;
   }
 
-  .jn-heading span + span::before {
+  .jn-heading span+span::before {
     content: " ";
   }
 
@@ -967,7 +967,7 @@
     margin-top: 22px;
   }
 
-  .jn-sub--aside span + span {
+  .jn-sub--aside span+span {
     display: block;
     font-size: 14.6px;
     margin-top: 6px;
@@ -986,32 +986,35 @@
 
   /* ---- City cards: scrolls within the column, however many fit ---- */
 
-  /* Same width as the rest of .jn-body (and so the button) rather than
-     bleeding out to a fixed 800px — that was overflowing the page on
-     narrower desktop widths. Still a horizontal scroller, as on mobile,
-     for any cards past the visible width. */
+  /* On desktop the city rail becomes a wrapping 2-column grid so the
+     cards are always visible without horizontal scrolling. */
   .jn-cities {
     margin: 0;
     padding: 0;
-    gap: 20px;
+    gap: 12px;
     scroll-padding-left: 0;
+    overflow-x: visible;
+    flex-wrap: wrap;
+    /* Use 2 evenly-sized columns within the constrained right column */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .jn-city {
-    width: 193px;
-    height: 229px;
+    width: 100%;
+    height: 180px;
     border-radius: 12px;
     padding-bottom: 14px;
   }
 
   .jn-city-art {
-    height: 168px;
+    height: 130px;
   }
 
   .jn-city-name {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
-    margin-top: 12px;
+    margin-top: 10px;
   }
 
   .jn-page {
@@ -1099,13 +1102,13 @@
     display: inline;
   }
 
-  .jn-page--art .jn-sub span + span::before {
+  .jn-page--art .jn-sub span+span::before {
     content: " ";
   }
 
-  /* The footer action lines up under the copy column. */
+  /* The footer action lines up under the copy column (col2 = right). */
   .jn-page--art .jn-foot {
-    justify-content: flex-end;
+    grid-template-columns: minmax(0, 1fr) var(--jn-btn-w);
   }
 
   /* Mirror: artwork right, copy left — bleeds to the right edge of the
@@ -1129,7 +1132,13 @@
   }
 
   .jn-page--art-right .jn-foot {
-    justify-content: flex-start;
+    grid-template-columns: var(--jn-btn-w) minmax(0, 1fr);
+  }
+
+  .jn-page--art-right .jn-foot .jn-skip,
+  .jn-page--art-right .jn-foot .jn-cta,
+  .jn-page--art-right .jn-foot .jn-error {
+    grid-column: 1;
   }
 
   /* ---- Ambassadors: two across ---- */
@@ -1144,14 +1153,15 @@
     height: 100%;
   }
 
-  /* ---- Footer: actions to the right, on one line ---- */
+  /* ---- Footer: mirrors the main grid so btn aligns under the right column ---- */
 
   .jn-foot {
     position: static;
-    display: flex;
+    display: grid;
+    grid-template-columns: 440px var(--jn-btn-w);
+    column-gap: 72px;
+    justify-content: center;
     align-items: center;
-    justify-content: flex-end;
-    gap: 34px;
     margin-top: 0;
     padding: 40px 68px 46px;
     max-width: 1440px;
@@ -1159,13 +1169,24 @@
     width: 100%;
   }
 
+  /* Skip link + CTA stack in the right column */
+  .jn-foot .jn-skip,
+  .jn-foot .jn-cta {
+    grid-column: 2;
+  }
+
+  /* Error message sits in the right column too */
   .jn-error {
-    margin-right: auto;
+    grid-column: 2;
+    margin-right: 0;
+    justify-self: start;
   }
 
   .jn-skip {
     font-size: 15px;
     text-decoration: none;
+    text-align: center;
+    justify-self: center;
   }
 
   .jn-skip:hover {
@@ -1173,46 +1194,13 @@
     text-underline-offset: 3px;
   }
 
-  /* City and ambassador: the skip link ("Continue without a market" /
-     "I wasn't invited by an ambassador") stacks directly above the
-     Continue button, and the pair sits at the same horizontal position
-     as .jn-body's column above (440px column 1 + 72px gap in from the
-     shared 68px page padding), not against the far right edge of the
-     page — so the button lines up under the field/cards and the skip
-     label centers over the button instead of floating off to the side. */
+  /* City and ambassador: the skip link stacks above Continue */
   .jn-page--city .jn-foot,
   .jn-page--ambassador .jn-foot,
   .jn-page--email .jn-foot {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 14px;
+    row-gap: 14px;
   }
 
-  .jn-page--city .jn-foot .jn-skip,
-  .jn-page--ambassador .jn-foot .jn-skip,
-  .jn-page--email .jn-foot .jn-skip,
-  .jn-page--city .jn-foot .jn-cta,
-  .jn-page--ambassador .jn-foot .jn-cta,
-  .jn-page--email .jn-foot .jn-cta {
-    width: var(--jn-btn-w);
-    margin-left: calc(440px + 72px);
-  }
-
-  .jn-page--city .jn-foot .jn-skip,
-  .jn-page--ambassador .jn-foot .jn-skip,
-  .jn-page--email .jn-foot .jn-skip {
-    text-align: center;
-  }
-
-  .jn-page--city .jn-error,
-  .jn-page--ambassador .jn-error,
-  .jn-page--email .jn-error {
-    width: var(--jn-btn-w);
-    margin-left: calc(440px + 72px);
-    margin-right: 0;
-    text-align: left;
-  }
 
   .jn-cta {
     border-radius: 10px;
