@@ -472,11 +472,14 @@
   color: var(--jn-eyebrow);
 }
 
+/* Default state reads as a plain secondary action — transparent/white
+   fill with a neutral border and dark text — so it's clearly distinct
+   from the filled, brand-tinted "selected" state below. */
 .jn-optout {
   width: 100%;
   min-height: 87px;
-  background: var(--jn-optout);
-  border: 1px solid var(--jn-optout-border);
+  background: #fff;
+  border: 1px solid var(--jn-line);
   border-radius: 10px;
   padding: 20px;
   font-family: inherit;
@@ -484,6 +487,11 @@
   font-weight: 400;
   color: var(--jn-ink);
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.jn-optout:hover {
+  border-color: var(--jn-optout-border);
 }
 
 .jn-optout--on {
@@ -1019,14 +1027,16 @@
   /* ---- Steps with artwork ---- */
 
   /* Artwork and copy are columns of the same grid, so they stay a fixed
-     distance apart no matter how wide the window gets. */
+     distance apart no matter how wide the window gets. The row stretches
+     to the full height of the main area so the artwork column can fill
+     it edge-to-edge instead of hugging the top with dead space below. */
   .jn-page--art .jn-main {
     grid-template-columns: minmax(0, 1fr) var(--jn-btn-w);
-    grid-template-rows: auto;
+    grid-template-rows: 1fr;
     column-gap: 72px;
     justify-content: center;
-    align-content: center;
-    align-items: center;
+    align-content: stretch;
+    align-items: stretch;
     padding-top: 0;
   }
 
@@ -1034,15 +1044,26 @@
     display: block;
     grid-column: 2;
     grid-row: 1;
+    align-self: center;
   }
 
+  /* Fills the full height of the left column (rather than sitting at a
+     fixed height anchored to the top) so it reads as balanced against
+     the vertically centered copy on the right. No box, no fill — the
+     art stays a transparent PNG floating on the page background, the
+     same way it always has, just repositioned and recoloured. */
   .jn-page--art .jn-step-art {
     display: block;
     grid-column: 1;
     grid-row: 1;
-    align-self: center;
+    align-self: stretch;
     min-width: 0;
-    height: min(62vh, 560px);
+    height: 100%;
+    /* Bleeds the artwork past .jn-main's own padding and max-width
+       centering out to the true left edge of the viewport, instead of
+       stopping wherever the centered 1440px content box happens to
+       start. */
+    margin-left: calc(-68px - max(0px, (100vw - 1440px) / 2));
   }
 
   .jn-page--art .jn-step-art img {
@@ -1050,7 +1071,18 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    object-position: center;
+    /* Flush against the bled-out left edge rather than centered in the
+       (now much wider) box, so the illustration itself visibly starts
+       right at the edge of the screen. */
+    object-position: left center;
+    /* The source illustration is a sepia hand-drawn sketch, which reads
+       as a different, more vintage product than the rest of the flow.
+       This desaturates it and re-tints it toward the brand green
+       directly on the image (rather than a separate color layer), so
+       transparent pixels stay transparent instead of picking up a
+       flat color fill. */
+    filter: grayscale(1) sepia(0.55) saturate(3.2) hue-rotate(88deg)
+      brightness(0.98) contrast(1.02);
   }
 
   .jn-page--art .jn-heading {
@@ -1076,9 +1108,16 @@
     justify-content: flex-end;
   }
 
-  /* Mirror: artwork right, copy left. */
+  /* Mirror: artwork right, copy left — bleeds to the right edge of the
+     viewport instead of the left. */
   .jn-page--art-right .jn-step-art {
     grid-column: 2;
+    margin-left: 0;
+    margin-right: calc(-68px - max(0px, (100vw - 1440px) / 2));
+  }
+
+  .jn-page--art-right .jn-step-art img {
+    object-position: right center;
   }
 
   .jn-page--art-right .jn-step-copy {
