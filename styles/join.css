@@ -897,7 +897,8 @@
     min-height: 100vh;
     min-height: 100svh;
     --jn-side-pad: 48px;
-    --jn-col-gap: 72px;
+    /* Keep copy and controls close — avoid the stretched mid-gap. */
+    --jn-col-gap: 40px;
     /* Match the intro input + CTA: same height, fixed control width. */
     --jn-field-h: 59px;
     --jn-btn-h: 59px;
@@ -938,21 +939,22 @@
   .jn-main {
     flex: 0 1 auto;
     display: grid;
-    /* Copy flexes; the control column stays the intro field/button width. */
-    grid-template-columns: minmax(280px, 1fr) var(--jn-control-w);
+    /* Cap the copy column so 1fr can't open a huge gutter. */
+    grid-template-columns: minmax(260px, 380px) var(--jn-control-w);
     column-gap: var(--jn-col-gap);
+    justify-content: center;
     align-content: start;
     align-items: start;
-    padding: 56px var(--jn-side-pad) 46px;
+    padding: 36px var(--jn-side-pad) 40px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 960px;
     margin-inline: auto;
   }
 
   .jn-col-copy {
     grid-column: 1;
     grid-row: 1;
-    max-width: 480px;
+    max-width: none;
   }
 
   .jn-col-actions {
@@ -960,7 +962,7 @@
     grid-row: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     width: var(--jn-control-w);
     max-width: var(--jn-control-w);
   }
@@ -970,9 +972,9 @@
   }
 
   .jn-heading {
-    font-size: 46px;
-    line-height: 1.1;
-    margin-top: 18px;
+    font-size: 42px;
+    line-height: 1.12;
+    margin-top: 12px;
   }
 
   /* The artboard's line breaks are a mobile measure — at 400px the
@@ -987,7 +989,7 @@
 
   .jn-sub {
     font-size: 17px;
-    margin-top: 22px;
+    margin-top: 14px;
   }
 
   .jn-sub--aside span+span {
