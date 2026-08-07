@@ -7,11 +7,16 @@
   --text-muted: #9a9a9a;
   --border: #d8d5cf;
   --input-bg: #ffffff;
-  --btn-bg: #1a1a1a;
+  --btn-bg: #20452f;
   --btn-text: #ffffff;
   --font-serif: "Canela Text", var(--font-fraunces), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-lato), -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
-    sans-serif;
+  /* Intentionally not redefining --font-sans here: this used to read
+     var(--font-lato), a CSS variable nothing ever set (the root layout's
+     own Lato instance publishes --font-sans directly, not --font-lato),
+     which made the whole font-family value invalid at computed-value time
+     and silently fell back to the browser default font instead of Lato.
+     Inheriting --font-sans from <html> (set by app/layout.tsx) gives the
+     real Lato font that's already loaded there. */
 
   min-height: 100vh;
   background-color: var(--bg);
@@ -358,6 +363,16 @@
   font-size: 13px;
 }
 
+.ambassador-login-root .form-success {
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #e7efe9;
+  color: #20452f;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .ambassador-login-root .or-divider {
   display: flex;
   align-items: center;
@@ -569,6 +584,19 @@
   margin-bottom: 28px;
 }
 
+/* .ambassador-login-root .left-panel img (above) was written for the
+   original design's full-bleed photo and forces width/height: 100% on
+   every <img> inside .left-panel — including this one, since the program
+   variant's wrapper keeps the base "left-panel" class alongside
+   "left-panel--program". That stretched the 76x76 logo to fill its
+   flex container (and blurred it badly in the process). This needs one
+   extra class of specificity ((0,3,0) vs the base rule's (0,2,1)) to win. */
+.ambassador-login-root--program .left-panel-program-inner .left-program-logo {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+}
+
 .ambassador-login-root--program .left-program-eyebrow {
   margin: 0 0 18px;
   font-size: 11px;
@@ -592,7 +620,7 @@
   margin: 0;
   font-size: 14px;
   font-weight: 400;
-  color: var(--text-primary);
+  color: var(--green);
 }
 
 .ambassador-login-root--program .text-highlight {
@@ -657,7 +685,7 @@
 
 .ambassador-login-root--program .forgot-link--program {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--green);
 }
 
 .ambassador-login-root--program .btn-login--program {
