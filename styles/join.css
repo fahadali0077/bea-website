@@ -959,6 +959,16 @@
     grid-row: 1 / span 3;
     margin-top: 0;
     gap: 20px;
+    /* Matches the intro column, so every field is the same width as the
+       button that follows it. */
+    max-width: var(--jn-btn-w);
+  }
+
+  /* The city rail is the one exception — it bleeds past the measure so four
+     cards stay visible, and scrolls from there. */
+  .jn-cities {
+    width: 800px;
+    max-width: none;
   }
 
   /* ---- City cards: four across, no scroll ---- */
@@ -1012,9 +1022,6 @@
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
-    /* Held well back so every word on top of it stays readable — at full
-       strength the grey sub-heading disappeared into the tree canopy. */
-    opacity: 0.5;
   }
 
   .jn-step-art img {
@@ -1023,25 +1030,12 @@
     height: 100%;
     object-fit: contain;
     object-position: left bottom;
-    /* Fades out under the copy block and back in below it. */
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      transparent 34%,
-      #000 62%
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      transparent 34%,
-      #000 62%
-    );
   }
 
   /* When a step carries artwork, the copy and the controls share a single
      column on the far side of it rather than splitting left/right. */
   .jn-page--art .jn-main {
-    grid-template-columns: minmax(0, 620px);
+    grid-template-columns: minmax(0, 440px);
     grid-template-rows: auto;
     justify-content: end;
     align-content: center;
@@ -1077,12 +1071,6 @@
   /* The illustration takes the vacated side and no longer needs masking. */
   .jn-page--art .jn-step-art {
     width: 620px;
-    opacity: 1;
-  }
-
-  .jn-page--art .jn-step-art img {
-    -webkit-mask-image: none;
-    mask-image: none;
   }
 
   .jn-page--art .jn-foot {
