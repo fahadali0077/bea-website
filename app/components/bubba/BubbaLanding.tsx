@@ -27,7 +27,7 @@ export function BubbaLanding() {
         {/* ── Launching in ── */}
         <section className="bb-rail">
           <div className="bb-shell">
-            <p className="bb-eyebrow">Launching this summer</p>
+            <p className="bb-eyebrow">Launching this fall</p>
             <ul className="bb-rail-cities">
               {BUBBA_LAUNCH_CITIES.map((city) => (
                 <li key={city} className="bb-rail-city">
