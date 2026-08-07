@@ -1173,6 +1173,25 @@
     text-underline-offset: 3px;
   }
 
+  /* City and ambassador: the skip link ("Continue without a market" /
+     "I wasn't invited by an ambassador") stacks directly above the
+     Continue button instead of sitting beside it, so the two read as
+     one right-aligned unit. */
+  .jn-page--city .jn-foot,
+  .jn-page--ambassador .jn-foot {
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .jn-page--city .jn-error,
+  .jn-page--ambassador .jn-error {
+    margin-right: 0;
+    align-self: stretch;
+    text-align: right;
+  }
+
   .jn-cta {
     border-radius: 10px;
     padding: 0 54px 0 30px;

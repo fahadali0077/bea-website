@@ -53,6 +53,7 @@ export function JoinShell({
     <div
       className={
         "jn-page" +
+        ` jn-page--${slug}` +
         (art ? " jn-page--art" : "") +
         (art && artSide === "right" ? " jn-page--art-right" : "")
       }
