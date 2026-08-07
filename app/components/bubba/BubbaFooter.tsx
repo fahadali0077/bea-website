@@ -33,6 +33,10 @@ export function BubbaFooter({ showCapture = true }: Props) {
         </section>
       ) : null}
 
+      <section className="bb-brand-outro" aria-hidden="true">
+        <span className="bb-brand-outro-word">Bubba</span>
+      </section>
+
       <footer className="bb-footer">
         <div className="bb-shell bb-shell--wide">
           <div className="bb-footer-grid">
