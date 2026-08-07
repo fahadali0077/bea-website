@@ -65,15 +65,16 @@ export function JoinShell({
         <JoinDots current={index} />
       </header>
 
-      {art ? (
-        <div className="jn-step-art" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={art} alt="" />
-        </div>
-      ) : null}
-
       <main className="jn-main">
-        <p className="jn-eyebrow">{step.eyebrow}</p>
+        {art ? (
+          <div className="jn-step-art" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={art} alt="" />
+          </div>
+        ) : null}
+
+        <div className="jn-step-copy">
+          <p className="jn-eyebrow">{step.eyebrow}</p>
         <h1 className="jn-heading">
           {step.heading.map((line, i) => (
             <span key={i}>{line}</span>
@@ -87,7 +88,8 @@ export function JoinShell({
           ))}
         </p>
 
-        <div className="jn-body">{children}</div>
+          <div className="jn-body">{children}</div>
+        </div>
       </main>
 
       <footer className="jn-foot">
