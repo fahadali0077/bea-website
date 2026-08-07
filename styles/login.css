@@ -716,14 +716,17 @@
   }
 
   .ambassador-login-root--program .left-panel--program {
-    min-height: auto;
-    padding: 56px 24px 32px;
-  }
+  ...
+  background-color: #f5f1ef;   /* was: var(--bg) */
+  ...
+}
 
-  .ambassador-login-root--program .right-panel--program {
-    min-height: auto;
-    padding: 8px 24px 56px;
-  }
+.ambassador-login-root--program .right-panel--program {
+  ...
+  border-top-left-radius: 0;
+  background-color: #f8f6f3;   /* new line added */
+  z-index: 1;
+}
 }
 
 @media (max-width: 420px) {
