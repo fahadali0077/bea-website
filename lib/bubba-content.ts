@@ -24,7 +24,7 @@ export const BUBBA_BRAND = {
 
 /** Nav — left links; the wordmark sits centred and the CTA sits right. */
 export const BUBBA_NAV_LINKS = [
-  { key: "waiting-room", label: "The Waiting Room", href: "/#waiting-room" },
+  { key: "waiting-room", label: "The Waiting Room", href: "/waiting-room" },
   { key: "ambassadors", label: "Ambassadors", href: "/login" },
   { key: "faq", label: "FAQs", href: "/faq" },
   { key: "contact", label: "Contact", href: "/contact" },
@@ -201,7 +201,7 @@ export const BUBBA_FAQS = [
 
 /** Footer. */
 export const BUBBA_FOOTER_EXPLORE = [
-  { label: "The Waiting Room", href: "/#waiting-room" },
+  { label: "The Waiting Room", href: "/waiting-room" },
   { label: "Ambassadors", href: "/login" },
   { label: "FAQs", href: "/faq" },
   { label: "Contact", href: "/contact" },
@@ -241,7 +241,7 @@ export const BUBBA_COOKIE_NOTICE = {
 
 /** Mobile drawer — a longer list than the desktop nav rail. */
 export const BUBBA_DRAWER_LINKS = [
-  { label: "The Waiting Room", href: "/#waiting-room" },
+  { label: "The Waiting Room", href: "/waiting-room" },
   { label: "Ambassadors", href: "/login" },
   { label: "FAQs", href: "/faq" },
   { label: "Contact", href: "/contact" },
@@ -288,4 +288,194 @@ export const BUBBA_WAITING_ROOM = {
   footnote:
     "Cities will launch one at a time shortly after the waiting room ends",
   cta: { label: "Learn more", href: "/calendar" },
+} as const;
+
+/**
+ * The Waiting Room detail page (/waiting-room) — the full page that "The
+ * Waiting Room" nav/footer/drawer links open into. Separate from
+ * BUBBA_WAITING_ROOM above, which is the gold teaser card on the home page
+ * and is intentionally left untouched.
+ *
+ * Dates and counts are placeholders pending real numbers from him. Hero
+ * photo, the Snap card photo, and all five prize images are now real
+ * assets he supplied (public/bubba/wrp-*.jpg — cropped from his composite
+ * reference shots).
+ */
+export const BUBBA_WRP_HERO = {
+  kicker: "By Bubba",
+  sub: "The experience starts before the app does.",
+  dateRange: "August 18–24",
+  tagline: "Seven days. 100 schools. Many winners.",
+  photo: "/bubba/wrp-hero.jpg" as string | null,
+  benefits: [
+    { key: "prompts", label: "Daily prompts & challenges" },
+    { key: "leaderboard", label: "Climb the leaderboard" },
+    { key: "prizes", label: "Earn points & win prizes" },
+  ],
+  stats: [
+    { key: "campuses", value: "100+", label: "Campuses" },
+    { key: "ambassadors", value: "500+", label: "Ambassadors" },
+    { key: "days", value: "7", label: "Days" },
+  ],
+  statCta: { label: "Let\u2019s have a good laugh" },
+} as const;
+
+export const BUBBA_WRP_PROMO = {
+  kicker: "The Waiting Room",
+  title: ["One daily promo.", "Every campus."],
+  body: [
+    "Over 300 participating schools across the country. Each school receives the same prompt.",
+    "Submit your response daily, like and comment. See responses from your school and around the country.",
+  ],
+} as const;
+
+/** The three floating prompt-type cards beside the promo copy. */
+export const BUBBA_WRP_CARDS = [
+  {
+    id: "snap",
+    chip: "Snap",
+    tone: "blue",
+    title: "My idea of fun looks something like",
+    art: "/bubba/wrp-snap.jpg" as string | null,
+    likes: 73,
+    action: "View top responses",
+  },
+  {
+    id: "game",
+    chip: "Game",
+    tone: "clay",
+    title: "If you had one forever\u2026",
+    likes: 48,
+    detail: "Match paired one word from Islam to Joe Bogen for a laugh.",
+    action: "View top responses",
+  },
+  {
+    id: "prompt",
+    chip: "Prompt",
+    tone: "green",
+    title: "The one thing I\u2019ll never get tired of",
+    likes: 124,
+    action: "View top responses",
+  },
+] as const;
+
+export type BubbaWrpDayType = "prompt" | "game" | "snap" | "mystery";
+
+export const BUBBA_WRP_SCHEDULE: {
+  day: string;
+  date: string;
+  type: BubbaWrpDayType;
+  label: string;
+}[] = [
+  { day: "Day 1", date: "Mon 8/18", type: "prompt", label: "Prompt" },
+  { day: "Day 2", date: "Tue 8/19", type: "game", label: "Game" },
+  { day: "Day 3", date: "Wed 8/20", type: "snap", label: "Snap" },
+  { day: "Day 4", date: "Thu 8/21", type: "prompt", label: "Prompt" },
+  { day: "Day 5", date: "Fri 8/22", type: "game", label: "Game" },
+  { day: "Day 6", date: "Sat 8/23", type: "snap", label: "Snap" },
+  { day: "Day 7", date: "Sun 8/24", type: "mystery", label: "???" },
+];
+
+export const BUBBA_WRP_CALENDAR = {
+  kicker: "Only 7 days",
+  title: "August 18\u201324",
+  body: "Get a sneak peek at some of our icebreakers and submit your best response. Top responses earn the most points, redeemable for prizes.",
+} as const;
+
+export const BUBBA_WRP_CAMPUS_PRIZE = {
+  kicker: "The Campus Prize",
+  title: ["Win free Premium", "for your school."],
+  body: "In every market, the school with the most points wins one month of Bubba Premium for everyone on campus.",
+  ticket: {
+    label: "Bubba Premium",
+    headline: "Unlocked",
+    sub: "For your whole campus",
+    pill: "1 month = free",
+  },
+  annotation: "one month for everyone on the waitlist",
+  marketsKicker: "Active markets",
+  premiumKicker: "1 month of Premium",
+  requestCta: "Request my campus",
+} as const;
+
+export const BUBBA_WRP_HOW_IT_WORKS = [
+  {
+    key: "prompts",
+    title: "Daily prompts",
+    body: "One new prompt each day, across every campus.",
+  },
+  {
+    key: "invite",
+    title: "Invite friends",
+    body: "Earn a spot toward a Premium membership by inviting friends.",
+  },
+  {
+    key: "points",
+    title: "Earn points",
+    body: "Get points for engaging \u2014 see who has the most.",
+  },
+  {
+    key: "redeem",
+    title: "Redeem prizes",
+    body: "We put together some fun merch, ready to be won. Limited time only.",
+  },
+  {
+    key: "launch",
+    title: "City launches",
+    body: "Straight out of the Waiting Room and into the app \u2014 we\u2019ll launch one city at a time.",
+  },
+] as const;
+
+/**
+ * Real product photography (scooter + merch) not supplied yet — `art` is
+ * null until it is, and the page renders a plain placeholder tile instead
+ * of a broken image.
+ */
+export const BUBBA_WRP_PRIZES = {
+  kicker: "Sneak peek the prizes",
+  title: "Redeem your points",
+  grand: {
+    label: "Grand prize",
+    name: "The Bubba Vespa",
+    art: "/bubba/wrp-vespa.jpg" as string | null,
+    points: "30,000 pts",
+    cta: "Redeem for 30,000 pts",
+  },
+  items: [
+    {
+      id: "picnic-set",
+      name: "Picnic set",
+      sub: "Everything you need",
+      points: "7,500 pts",
+      art: "/bubba/wrp-picnic.jpg" as string | null,
+    },
+    {
+      id: "crewneck",
+      name: "Bubba crewneck",
+      sub: "Classic look",
+      points: "6,000 pts",
+      art: "/bubba/wrp-crewneck.jpg" as string | null,
+    },
+    {
+      id: "hat",
+      name: "Bubba hat",
+      sub: "Classic everyday",
+      points: "3,500 pts",
+      art: "/bubba/wrp-hat.jpg" as string | null,
+    },
+    {
+      id: "beach-chair",
+      name: "Beach chair",
+      sub: "Take it easy",
+      points: "6,000 pts",
+      art: "/bubba/wrp-beach-chair.jpg" as string | null,
+    },
+  ],
+} as const;
+
+export const BUBBA_WRP_CLOSER = {
+  title: "Seven day competition, then we launch.",
+  sub: "Let\u2019s have a good laugh.",
+  annotation: "see you in the waiting room",
+  cta: { label: "Join the waitlist", href: "/waitlist/start" },
 } as const;

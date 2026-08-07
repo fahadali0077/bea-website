@@ -1108,6 +1108,28 @@
   background: var(--bb-ink-btn);
 }
 
+/* ============================================================
+   Brand outro band — sits between the closing capture and the
+   footer. Separate from .bb-footer on purpose: the footer's own
+   background/content are untouched by this.
+   ============================================================ */
+
+.bb-brand-outro {
+  background: #1f2330;
+  padding: clamp(28px, 6vw, 56px) var(--bb-gutter);
+  display: flex;
+  align-items: center;
+}
+
+.bb-brand-outro-word {
+  font-family: var(--bb-display);
+  font-weight: 400;
+  font-size: clamp(56px, 12vw, 128px);
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
 .bb-footer {
   background: var(--bb-footer-bg);
   padding: 40px 0 26px;
@@ -1459,7 +1481,9 @@
   position: relative;
   border-radius: var(--bb-radius-lg);
   overflow: hidden;
-  background: var(--bb-green);
+  /* Slightly warmer/lighter than --bb-green — matches the exact swatch
+     supplied for this card specifically, not the sitewide brand green. */
+  background: #294431;
   color: #fff;
   display: grid;
   gap: 0;
@@ -2193,5 +2217,984 @@
 
   .bb-cookie-x {
     position: static;
+  }
+}
+
+/* ============================================================
+   Waiting Room detail page (/waiting-room)
+   Namespaced `bb-wrp-` (Waiting Room Page) so nothing here
+   collides with `.bb-wr-*`, which belongs to the gold teaser
+   card on the home page and is untouched by this page.
+   ============================================================ */
+
+.bb-wrp {
+  padding-top: clamp(28px, 5vw, 48px);
+}
+
+/* ---------- Hero ---------- */
+
+.bb-wrp-hero {
+  border: 1px solid var(--bb-line);
+  border-radius: var(--bb-radius-lg);
+  padding: clamp(24px, 4vw, 40px);
+  display: grid;
+  gap: 20px;
+  margin-bottom: clamp(28px, 5vw, 48px);
+}
+
+.bb-wrp-hero-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bb-wrp-hero-title {
+  margin: 0;
+  font-family: var(--bb-ui);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.bb-wrp-hero-line {
+  display: block;
+  font-size: clamp(38px, 8vw, 76px);
+}
+
+.bb-wrp-hero-line--gold {
+  color: #f0a828;
+}
+
+.bb-wrp-hero-line--green {
+  color: var(--bb-green);
+}
+
+.bb-wrp-hero-line--blue {
+  color: var(--bb-blue);
+}
+
+.bb-wrp-hero-kicker {
+  margin: 4px 0 0;
+  font-family: var(--bb-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bb-green);
+  flex: none;
+}
+
+/* Placeholder panel until a real photo is supplied — see BUBBA_WRP_HERO.photo. */
+.bb-wrp-hero-photo {
+  border-radius: var(--bb-radius);
+  min-height: 200px;
+  background: linear-gradient(135deg, var(--bb-sage), var(--bb-blue-soft));
+}
+
+.bb-wrp-hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
+
+.bb-wrp-hero-copy {
+  display: grid;
+  gap: 10px;
+}
+
+.bb-wrp-hero-sub {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--bb-muted);
+}
+
+.bb-wrp-hero-date {
+  margin: 0;
+  font-family: var(--bb-ui);
+  font-size: clamp(22px, 3.4vw, 30px);
+  font-weight: 800;
+  color: var(--bb-ink);
+}
+
+.bb-wrp-hero-tagline {
+  margin: 0;
+}
+
+.bb-wrp-hero-tagline span {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--bb-ink);
+  box-shadow: inset 0 -0.5em 0 var(--bb-highlight);
+}
+
+.bb-wrp-hero-benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.bb-wrp-hero-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bb-wrp-hero-benefit-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--bb-line);
+  color: var(--bb-ink);
+  flex: none;
+}
+
+.bb-wrp-hero-benefit-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--bb-ink);
+  box-shadow: inset 0 -0.45em 0 var(--bb-highlight);
+}
+
+.bb-wrp-stats {
+  border-top: 1px solid var(--bb-line);
+  padding-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.bb-wrp-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--bb-ink);
+}
+
+.bb-wrp-stat-value {
+  font-family: var(--bb-ui);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.bb-wrp-stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bb-muted);
+}
+
+.bb-wrp-stat--cta {
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bb-clay);
+  box-shadow: inset 0 -0.5em 0 var(--bb-highlight);
+  align-self: center;
+}
+
+@media (min-width: 860px) {
+  .bb-wrp-hero {
+    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .bb-wrp-hero-head {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .bb-wrp-hero-photo {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    min-height: 260px;
+  }
+
+  .bb-wrp-hero-copy {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .bb-wrp-hero-benefits {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: end;
+  }
+
+  .bb-wrp-stats {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    grid-template-columns: repeat(4, auto) 1fr;
+    align-items: center;
+  }
+
+  .bb-wrp-stat--cta {
+    justify-self: end;
+  }
+}
+
+/* ---------- One daily promo ---------- */
+
+.bb-wrp-promo {
+  display: grid;
+  gap: 40px;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+.bb-wrp-promo-title {
+  margin: 10px 0 16px;
+  font-family: var(--bb-display);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.bb-wrp-promo-title-a,
+.bb-wrp-promo-title-b {
+  display: block;
+  font-size: clamp(26px, 4vw, 38px);
+}
+
+.bb-wrp-promo-title-a {
+  color: var(--bb-green);
+}
+
+.bb-wrp-promo-title-b {
+  color: #7fb3c9;
+}
+
+.bb-wrp-promo-body {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--bb-body);
+  margin: 0 0 12px;
+  max-width: 42ch;
+}
+
+.bb-wrp-cards {
+  position: relative;
+  min-height: 300px;
+}
+
+.bb-wrp-card {
+  position: absolute;
+  width: min(300px, 82%);
+  background: #fff;
+  border: 1px solid var(--bb-line);
+  border-radius: var(--bb-radius);
+  padding: 16px;
+  box-shadow: 0 18px 34px -22px rgba(20, 24, 22, 0.35);
+}
+
+.bb-wrp-card--snap {
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.bb-wrp-card--game {
+  top: 56px;
+  left: 14%;
+  z-index: 2;
+}
+
+.bb-wrp-card--prompt {
+  top: 112px;
+  left: 26%;
+  z-index: 3;
+}
+
+.bb-wrp-card-chip {
+  margin: 0 0 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.bb-wrp-card-chip--blue {
+  color: var(--bb-blue);
+}
+
+.bb-wrp-card-chip--clay {
+  color: var(--bb-clay);
+}
+
+.bb-wrp-card-chip--green {
+  color: var(--bb-green);
+}
+
+.bb-wrp-card-title {
+  margin: 0 0 10px;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--bb-ink);
+  line-height: 1.3;
+}
+
+/* Placeholder tile until real snap/game photography is supplied. */
+.bb-wrp-card-art {
+  height: 110px;
+  border-radius: 10px;
+  background: var(--bb-sage);
+  margin-bottom: 10px;
+}
+
+.bb-wrp-card-art--photo {
+  overflow: hidden;
+}
+
+.bb-wrp-card-art--photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bb-wrp-card-detail {
+  font-size: 12px;
+  color: var(--bb-muted);
+  border-top: 1px solid var(--bb-line-soft);
+  padding-top: 10px;
+  margin: 0 0 10px;
+}
+
+.bb-wrp-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--bb-line-soft);
+  padding-top: 10px;
+}
+
+.bb-wrp-card-likes {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  color: var(--bb-muted);
+}
+
+.bb-wrp-card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--bb-ink);
+}
+
+@media (min-width: 860px) {
+  .bb-wrp-promo {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .bb-wrp-cards {
+    min-height: 380px;
+  }
+
+  .bb-wrp-card {
+    width: 300px;
+  }
+
+  .bb-wrp-card--game {
+    left: 22%;
+  }
+
+  .bb-wrp-card--prompt {
+    left: 42%;
+  }
+}
+
+/* ---------- 7-day calendar strip ---------- */
+
+.bb-wrp-calendar {
+  border: 1px solid var(--bb-line);
+  border-radius: var(--bb-radius-lg);
+  padding: clamp(22px, 3.6vw, 34px);
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+.bb-wrp-calendar-head {
+  margin-bottom: 22px;
+  max-width: 46ch;
+}
+
+.bb-wrp-calendar-title {
+  font-family: var(--bb-display);
+  font-size: clamp(24px, 3vw, 32px);
+  color: var(--bb-ink);
+  margin: 8px 0 10px;
+}
+
+.bb-wrp-calendar-body {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--bb-body);
+  margin: 0;
+}
+
+.bb-wrp-days {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px 10px;
+}
+
+.bb-wrp-day {
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--bb-line-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.bb-wrp-day-name {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bb-ink);
+}
+
+.bb-wrp-day-date {
+  margin: 0 0 6px;
+  font-size: 10px;
+  color: var(--bb-muted);
+}
+
+.bb-wrp-day-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.bb-wrp-day-icon--prompt {
+  background: var(--bb-green);
+}
+
+.bb-wrp-day-icon--game {
+  background: var(--bb-clay);
+}
+
+.bb-wrp-day-icon--snap {
+  background: var(--bb-blue);
+}
+
+.bb-wrp-day-icon--mystery {
+  background: var(--bb-faint);
+}
+
+.bb-wrp-day-label {
+  margin: 4px 0 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--bb-body);
+}
+
+@media (min-width: 700px) {
+  .bb-wrp-days {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+/* ---------- Campus prize (full-bleed dark section) ---------- */
+
+.bb-wrp-prize {
+  background: #14161c;
+  color: #fff;
+  padding: clamp(36px, 6vw, 72px) 0;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+.bb-wrp-prize-grid {
+  display: grid;
+  gap: 40px;
+}
+
+.bb-wrp-prize-kicker {
+  color: #7fd9b0;
+}
+
+.bb-wrp-prize-title {
+  margin: 10px 0 16px;
+  font-family: var(--bb-display);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.bb-wrp-prize-title span {
+  display: block;
+  font-size: clamp(28px, 4.4vw, 42px);
+  color: #fff;
+}
+
+.bb-wrp-prize-title-b {
+  color: #6fa8dc;
+}
+
+.bb-wrp-prize-body {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 40ch;
+  margin: 0 0 28px;
+}
+
+.bb-wrp-ticket {
+  background: #f4f2ec;
+  border-radius: 14px;
+  padding: 22px 24px 26px;
+  max-width: 300px;
+  transform: rotate(-3deg);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
+}
+
+.bb-wrp-ticket-label {
+  margin: 0 0 10px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bb-ink);
+}
+
+.bb-wrp-ticket-headline {
+  margin: 0;
+  font-family: var(--bb-ui);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--bb-green);
+  text-transform: uppercase;
+}
+
+.bb-wrp-ticket-sub {
+  margin: 2px 0 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--bb-ink);
+}
+
+.bb-wrp-ticket-pill {
+  display: inline-block;
+  background: var(--bb-blue-soft);
+  color: var(--bb-blue);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.bb-wrp-annotation {
+  display: inline-block;
+  margin: 18px 0 0 12px;
+  font-family: var(--bb-canela-text, serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--bb-ink);
+  background: var(--bb-highlight);
+  padding: 2px 8px;
+  transform: rotate(-2deg);
+}
+
+.bb-wrp-prize-markets {
+  display: grid;
+  gap: 16px;
+}
+
+.bb-wrp-prize-markets-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bb-wrp-prize-markets-kicker {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.bb-wrp-prize-markets-kicker--blue {
+  color: #6fa8dc;
+}
+
+.bb-wrp-request {
+  background: #22242c;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.bb-wrp-market {
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px;
+  color: var(--bb-ink);
+}
+
+.bb-wrp-market-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.bb-wrp-market-art {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  background: var(--bb-blue-soft);
+  flex: none;
+  overflow: hidden;
+}
+
+.bb-wrp-market-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bb-wrp-market-id {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.bb-wrp-market-name {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--bb-blue);
+}
+
+.bb-wrp-market-count {
+  margin: 2px 0 0;
+  font-size: 11.5px;
+  color: var(--bb-muted);
+}
+
+.bb-wrp-market-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--bb-ink);
+  text-decoration: none;
+  flex: none;
+}
+
+.bb-wrp-avatars {
+  list-style: none;
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--bb-line-soft);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.bb-wrp-avatar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  border-radius: 999px;
+  padding: 5px 5px 5px 5px;
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.bb-wrp-avatar span:first-child {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.15);
+  flex: none;
+}
+
+.bb-wrp-avatar-name {
+  color: var(--bb-ink);
+  padding-right: 6px;
+}
+
+.bb-wrp-avatar--more {
+  background: var(--bb-line);
+}
+
+.bb-wrp-avatar--more span {
+  color: var(--bb-ink);
+  background: transparent;
+}
+
+@media (min-width: 900px) {
+  .bb-wrp-prize-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- How it works ---------- */
+
+.bb-wrp-how {
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+.bb-wrp-how-list {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 26px;
+}
+
+.bb-wrp-how-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: var(--bb-ink);
+  margin-bottom: 10px;
+}
+
+.bb-wrp-how-title {
+  margin: 0 0 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bb-ink);
+}
+
+.bb-wrp-how-body {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--bb-body);
+  max-width: 26ch;
+}
+
+@media (min-width: 900px) {
+  .bb-wrp-how-list {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* ---------- Prizes carousel ---------- */
+
+.bb-wrp-prizes {
+  background: var(--bb-sage);
+  border-radius: var(--bb-radius-lg);
+  padding: clamp(24px, 4vw, 40px);
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+.bb-wrp-prizes-title {
+  margin: 6px 0 22px;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 800;
+  color: var(--bb-ink);
+}
+
+.bb-wrp-prizes-row {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+
+.bb-wrp-grand,
+.bb-wrp-prize-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.bb-wrp-grand-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bb-blue);
+  background: var(--bb-blue-soft);
+  border-radius: 999px;
+  padding: 4px 10px;
+  margin-bottom: 12px;
+}
+
+/* Real product photography (scooter/merch) if supplied, else a plain
+   placeholder tile — see BUBBA_WRP_PRIZES. */
+.bb-wrp-grand-art {
+  height: 160px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--bb-mist), var(--bb-line-soft));
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.bb-wrp-grand-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.bb-wrp-grand-name {
+  font-family: var(--bb-display);
+  font-size: 22px;
+  color: var(--bb-green);
+  margin: 0 0 14px;
+}
+
+.bb-wrp-grand-cta {
+  width: 100%;
+  border: 1px solid var(--bb-ink);
+  background: transparent;
+  color: var(--bb-ink);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.bb-wrp-prize-points {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--bb-blue);
+  margin-bottom: 10px;
+}
+
+.bb-wrp-prize-art {
+  height: 100px;
+  border-radius: 10px;
+  background: var(--bb-line-soft);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.bb-wrp-prize-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.bb-wrp-prize-name {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bb-ink);
+}
+
+.bb-wrp-prize-sub {
+  margin: 2px 0 0;
+  font-size: 11.5px;
+  color: var(--bb-muted);
+}
+
+@media (min-width: 700px) {
+  .bb-wrp-prizes-row {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+/* ---------- Closing banner ---------- */
+
+.bb-wrp-closer {
+  background: var(--bb-blue-soft);
+  border-radius: var(--bb-radius-lg);
+  margin: 0 var(--bb-gutter) clamp(48px, 7vw, 90px);
+  padding: clamp(24px, 4vw, 36px);
+}
+
+.bb-wrp-closer-row {
+  display: grid;
+  gap: 18px;
+  align-items: center;
+}
+
+.bb-wrp-closer-title {
+  font-family: var(--bb-display);
+  font-size: clamp(20px, 2.6vw, 26px);
+  color: var(--bb-ink);
+  margin: 0 0 6px;
+}
+
+.bb-wrp-closer-sub {
+  margin: 0;
+  font-size: 13px;
+  color: var(--bb-body);
+}
+
+.bb-wrp-closer-note {
+  justify-self: start;
+  font-family: var(--bb-canela-text, serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--bb-ink);
+  background: var(--bb-highlight);
+  padding: 2px 8px;
+  transform: rotate(-3deg);
+}
+
+.bb-wrp-closer-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--bb-green);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 13px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  justify-self: start;
+}
+
+@media (min-width: 860px) {
+  .bb-wrp-closer-row {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .bb-wrp-closer-note {
+    justify-self: center;
+  }
+
+  .bb-wrp-closer-cta {
+    justify-self: end;
   }
 }
