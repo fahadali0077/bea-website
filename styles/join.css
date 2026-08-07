@@ -10,11 +10,13 @@
    ============================================================ */
 
 .jn-page {
-  /* One control scale across every screen — fields and buttons are the same
-     height on the intro, the steps and the confirmation. */
-  --jn-field-h: 49px;
-  --jn-btn-h: 56px;
-  --jn-btn-w: 100%;
+  /* One control scale across every screen — fields and buttons share the
+     same height, width, and radius as the intro form. */
+  --jn-field-h: 52px;
+  --jn-btn-h: 52px;
+  --jn-control-w: 100%;
+  --jn-btn-w: var(--jn-control-w);
+  --jn-control-radius: 8px;
 
   --jn-paper: #fcfbfb;
   --jn-ink: #000000;
@@ -203,7 +205,7 @@
   width: 100%;
   height: var(--jn-field-h);
   border: 1px solid var(--jn-line);
-  border-radius: 8px;
+  border-radius: var(--jn-control-radius);
   background: #fff;
   padding: 0 16px;
   /* 16px rather than the design's 12.5px: anything under 16 makes iOS
@@ -374,7 +376,7 @@
   margin: -6px 0 0;
   padding: 0;
   border: 1px solid var(--jn-line);
-  border-radius: 8px;
+  border-radius: var(--jn-control-radius);
   overflow: hidden;
 }
 
@@ -422,7 +424,7 @@
   min-height: 66px;
   background: var(--jn-tint);
   border: 1px solid var(--jn-sel-border);
-  border-radius: 8px;
+  border-radius: var(--jn-control-radius);
   padding: 12px 14px 12px 16px;
 }
 
@@ -620,11 +622,11 @@
   background: var(--jn-green-btn);
   color: #fff;
   border: 0;
-  border-radius: 10px;
+  border-radius: var(--jn-control-radius);
   padding: 0 22px;
   font-family: inherit;
-  font-size: 16.65px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   position: relative;
 }
@@ -836,7 +838,7 @@
   gap: 8px;
   height: var(--jn-field-h);
   border: 1px solid #727272;
-  border-radius: 8px;
+  border-radius: var(--jn-control-radius);
   background: #fff;
   padding: 0 6px 0 14px;
 }
@@ -871,7 +873,7 @@
   width: 100%;
   height: var(--jn-btn-h);
   border: 1px solid var(--jn-blue);
-  border-radius: 8px;
+  border-radius: var(--jn-control-radius);
   font-size: 12.5px;
   font-weight: 500;
   color: var(--jn-blue);
@@ -896,9 +898,11 @@
     min-height: 100svh;
     --jn-side-pad: 48px;
     --jn-col-gap: 72px;
+    /* Match the intro input + CTA: same height, fixed control width. */
     --jn-field-h: 59px;
-    --jn-btn-h: 65px;
-    --jn-btn-w: 100%;
+    --jn-btn-h: 59px;
+    --jn-control-w: 440px;
+    --jn-btn-w: var(--jn-control-w);
   }
 
   /* ---- Header: wordmark left, dots right — spans full width ---- */
@@ -910,6 +914,8 @@
     height: 84px;
     padding: 0 var(--jn-side-pad);
     width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
   }
 
   .jn-brand img {
@@ -932,17 +938,21 @@
   .jn-main {
     flex: 0 1 auto;
     display: grid;
-    grid-template-columns: minmax(280px, 480px) minmax(0, 1fr);
+    /* Copy flexes; the control column stays the intro field/button width. */
+    grid-template-columns: minmax(280px, 1fr) var(--jn-control-w);
     column-gap: var(--jn-col-gap);
     align-content: start;
     align-items: start;
     padding: 56px var(--jn-side-pad) 46px;
     width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
   }
 
   .jn-col-copy {
     grid-column: 1;
     grid-row: 1;
+    max-width: 480px;
   }
 
   .jn-col-actions {
@@ -951,6 +961,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: var(--jn-control-w);
+    max-width: var(--jn-control-w);
   }
 
   .jn-eyebrow {
@@ -986,18 +998,20 @@
 
   .jn-body {
     margin-top: 0;
-    gap: 20px;
+    gap: 14px;
     width: 100%;
-    max-width: var(--jn-btn-w);
   }
 
   .jn-actions {
     margin-top: 0;
     padding: 0;
     width: 100%;
-    max-width: var(--jn-btn-w);
     justify-items: stretch;
     gap: 14px;
+  }
+
+  .jn-cta {
+    width: 100%;
   }
 
   .jn-error {
@@ -1063,12 +1077,7 @@
     font-size: 15px;
   }
 
-  /* ---- Campus & basics (standard two-column, no artwork) ---- */
-
-  .jn-page--campus .jn-col-actions,
-  .jn-page--basics .jn-col-actions {
-    max-width: 560px;
-  }
+  /* ---- Campus & basics (same control column as every other step) ---- */
 
   .jn-page--campus .jn-sub span,
   .jn-page--basics .jn-sub span {
@@ -1078,10 +1087,6 @@
   .jn-page--campus .jn-sub span+span::before,
   .jn-page--basics .jn-sub span+span::before {
     content: " ";
-  }
-
-  .jn-page--basics .jn-body {
-    gap: 18px;
   }
 
   /* ---- Ambassadors: two across ---- */
@@ -1101,15 +1106,8 @@
     line-height: 1.3;
   }
 
-  .jn-cta {
-    border-radius: 10px;
-    padding: 0 54px 0 30px;
-    font-size: 16px;
-    font-weight: 600;
-  }
-
   .jn-cta svg {
-    right: 26px;
+    right: 22px;
   }
 
   /* ---- Intro: copy left, illustration right ---- */
@@ -1125,6 +1123,8 @@
     padding: 0 var(--jn-side-pad);
     height: 98px;
     width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
   }
 
   .jn-intro-copy {
@@ -1135,12 +1135,14 @@
     flex: 1 1 auto;
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: minmax(280px, 480px) minmax(0, 1fr);
+    grid-template-columns: minmax(280px, var(--jn-control-w)) minmax(0, 1fr);
     column-gap: var(--jn-col-gap);
     align-items: center;
     align-content: center;
     padding: 0 var(--jn-side-pad);
     width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
   }
 
   /* 54px, not 66 — at 66 the headline overruns a 440px column. */
@@ -1153,7 +1155,7 @@
     font-size: 17px;
     line-height: 1.55;
     margin-top: 24px;
-    max-width: 480px;
+    max-width: var(--jn-control-w);
   }
 
   /* The illustration moves to its own column. */
@@ -1164,13 +1166,17 @@
     max-width: 620px;
   }
 
-  /* The reference stacks these: label, field, then a full-width button.
-     Keeping the button inline with the input squeezed both. */
+  /* Same width/height stack as every other step's field + Continue. */
   .jn-intro-form {
-    max-width: var(--jn-btn-w);
+    width: 100%;
+    max-width: var(--jn-control-w);
     grid-template-columns: minmax(0, 1fr);
     gap: 14px;
     margin-top: 40px;
+  }
+
+  .jn-intro-form .jn-cta {
+    width: 100%;
   }
 
   .jn-intro-form .jn-field-label {
