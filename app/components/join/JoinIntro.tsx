@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Heart } from "lucide-react";
+import { ArrowRight, Heart, Mail } from "lucide-react";
 
 import { updateWaitlistForm } from "@/features/waitlist/waitlist.slice";
 import { BUBBA_BRAND } from "@/lib/bubba-content";
@@ -61,19 +61,27 @@ export function JoinIntro() {
           <label className="jn-field-label" htmlFor="jn-intro-email">
             Enter your email to get started
           </label>
-          <input
-            id="jn-intro-email"
-            className="jn-input"
-            type="email"
-            inputMode="email"
-            autoComplete="email"
-            placeholder="you@email.com"
-            value={value}
-            onChange={(e) => {
-              setValue(e.target.value);
-              if (error) setError(null);
-            }}
-          />
+          <div className="jn-input-wrap">
+            <Mail
+              className="jn-input-icon"
+              size={16}
+              strokeWidth={1.8}
+              aria-hidden="true"
+            />
+            <input
+              id="jn-intro-email"
+              className="jn-input jn-input--icon"
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              placeholder="you@email.com"
+              value={value}
+              onChange={(e) => {
+                setValue(e.target.value);
+                if (error) setError(null);
+              }}
+            />
+          </div>
           {error ? (
             <p className="jn-error" role="alert">
               {error}

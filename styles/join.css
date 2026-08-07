@@ -226,6 +226,23 @@
   box-shadow: 0 0 0 3px rgba(32, 69, 47, 0.08);
 }
 
+.jn-input-wrap {
+  position: relative;
+}
+
+.jn-input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--jn-placeholder);
+  pointer-events: none;
+}
+
+.jn-input--icon {
+  padding-left: 42px;
+}
+
 .jn-field {
   display: block;
 }
@@ -523,6 +540,7 @@
   font-size: 12.5px;
   font-weight: 400;
   color: var(--jn-ink);
+  text-align: center;
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
@@ -783,6 +801,14 @@
 }
 
 @media (max-width: 1023px) {
+  /* ---- Intro: centered wordmark, copy → art → form ---- */
+
+  .jn-page--intro .jn-main--intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .jn-intro-title {
     order: 1;
   }
@@ -801,6 +827,30 @@
 
   .jn-promise {
     order: 5;
+  }
+
+  /* ---- Collecting steps: left wordmark, CTA pinned to bottom ---- */
+
+  .jn-page:not(.jn-page--intro):not(.jn-page--done) .jn-main {
+    flex: 1 1 auto;
+    padding-bottom: 0;
+    min-height: 0;
+  }
+
+  .jn-page:not(.jn-page--intro):not(.jn-page--done) .jn-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    margin-top: auto;
+    padding-top: 24px;
+  }
+
+  /* ---- Done: single centered column ---- */
+
+  .jn-page--done .jn-main--done {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -908,10 +958,21 @@
 }
 
 .jn-invite-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   font-size: 12.5px;
   font-weight: 500;
   color: var(--jn-ink);
   margin: 0 0 10px;
+}
+
+.jn-invite-label::before,
+.jn-invite-label::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--jn-line);
 }
 
 .jn-invite-row {
@@ -1114,6 +1175,12 @@
   .jn-skip:hover {
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+
+  .jn-page--ambassador .jn-skip {
+    font-size: 12.5px;
+    font-weight: 400;
+    color: var(--jn-ink);
   }
 
   /* ---- City: slightly wider so a 2-up card grid breathes ---- */

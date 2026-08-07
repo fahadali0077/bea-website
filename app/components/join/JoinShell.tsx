@@ -58,7 +58,7 @@ export function JoinShell({
         (art && artSide === "right" ? " jn-page--art-right" : "")
       }
     >
-      <header className="jn-top jn-top--intro">
+      <header className="jn-top">
         <Link href="/" className="jn-brand" aria-label="Bubba — home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={BUBBA_BRAND.wordmark} alt="Bubba" />
@@ -103,13 +103,7 @@ export function JoinShell({
             {/* The artboards treat these differently: the city skip is 24pt
                 medium green, the ambassador one 18pt regular ink. */}
             {skip ? (
-              <button
-                type="button"
-                className={
-                  "jn-skip" + (slug === "ambassador" ? " jn-skip--plain" : "")
-                }
-                onClick={skip.onClick}
-              >
+              <button type="button" className="jn-skip" onClick={skip.onClick}>
                 {skip.label}
               </button>
             ) : null}
