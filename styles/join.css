@@ -13,7 +13,7 @@
   /* One control scale across every screen — fields and buttons are the same
      height on the intro, the steps and the confirmation. */
   --jn-field-h: 49px;
-  --jn-btn-h: 49px;
+  --jn-btn-h: 56px;
 
   --jn-paper: #fcfbfb;
   --jn-ink: #000000;
@@ -974,7 +974,7 @@
 
   .jn-page {
     --jn-field-h: 59px;
-    --jn-btn-h: 59px;
+    --jn-btn-h: 65px;
   }
 
   .jn-optout {
