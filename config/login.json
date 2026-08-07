@@ -17,8 +17,10 @@
       "--text-muted": "#9a9a9a",
       "--border": "#d8d5cf",
       "--input-bg": "#ffffff",
-      "--btn-bg": "#1a1a1a",
-      "--btn-text": "#ffffff"
+      "--btn-bg": "#20452f",
+      "--btn-text": "#ffffff",
+      "--green": "#20452f",
+      "--highlight": "#fbcbcc"
     }
   },
   "api": {
@@ -27,30 +29,27 @@
     "apple": "/api/auth/social",
     "useExternalBackend": false,
     "externalBaseUrl": "",
-    "redirectOnSuccess": "/onboarding"
+    "redirectOnSuccess": "/dashboard"
   },
   "leftPanel": {
-    "image": "/images/login-page-image.png",
-    "imageAlt": "Group of happy people sharing a real connection",
-    "brand": "Bea",
-    "eyebrow": "Be a part of something real",
-    "headline": ["Real people.", "Real connections.", "Real impact."],
-    "body": "As a Bea Ambassador, you'll help build a community where meaningful connections create lasting change."
+    "eyebrow": "JOIN US THIS SUMMER & FALL",
+    "headline": "Ambassador Program",
+    "tagline": "by invite only."
   },
   "header": {
-    "backLabel": "Back to home",
-    "backHref": "/waitlist"
+    "backLabel": "Back to login",
+    "backHref": "/login"
   },
   "form": {
     "eyebrow": "Ambassador Login",
-    "title": "Welcome back",
+    "title": "Welcome back.",
     "subtitle": "Log in to your ambassador account.",
     "fields": [
       {
         "id": "email",
         "label": "Email",
         "type": "email",
-        "placeholder": "you@beadating.com",
+        "placeholder": "you@email.com",
         "autoComplete": "email",
         "required": true
       },
