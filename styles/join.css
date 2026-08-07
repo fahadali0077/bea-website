@@ -43,6 +43,14 @@
     var(--font-sans), sans-serif;
   --jn-label: "Suisse Intl", "SuisseIntl";
 
+  /* bubba.css (which owns these) isn't loaded on the waitlist pages, so
+     define them here too — otherwise font-family: var(--bb-canela-text)
+     is an invalid value and the type silently falls back. */
+  --bb-canela: "Canela", "Canela Fallback", var(--font-fraunces), Georgia,
+    "Times New Roman", serif;
+  --bb-canela-text: "Canela Text", "Canela Text Fallback",
+    var(--font-fraunces), Georgia, "Times New Roman", serif;
+
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
@@ -737,7 +745,7 @@
 
 .jn-cta svg {
   position: absolute;
-  right: 20px;
+  right: 33.71px;
 }
 
 /* The reference screens always render Continue solid dark green — even
@@ -783,14 +791,14 @@
 
 .jn-main--intro {
   flex: 1 1 auto;
-  padding: 30px 24px 40px;
+  padding: 50.51px 24px 40px;
   align-items: center;
 }
 
 .jn-intro-title {
-  font-family: var(--jn-serif);
+  font-family: var(--bb-canela-text);
   font-weight: 400;
-  font-size: 33.3px;
+  font-size: 48px;
   line-height: 1.24;
   color: var(--jn-green);
   margin: 0;
@@ -801,16 +809,16 @@
 }
 
 .jn-intro-sub {
-  font-size: 16.65px;
+  font-size: 24px;
   line-height: 1.5;
   color: var(--jn-body);
-  margin: 16px 0 0;
+  margin: 38.83px 0 0;
 }
 
 .jn-intro-art {
   width: 100%;
   max-width: 353px;
-  margin: 26px auto 24px;
+  margin: 27.01px auto 11.5px;
 }
 
 .jn-intro-art img {
@@ -882,17 +890,17 @@
 .jn-intro-form {
   width: 100%;
   display: grid;
-  gap: 12px;
+  gap: 0px;
   text-align: left;
 }
 
 .jn-promise {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  font-size: 12.5px;
+  gap: 16.92px;
+  font-size: 18px;
   color: #878787;
-  margin: 16px 0 0;
+  margin: 29.01px 0 0;
 }
 
 .jn-promise svg {
