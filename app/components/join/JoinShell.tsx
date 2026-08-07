@@ -74,56 +74,58 @@ export function JoinShell({
           </div>
         ) : null}
 
-        <div className="jn-step-copy">
+        <div className="jn-col-copy">
           <p className="jn-eyebrow">{step.eyebrow}</p>
-        <h1 className="jn-heading">
-          {step.heading.map((line, i) => (
-            <span key={i}>{line}</span>
-          ))}
-        </h1>
-        {/* Only the city step has a smaller, dimmer second line
-            ("(This helps with launch)") — 21pt against 24pt in the .ai. */}
-        <p className={"jn-sub" + (slug === "city" ? " jn-sub--aside" : "")}>
-          {step.sub.map((line, i) => (
-            <span key={i}>{line}</span>
-          ))}
-        </p>
+          <h1 className="jn-heading">
+            {step.heading.map((line, i) => (
+              <span key={i}>{line}</span>
+            ))}
+          </h1>
+          {/* Only the city step has a smaller, dimmer second line
+              ("(This helps with launch)") — 21pt against 24pt in the .ai. */}
+          <p className={"jn-sub" + (slug === "city" ? " jn-sub--aside" : "")}>
+            {step.sub.map((line, i) => (
+              <span key={i}>{line}</span>
+            ))}
+          </p>
+        </div>
 
+        <div className="jn-col-actions">
           <div className="jn-body">{children}</div>
+
+          <div className="jn-actions">
+            {error ? (
+              <p className="jn-error" role="alert">
+                {error}
+              </p>
+            ) : null}
+
+            {/* The artboards treat these differently: the city skip is 24pt
+                medium green, the ambassador one 18pt regular ink. */}
+            {skip ? (
+              <button
+                type="button"
+                className={
+                  "jn-skip" + (slug === "ambassador" ? " jn-skip--plain" : "")
+                }
+                onClick={skip.onClick}
+              >
+                {skip.label}
+              </button>
+            ) : null}
+
+            <button
+              type="button"
+              className="jn-cta"
+              onClick={advance}
+              disabled={!canContinue || busy}
+            >
+              {busy ? "Just a moment…" : "Continue"}
+              <ArrowRight size={18} strokeWidth={2} />
+            </button>
+          </div>
         </div>
       </main>
-
-      <footer className="jn-foot">
-        {error ? (
-          <p className="jn-error" role="alert">
-            {error}
-          </p>
-        ) : null}
-
-        {/* The artboards treat these differently: the city skip is 24pt
-            medium green, the ambassador one 18pt regular ink. */}
-        {skip ? (
-          <button
-            type="button"
-            className={
-              "jn-skip" + (slug === "ambassador" ? " jn-skip--plain" : "")
-            }
-            onClick={skip.onClick}
-          >
-            {skip.label}
-          </button>
-        ) : null}
-
-        <button
-          type="button"
-          className="jn-cta"
-          onClick={advance}
-          disabled={!canContinue || busy}
-        >
-          {busy ? "Just a moment…" : "Continue"}
-          <ArrowRight size={18} strokeWidth={2} />
-        </button>
-      </footer>
     </div>
   );
 }
