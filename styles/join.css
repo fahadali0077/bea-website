@@ -1182,7 +1182,8 @@
      page — so the button lines up under the field/cards and the skip
      label centers over the button instead of floating off to the side. */
   .jn-page--city .jn-foot,
-  .jn-page--ambassador .jn-foot {
+  .jn-page--ambassador .jn-foot,
+  .jn-page--email .jn-foot {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
@@ -1191,19 +1192,23 @@
 
   .jn-page--city .jn-foot .jn-skip,
   .jn-page--ambassador .jn-foot .jn-skip,
+  .jn-page--email .jn-foot .jn-skip,
   .jn-page--city .jn-foot .jn-cta,
-  .jn-page--ambassador .jn-foot .jn-cta {
+  .jn-page--ambassador .jn-foot .jn-cta,
+  .jn-page--email .jn-foot .jn-cta {
     width: var(--jn-btn-w);
     margin-left: calc(440px + 72px);
   }
 
   .jn-page--city .jn-foot .jn-skip,
-  .jn-page--ambassador .jn-foot .jn-skip {
+  .jn-page--ambassador .jn-foot .jn-skip,
+  .jn-page--email .jn-foot .jn-skip {
     text-align: center;
   }
 
   .jn-page--city .jn-error,
-  .jn-page--ambassador .jn-error {
+  .jn-page--ambassador .jn-error,
+  .jn-page--email .jn-error {
     width: var(--jn-btn-w);
     margin-left: calc(440px + 72px);
     margin-right: 0;
