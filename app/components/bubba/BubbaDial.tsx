@@ -41,9 +41,9 @@ export function BubbaDial() {
   }, []);
 
   const { h, m, s } = split(remaining ?? DAY_MS);
-  const fraction = (remaining ?? DAY_MS) / DAY_MS;
-  const offset = CIRCUMFERENCE * (1 - fraction);
-  const readout = `${pad(h)}:${pad(m)}:${pad(s)}`;
+  /* Dark tick = time already spent today; sage track = time still left. */
+  const elapsed = 1 - (remaining ?? DAY_MS) / DAY_MS;
+  const offset = CIRCUMFERENCE * (1 - elapsed);
 
   return (
     <div className="bb-dial">
@@ -60,17 +60,29 @@ export function BubbaDial() {
       </svg>
 
       <div className="bb-dial-inner">
-        <span className="bb-dial-time" suppressHydrationWarning>
-          {readout}
-        </span>
+        <div className="bb-dial-readout" suppressHydrationWarning>
+          <div className="bb-dial-part">
+            <span className="bb-dial-time">{pad(h)}</span>
+            <span className="bb-dial-unit">HRS</span>
+          </div>
+          <span className="bb-dial-colon" aria-hidden="true">
+            :
+          </span>
+          <div className="bb-dial-part">
+            <span className="bb-dial-time">{pad(m)}</span>
+            <span className="bb-dial-unit">MIN</span>
+          </div>
+          <span className="bb-dial-colon" aria-hidden="true">
+            :
+          </span>
+          <div className="bb-dial-part">
+            <span className="bb-dial-time">{pad(s)}</span>
+            <span className="bb-dial-unit">SEC</span>
+          </div>
+        </div>
         <span className="bb-sr">
           {h} hours, {m} minutes and {s} seconds left today
         </span>
-        <div className="bb-dial-units" aria-hidden="true">
-          <span>HRS</span>
-          <span>MIN</span>
-          <span>SEC</span>
-        </div>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={BUBBA_BRAND.bolt} alt="" className="bb-dial-bolt" />
       </div>

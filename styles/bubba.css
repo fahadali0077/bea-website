@@ -530,6 +530,18 @@
   color: var(--bb-ai-placeholder);
 }
 
+/* Chrome/Safari paint a blue/yellow rect on autofill — pin it back to paper. */
+.bb-capture-input:-webkit-autofill,
+.bb-capture-input:-webkit-autofill:hover,
+.bb-capture-input:-webkit-autofill:focus,
+.bb-capture-input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--bb-ink) !important;
+  caret-color: var(--bb-ink);
+  border-radius: 0;
+  box-shadow: 0 0 0 1000px var(--bb-paper) inset !important;
+  transition: background-color 99999s ease-out;
+}
+
 .bb-capture-btn {
   flex: 0 0 auto;
   width: 38px;
@@ -709,14 +721,14 @@
 
 .bb-dial-track {
   fill: none;
-  stroke: var(--bb-line);
-  stroke-width: 2.5;
+  stroke: #c5d1c7;
+  stroke-width: 1.75;
 }
 
 .bb-dial-arc {
   fill: none;
   stroke: var(--bb-green);
-  stroke-width: 2.5;
+  stroke-width: 1.75;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.9s linear;
 }
@@ -727,31 +739,55 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
 }
 
-.bb-dial-time {
-  font-family: var(--bb-numeral);
+.bb-dial-readout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+}
+
+.bb-dial-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  min-width: 1.7em;
+}
+
+.bb-dial-time,
+.bb-dial-colon {
+  font-family: var(--bb-display);
   font-size: clamp(28px, 4.4vw, 36px);
+  font-weight: 400;
   color: var(--bb-green);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.01em;
   line-height: 1;
 }
 
-.bb-dial-units {
-  display: flex;
-  gap: clamp(16px, 3vw, 26px);
-  font-size: 9px;
+.bb-dial-colon {
+  padding-top: 0;
+  min-width: 0.35em;
+  text-align: center;
+}
+
+.bb-dial-unit {
+  font-family: var(--bb-ui);
+  font-size: 8.5px;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--bb-ai-units);
+  line-height: 1;
 }
 
 .bb-dial-bolt {
   width: 11px;
   height: auto;
-  margin: 6px auto 0;
+  margin: 2px auto 0;
   display: block;
 }
 
@@ -1990,8 +2026,18 @@
     margin-top: 62px;
   }
 
-  .bb-dial-time {
+  .bb-dial-time,
+  .bb-dial-colon {
     font-size: 46px;
+  }
+
+  .bb-dial-unit {
+    font-size: 9px;
+  }
+
+  .bb-dial-part {
+    gap: 10px;
+    min-width: 1.85em;
   }
 
   .bb-scene {
