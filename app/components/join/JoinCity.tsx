@@ -10,6 +10,7 @@ import { cityArt, joinStepHref, joinStepIndex } from "@/lib/join";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { JoinFail } from "./JoinFail";
+import { JoinSearchSkeleton } from "./JoinLoading";
 import { JoinShell } from "./JoinShell";
 
 /** "Boston" + "MA" reads as "Boston, MA" under the name in the chosen row. */
@@ -88,9 +89,11 @@ export function JoinCity() {
         <JoinFail what="cities" onRetry={() => void refetchFeatured()} />
       ) : null}
 
-      <ul className="jn-cities">
+      <ul className="jn-cities" aria-busy={isLoading || undefined}>
         {isLoading
-          ? [0, 1, 2].map((i) => <li key={i} className="jn-city jn-city--ghost" />)
+          ? [0, 1, 2, 3].map((i) => (
+              <li key={i} className="jn-city jn-city--ghost" aria-hidden="true" />
+            ))
           : cards.map((m) => (
               <li key={m.id}>
                 <button
@@ -128,19 +131,32 @@ export function JoinCity() {
       />
 
       {showResults ? (
-        <ul className="jn-results" id="jn-city-results" role="listbox">
-          {searchFailed ? (
+        searchFailed ? (
+          <ul className="jn-results" id="jn-city-results" role="listbox">
             <li className="jn-results-note">
               Search is unavailable right now. Try again in a moment.
             </li>
-          ) : isFetching && results.length === 0 ? (
-            <li className="jn-results-note">Searching…</li>
-          ) : results.length === 0 ? (
+          </ul>
+        ) : isFetching && results.length === 0 ? (
+          <div id="jn-city-results">
+            <JoinSearchSkeleton />
+          </div>
+        ) : results.length === 0 ? (
+          <ul className="jn-results" id="jn-city-results" role="listbox">
             <li className="jn-results-note">
               No market matches &ldquo;{search.trim()}&rdquo; yet.
             </li>
-          ) : (
-            results.map((m) => (
+          </ul>
+        ) : (
+          <ul
+            className={
+              "jn-results" + (isFetching ? " jn-results--busy" : "")
+            }
+            id="jn-city-results"
+            role="listbox"
+            aria-busy={isFetching || undefined}
+          >
+            {results.map((m) => (
               <li key={m.id} role="option" aria-selected={false}>
                 <button
                   type="button"
@@ -154,9 +170,9 @@ export function JoinCity() {
                   ) : null}
                 </button>
               </li>
-            ))
-          )}
-        </ul>
+            ))}
+          </ul>
+        )
       ) : null}
 
       {/* Whatever the route in — card or dropdown — the choice reads back

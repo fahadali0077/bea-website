@@ -116,12 +116,22 @@ export function JoinShell({
 
             <button
               type="button"
-              className="jn-cta"
+              className={"jn-cta" + (busy ? " jn-cta--busy" : "")}
               onClick={advance}
               disabled={!canContinue || busy}
+              aria-busy={busy || undefined}
             >
-              {busy ? "Just a moment…" : "Continue"}
-              <ArrowRight size={18} strokeWidth={2} />
+              {busy ? (
+                <>
+                  <span className="jn-cta-spin" aria-hidden="true" />
+                  Just a moment…
+                </>
+              ) : (
+                <>
+                  Continue
+                  <ArrowRight size={18} strokeWidth={2} />
+                </>
+              )}
             </button>
           </div>
         </div>

@@ -8,6 +8,7 @@ import { updateWaitlistForm } from "@/features/waitlist/waitlist.slice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { JoinFail } from "./JoinFail";
+import { JoinSearchSkeleton } from "./JoinLoading";
 import { JoinShell } from "./JoinShell";
 
 export function JoinCampus() {
@@ -58,18 +59,23 @@ export function JoinCampus() {
       {/* Searching and no-match states, so an empty box never reads as broken. */}
       {search.trim().length >= 2 && !form.schoolId && !isError ? (
         results.length === 0 ? (
-          <ul className="jn-results">
-            <li className="jn-results-note">
-              {isFetching
-                ? "Searching…"
-                : `No school matches “${search.trim()}” yet.`}
-            </li>
-          </ul>
+          isFetching ? (
+            <JoinSearchSkeleton />
+          ) : (
+            <ul className="jn-results">
+              <li className="jn-results-note">
+                No school matches “{search.trim()}” yet.
+              </li>
+            </ul>
+          )
         ) : null
       ) : null}
 
       {results.length > 0 && !form.schoolId ? (
-        <ul className="jn-results">
+        <ul
+          className={"jn-results" + (isFetching ? " jn-results--busy" : "")}
+          aria-busy={isFetching || undefined}
+        >
           {results.map((s) => (
             <li key={s.id}>
               <button

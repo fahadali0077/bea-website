@@ -45,9 +45,13 @@ export function JoinAmbassador() {
       {isError ? (
         <JoinFail what="ambassadors" onRetry={() => void refetch()} />
       ) : isLoading ? (
-        <ul className="jn-amb">
-          {[0, 1, 2].map((i) => (
-            <li key={i} className="jn-amb-row jn-amb-row--ghost" />
+        <ul className="jn-amb" aria-busy="true" aria-label="Loading ambassadors">
+          {[0, 1, 2, 3].map((i) => (
+            <li
+              key={i}
+              className="jn-amb-row jn-amb-row--ghost"
+              aria-hidden="true"
+            />
           ))}
         </ul>
       ) : ambassadors.length === 0 ? (

@@ -326,8 +326,16 @@
 
 .jn-city--ghost {
   height: 167px;
-  background: #f2f2f0;
   border-color: transparent;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    #eeebe8 20%,
+    #f7f5f3 40%,
+    #eeebe8 60%
+  );
+  background-size: 200% 100%;
+  animation: jn-shimmer 1.35s ease-in-out infinite;
 }
 
 .jn-city-art {
@@ -415,6 +423,33 @@
   color: var(--jn-meta);
   background: #fff;
 }
+
+/* Soft skeleton rows while a city/school search is in flight. */
+.jn-results-skel {
+  height: 52px;
+  margin: 0;
+  border-bottom: 1px solid var(--jn-line);
+  background: linear-gradient(
+    100deg,
+    #f3f1ef 20%,
+    #faf9f8 40%,
+    #f3f1ef 60%
+  );
+  background-size: 200% 100%;
+  animation: jn-shimmer 1.35s ease-in-out infinite;
+}
+
+.jn-results li:last-child.jn-results-skel {
+  border-bottom: 0;
+}
+
+/* Soft dim while an existing result list is refreshing. */
+.jn-results--busy {
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
 
 .jn-chosen {
   display: flex;
@@ -528,8 +563,32 @@
 
 .jn-amb-row--ghost {
   height: 66px;
-  background: #f2f2f0;
   border-color: transparent;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    #eeebe8 20%,
+    #f7f5f3 40%,
+    #eeebe8 60%
+  );
+  background-size: 200% 100%;
+  animation: jn-shimmer 1.35s ease-in-out infinite;
+}
+
+.jn-amb-row--ghost:nth-child(2),
+.jn-city--ghost:nth-child(2),
+.jn-results-skel:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.jn-amb-row--ghost:nth-child(3),
+.jn-city--ghost:nth-child(3),
+.jn-results-skel:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+.jn-city--ghost:nth-child(4) {
+  animation-delay: 0.36s;
 }
 
 .jn-amb-row--on {
@@ -639,6 +698,22 @@
 .jn-cta:disabled {
   opacity: 0.42;
   cursor: not-allowed;
+}
+
+/* Keep the busy CTA readable — full opacity, light spinner instead. */
+.jn-cta--busy:disabled {
+  opacity: 1;
+  cursor: wait;
+}
+
+.jn-cta-spin {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: jn-spin 0.7s linear infinite;
+  flex: none;
 }
 
 /* ---------- Intro screen ---------- */
@@ -1344,4 +1419,37 @@
   text-decoration: underline;
   text-underline-offset: 3px;
   padding: 4px 0;
+}
+
+/* ---------- Loading motion ---------- */
+
+@keyframes jn-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes jn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jn-city--ghost,
+  .jn-amb-row--ghost,
+  .jn-results-skel,
+  .jn-cta-spin {
+    animation: none;
+  }
+
+  .jn-city--ghost,
+  .jn-amb-row--ghost,
+  .jn-results-skel {
+    background: #eeebe8;
+  }
 }
