@@ -33,12 +33,9 @@ export type LoginConfig = {
     redirectOnSuccess: string;
   };
   leftPanel: {
-    image: string;
-    imageAlt: string;
-    brand: string;
     eyebrow: string;
-    headline: string[];
-    body: string;
+    headline: string;
+    tagline: string;
   };
   header: { backLabel: string; backHref: string };
   form: {

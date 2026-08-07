@@ -1,156 +1,160 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ChevronLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
 import { useMemo, useState, type CSSProperties, type FormEvent } from "react";
 
-import { getApiErrorMessage } from "@/lib/api";
-import { useRequestMagicLinkMutation } from "@/features/api/apiSlice";
+import { loginRequest } from "@/lib/auth-client";
 import { login as loginConfig } from "@/lib/config";
+import type { LoginFieldConfig } from "@/lib/config";
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { AmbassadorLoginBrandPanel } from "./AmbassadorLoginBrandPanel";
+
+function LoginField({
+  field,
+  value,
+  visible,
+  onChange,
+  onToggleVisibility,
+}: {
+  field: LoginFieldConfig;
+  value: string;
+  visible: boolean;
+  onChange: (value: string) => void;
+  onToggleVisibility?: () => void;
+}) {
+  const isPassword = field.type === "password";
+
+  return (
+    <div className="field-group">
+      <label className="field-label field-label--strong" htmlFor={field.id}>
+        {field.label}
+      </label>
+      <div className="input-wrap">
+        <input
+          className="field-input"
+          style={isPassword && field.showToggle ? { paddingRight: "46px" } : undefined}
+          type={isPassword && visible ? "text" : field.type}
+          id={field.id}
+          name={field.id}
+          placeholder={field.placeholder}
+          autoComplete={field.autoComplete}
+          required={field.required}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+        />
+        {isPassword && field.showToggle ? (
+          <button
+            className="password-toggle"
+            type="button"
+            aria-label="Toggle password visibility"
+            onClick={onToggleVisibility}
+          >
+            {visible ? (
+              <EyeOff size={20} strokeWidth={1.7} aria-hidden="true" />
+            ) : (
+              <Eye size={20} strokeWidth={1.7} aria-hidden="true" />
+            )}
+          </button>
+        ) : null}
+      </div>
+    </div>
+  );
+}
 
 export function AmbassadorLoginPage() {
-  const { leftPanel, header, footer, theme } = loginConfig;
-  const themeStyle = useMemo(() => theme.cssVariables as CSSProperties, [theme.cssVariables]);
+  const router = useRouter();
+  const { form, api, theme } = loginConfig;
 
-  const [requestMagicLink, { isLoading: loading }] = useRequestMagicLinkMutation();
-  const [email, setEmail] = useState("");
+  const initialValues = useMemo(
+    () => Object.fromEntries(form.fields.map((field) => [field.id, ""])) as Record<string, string>,
+    [form.fields],
+  );
+
+  const [values, setValues] = useState(initialValues);
+  const [remember, setRemember] = useState(form.rememberMe.defaultChecked);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [sent, setSent] = useState(false);
+
+  const themeStyle = useMemo(() => theme.cssVariables as CSSProperties, [theme.cssVariables]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const value = email.trim().toLowerCase();
-    if (!EMAIL_RE.test(value)) {
-      setError("Enter a valid email address");
-      return;
-    }
-
     setError(null);
+    setLoading(true);
+
     try {
-      await requestMagicLink(value).unwrap();
-      setSent(true);
+      const result = await loginRequest(api, {
+        email: values.email ?? "",
+        password: values.password ?? "",
+        remember,
+      });
+      router.push(result.redirectTo ?? api.redirectOnSuccess);
     } catch (err) {
-      setError(getApiErrorMessage(err, "Unable to send login link. Please try again."));
+      setError(err instanceof Error ? err.message : "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="ambassador-login-root" style={themeStyle}>
-      <div className="page-wrapper">
-        <div className="login-layout">
-          <div className="left-panel">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={leftPanel.image} alt={leftPanel.imageAlt} />
-            <div className="left-overlay" />
-            <div className="left-brand">{leftPanel.brand}</div>
-            <div className="left-content">
-              <p className="left-eyebrow">{leftPanel.eyebrow}</p>
-              <h2 className="left-headline">
-                {leftPanel.headline.map((line, index) => (
-                  <span key={line}>
-                    {line}
-                    {index < leftPanel.headline.length - 1 && <br />}
-                  </span>
-                ))}
-              </h2>
-              <div className="left-divider" />
-              <p className="left-body">{leftPanel.body}</p>
-            </div>
-          </div>
+    <div className="ambassador-login-root ambassador-login-root--program" style={themeStyle}>
+      <div className="page-wrapper page-wrapper--program">
+        <div className="login-layout login-layout--program">
+          <AmbassadorLoginBrandPanel />
 
-          <div className="right-panel">
-            <div className="right-header">
-              <Link href={header.backHref} className="back-link">
-                <ChevronLeft size={18} strokeWidth={1.8} aria-hidden="true" />
-                {header.backLabel}
-              </Link>
-            </div>
+          <div className="right-panel right-panel--program">
+            <div className="right-form-wrap right-form-wrap--program">
+              <p className="form-eyebrow form-eyebrow--program">{form.eyebrow}</p>
+              <h1 className="form-title form-title--program">{form.title}</h1>
+              <p className="form-subtitle form-subtitle--program">
+                <span className="text-highlight">{form.subtitle}</span>
+              </p>
 
-            <div className="right-form-wrap">
-              {sent ? (
-                <>
-                  <p className="form-eyebrow">Check your email</p>
-                  <h1 className="form-title">Link on the way</h1>
-                  <p className="form-subtitle">
-                    If an account exists for <strong>{email}</strong>, we&apos;ve sent a secure login
-                    link. Open it on this device to sign in.
-                  </p>
-
-                  <button
-                    className="btn-login"
-                    type="button"
-                    onClick={() => {
-                      setSent(false);
-                      setEmail("");
-                    }}
-                  >
-                    <span>Use a different email</span>
-                    <span className="btn-arrow">
-                      <ArrowRight size={18} strokeWidth={2} aria-hidden="true" />
-                    </span>
-                  </button>
-                </>
-              ) : (
-                <>
-                  <p className="form-eyebrow">Log in</p>
-                  <h1 className="form-title">Welcome back</h1>
-                  <p className="form-subtitle">Enter your email and we&apos;ll send you a secure login link.</p>
-
-                  <form onSubmit={handleSubmit} noValidate>
-                    {error && (
-                      <div className="form-error" role="alert">
-                        {error}
-                      </div>
-                    )}
-
-                    <div className="field-group">
-                      <label className="field-label" htmlFor="email">
-                        Email
-                      </label>
-                      <div className="input-wrap">
-                        <input
-                          className="field-input"
-                          type="email"
-                          id="email"
-                          name="email"
-                          placeholder="you@email.com"
-                          autoComplete="email"
-                          required
-                          value={email}
-                          onChange={(e) => {
-                            setEmail(e.target.value);
-                            setError(null);
-                          }}
-                        />
-                      </div>
-                    </div>
-
-                    <button className="btn-login" type="submit" disabled={loading}>
-                      <span>{loading ? "Sending link…" : "Email me a login link"}</span>
-                      <span className="btn-arrow">
-                        <ArrowRight size={18} strokeWidth={2} aria-hidden="true" />
-                      </span>
-                    </button>
-                  </form>
-
-                  <div className="apply-section">
-                    <p>New to Bea?</p>
-                    <Link href="/waitlist" className="apply-link">
-                      Join the waitlist
-                      <ArrowRight size={14} strokeWidth={2} aria-hidden="true" />
-                    </Link>
+              <form onSubmit={handleSubmit} noValidate>
+                {error ? (
+                  <div className="form-error" role="alert">
+                    {error}
                   </div>
-                </>
-              )}
+                ) : null}
+
+                {form.fields.map((field) => (
+                  <LoginField
+                    key={field.id}
+                    field={field}
+                    value={values[field.id] ?? ""}
+                    visible={passwordVisible}
+                    onChange={(next) => setValues((current) => ({ ...current, [field.id]: next }))}
+                    onToggleVisibility={field.showToggle ? () => setPasswordVisible((v) => !v) : undefined}
+                  />
+                ))}
+
+                <div className="form-row form-row--program">
+                  <label className="remember-label remember-label--program" htmlFor="remember">
+                    <input
+                      className="remember-checkbox"
+                      type="checkbox"
+                      id="remember"
+                      checked={remember}
+                      onChange={(e) => setRemember(e.target.checked)}
+                    />
+                    <span className="text-highlight">{form.rememberMe.label}</span>
+                  </label>
+
+                  <Link href={form.forgotPassword.href} className="forgot-link forgot-link--program">
+                    {form.forgotPassword.label}
+                  </Link>
+                </div>
+
+                <button className="btn-login btn-login--program" type="submit" disabled={loading}>
+                  {loading ? form.submit.loadingLabel : form.submit.label}
+                </button>
+              </form>
             </div>
           </div>
         </div>
-
-        <footer className="page-footer">
-          {footer.prefix} <a href={footer.emailHref}>{footer.email}</a>
-        </footer>
       </div>
     </div>
   );
