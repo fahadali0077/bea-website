@@ -1063,8 +1063,14 @@
    ============================================================ */
 
 .bb-closer {
-  padding: 26px 0 30px;
+  padding: 32px var(--bb-gutter) 48px;
   background: var(--bb-paper);
+}
+
+@media (min-width: 768px) {
+  .bb-closer {
+    padding: 64px var(--bb-gutter) 64px;
+  }
 }
 
 .bb-closer-card {
@@ -2054,7 +2060,7 @@
   /* ---- Closer ---- */
 
   .bb-closer {
-    padding: 96px 0 0;
+    padding: 96px var(--bb-gutter) 72px;
   }
 
   .bb-closer-card {
