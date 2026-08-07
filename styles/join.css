@@ -665,7 +665,10 @@
   position: static;
   background: var(--jn-paper);
   margin-top: 32px;
-  padding: 20px 24px calc(24px + env(safe-area-inset-bottom));
+  /* Horizontal inset comes from .jn-main alone — .jn-body (the inputs)
+     gets no padding of its own, so .jn-actions must match that or the
+     button renders narrower than the fields above it. */
+  padding: 20px 0 calc(24px + env(safe-area-inset-bottom));
   display: grid;
   gap: 12px;
   justify-items: center;
