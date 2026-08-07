@@ -2141,7 +2141,7 @@
     font-size: 14.5px;
   }
 
-  /* Socials read as words, not glyphs. */
+  /* Socials: icons on every breakpoint (match the brand glyphs). */
   .bb-footer-social {
     margin-top: 30px;
     gap: 22px;
@@ -2149,15 +2149,7 @@
 
   .bb-footer-social a {
     font-size: 14.5px;
-    line-height: 1.4;
-  }
-
-  .bb-footer-social svg {
-    display: none;
-  }
-
-  .bb-footer-social a span {
-    display: inline;
+    line-height: 0;
   }
 
   .bb-footer-sep {
