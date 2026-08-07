@@ -23,7 +23,6 @@ export function JoinCity() {
   const router = useRouter();
   const form = useAppSelector((s) => s.waitlist.form);
   const [search, setSearch] = useState("");
-  const [meta, setMeta] = useState<string | null>(null);
 
   /* The card rail always shows the featured markets — typing filters the
      dropdown, not the rail, so the cards don't vanish mid-search. */
@@ -50,18 +49,22 @@ export function JoinCity() {
       updateWaitlistForm({
         marketId: id,
         marketName: name,
+        marketPlace: place,
         skippedMarket: false,
       }),
     );
-    setMeta(place);
     setSearch("");
   };
 
   const clear = () => {
     dispatch(
-      updateWaitlistForm({ marketId: null, marketName: null, skippedMarket: false }),
+      updateWaitlistForm({
+        marketId: null,
+        marketName: null,
+        marketPlace: null,
+        skippedMarket: false,
+      }),
     );
-    setMeta(null);
   };
 
   const showResults = search.trim().length >= 2 && !form.marketId;
@@ -77,10 +80,10 @@ export function JoinCity() {
             updateWaitlistForm({
               marketId: null,
               marketName: null,
+              marketPlace: null,
               skippedMarket: true,
             }),
           );
-          setMeta(null);
           router.push(joinStepHref(joinStepIndex("city") + 1));
         },
       }}
@@ -181,7 +184,9 @@ export function JoinCity() {
         <div className="jn-chosen">
           <span>
             <span className="jn-chosen-name">{form.marketName}</span>
-            {meta ? <span className="jn-chosen-meta">{meta}</span> : null}
+            {form.marketPlace ? (
+              <span className="jn-chosen-meta">{form.marketPlace}</span>
+            ) : null}
           </span>
           <button type="button" onClick={clear} aria-label="Clear city">
             <X size={16} strokeWidth={2} />

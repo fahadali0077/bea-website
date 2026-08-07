@@ -69,8 +69,8 @@ export function JoinDone() {
             <span className="jn-place-hash">#</span>
             {place !== null ? place.toLocaleString() : "—"}
           </p>
-          {form.marketName ? (
-            <p className="jn-place-where">in {form.marketName}</p>
+          {form.marketPlace || form.marketName ? (
+            <p className="jn-place-where">in {form.marketPlace || form.marketName}</p>
           ) : null}
         </section>
         )}
