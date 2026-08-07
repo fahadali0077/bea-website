@@ -263,13 +263,13 @@
 
 .jn-cities {
   list-style: none;
-  margin: 0 -22px;
-  padding: 0 22px;
+  margin: 0 -24px;
+  padding: 0 24px;
   display: flex;
   gap: 7px;
   overflow-x: auto;
   scroll-snap-type: x proximity;
-  scroll-padding-left: 22px;
+  scroll-padding-left: 24px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -917,23 +917,24 @@
 
   /* ---- City cards: four across, no scroll ---- */
 
+  /* Still a scroller, as on mobile — four fit the column and the rest are
+     reachable by dragging sideways. */
   .jn-cities {
     margin: 0;
     padding: 0;
-    overflow: visible;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 20px;
+    scroll-padding-left: 0;
   }
 
   .jn-city {
-    width: auto;
+    width: 193px;
+    height: 229px;
     border-radius: 12px;
     padding-bottom: 14px;
   }
 
   .jn-city-art {
-    height: 180px;
+    height: 168px;
   }
 
   .jn-city-name {
