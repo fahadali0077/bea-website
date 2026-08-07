@@ -1037,21 +1037,24 @@
     justify-content: center;
     align-content: stretch;
     align-items: stretch;
-    padding-top: 0;
+    padding-top: 56px;
   }
 
+  /* Anchored to the top of the row (not centered) — on tall viewports,
+     centering left a large dead gap above the eyebrow/heading before
+     any text appeared. */
   .jn-page--art .jn-step-copy {
     display: block;
     grid-column: 2;
     grid-row: 1;
-    align-self: center;
+    align-self: start;
   }
 
   /* Fills the full height of the left column (rather than sitting at a
      fixed height anchored to the top) so it reads as balanced against
-     the vertically centered copy on the right. No box, no fill — the
-     art stays a transparent PNG floating on the page background, the
-     same way it always has, just repositioned and recoloured. */
+     the copy on the right. No box, no fill — the art stays a plain PNG
+     floating on the page background, shown in its own original colours
+     (no CSS recolouring). */
   .jn-page--art .jn-step-art {
     display: block;
     grid-column: 1;
@@ -1075,14 +1078,8 @@
        (now much wider) box, so the illustration itself visibly starts
        right at the edge of the screen. */
     object-position: left center;
-    /* The source illustration is a sepia hand-drawn sketch, which reads
-       as a different, more vintage product than the rest of the flow.
-       This desaturates it and re-tints it toward the brand green
-       directly on the image (rather than a separate color layer), so
-       transparent pixels stay transparent instead of picking up a
-       flat color fill. */
-    filter: grayscale(1) sepia(0.55) saturate(3.2) hue-rotate(88deg)
-      brightness(0.98) contrast(1.02);
+    /* Shown in the artwork's own original colours — no grayscale/tint
+       filter — per the reference illustrations. */
   }
 
   .jn-page--art .jn-heading {
