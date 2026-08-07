@@ -5,7 +5,7 @@ type Props = {
   className?: string;
 };
 
-export function AmbassadorProgramLogo({ size = 76, className = "" }: Props) {
+export function AmbassadorProgramLogo({ size = 48, className = "" }: Props) {
   return (
     <Image
       src="/images/ambassador-logo.png"
