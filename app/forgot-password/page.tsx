@@ -177,13 +177,6 @@ export default function ForgotPasswordPage() {
                   </form>
                 </>
               )}
-
-              <div className="apply-section">
-                <p>Remember your password?</p>
-                <Link href={navigation.login} className="apply-link">
-                  Back to login
-                </Link>
-              </div>
             </div>
           </div>
         </div>
