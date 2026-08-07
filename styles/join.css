@@ -731,14 +731,14 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: var(--jn-green-btn);
+  background: #294431;
   color: #fff;
   border: 0;
   border-radius: 16px;
   padding: 31.5px 33.7px;
   font-family: var(--font-sfpro);
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   position: relative;
 }
