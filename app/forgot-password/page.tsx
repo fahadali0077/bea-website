@@ -1,10 +1,27 @@
 "use client";
 
-import { useState, type CSSProperties, type FormEvent } from "react";
+import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
 import Link from "next/link";
 
 import { AmbassadorLoginBrandPanel } from "@/app/components/login/AmbassadorLoginBrandPanel";
 import { login as loginConfig, navigation } from "@/lib/config";
+
+const RESEND_COOLDOWN_SECONDS = 30;
+
+type ForgotPasswordResponse = { ok?: boolean; message?: string };
+
+async function requestPasswordReset(targetEmail: string): Promise<void> {
+  const res = await fetch("/api/auth/forgot-password", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({ email: targetEmail }),
+  });
+  const data = (await res.json().catch(() => null)) as ForgotPasswordResponse | null;
+
+  if (!res.ok || !data?.ok) {
+    throw new Error(data?.message ?? "Unable to send reset link. Please try again.");
+  }
+}
 
 export default function ForgotPasswordPage() {
   const { header, theme } = loginConfig;
@@ -14,6 +31,16 @@ export default function ForgotPasswordPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
+  const [resending, setResending] = useState(false);
+  const [resendCooldown, setResendCooldown] = useState(0);
+  const [justResent, setJustResent] = useState(false);
+
+  // Ticks the resend cooldown down once a second while it's active.
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    const timer = setTimeout(() => setResendCooldown((s) => s - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [resendCooldown]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,22 +48,32 @@ export default function ForgotPasswordPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/forgot-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ email: email.trim() }),
-      });
-      const data = (await res.json().catch(() => null)) as { ok?: boolean; message?: string } | null;
-
-      if (!res.ok || !data?.ok) {
-        throw new Error(data?.message ?? "Unable to send reset link. Please try again.");
-      }
-
+      const trimmed = email.trim();
+      await requestPasswordReset(trimmed);
+      setEmail(trimmed);
       setSent(true);
+      setResendCooldown(RESEND_COOLDOWN_SECONDS);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to send reset link. Please try again.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleResend = async () => {
+    if (resending || resendCooldown > 0) return;
+    setError(null);
+    setJustResent(false);
+    setResending(true);
+
+    try {
+      await requestPasswordReset(email);
+      setResendCooldown(RESEND_COOLDOWN_SECONDS);
+      setJustResent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to resend the link. Please try again.");
+    } finally {
+      setResending(false);
     }
   };
 
@@ -60,10 +97,42 @@ export default function ForgotPasswordPage() {
                   <p className="form-subtitle form-subtitle--program">
                     <span className="text-highlight">Check your email.</span>
                   </p>
+
+                  {error ? (
+                    <div className="form-error" role="alert">
+                      {error}
+                    </div>
+                  ) : null}
+
                   <div className="form-success" role="status">
-                    If an account exists for <strong>{email.trim()}</strong>, we&apos;ve sent a link to
-                    reset your password. The link is single-use and expires in 30 minutes.
+                    {justResent ? (
+                      <>
+                        Sent again — if an account exists for <strong>{email}</strong>, a fresh link is
+                        on its way. The link is single-use and expires in 30 minutes.
+                      </>
+                    ) : (
+                      <>
+                        If an account exists for <strong>{email}</strong>, we&apos;ve sent a link to
+                        reset your password. The link is single-use and expires in 30 minutes.
+                      </>
+                    )}
                   </div>
+
+                  <p className="form-subtitle form-subtitle--program" style={{ marginTop: 24, marginBottom: 12 }}>
+                    Didn&apos;t get it?
+                  </p>
+                  <button
+                    className="btn-login btn-login--program"
+                    type="button"
+                    onClick={() => void handleResend()}
+                    disabled={resending || resendCooldown > 0}
+                  >
+                    {resending
+                      ? "Resending…"
+                      : resendCooldown > 0
+                        ? `Resend email (${resendCooldown}s)`
+                        : "Resend email"}
+                  </button>
                 </>
               ) : (
                 <>
