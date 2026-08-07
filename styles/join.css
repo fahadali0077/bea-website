@@ -511,8 +511,8 @@
 .jn-or {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin: 4px 0;
+  gap: 42.02px;
+  margin: 48.78px 0 50.62px 0;
 }
 
 .jn-or::before,
@@ -525,7 +525,7 @@
 
 .jn-or span {
   font-family: var(--jn-label);
-  font-size: 9.7px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -537,13 +537,13 @@
    from the filled, brand-tinted "selected" state below. */
 .jn-optout {
   width: 100%;
-  min-height: 87px;
-  background: #fff;
-  border: 1px solid var(--jn-line);
-  border-radius: 10px;
+  min-height: 125.19px;
+  background: #EEEEEA;
+  border: 1px solid #7D997A;
+  border-radius: 11px;
   padding: 20px;
-  font-family: inherit;
-  font-size: 12.5px;
+  font-family: var(--font-sfpro);
+  font-size: 18px;
   font-weight: 400;
   color: var(--jn-ink);
   text-align: center;
@@ -556,8 +556,8 @@
 }
 
 .jn-optout--on {
-  background: var(--jn-tint);
-  border-color: var(--jn-sel-border);
+  background: #E9F1F7;
+  border-color: #3E5C72;
 }
 
 /* ---------- Ambassadors ---------- */
