@@ -649,7 +649,8 @@
 
 .jn-intro-art {
   width: 100%;
-  margin: 26px 0 22px;
+  max-width: 353px;
+  margin: 26px auto 24px;
 }
 
 .jn-intro-art img {
@@ -664,6 +665,28 @@
 
 .jn-intro-copy {
   display: contents;
+}
+
+@media (max-width: 1023px) {
+  .jn-intro-title {
+    order: 1;
+  }
+
+  .jn-intro-sub {
+    order: 2;
+  }
+
+  .jn-intro-art {
+    order: 3;
+  }
+
+  .jn-intro-form {
+    order: 4;
+  }
+
+  .jn-promise {
+    order: 5;
+  }
 }
 
 .jn-intro-form {
