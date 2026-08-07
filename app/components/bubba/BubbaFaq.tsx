@@ -12,7 +12,7 @@ export function BubbaFaq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <BubbaShell>
+    <BubbaShell showCapture={false}>
         <div className="bb-shell">
           <header className="bb-faq-head">
             <p className="bb-eyebrow bb-eyebrow--muted">
