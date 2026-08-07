@@ -717,14 +717,14 @@
 
   .ambassador-login-root--program .left-panel--program {
   ...
-  background-color: #f5f1ef;   /* was: var(--bg) */
+  background-color: #f5f1ef;  
   ...
 }
 
 .ambassador-login-root--program .right-panel--program {
   ...
   border-top-left-radius: 0;
-  background-color: #f8f6f3;   /* new line added */
+  background-color: #f8f6f3;  
   z-index: 1;
 }
 }
