@@ -15,8 +15,6 @@ export function JoinBasics() {
   return (
     <JoinShell
       slug="basics"
-      art="/bubba/basics-shore.png"
-      artSide="right"
       canContinue={form.fullName.trim().length > 0 && ageOk}
     >
       <label className="jn-field">

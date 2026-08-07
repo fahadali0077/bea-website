@@ -40,7 +40,6 @@ export function JoinCampus() {
   return (
     <JoinShell
       slug="campus"
-      art="/bubba/campus-hall.png"
       canContinue={Boolean(form.schoolId) || form.notInSchool}
     >
       <input
