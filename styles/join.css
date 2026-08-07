@@ -656,6 +656,10 @@
   color: #c4c4c4;
 }
 
+.jn-intro-copy {
+  display: contents;
+}
+
 .jn-intro-form {
   width: 100%;
   display: grid;
@@ -838,11 +842,11 @@
     align-items: center;
     justify-content: space-between;
     height: 84px;
-    padding: 0 64px;
+    padding: 0 68px;
   }
 
   .jn-brand img {
-    height: 30px;
+    height: 34px;
   }
 
   .jn-dots {
@@ -855,12 +859,12 @@
   .jn-main {
     flex: 1 1 auto;
     display: grid;
-    grid-template-columns: 400px minmax(0, 840px);
+    grid-template-columns: 440px minmax(0, 800px);
     grid-template-rows: auto auto 1fr;
     column-gap: 72px;
     align-content: start;
     justify-content: center;
-    padding: 56px 64px 0;
+    padding: 56px 68px 0;
     max-width: 1440px;
     margin-inline: auto;
     width: 100%;
@@ -968,7 +972,7 @@
     justify-content: flex-end;
     gap: 34px;
     margin-top: 0;
-    padding: 40px 64px 46px;
+    padding: 40px 68px 46px;
     max-width: 1440px;
     margin-inline: auto;
     width: 100%;
@@ -1012,57 +1016,73 @@
   .jn-top--intro {
     display: flex;
     justify-content: space-between;
-    padding: 0 64px;
+    padding: 0 68px;
     height: 98px;
+  }
+
+  .jn-intro-copy {
+    display: block;
   }
 
   .jn-main--intro {
     display: grid;
-    grid-template-columns: 560px minmax(0, 616px);
+    grid-template-rows: auto;
+    grid-template-columns: 440px minmax(0, 1fr);
     column-gap: 96px;
     align-items: center;
     justify-content: center;
     align-content: center;
-    padding: 0 64px;
+    padding: 0 68px;
     max-width: 1440px;
     margin-inline: auto;
     width: 100%;
   }
 
+  /* 54px, not 66 — at 66 the headline overruns a 440px column. */
   .jn-intro-title {
-    font-size: 66px;
-    line-height: 1.06;
+    font-size: 54px;
+    line-height: 1.22;
   }
 
   .jn-intro-sub {
-    font-size: 19px;
-    margin-top: 26px;
+    font-size: 17px;
+    line-height: 1.55;
+    margin-top: 24px;
     max-width: 440px;
   }
 
   /* The illustration moves to its own column. */
   .jn-intro-art {
-    grid-column: 2;
-    grid-row: 1 / span 4;
     margin: 0;
     align-self: center;
+    justify-self: center;
+    max-width: 620px;
   }
 
+  /* The reference stacks these: label, field, then a full-width button.
+     Keeping the button inline with the input squeezed both. */
   .jn-intro-form {
-    max-width: 560px;
-    grid-template-columns: 1fr auto;
-    align-items: end;
-    column-gap: 14px;
-    margin-top: 34px;
+    max-width: 440px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    margin-top: 40px;
   }
 
   .jn-intro-form .jn-field-label {
-    grid-column: 1 / -1;
-    margin-bottom: 0;
+    margin-bottom: -4px;
+  }
+
+  .jn-intro-form .jn-input {
+    height: 59px;
   }
 
   .jn-intro-form .jn-cta {
-    height: 60px;
+    height: 65px;
+  }
+
+  /* Errors belong under the field they refer to, not beside it. */
+  .jn-intro-form .jn-error {
+    margin: -2px 0 0;
   }
 
   .jn-promise {
@@ -1073,12 +1093,13 @@
 
   .jn-main--done {
     display: grid;
+    grid-template-rows: auto;
     grid-template-columns: 584px minmax(0, 584px);
     column-gap: 80px;
     align-items: center;
     align-content: center;
     justify-content: center;
-    padding: 0 64px;
+    padding: 0 68px;
     max-width: 1440px;
     margin-inline: auto;
     width: 100%;

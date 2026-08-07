@@ -40,28 +40,24 @@ export function JoinIntro() {
       </header>
 
       <main className="jn-main jn-main--intro">
-        <h1 className="jn-intro-title">
+        <div className="jn-intro-copy">
+          <h1 className="jn-intro-title">
           Join the waitlist
           <br />
           for early access
           <br />
-          to <span className="jn-intro-accent">your city</span>
-        </h1>
+            to <span className="jn-intro-accent">your city</span>
+          </h1>
 
-        <p className="jn-intro-sub">
-          Bubba is launching soon.
-          <br />
-          We&rsquo;ve designed a special waitlist
-          <br />
-          experience beforehand.
-        </p>
+          <p className="jn-intro-sub">
+            Bubba is launching soon.
+            <br />
+            We&rsquo;ve designed a special waitlist
+            <br />
+            experience beforehand.
+          </p>
 
-        <div className="jn-intro-art" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/bubba/intro-bench.png" alt="" />
-        </div>
-
-        <form className="jn-intro-form" onSubmit={submit} noValidate>
+          <form className="jn-intro-form" onSubmit={submit} noValidate>
           <label className="jn-field-label" htmlFor="jn-intro-email">
             Enter your email to get started
           </label>
@@ -90,10 +86,16 @@ export function JoinIntro() {
           </button>
         </form>
 
-        <p className="jn-promise">
-          <Heart size={13} strokeWidth={1.8} />
-          We&rsquo;ll never spam you. Unsubscribe anytime.
-        </p>
+          <p className="jn-promise">
+            <Heart size={13} strokeWidth={1.8} />
+            We&rsquo;ll never spam you. Unsubscribe anytime.
+          </p>
+        </div>
+
+        <div className="jn-intro-art" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/bubba/intro-bench.png" alt="" />
+        </div>
       </main>
     </div>
   );
