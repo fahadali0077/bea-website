@@ -152,7 +152,8 @@
 
 @media (min-width: 768px) {
   .bb-eyebrow {
-    font-size: 19px;
+    font-size: 18px;
+    font-weight: 800;
   }
 }
 
@@ -2038,14 +2039,17 @@
   }
 
   .bb-moment .bb-display--lg {
-    font-size: 86px;
-    margin-top: 22px;
+    font-size: 60px;
+    margin-top: 40px !important;
+    line-height: 90.19px;
   }
 
   .bb-moment-lede {
-    font-size: 18px;
-    max-width: 30ch;
-    margin-top: 22px;
+    font-size: 21px;
+    max-width: 32ch;
+    margin-top: 32px;
+    font-weight: 400;
+    color: #7a7a7a;
   }
 
   .bb-dial {

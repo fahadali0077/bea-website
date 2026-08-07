@@ -52,7 +52,7 @@ export function BubbaLanding() {
               24 hours to chat
             </h2>
             <p className="bb-moment-lede">
-              Only see recently active profiles. Every conversation lasts 24
+              Only see recently active profiles.<br/> Every conversation lasts 24
               hours.
             </p>
 
