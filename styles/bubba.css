@@ -500,19 +500,30 @@
 
 .bb-capture:focus-within {
   border-color: var(--bb-green);
-  box-shadow: 0 0 0 4px rgba(32, 69, 47, 0.08);
+  box-shadow: 0 0 0 3px rgba(32, 69, 47, 0.16);
 }
 
 .bb-capture-input {
   flex: 1 1 auto;
   border: 0;
-  outline: 0;
+  outline: none;
   background: transparent;
   font-family: var(--bb-sans);
   font-size: 14.5px;
   color: var(--bb-ink);
   min-width: 0;
   padding: 10px 0;
+}
+
+/* Kill the global blue rect — the pill carries focus instead. */
+.bb-page .bb-capture-input:focus,
+.bb-page .bb-capture-input:focus-visible,
+.bb-page .bb-capture-btn:focus,
+.bb-page .bb-capture-btn:focus-visible {
+  outline: none;
+  outline-offset: 0;
+  border-radius: inherit;
+  box-shadow: none;
 }
 
 .bb-capture-input::placeholder {

@@ -63,7 +63,7 @@
 /* ---------- Top bar + dots ---------- */
 
 .jn-top {
-  padding: 22px 24px 0;
+  padding: 26px 24px 0;
 }
 
 .jn-brand {
@@ -977,16 +977,16 @@
     --jn-btn-w: var(--jn-control-w);
   }
 
-  /* ---- Header: wordmark left, dots right — spans full width ---- */
+  /* ---- Header: wordmark left, dots right — match intro top spacing ---- */
 
   .jn-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 84px;
+    height: 98px;
     padding: 0 var(--jn-side-pad);
     width: 100%;
-    max-width: 1120px;
+    max-width: 1200px;
     margin-inline: auto;
     flex: none;
   }
