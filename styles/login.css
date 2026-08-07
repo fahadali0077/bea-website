@@ -620,14 +620,18 @@
   margin: 0;
   font-size: 14px;
   font-weight: 400;
-  color: var(--green);
+  color: var(--text-primary);
 }
 
+/* Per feedback: "by invite only.", the login subtitle, and "Remember me"
+   should read as plain black text, not a highlighted pink pill — even
+   though the pill appears in the design mockup. The class stays on those
+   elements (AmbassadorLoginBrandPanel, AmbassadorLoginPage,
+   ForgotPasswordPage, ResetPasswordPage) so the highlight can be
+   reinstated from this one rule if that changes. */
 .ambassador-login-root--program .text-highlight {
-  background: var(--highlight);
-  padding: 0.08em 0.28em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
+  background: none;
+  padding: 0;
 }
 
 .ambassador-login-root--program .right-panel--program {
