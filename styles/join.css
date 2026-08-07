@@ -654,6 +654,7 @@
 }
 
 .jn-main--intro {
+  flex: 1 1 auto;
   padding: 30px 24px 40px;
   align-items: center;
 }
@@ -743,6 +744,7 @@
 /* ---------- Done screen ---------- */
 
 .jn-main--done {
+  flex: 1 1 auto;
   padding: 24px 24px 44px;
   align-items: center;
 }
@@ -1027,11 +1029,12 @@
   /* ---- Steps with artwork ---- */
 
   /* Artwork and copy are columns of the same grid, so they stay a fixed
-     distance apart no matter how wide the window gets. The row stretches
-     to the full height of the main area so the artwork column can fill
-     it edge-to-edge instead of hugging the top with dead space below. */
+     distance apart no matter how wide the window gets. .jn-main no longer
+     grows to fill the viewport (see the base .jn-main rule) — forcing that
+     height is what was pushing the Continue button far below a short form,
+     so the artwork now sizes to the row's content height instead of being
+     stretched edge-to-edge. */
   .jn-page--art .jn-main {
-    flex: 1 1 auto;
     grid-template-columns: minmax(0, 1fr) var(--jn-btn-w);
     grid-template-rows: 1fr;
     column-gap: 72px;
@@ -1181,18 +1184,29 @@
   .jn-page--city .jn-foot,
   .jn-page--ambassador .jn-foot {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: 14px;
+  }
+
+  .jn-page--city .jn-foot .jn-skip,
+  .jn-page--ambassador .jn-foot .jn-skip,
+  .jn-page--city .jn-foot .jn-cta,
+  .jn-page--ambassador .jn-foot .jn-cta {
     width: var(--jn-btn-w);
-    margin-inline: calc(68px + 440px + 72px) 0;
-    padding-inline: 0;
+    margin-left: calc(440px + 72px);
+  }
+
+  .jn-page--city .jn-foot .jn-skip,
+  .jn-page--ambassador .jn-foot .jn-skip {
+    text-align: center;
   }
 
   .jn-page--city .jn-error,
   .jn-page--ambassador .jn-error {
+    width: var(--jn-btn-w);
+    margin-left: calc(440px + 72px);
     margin-right: 0;
-    align-self: stretch;
     text-align: left;
   }
 
@@ -1226,6 +1240,7 @@
   }
 
   .jn-main--intro {
+    flex: 1 1 auto;
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: 440px minmax(0, 1fr);
@@ -1285,6 +1300,7 @@
   /* ---- Done: illustration left, detail right ---- */
 
   .jn-main--done {
+    flex: 1 1 auto;
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: 584px minmax(0, 584px);
