@@ -671,7 +671,10 @@
   position: static;
   background: var(--jn-paper);
   margin-top: 32px;
-  padding: 20px 24px calc(24px + env(safe-area-inset-bottom));
+  /* Horizontal inset comes from .jn-main alone — .jn-body (the inputs)
+     gets no padding of its own, so .jn-actions must match that or the
+     button renders narrower than the fields above it. */
+  padding: 20px 0 calc(24px + env(safe-area-inset-bottom));
   display: grid;
   gap: 36.65px;
   justify-items: center;
@@ -719,14 +722,14 @@
   right: 20px;
 }
 
+/* The reference screens always render Continue solid dark green — even
+   with no selection or empty required fields — so the disabled state
+   stays functionally non-interactive but is never visually dimmed. */
 .jn-cta:disabled {
-  opacity: 0.42;
   cursor: not-allowed;
 }
 
-/* Keep the busy CTA readable — full opacity, light spinner instead. */
 .jn-cta--busy:disabled {
-  opacity: 1;
   cursor: wait;
 }
 
