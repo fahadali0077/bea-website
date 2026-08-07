@@ -61,7 +61,7 @@ export function JoinShell({
       <header className="jn-top">
         <Link href="/" className="jn-brand" aria-label="Bubba — home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={BUBBA_BRAND.wordmark} alt="Bubba" />
+          <img src="/bubba/logo.png" alt="Bubba" />
         </Link>
         <JoinDots current={index} />
       </header>
