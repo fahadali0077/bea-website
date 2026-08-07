@@ -2,9 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { apiSlice } from "@/features/api/apiSlice";
 import authReducer from "@/features/auth/auth.slice";
-import waitlistReducer from "@/features/waitlist/waitlist.slice";
+import waitlistReducer, { updateWaitlistForm } from "@/features/waitlist/waitlist.slice";
 import { initialWaitlistForm } from "@/features/waitlist/waitlist.types";
-import type { WaitlistState } from "@/features/waitlist/waitlist.types";
 
 const WAITLIST_FORM_STORAGE_KEY = "waitlist_form";
 
@@ -19,9 +18,19 @@ function readPersistedWaitlistForm() {
   }
 }
 
-export const makeStore = () => {
+/**
+ * Rehydrates the waitlist form from sessionStorage after the app has mounted.
+ * Reading storage during store creation would make the client's first render
+ * differ from the server's HTML, causing a hydration mismatch.
+ */
+export function rehydrateWaitlistForm(store: AppStore) {
   const persistedForm = readPersistedWaitlistForm();
+  if (persistedForm) {
+    store.dispatch(updateWaitlistForm(persistedForm));
+  }
+}
 
+export const makeStore = () => {
   const store = configureStore({
     reducer: {
       auth: authReducer,
@@ -30,17 +39,6 @@ export const makeStore = () => {
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
     devTools: process.env.NODE_ENV !== "production",
-    preloadedState: persistedForm
-      ? {
-          waitlist: {
-            form: persistedForm,
-            joinStatus: "idle",
-            joinError: null,
-            joinResult: null,
-            waitlistPosition: null,
-          } satisfies WaitlistState,
-        }
-      : undefined,
   });
 
   if (typeof window !== "undefined") {

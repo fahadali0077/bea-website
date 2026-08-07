@@ -97,6 +97,28 @@
   font-display: swap;
 }
 
+/* ---- Suisse Intl (trial cut, local installs only) ----
+   Family names below match the per-user installs on this
+   machine ("Suisse Int'l Trial", "Suisse Intl Trial Semibold",
+   ...). No url() here — the trial files are not redistributed. */
+
+@font-face {
+  font-family: "Suisse Intl";
+  src: local("Suisse Int'l Trial");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl";
+  src: local("Suisse Intl Trial Semibold"), local("SuisseIntl-SemiBold"),
+    local("SuisseIntlTrial-Semibold");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ============================================================
    Metric-matched fallbacks
    ------------------------------------------------------------
