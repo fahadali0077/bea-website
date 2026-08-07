@@ -1012,6 +1012,9 @@
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
+    /* Held well back so every word on top of it stays readable — at full
+       strength the grey sub-heading disappeared into the tree canopy. */
+    opacity: 0.5;
   }
 
   .jn-step-art img {
@@ -1020,6 +1023,70 @@
     height: 100%;
     object-fit: contain;
     object-position: left bottom;
+    /* Fades out under the copy block and back in below it. */
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 34%,
+      #000 62%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 34%,
+      #000 62%
+    );
+  }
+
+  /* When a step carries artwork, the copy and the controls share a single
+     column on the far side of it rather than splitting left/right. */
+  .jn-page--art .jn-main {
+    grid-template-columns: minmax(0, 620px);
+    grid-template-rows: auto;
+    justify-content: end;
+    align-content: center;
+    padding-top: 0;
+  }
+
+  .jn-page--art .jn-eyebrow,
+  .jn-page--art .jn-heading,
+  .jn-page--art .jn-sub,
+  .jn-page--art .jn-body {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .jn-page--art .jn-heading {
+    font-size: 42px;
+  }
+
+  .jn-page--art .jn-body {
+    margin-top: 30px;
+  }
+
+  /* Let the sub-heading flow to the column width instead of keeping the
+     artboard's mobile line breaks. */
+  .jn-page--art .jn-sub span {
+    display: inline;
+  }
+
+  .jn-page--art .jn-sub span + span::before {
+    content: " ";
+  }
+
+  /* The illustration takes the vacated side and no longer needs masking. */
+  .jn-page--art .jn-step-art {
+    width: 620px;
+    opacity: 1;
+  }
+
+  .jn-page--art .jn-step-art img {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .jn-page--art .jn-foot {
+    justify-content: flex-end;
   }
 
   /* ---- Ambassadors: two across ---- */

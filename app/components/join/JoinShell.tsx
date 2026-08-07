@@ -47,7 +47,7 @@ export function JoinShell({
   };
 
   return (
-    <div className="jn-page">
+    <div className={"jn-page" + (art ? " jn-page--art" : "")}>
       <header className="jn-top">
         <Link href="/" className="jn-brand" aria-label="Bubba — home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
