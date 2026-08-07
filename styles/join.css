@@ -1089,6 +1089,24 @@
     justify-content: flex-end;
   }
 
+  /* Mirror: artwork right, copy left. */
+  .jn-page--art-right .jn-step-art {
+    left: auto;
+    right: 0;
+  }
+
+  .jn-page--art-right .jn-step-art img {
+    object-position: right bottom;
+  }
+
+  .jn-page--art-right .jn-main {
+    justify-content: start;
+  }
+
+  .jn-page--art-right .jn-foot {
+    justify-content: flex-start;
+  }
+
   /* ---- Ambassadors: two across ---- */
 
   .jn-amb {

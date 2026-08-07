@@ -21,8 +21,10 @@ type Props = {
   skip?: { label: string; onClick: () => void };
   busy?: boolean;
   error?: string | null;
-  /** Decorative artwork layered behind the step content. */
+  /** Decorative artwork beside the step content. */
   art?: string;
+  /** Which side the artwork sits on; the copy takes the other. */
+  artSide?: "left" | "right";
 };
 
 export function JoinShell({
@@ -34,6 +36,7 @@ export function JoinShell({
   busy,
   error,
   art,
+  artSide = "left",
 }: Props) {
   const router = useRouter();
   const index = joinStepIndex(slug);
@@ -47,7 +50,13 @@ export function JoinShell({
   };
 
   return (
-    <div className={"jn-page" + (art ? " jn-page--art" : "")}>
+    <div
+      className={
+        "jn-page" +
+        (art ? " jn-page--art" : "") +
+        (art && artSide === "right" ? " jn-page--art-right" : "")
+      }
+    >
       <header className="jn-top">
         <Link href="/" className="jn-brand" aria-label="Bubba — home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
