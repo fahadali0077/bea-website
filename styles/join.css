@@ -894,18 +894,21 @@
   .jn-page {
     min-height: 100vh;
     min-height: 100svh;
+    --jn-side-pad: 48px;
+    --jn-col-gap: 72px;
+    --jn-field-h: 59px;
+    --jn-btn-h: 65px;
+    --jn-btn-w: 100%;
   }
 
-  /* ---- Header: wordmark left, dots right — same width as content ---- */
+  /* ---- Header: wordmark left, dots right — spans full width ---- */
 
   .jn-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 84px;
-    padding: 0 68px;
-    max-width: 1440px;
-    margin-inline: auto;
+    padding: 0 var(--jn-side-pad);
     width: 100%;
   }
 
@@ -929,14 +932,11 @@
   .jn-main {
     flex: 0 1 auto;
     display: grid;
-    grid-template-columns: 440px var(--jn-btn-w);
-    column-gap: 72px;
+    grid-template-columns: minmax(280px, 480px) minmax(0, 1fr);
+    column-gap: var(--jn-col-gap);
     align-content: start;
     align-items: start;
-    justify-content: center;
-    padding: 56px 68px 46px;
-    max-width: 1440px;
-    margin-inline: auto;
+    padding: 56px var(--jn-side-pad) 46px;
     width: 100%;
   }
 
@@ -1058,12 +1058,6 @@
     align-content: start;
   }
 
-  .jn-page {
-    --jn-field-h: 59px;
-    --jn-btn-h: 65px;
-    --jn-btn-w: 440px;
-  }
-
   .jn-optout {
     padding: 34px 24px;
     font-size: 15px;
@@ -1072,8 +1066,8 @@
   /* ---- Steps with artwork ---- */
 
   .jn-page--art .jn-main {
-    grid-template-columns: minmax(0, 1fr) var(--jn-btn-w);
-    column-gap: 72px;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
+    column-gap: var(--jn-col-gap);
     align-items: stretch;
     padding-top: 56px;
   }
@@ -1096,7 +1090,7 @@
     align-self: stretch;
     min-width: 0;
     height: 100%;
-    margin-left: calc(-68px - max(0px, (100vw - 1440px) / 2));
+    margin-left: calc(-1 * var(--jn-side-pad));
   }
 
   .jn-page--art .jn-step-art img {
@@ -1128,7 +1122,7 @@
     grid-column: 2;
     grid-row: 1 / span 2;
     margin-left: 0;
-    margin-right: calc(-68px - max(0px, (100vw - 1440px) / 2));
+    margin-right: calc(-1 * var(--jn-side-pad));
   }
 
   .jn-page--art-right .jn-step-art img {
@@ -1146,7 +1140,7 @@
   }
 
   .jn-page--art-right .jn-main {
-    grid-template-columns: var(--jn-btn-w) minmax(0, 1fr);
+    grid-template-columns: minmax(320px, 520px) minmax(0, 1fr);
   }
 
   /* ---- Ambassadors: two across ---- */
@@ -1187,10 +1181,8 @@
   .jn-top--intro {
     display: flex;
     justify-content: space-between;
-    padding: 0 68px;
+    padding: 0 var(--jn-side-pad);
     height: 98px;
-    max-width: 1440px;
-    margin-inline: auto;
     width: 100%;
   }
 
@@ -1202,14 +1194,11 @@
     flex: 1 1 auto;
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: 440px minmax(0, 1fr);
-    column-gap: 96px;
+    grid-template-columns: minmax(280px, 480px) minmax(0, 1fr);
+    column-gap: var(--jn-col-gap);
     align-items: center;
-    justify-content: center;
     align-content: center;
-    padding: 0 68px;
-    max-width: 1440px;
-    margin-inline: auto;
+    padding: 0 var(--jn-side-pad);
     width: 100%;
   }
 
@@ -1223,7 +1212,7 @@
     font-size: 17px;
     line-height: 1.55;
     margin-top: 24px;
-    max-width: 440px;
+    max-width: 480px;
   }
 
   /* The illustration moves to its own column. */
@@ -1262,14 +1251,11 @@
     flex: 1 1 auto;
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: 584px minmax(0, 584px);
-    column-gap: 80px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--jn-col-gap);
     align-items: center;
     align-content: center;
-    justify-content: center;
-    padding: 0 68px;
-    max-width: 1440px;
-    margin-inline: auto;
+    padding: 0 var(--jn-side-pad);
     width: 100%;
   }
 
@@ -1316,5 +1302,16 @@
     grid-column: 2;
     margin-top: 20px;
     justify-self: start;
+  }
+}
+
+/* Use the extra width on large screens for denser card grids. */
+@media (min-width: 1400px) {
+  .jn-cities {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .jn-amb {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
