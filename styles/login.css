@@ -566,7 +566,7 @@
   min-height: 100vh;
   margin-right: 0;
   overflow: visible;
-  background-color: var(--bg);
+  background-color: #f5f1ef;
   padding: 48px 32px;
 }
 
@@ -641,6 +641,7 @@
   min-height: 100vh;
   padding: 48px 32px;
   border-top-left-radius: 0;
+  background-color: #f8f6f3;
   z-index: 1;
 }
 
@@ -716,17 +717,14 @@
   }
 
   .ambassador-login-root--program .left-panel--program {
-  ...
-  background-color: #f5f1ef;  
-  ...
-}
+    min-height: auto;
+    padding: 56px 24px 32px;
+  }
 
-.ambassador-login-root--program .right-panel--program {
-  ...
-  border-top-left-radius: 0;
-  background-color: #f8f6f3;  
-  z-index: 1;
-}
+  .ambassador-login-root--program .right-panel--program {
+    min-height: auto;
+    padding: 8px 24px 56px;
+  }
 }
 
 @media (max-width: 420px) {
