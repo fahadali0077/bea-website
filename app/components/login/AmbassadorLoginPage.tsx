@@ -6,6 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useMemo, useState, type CSSProperties, type FormEvent } from "react";
 
 import { loginRequest } from "@/lib/auth-client";
+import { persistAccessToken } from "@/lib/api";
 import { login as loginConfig } from "@/lib/config";
 import type { LoginFieldConfig } from "@/lib/config";
 
@@ -91,6 +92,15 @@ export function AmbassadorLoginPage() {
         password: values.password ?? "",
         remember,
       });
+
+      // The dashboard reads its session from a bearer token in localStorage
+      // (the same mechanism magic-link login and onboarding use), not from
+      // a cookie — so the token from the login response has to be persisted
+      // here or every dashboard request right after would come back 401.
+      if (result.token) {
+        persistAccessToken(result.token);
+      }
+
       router.push(result.redirectTo ?? api.redirectOnSuccess);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");

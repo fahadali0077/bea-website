@@ -29,7 +29,7 @@
     "apple": "/api/auth/social",
     "useExternalBackend": false,
     "externalBaseUrl": "",
-    "redirectOnSuccess": "/dashboard"
+    "redirectOnSuccess": "/dashboard/ambassador"
   },
   "leftPanel": {
     "eyebrow": "JOIN US THIS SUMMER & FALL",
