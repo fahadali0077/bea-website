@@ -14,6 +14,7 @@
      height on the intro, the steps and the confirmation. */
   --jn-field-h: 49px;
   --jn-btn-h: 56px;
+  --jn-btn-w: 100%;
 
   --jn-paper: #fcfbfb;
   --jn-ink: #000000;
@@ -556,7 +557,7 @@
   bottom: 0;
   background: var(--jn-paper);
   margin-top: 32px;
-  padding: 20px 29px calc(24px + env(safe-area-inset-bottom));
+  padding: 20px 24px calc(24px + env(safe-area-inset-bottom));
   display: grid;
   gap: 12px;
   justify-items: center;
@@ -581,7 +582,7 @@
 }
 
 .jn-cta {
-  width: 100%;
+  width: var(--jn-btn-w);
   height: var(--jn-btn-h);
   display: inline-flex;
   align-items: center;
@@ -623,7 +624,7 @@
 }
 
 .jn-main--intro {
-  padding: 30px 22px 40px;
+  padding: 30px 24px 40px;
   align-items: center;
 }
 
@@ -712,7 +713,7 @@
 /* ---------- Done screen ---------- */
 
 .jn-main--done {
-  padding: 24px 22px 44px;
+  padding: 24px 24px 44px;
   align-items: center;
 }
 
@@ -975,6 +976,7 @@
   .jn-page {
     --jn-field-h: 59px;
     --jn-btn-h: 65px;
+    --jn-btn-w: 440px;
   }
 
   .jn-optout {
@@ -1024,8 +1026,6 @@
   }
 
   .jn-cta {
-    width: auto;
-    min-width: 172px;
     border-radius: 10px;
     padding: 0 54px 0 30px;
     font-size: 16px;
@@ -1092,7 +1092,7 @@
   /* The reference stacks these: label, field, then a full-width button.
      Keeping the button inline with the input squeezed both. */
   .jn-intro-form {
-    max-width: 440px;
+    max-width: var(--jn-btn-w);
     grid-template-columns: minmax(0, 1fr);
     gap: 14px;
     margin-top: 40px;
