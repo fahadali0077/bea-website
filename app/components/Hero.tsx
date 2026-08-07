@@ -35,7 +35,7 @@ export default function Hero() {
 
             {/* Left side text container spanning 6 columns */}
             <div className="md:col-span-6 flex flex-col items-start space-y-6">
-                <span 
+                <span
                     className="text-[6px] font-bold uppercase tracking-[0.2em] text-neutral-400 animate-pulse block"
                     style={{ fontFamily: 'SFProDisplay, "SF Pro Display", -apple-system, sans-serif' }}
                 >
@@ -71,7 +71,7 @@ export default function Hero() {
                                     disabled={status === 'submitting'}
                                     className="w-full bg-transparent pl-4 text-[16px] md:text-[7px] font-sans text-neutral-800 placeholder-neutral-600 focus:outline-none py-2 disabled:opacity-50"
                                 />
-                                <button 
+                                <button
                                     type="submit"
                                     disabled={status === 'submitting' || !email}
                                     className={`bg-[#252018] text-white h-9 w-9 rounded-full flex items-center justify-center flex-shrink-0 hover:bg-black transition-all ${

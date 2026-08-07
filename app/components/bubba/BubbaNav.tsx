@@ -79,7 +79,8 @@ export function BubbaNav({ active = "home" }: Props) {
 
           <div className="bb-nav-right">
             <Link href="/waitlist/start" className="bb-btn bb-btn--ink bb-nav-cta">
-              Join
+              <span className="bb-nav-cta-desktop">Join waitlist</span>
+              <span className="bb-nav-cta-mobile">Join</span>
             </Link>
           </div>
         </div>
