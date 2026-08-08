@@ -1847,8 +1847,10 @@
 @media (min-width: 1024px) {
   .bb-shell,
   .bb-shell--wide {
-    max-width: 1360px;
+    max-width: 1366px;
     padding-inline: 40px;
+    padding-left: 94.91px;
+    padding-right: 94.91px;
   }
 
   /* ---- Chrome ---- */
@@ -2138,34 +2140,44 @@
   /* ---- Footer ---- */
 
   .bb-footer {
-    background: var(--bb-footer-bg-desk);
+    /*background: var(--bb-footer-bg-desk);*/
     padding: 84px 0 28px;
+    padding-top: 216px;
   }
 
   .bb-footer-grid {
-    grid-template-columns: minmax(0, 468px) minmax(0, 334px) minmax(0, 334px);
+    grid-template-columns: minmax(0, 572px) minmax(0, 298px) minmax(0, 298px);
     justify-content: space-between;
     gap: 0;
   }
 
   .bb-footer-brand img {
-    height: 30px;
+    height: 48.8px;
   }
 
   .bb-footer-tag {
-    font-size: 17px;
+    font-size: 24px;
     margin: 6px 0 26px;
+    margin-top: 46.71px;
+    margin-bottom: 34.24px;
+    font-family: var(--bb-canela-text);
+    font-weight: 400;
   }
 
   .bb-footer-about {
-    font-size: 14.5px;
-    line-height: 1.72;
-    max-width: 420px;
+    font-size: 14px;
+    line-height: 24px;
+    max-width: 317.27px;
+    color: #2d2d2d;
+    font-family: var(--bb-sans);
+    font-weight: 400;
   }
 
   .bb-footer-heading {
-    font-size: 11.5px;
-    margin-bottom: 24px;
+    font-size: 18px;
+    margin-bottom: 63.56px;
+    font-family: var(--bb-ui);
+    font-weight: 800;
   }
 
   /* Single column per group on desktop. */
@@ -2173,22 +2185,36 @@
     grid-auto-flow: row;
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: none !important;
-    gap: 14px;
+    gap: 43.82px;
   }
 
   .bb-footer-list a {
-    font-size: 14.5px;
+    font-size: 18px;
+    font-family: var(--bb-sans);
+    font-weight: 500;
   }
 
   /* Socials: icons on every breakpoint (match the brand glyphs). */
   .bb-footer-social {
-    margin-top: 30px;
+    margin-top: 49.7px;
     gap: 22px;
   }
 
   .bb-footer-social a {
     font-size: 14.5px;
     line-height: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45.08px;
+    height: 45.08px;
+    border: 1px solid #B7B7B7;
+    border-radius: 100%;
+  }
+
+  .bb-footer-social a svg {
+      width: 17px;
+      height: 17px;
   }
 
   .bb-footer-sep {
@@ -2196,9 +2222,18 @@
   }
 
   .bb-footer-base {
-    margin-top: 48px;
+    margin-top: 40.33px;
     padding: 24px 0 0;
-    font-size: 13px;
+    font-size: 18px;
+    font-family: var(--bb-sans);
+    color: #000;
+    gap: 0;
+    border-top: 1px solid #E6E5E1;
+  }
+  .bb-footer-seal {
+      background: none;
+      height: 72px;
+      width: auto;
   }
 
   /* ---- Cookie sheet reads as one row ---- */
