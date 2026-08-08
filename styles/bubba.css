@@ -347,11 +347,12 @@
 
 .bb-nav-link {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 400;
   color: #212121;
   text-decoration: none;
   white-space: nowrap;
   opacity: 1;
+  font-family: var(--bb-sans);
   transition: opacity 0.16s ease;
 }
 
@@ -493,10 +494,10 @@
   align-items: center;
   gap: 6px;
   background: var(--bb-paper);
-  border: 1px solid var(--bb-line);
+  border: 1px solid #F1F1F1;
   border-radius: 999px;
   /* Extra left inset so the caret isn’t clipped by the pill curve. */
-  padding: 5px 5px 5px 22px;
+  padding: 3.5px 3.5px 3.5px 22px;
   width: 100%;
   max-width: 380px;
   overflow: visible;
@@ -1850,8 +1851,8 @@
   }
 
   .bb-nav-inner {
-    height: 82px;
     padding-inline: 40px;
+    padding-top: 43.24px;
   }
 
   .bb-nav-links {
@@ -1860,7 +1861,7 @@
   }
 
   .bb-nav-link {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .bb-nav-brand img {
@@ -1905,13 +1906,13 @@
   }
 
   .bb-hero-sub {
-    margin-top: 34px;
+    margin-top: 47.43px;
     font-size: 22.5px;
     font-weight: 500;
   }
 
   .bb-hero-capture {
-    margin-top: 100px;
+    margin-top: 119px;
   }
 
   .bb-hero-capture .bb-capture {
@@ -2087,11 +2088,12 @@
   }
 
   .bb-closer-card {
-    max-width: 1280px;
+    max-width: 554px;
     border-radius: 24px;
-    padding: 72px 80px;
-    background: var(--bb-closer-bg);
-    display: grid;
+    padding: 34px;
+    padding-right: 24px;
+    background: #F3F3F3;
+    /*display: grid;*/
     grid-template-columns: 530px 530px;
     justify-content: space-between;
     align-items: center;
@@ -2099,20 +2101,31 @@
   }
 
   .bb-closer-title {
-    font-size: 54px;
+    font-size: 25.64px;
+    font-family: var(--bb-canela);
+    font-weight: 400;
     margin: 0;
   }
 
   .bb-closer-sub {
-    font-size: 17px;
-    margin: 16px 0 0;
+      font-size: 14.95px;
+    margin: 18.94px 0 0;
     max-width: 380px;
+    margin-bottom: 31.14px;
+    font-family: var(--bb-sans);
+    color: #676669;
+    font-weight: 400;
   }
 
   .bb-closer-card .bb-capture {
     grid-column: 2;
     grid-row: 1 / span 2;
-    width: 530px;
+    /*width: 530px;*/
+    padding: 6.64px 7.35px;
+    padding-left: 0;
+  }
+  .bb-closer-card .bb-capture input {
+    padding-left: 29.53px;
   }
 
   /* ---- Footer ---- */

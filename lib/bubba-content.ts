@@ -24,10 +24,9 @@ export const BUBBA_BRAND = {
 
 /** Nav — left links; the wordmark sits centred and the CTA sits right. */
 export const BUBBA_NAV_LINKS = [
-  { key: "waiting-room", label: "The Waiting Room", href: "/#waiting-room" },
+  { key: "waiting-room", label: "Waiting Room", href: "/#waiting-room" },
   { key: "ambassadors", label: "Ambassadors", href: "/login" },
-  { key: "faq", label: "FAQs", href: "/faq" },
-  { key: "contact", label: "Contact", href: "/contact" },
+  { key: "calendar", label: "Calendar", href: "/calendar" },
 ] as const;
 
 export type BubbaNavKey =
