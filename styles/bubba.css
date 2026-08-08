@@ -155,6 +155,9 @@
     font-size: 18px;
     font-weight: 500;
   }
+  .bb-moment .bb-eyebrow  {
+      font-weight: 800;
+  }
 }
 
 .bb-display {
