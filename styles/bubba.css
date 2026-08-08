@@ -2110,6 +2110,7 @@
     font-family: var(--bb-canela);
     font-weight: 400;
     margin: 0;
+    letter-spacing: 0.6px;
   }
 
   .bb-closer-sub {
