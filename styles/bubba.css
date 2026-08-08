@@ -2094,7 +2094,7 @@
 
   .bb-closer-card {
     max-width: 554px;
-    border-radius: 24px;
+    border-radius: 11px;
     padding: 34px;
     padding-right: 24px;
     background: #F3F3F3;
@@ -2114,7 +2114,7 @@
 
   .bb-closer-sub {
       font-size: 14.95px;
-    margin: 18.94px 0 0;
+    margin: 0 0 0;
     max-width: 380px;
     margin-bottom: 31.14px;
     font-family: var(--bb-sans);
