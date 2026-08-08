@@ -3,7 +3,7 @@
 import { Suspense, useState, type CSSProperties, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 
 import { AmbassadorLoginBrandPanel } from "@/app/components/login/AmbassadorLoginBrandPanel";
 import { persistAccessToken } from "@/lib/api";
@@ -84,7 +84,11 @@ function ResetPasswordForm() {
 
           <div className="right-panel right-panel--program">
             <div className="right-form-wrap right-form-wrap--program">
-              <Link href={navigation.login} className="forgot-link forgot-link--program forgot-back-link">
+              <Link
+                href={navigation.login}
+                className="forgot-link forgot-link--program forgot-back-link"
+              >
+                <ArrowLeft size={14} strokeWidth={2} />
                 Back to login
               </Link>
 

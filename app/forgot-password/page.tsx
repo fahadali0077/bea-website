@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 import { AmbassadorLoginBrandPanel } from "@/app/components/login/AmbassadorLoginBrandPanel";
 import { login as loginConfig, navigation } from "@/lib/config";
@@ -85,7 +86,11 @@ export default function ForgotPasswordPage() {
 
           <div className="right-panel right-panel--program">
             <div className="right-form-wrap right-form-wrap--program">
-              <Link href={navigation.login} className="forgot-link forgot-link--program forgot-back-link">
+              <Link
+                href={navigation.login}
+                className="forgot-link forgot-link--program forgot-back-link"
+              >
+                <ArrowLeft size={14} strokeWidth={2} />
                 {header.backLabel}
               </Link>
 
@@ -177,13 +182,6 @@ export default function ForgotPasswordPage() {
                   </form>
                 </>
               )}
-
-              <div className="apply-section">
-                <p>Remember your password?</p>
-                <Link href={navigation.login} className="apply-link">
-                  Back to login
-                </Link>
-              </div>
             </div>
           </div>
         </div>
