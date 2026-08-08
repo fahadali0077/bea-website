@@ -2123,6 +2123,7 @@
     /*width: 530px;*/
     padding: 6.64px 7.35px;
     padding-left: 0;
+    border: 1px solid #D6D6D6;
   }
   .bb-closer-card .bb-capture input {
     padding-left: 29.53px;
