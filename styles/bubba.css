@@ -673,8 +673,8 @@
   top: 50%;
   transform: translateY(-50%);
   width: 1px;
-  height: 14px;
-  background: var(--bb-line);
+  height: 16.18px;
+  background: #D0D0D0;
 }
 
 /* ============================================================
@@ -1925,12 +1925,12 @@
   }
 
   .bb-rail-cities {
-    margin-top: 22px;
+    margin-top: 47.34px;
   }
 
   .bb-rail-city {
     font-size: 22px;
-    padding: 4px 28px;
+    padding: 4px 38px;
   }
 
   /* ---- Waiting Room ---- */
