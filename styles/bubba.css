@@ -2146,7 +2146,7 @@
   .bb-footer {
     /*background: var(--bb-footer-bg-desk);*/
     padding: 84px 0 28px;
-    padding-top: 216px;
+    padding-top: 214px;
   }
 
   .bb-footer-grid {
@@ -2179,7 +2179,7 @@
 
   .bb-footer-heading {
     font-size: 18px;
-    margin-bottom: 63.56px;
+    margin-bottom: 52.72px;
     font-family: var(--bb-ui);
     font-weight: 800;
   }
@@ -2189,7 +2189,7 @@
     grid-auto-flow: row;
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: none !important;
-    gap: 43.82px;
+    gap: 40.01px;
   }
 
   .bb-footer-list a {
@@ -2200,8 +2200,8 @@
 
   /* Socials: icons on every breakpoint (match the brand glyphs). */
   .bb-footer-social {
-    margin-top: 49.7px;
-    gap: 22px;
+    margin-top: 44.96px;
+    gap: 13.70px;
   }
 
   .bb-footer-social a {
@@ -2232,12 +2232,14 @@
     font-family: var(--bb-sans);
     color: #000;
     gap: 0;
+    font-weight: 500;
     border-top: 1px solid #E6E5E1;
   }
   .bb-footer-seal {
       background: none;
       height: 72px;
       width: auto;
+      margin-left: -25px;
   }
 
   /* ---- Cookie sheet reads as one row ---- */

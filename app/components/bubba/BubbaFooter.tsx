@@ -36,7 +36,7 @@ export function BubbaFooter({ showCapture = true }: Props) {
       <footer className="bb-footer">
         <div className="bb-shell bb-shell--wide">
           <div className="bb-footer-grid">
-              <div className="lg:pt-[68px]">
+              <div className="lg:pt-[115px]">
               <div className="bb-footer-brand">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={BUBBA_BRAND.wordmark} alt="Bubba" />
